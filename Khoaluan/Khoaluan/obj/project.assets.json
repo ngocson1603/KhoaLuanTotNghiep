@@ -2,6 +2,29 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "AspNetCoreHero.ToastNotification/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "lib/net5.0/AspNetCoreHero.ToastNotification.Views.dll": {},
+          "lib/net5.0/AspNetCoreHero.ToastNotification.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/AspNetCoreHero.ToastNotification.Views.dll": {},
+          "lib/net5.0/AspNetCoreHero.ToastNotification.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ],
+        "build": {
+          "buildTransitive/AspNetCoreHero.ToastNotification.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/AspNetCoreHero.ToastNotification.props": {}
+        }
+      },
       "Dapper/2.0.123": {
         "type": "package",
         "compile": {
@@ -44,6 +67,43 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Mvc.Razor.Extensions/5.0.17": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Razor.Language": "5.0.17",
+          "Microsoft.CodeAnalysis.Razor": "5.0.17"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/5.0.17": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Razor.Extensions": "5.0.17",
+          "Microsoft.CodeAnalysis.Razor": "5.0.17",
+          "Microsoft.Extensions.DependencyModel": "5.0.0"
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ],
+        "build": {
+          "buildTransitive/net5.0/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.targets": {}
+        }
+      },
       "Microsoft.AspNetCore.Razor/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -60,7 +120,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Razor.Language/5.0.0": {
+      "Microsoft.AspNetCore.Razor.Language/5.0.17": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Language.dll": {}
@@ -283,12 +343,12 @@
           }
         }
       },
-      "Microsoft.CodeAnalysis.Razor/5.0.0": {
+      "Microsoft.CodeAnalysis.Razor/5.0.17": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Razor.Language": "5.0.0",
-          "Microsoft.CodeAnalysis.CSharp": "3.7.0",
-          "Microsoft.CodeAnalysis.Common": "3.7.0"
+          "Microsoft.AspNetCore.Razor.Language": "5.0.17",
+          "Microsoft.CodeAnalysis.CSharp": "3.8.0",
+          "Microsoft.CodeAnalysis.Common": "3.8.0"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.CodeAnalysis.Razor.dll": {}
@@ -626,6 +686,19 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyModel/5.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyModel.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyModel.dll": {
             "related": ".xml"
           }
         }
@@ -1014,7 +1087,7 @@
           }
         }
       },
-      "Newtonsoft.Json/11.0.2": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
@@ -2372,6 +2445,30 @@
     }
   },
   "libraries": {
+    "AspNetCoreHero.ToastNotification/1.1.0": {
+      "sha512": "bCAYeD+b2pRelcOrHMNtYGVtRq+J2u+SAaND33v3u6qZCatHf4XSZOEPhBfCKJAjMGvsggtPKaNFnrv4VhwOfA==",
+      "type": "package",
+      "path": "aspnetcorehero.toastnotification/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "aspnetcorehero.toastnotification.1.1.0.nupkg.sha512",
+        "aspnetcorehero.toastnotification.nuspec",
+        "build/AspNetCoreHero.ToastNotification.props",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "buildMultiTargeting/AspNetCoreHero.ToastNotification.props",
+        "buildTransitive/AspNetCoreHero.ToastNotification.props",
+        "lib/net5.0/AspNetCoreHero.ToastNotification.Views.dll",
+        "lib/net5.0/AspNetCoreHero.ToastNotification.dll",
+        "lib/netcoreapp3.1/AspNetCoreHero.ToastNotification.Views.dll",
+        "lib/netcoreapp3.1/AspNetCoreHero.ToastNotification.dll",
+        "logo-transparent.png",
+        "staticwebassets/notyf.min.css",
+        "staticwebassets/notyf.min.js",
+        "staticwebassets/toastify.css",
+        "staticwebassets/toastify.js"
+      ]
+    },
     "Dapper/2.0.123": {
       "sha512": "RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
       "type": "package",
@@ -2419,6 +2516,37 @@
         "microsoft.aspnetcore.html.abstractions.nuspec"
       ]
     },
+    "Microsoft.AspNetCore.Mvc.Razor.Extensions/5.0.17": {
+      "sha512": "wLdOlzlUg7r21g4CowBfacP9Zm8ML1IlEXK1GjOWiq0YM6Qqtx9c9RgPmGFCrLfvxY2R8gnRjuS2SgI4P0189g==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.mvc.razor.extensions/5.0.17",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll",
+        "microsoft.aspnetcore.mvc.razor.extensions.5.0.17.nupkg.sha512",
+        "microsoft.aspnetcore.mvc.razor.extensions.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/5.0.17": {
+      "sha512": "COGQj58i4z+DkdrIuiooarHdkEzkavKAvDi65606dH1mQlEm/kjMK8gN8rBIH5Xkkeyxjpr8wKep1t5jK5Z6xQ==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.mvc.razor.runtimecompilation/5.0.17",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "build/net5.0/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.targets",
+        "buildTransitive/net5.0/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.targets",
+        "lib/net5.0/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll",
+        "lib/net5.0/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.xml",
+        "microsoft.aspnetcore.mvc.razor.runtimecompilation.5.0.17.nupkg.sha512",
+        "microsoft.aspnetcore.mvc.razor.runtimecompilation.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Razor/2.2.0": {
       "sha512": "V54PIyDCFl8COnTp9gezNHpUNHk7F9UnerGeZy3UfbnwYvfzbo+ipqQmSgeoESH8e0JvKhRTyQyZquW2EPtCmg==",
       "type": "package",
@@ -2432,17 +2560,17 @@
         "microsoft.aspnetcore.razor.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Razor.Language/5.0.0": {
-      "sha512": "6yOBBASGfXMx1fY6hyjvG+oM3eR8vovIehDdEZW7jAV4gKlY4xuAvTm7Iw1fEq7KPunh2VrJwo7oRK1XxUn1OQ==",
+    "Microsoft.AspNetCore.Razor.Language/5.0.17": {
+      "sha512": "Knw57iBgB0A3DEYu7vLGgKmgqOBOK1LMQcjwY8aVzj7+IwEJsDL0U4WkCs7YXX8eViaSf4QtJbSIpORJ9x6gRA==",
       "type": "package",
-      "path": "microsoft.aspnetcore.razor.language/5.0.0",
+      "path": "microsoft.aspnetcore.razor.language/5.0.17",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Language.dll",
-        "microsoft.aspnetcore.razor.language.5.0.0.nupkg.sha512",
+        "microsoft.aspnetcore.razor.language.5.0.17.nupkg.sha512",
         "microsoft.aspnetcore.razor.language.nuspec"
       ]
     },
@@ -2720,17 +2848,17 @@
         "microsoft.codeanalysis.csharp.workspaces.nuspec"
       ]
     },
-    "Microsoft.CodeAnalysis.Razor/5.0.0": {
-      "sha512": "s4u/6z/MQ35y/egrXf4WgJlUZf5GGvuba9mZ700dH4XxLBrA9Fw9kFZ8uymoATry7hwz5owvFhBVo+2VnoiGRg==",
+    "Microsoft.CodeAnalysis.Razor/5.0.17": {
+      "sha512": "TA57romUfl3+yysUHK9+0DCzuPytQ/ljXd9yVad7/Wkw8O5jMwtWxvg4eYS0f/z20Fhw+G9ZIhcvmoNRXPyOcw==",
       "type": "package",
-      "path": "microsoft.codeanalysis.razor/5.0.0",
+      "path": "microsoft.codeanalysis.razor/5.0.17",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netstandard2.0/Microsoft.CodeAnalysis.Razor.dll",
-        "microsoft.codeanalysis.razor.5.0.0.nupkg.sha512",
+        "microsoft.codeanalysis.razor.5.0.17.nupkg.sha512",
         "microsoft.codeanalysis.razor.nuspec"
       ]
     },
@@ -3138,6 +3266,32 @@
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.abstractions.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "Microsoft.Extensions.DependencyModel/5.0.0": {
+      "sha512": "umBECCoMC+sOUgm083yFr8SxTobUOcPFH4AXigdO2xJiszCHAnmeDl4qPphJt+oaJ/XIfV1wOjIts2nRnki61Q==",
+      "type": "package",
+      "path": "microsoft.extensions.dependencymodel/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net451/Microsoft.Extensions.DependencyModel.dll",
+        "lib/net451/Microsoft.Extensions.DependencyModel.xml",
+        "lib/net461/Microsoft.Extensions.DependencyModel.dll",
+        "lib/net461/Microsoft.Extensions.DependencyModel.xml",
+        "lib/netstandard1.3/Microsoft.Extensions.DependencyModel.dll",
+        "lib/netstandard1.3/Microsoft.Extensions.DependencyModel.xml",
+        "lib/netstandard1.6/Microsoft.Extensions.DependencyModel.dll",
+        "lib/netstandard1.6/Microsoft.Extensions.DependencyModel.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.DependencyModel.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.DependencyModel.xml",
+        "microsoft.extensions.dependencymodel.5.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencymodel.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
@@ -3889,10 +4043,10 @@
         "version.txt"
       ]
     },
-    "Newtonsoft.Json/11.0.2": {
-      "sha512": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
-      "path": "newtonsoft.json/11.0.2",
+      "path": "newtonsoft.json/12.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3915,8 +4069,9 @@
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.11.0.2.nupkg.sha512",
-        "newtonsoft.json.nuspec"
+        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
     "PagedList.Core/1.17.4": {
@@ -7628,7 +7783,9 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "AspNetCoreHero.ToastNotification >= 1.1.0",
       "Dapper >= 2.0.123",
+      "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 5.0.17",
       "Microsoft.EntityFrameworkCore >= 5.0.17",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.17",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.17",
@@ -7638,19 +7795,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sondo\\.nuget\\packages\\": {}
+    "C:\\Users\\Admins\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sondo\\Desktop\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj",
+      "projectUniqueName": "C:\\Users\\Admins\\OneDrive\\Máy tính\\khoaluantest\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj",
       "projectName": "Khoaluan",
-      "projectPath": "C:\\Users\\Sondo\\Desktop\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj",
-      "packagesPath": "C:\\Users\\Sondo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sondo\\Desktop\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\obj\\",
+      "projectPath": "C:\\Users\\Admins\\OneDrive\\Máy tính\\khoaluantest\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj",
+      "packagesPath": "C:\\Users\\Admins\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Admins\\OneDrive\\Máy tính\\khoaluantest\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Sondo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admins\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7676,9 +7838,17 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "AspNetCoreHero.ToastNotification": {
+            "target": "Package",
+            "version": "[1.1.0, )"
+          },
           "Dapper": {
             "target": "Package",
             "version": "[2.0.123, )"
+          },
+          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+            "target": "Package",
+            "version": "[5.0.17, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
@@ -7726,7 +7896,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

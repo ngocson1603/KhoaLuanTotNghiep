@@ -37,6 +37,9 @@ namespace Khoaluan.OtpModels
         public List<Product> FreeGames { get; set; } 
         public List<Productdetail> PopularGame { get; set; }
         public List<Productdetail> RecentlyRealeased { get; set; }
+        public List<Category> cate { get; set; }
+        public List<Category> catesecond { get; set; }
+        public Productdetail detail { get; set; }
     }
     public class DetailPage
     {

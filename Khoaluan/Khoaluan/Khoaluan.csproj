@@ -12,6 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\Error.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_SideNavPartialView.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Areas\Admin\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Views\About\AboutUs.cshtml" />
     <None Include="Views\Checkout\Check.cshtml" />
     <None Include="Views\Home\BlogArticle.cshtml" />
@@ -805,7 +812,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
     <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
@@ -822,6 +831,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="wwwroot\php\instagram\cache\" />
   </ItemGroup>
 
