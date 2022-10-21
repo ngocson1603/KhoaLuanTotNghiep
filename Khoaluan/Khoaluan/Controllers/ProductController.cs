@@ -46,11 +46,15 @@ namespace Khoaluan.Controllers
             var x=_unitOfWork.ProductRepository.getallProductwithCategory().Where(t=>t.Id==id).FirstOrDefault();
             var relateGame = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
             var popularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals("Rockstar Games")).ToList();
+            var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Take(5).ToList();
+            var catesecond = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Skip(5).ToList();
             DetailPage dtp = new DetailPage()
             {
                 productDetail = x,
                 relateGame=relateGame,
-                popularGame=popularGame
+                popularGame=popularGame,
+                cate = cate,
+                catesecond = catesecond,
             };
             return View(dtp);
         }

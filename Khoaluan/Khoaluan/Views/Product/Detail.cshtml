@@ -337,16 +337,23 @@
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Category</span> Menu</span></h4>
                         <div class="nk-widget-content">
                             <ul class="nk-widget-categories">
-                                <li><a href="#">RTS</a></li>
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">RPG</a></li>
-                                <li><a href="#">MMO</a></li>
-                                <li><a href="#">MOBA</a></li>
-                                <li><a href="#">Adventure</a></li>
-                                <li><a href="#">Indie</a></li>
-                                <li><a href="#">Strategy</a></li>
-                                <li><a href="#">Racing</a></li>
-                                <li><a href="#">Simulator</a></li>
+                                @if (Model.cate != null && Model.cate.Count() > 0)
+                                {
+                                    foreach (var item in Model.cate)
+                                    {
+                                        <li><a href="#">@item.Name</a></li>
+                                    }
+                                }
+                            </ul>
+                            <p style="text-align:center"><a onclick="javascript:ShowHide('HiddenDiv')"><i class="fa fa-sort-desc" aria-hidden="true"></i></a></p>
+                            <ul class="nk-widget-categories" id="HiddenDiv" style="display: none;">
+                                @if (Model.catesecond != null && Model.catesecond.Count() > 0)
+                                {
+                                    foreach (var item in Model.catesecond)
+                                    {
+                                        <li><a href="#">@item.Name</a></li>
+                                    }
+                                }
                             </ul>
                         </div>
                     </div>
@@ -431,3 +438,16 @@
 
 <img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
 <img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
+@section Scripts {
+    <script type="text/javascript">
+        // <![CDATA[
+        function ShowHide(HiddenDiv) {
+            if (document.getElementById(HiddenDiv).style.display == 'none') {
+                document.getElementById(HiddenDiv).style.display = 'block';
+            }
+            else {
+                document.getElementById(HiddenDiv).style.display = 'none';
+            }
+        }
+                    // ]]></script>
+}
