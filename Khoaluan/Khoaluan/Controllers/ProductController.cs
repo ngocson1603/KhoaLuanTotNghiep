@@ -44,7 +44,15 @@ namespace Khoaluan.Controllers
         public IActionResult Detail(int id)
         {
             var x=_unitOfWork.ProductRepository.getallProductwithCategory().Where(t=>t.Id==id).FirstOrDefault();
-            return View(x);
+            var relateGame = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
+            var popularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals("Rockstar Games")).ToList();
+            DetailPage dtp = new DetailPage()
+            {
+                productDetail = x,
+                relateGame=relateGame,
+                popularGame=popularGame
+            };
+            return View(dtp);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Khoaluan.OtpModels.Productdetail
+﻿@model Khoaluan.OtpModels.DetailPage
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,7 +26,7 @@
 
             <li><span class="fa fa-angle-right"></span></li>
 
-            <li><span>@Model.Name </span></li>
+            <li><span>@Model.productDetail.Name </span></li>
 
         </ul>
     </div>
@@ -47,7 +47,7 @@
                                 <div class="nk-gallery-item-box">
                                     <a href="~/assets/images/product-6.jpg" class="nk-gallery-item" data-size="1200x554">
                                         <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
-                                        <img src="~/Images/@Url.Content(Model.Image)" alt="">
+                                        <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
                                     </a>
                                 </div>
 
@@ -57,7 +57,7 @@
                                         <div class="nk-gallery-item-box">
                                             <a href="~/assets/images/product-7.jpg" class="nk-gallery-item" data-size="622x942">
                                                 <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
-                                                <img src="~/Images/@Url.Content(Model.Image)" alt="">
+                                                <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
                                             </a>
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@
                                         <div class="nk-gallery-item-box">
                                             <a href="~/assets/images/product-8.jpg" class="nk-gallery-item" data-size="1920x907">
                                                 <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
-                                                <img src="~/Images/@Url.Content(Model.Image)" alt="">
+                                                <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
                                             </a>
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@
                                         <div class="nk-gallery-item-box">
                                             <a href="~/assets/images/product-9.jpg" class="nk-gallery-item" data-size="1500x750">
                                                 <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
-                                                <img src="~/Images/@Url.Content(Model.Image)" alt="">
+                                                <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
                                             </a>
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="col-md-6">
 
-                            <h2 class="nk-product-title h3">@Model.Name </h2>
+                            <h2 class="nk-product-title h3">@Model.productDetail.Name </h2>
 
                             <select class="form-control">
                                 <option value="" disabled selected>Select Platform</option>
@@ -93,13 +93,13 @@
                             </select>
 
                             <div class="nk-product-description">
-                                <p>@Model.Overview</p>
+                                <p>@Model.productDetail.Overview</p>
                             </div>
 
                             <!-- START: Add to Cart -->
                             <div class="nk-gap-2"></div>
                             <form action="#" class="nk-product-addtocart">
-                                <div class="nk-product-price">€ @Model.Price</div>
+                                <div class="nk-product-price">€ @Model.productDetail.Price</div>
                                 <div class="nk-gap-1"></div>
                                 <div class="input-group">
                                     <input type="number" class="form-control" value="1" min="1" max="21">
@@ -110,10 +110,10 @@
                             <!-- END: Add to Cart -->
                             <!-- START: Meta -->
                             <div class="nk-product-meta">
-                                <div><strong>Developer</strong>: @Model.DevName</div>
+                                <div><strong>Developer</strong>: @Model.productDetail.DevName</div>
                                 <div>
                                     <strong>Categories</strong>:
-                                    @foreach (var item in Model.Categories)
+                                    @foreach (var item in Model.productDetail.Categories)
                                     {
                                     <a href="#">@item,</a>
                                     }
@@ -154,9 +154,9 @@
                             <!-- START: Tab Description -->
                             <div role="tabpanel" class="tab-pane fade show active" id="tab-description">
                                 <div class="nk-gap"></div>
-                                <strong class="text-white">Release Date: @Model.ReleaseDate</strong>
+                                <strong class="text-white">Release Date: @Model.productDetail.ReleaseDate</strong>
                                 <div class="nk-gap"></div>
-                                <p>@Model.Description</p>
+                                <p>@Model.productDetail.Description</p>
 
                                 <div class="nk-product-info-row row vertical-gap">
                                     <div class="col-md-5">
@@ -294,103 +294,30 @@
                 <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Related</span> Products</span></h3>
                 <div class="nk-gap"></div>
                 <div class="row vertical-gap">
-
-
-                    <div class="col-md-6">
-                        <div class="nk-product-cat">
-                            <a class="nk-product-image" href="store-product.html">
-                                <img src="~/assets/images/product-11-xs.jpg" alt="She gave my mother">
-                            </a>
-                            <div class="nk-product-cont">
-                                <h3 class="nk-product-title h5"><a href="store-product.html">She gave my mother</a></h3>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-rating" data-rating="3"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i></div>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-price">€ 14.00</div>
+                    @foreach(var p in Model.relateGame)
+                    {
+                        string url = $"/Product/HomePage/{p.Id}.html";
+                        <div class="col-md-6">
+                            <div class="nk-product-cat">
+                                <a class="nk-product-image" href="@url">
+                                    <img src="~/Images/@p.Image" alt=@p.Name>
+                                </a>
+                                <div class="nk-product-cont">
+                                    <h3 class="nk-product-title h5"><a href="@url">@p.Name</a></h3>
+                                    <div class="nk-gap-1"></div>
+                                    <div class="nk-product-rating">
+                                        @for (int i = 1; i <= p.Id / 10; i++)
+                                        {
+                                            <i class="fa fa-star"></i>
+                                        }
+                                        
+                                        </div>
+                                    <div class="nk-gap-1"></div>
+                                    <div class="nk-product-price">€ @p.Price</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-
-                    <div class="col-md-6">
-                        <div class="nk-product-cat">
-                            <a class="nk-product-image" href="store-product.html">
-                                <img src="~/assets/images/product-12-xs.jpg" alt="A hundred thousand">
-                            </a>
-                            <div class="nk-product-cont">
-                                <h3 class="nk-product-title h5"><a href="store-product.html">A hundred thousand</a></h3>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-rating" data-rating="4.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i></div>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-price">€ 20.00</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-6">
-                        <div class="nk-product-cat">
-                            <a class="nk-product-image" href="store-product.html">
-                                <img src="~/assets/images/product-13-xs.jpg" alt="So saying he unbuckled">
-                            </a>
-                            <div class="nk-product-cont">
-                                <h3 class="nk-product-title h5"><a href="store-product.html">So saying he unbuckled</a></h3>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-rating" data-rating="5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-price">€ 23.00</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-6">
-                        <div class="nk-product-cat">
-                            <a class="nk-product-image" href="store-product.html">
-                                <img src="~/assets/images/product-14-xs.jpg" alt="However, I have reason">
-                            </a>
-                            <div class="nk-product-cont">
-                                <h3 class="nk-product-title h5"><a href="store-product.html">However, I have reason</a></h3>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-rating" data-rating="1.5"> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i></div>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-price">€ 32.00</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-6">
-                        <div class="nk-product-cat">
-                            <a class="nk-product-image" href="store-product.html">
-                                <img src="~/assets/images/product-15-xs.jpg" alt="At first, for some time">
-                            </a>
-                            <div class="nk-product-cont">
-                                <h3 class="nk-product-title h5"><a href="store-product.html">At first, for some time</a></h3>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-rating" data-rating="4"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i></div>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-price">€ 14.00</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-6">
-                        <div class="nk-product-cat">
-                            <a class="nk-product-image" href="store-product.html">
-                                <img src="~/assets/images/product-16-xs.jpg" alt="When the last &#39;natural&#39;">
-                            </a>
-                            <div class="nk-product-cont">
-                                <h3 class="nk-product-title h5"><a href="store-product.html">When the last &#39;natural&#39;</a></h3>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-rating" data-rating="4.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i></div>
-                                <div class="nk-gap-1"></div>
-                                <div class="nk-product-price">€ 20.00</div>
-                            </div>
-                        </div>
-                    </div>
-
+                    }
                 </div>
                 <!-- END: Related Products -->
             </div>
@@ -467,33 +394,23 @@
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Most</span> Popular</span></h4>
                         <div class="nk-widget-content">
 
-                            <div class="nk-widget-post">
-                                <a href="store-product.html" class="nk-post-image">
-                                    <img src="~/assets/images/product-1-xs.jpg" alt="So saying he unbuckled">
-                                </a>
-                                <h3 class="nk-post-title"><a href="store-product.html">So saying he unbuckled</a></h3>
-                                <div class="nk-product-rating" data-rating="4"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i></div>
-                                <div class="nk-product-price">€ 23.00</div>
-                            </div>
-
-                            <div class="nk-widget-post">
-                                <a href="store-product.html" class="nk-post-image">
-                                    <img src="~/assets/images/product-2-xs.jpg" alt="However, I have reason">
-                                </a>
-                                <h3 class="nk-post-title"><a href="store-product.html">However, I have reason</a></h3>
-                                <div class="nk-product-rating" data-rating="2.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i> <i class="far fa-star"></i> <i class="far fa-star"></i></div>
-                                <div class="nk-product-price">€ 32.00</div>
-                            </div>
-
-                            <div class="nk-widget-post">
-                                <a href="store-product.html" class="nk-post-image">
-                                    <img src="~/assets/images/product-3-xs.jpg" alt="It was some time before">
-                                </a>
-                                <h3 class="nk-post-title"><a href="store-product.html">It was some time before</a></h3>
-                                <div class="nk-product-rating" data-rating="5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                <div class="nk-product-price">€ 14.00</div>
-                            </div>
-
+                            @foreach(var item in Model.popularGame)
+                            {
+                                string url = $"/Product/HomePage/{item.Id}.html";
+                                <div class="nk-widget-post">
+                                    <a href="@url" class="nk-post-image">
+                                        <img src="~/Images/@item.Image" alt=@item.Name>
+                                    </a>
+                                    <h3 class="nk-post-title"><a href="@url">@item.Name</a></h3>
+                                    <div class="nk-product-rating">
+                                        @for (int i = 1; i <= item.Id / 20; i++)
+                                        {
+                                            <i class="fa fa-star"></i>
+                                        }                               
+                                        </div>
+                                    <div class="nk-product-price">€ @item.Price</div>
+                                </div>
+                            }                           
                         </div>
                     </div>
                 </aside>

@@ -38,4 +38,10 @@ namespace Khoaluan.OtpModels
         public List<Productdetail> PopularGame { get; set; }
         public List<Productdetail> RecentlyRealeased { get; set; }
     }
+    public class DetailPage
+    {
+        public Productdetail productDetail { get; set; }   
+        public List<Productdetail> relateGame { get; set; }
+        public List<Productdetail> popularGame { get; set; }
+    }
 }
