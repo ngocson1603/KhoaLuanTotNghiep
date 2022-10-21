@@ -43,8 +43,16 @@ namespace Khoaluan.Controllers
         [Route("/Product/HomePage/{id}.html", Name = ("ProductDetails"))]
         public IActionResult Detail(int id)
         {
-            var x=_unitOfWork.ProductRepository.getallProductwithCategory().Where(t=>t.Id==id).FirstOrDefault();
-            return View(x);
+            var detail = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t=>t.Id==id).FirstOrDefault();
+            var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Take(5).ToList();
+            var catesecond = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Skip(5).ToList();
+            HomePageViewModel homepage = new HomePageViewModel()
+            {
+                cate = cate,
+                catesecond = catesecond,
+                detail = detail,
+            };
+            return View(homepage);
         }
     }
 }
