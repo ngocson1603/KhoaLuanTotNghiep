@@ -336,7 +336,7 @@
                     <div class="nk-widget nk-widget-highlighted">
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Category</span> Menu</span></h4>
                         <div class="nk-widget-content">
-                            <ul class="nk-widget-categories">
+                            @*<ul class="nk-widget-categories">
                                 @if (Model.cate != null && Model.cate.Count() > 0)
                                 {
                                     foreach (var item in Model.cate)
@@ -354,7 +354,30 @@
                                         <li><a href="#">@item.Name</a></li>
                                     }
                                 }
-                            </ul>
+                            </ul>*@
+                            <p>
+                                <ul class="nk-widget-categories">
+                                    @if (Model.cate != null && Model.cate.Count() > 0)
+                                    {
+                                        foreach (var item in Model.cate)
+                                        {
+                                            <li><a href="#">@item.Name</a></li>
+                                        }
+                                    }
+                                    <span id="dots"></span>
+                                    <div style="border-top: 1px solid #293139;"></div>
+                                    <span id="more">
+                                    @if (Model.catesecond != null && Model.catesecond.Count() > 0)
+                                    {
+                                        foreach (var item in Model.catesecond)
+                                        {
+                                            <li><a href="#">@item.Name</a></li>
+                                        }
+                                    }
+                                    </span>
+                                </ul>
+                                </p>
+                            <button onclick="myFunction()" id="myBtn">Read more</button>
                         </div>
                     </div>
                     <div class="nk-widget nk-widget-highlighted">
@@ -438,6 +461,13 @@
 
 <img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
 <img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
+@section Styles{
+    <style>
+        #more {
+            display: none;
+        }
+    </style>
+}
 @section Scripts {
     <script type="text/javascript">
         // <![CDATA[
@@ -450,4 +480,21 @@
             }
         }
                     // ]]></script>
+    <script type="text/javascript">
+        function myFunction() {
+            var dots = document.getElementById("dots");
+            var moreText = document.getElementById("more");
+            var btnText = document.getElementById("myBtn");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Read more";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Read less";
+                moreText.style.display = "inline";
+            }
+        }
+                    </script>
 }
