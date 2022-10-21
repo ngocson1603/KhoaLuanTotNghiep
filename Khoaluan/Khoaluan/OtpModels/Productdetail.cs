@@ -17,6 +17,7 @@ namespace Khoaluan.OtpModels
         public DateTime ReleaseDate { get; set; }
         public List<string> Categories { get; set; }
         public string DevName { get; set; }
+        public string CatID { get; set; }
     }
     public class ProductDetailModel
     {
@@ -30,6 +31,7 @@ namespace Khoaluan.OtpModels
         public DateTime ReleaseDate { get; set; }
         public string Category { get; set; }
         public string DevName { get; set; }
+        public string CatID { get; set; }
     }
     public class HomePageViewModel
     {
@@ -48,5 +50,9 @@ namespace Khoaluan.OtpModels
         public List<Productdetail> popularGame { get; set; }
         public List<Category> cate { get; set; }
         public List<Category> catesecond { get; set; }
+    }
+    public class DetailCate
+    {
+        public List<Productdetail> productwithCate { get; set; }
     }
 }

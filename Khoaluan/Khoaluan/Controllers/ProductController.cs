@@ -58,5 +58,15 @@ namespace Khoaluan.Controllers
             };
             return View(dtp);
         }
+        [Route("/Product/HomePage/Cate/{id}.html", Name = ("ProductCate"))]
+        public IActionResult StoreCatalogAlt(string id)
+        {
+            var pro = _unitOfWork.ProductRepository.getCate().Where(t=>t.CatID.Equals(id)).ToList();
+            DetailCate pwc = new DetailCate()
+            {
+                productwithCate = pro,
+            };
+            return View(pwc);
+        }
     }
 }

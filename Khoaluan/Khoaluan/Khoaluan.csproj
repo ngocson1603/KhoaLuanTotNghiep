@@ -35,7 +35,7 @@
     <None Include="Views\StoreProduct\Galery.cshtml" />
     <None Include="Views\StoreProduct\ProductStore.cshtml" />
     <None Include="Views\StoreProduct\StoreCatalog.cshtml" />
-    <None Include="Views\StoreProduct\StoreCatalogAlt.cshtml" />
+    <None Include="Views\Product\StoreCatalogAlt.cshtml" />
     <None Include="wwwroot\Adminassets\es6\app.js" />
     <None Include="wwwroot\Adminassets\es6\constant\theme-constant.js" />
     <None Include="wwwroot\Adminassets\es6\core\core.js" />
