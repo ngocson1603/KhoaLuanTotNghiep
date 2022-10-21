@@ -69,16 +69,16 @@
     <!-- START: Some Products -->
     <div class="nk-gap-2"></div>
     <div class="row vertical-gap">
-        @if (Model != null && Model.onegame.Count() > 0)
+        @if (Model != null && Model.RecentlyRealeased.Count() > 0)
             {
-                foreach (var item in Model.onegame)
+                foreach (var item in Model.RecentlyRealeased.Take(1))
                 {
                     string url = $"/Product/HomePage/{item.Id}.html";
                     <div class="col-md-6 col-lg-4">
                         <div class="nk-gallery-item-box">
                             <a href="@url" class="nk-gallery-item">
                                 <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
-                                <img src="~/Images/@item.image" alt="She was bouncing">
+                                <img src="~/Images/@item.Image" alt=@item.Name height="315px" width="350px">
                             </a>
                             <div class="nk-gallery-item-label">
                                 <h4 class="mb-0">@item.Name</h4>
@@ -87,16 +87,16 @@
                     </div>
                 }
             }
-            @if (Model != null && Model.onegame1.Count() > 0)
+            @if (Model != null && Model.RecentlyRealeased.Count() > 0)
             {
-                foreach (var item in Model.onegame1)
+                foreach (var item in Model.RecentlyRealeased.Skip(5).Take(1))
                 {
                     string url = $"/Product/HomePage/{item.Id}.html";
             <div class="col-md-6 col-lg-4 order-lg-3">
                         <div class="nk-gallery-item-box">
                             <a href="@url" class="nk-gallery-item">
                                 <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
-                                <img src="~/Images/@item.image" alt="However, I have reason">
+                                <img src="~/Images/@item.Image" alt=@item.Name height="315px" width="350px">
                             </a>
                             <div class="nk-gallery-item-label">
                                 <h4 class="mb-0">@item.Name</h4>
@@ -107,16 +107,16 @@
             }
                     <div class="col-md-12 col-lg-4">
                         <div class="row vertical-gap">
-                    @if (Model != null && Model.fourgame.Count() > 0)
+                    @if (Model != null && Model.RecentlyRealeased.Count() > 0)
                     {
-                        foreach (var item in Model.fourgame)
+                        foreach (var item in Model.RecentlyRealeased.Skip(1).Take(4))
                         {
                             string url = $"/Product/HomePage/{item.Id}.html";
                             <div class="col-md-6">
                                 <div class="nk-gallery-item-box">
                                     <a href="@url" class="nk-gallery-item">
                                         <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
-                                        <img src="~/Images/@item.Image" alt="It was some time before">
+                                        <img src="~/Images/@item.Image" alt=@item.Name>
                                     </a>
                                 </div>
                             </div>
@@ -198,9 +198,9 @@
     <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Most</span> Popular</span></h3>
     <div class="nk-gap"></div>
     <div class="row vertical-gap">
-        @if (Model != null && Model.topgame.Count() > 0)
-                 {
-                foreach (var item in Model.topgame)
+        @if (Model != null && Model.PopularGame.Count() > 0)
+                 {  
+                foreach (var item in Model.PopularGame)
                 {
                     string url = $"/Product/HomePage/{item.Id}.html";
                     <div class="col-lg-4 col-md-6">
@@ -212,7 +212,7 @@
                                 <h3 class="nk-product-title h5"><a href="@url">@item.Name</a></h3>
                                 <div class="nk-gap-1"></div>
                                 <div class="nk-product-rating" data-rating="3">
-                                    @for(int i = 1;i <= item.Id;i++)
+                                    @for(int i = 1;i <= item.Id/20;i++)
                                     {
                                         <i class="fa fa-star"></i>
                                     }

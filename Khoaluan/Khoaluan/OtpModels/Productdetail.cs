@@ -34,11 +34,8 @@ namespace Khoaluan.OtpModels
     public class HomePageViewModel
     {
         public List<Product> bestSeller { get; set; }
-        public List<Product> FreeGames { get; set; }
-        public List<Product> onegame { get; set; }
-        public List<Product> onegame1 { get; set; }
+        public List<Product> FreeGames { get; set; } 
         public List<Productdetail> PopularGame { get; set; }
-        public List<Productdetail> topgame { get; set; }
-        public List<Productdetail> fourgame { get; set; }
+        public List<Productdetail> RecentlyRealeased { get; set; }
     }
 }

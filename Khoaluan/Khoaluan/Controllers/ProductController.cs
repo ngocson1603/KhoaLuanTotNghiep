@@ -29,22 +29,14 @@ namespace Khoaluan.Controllers
         {
             var bestSeller = _unitOfWork.ProductRepository.GetAll().Take(10).ToList();
             var FreeGame = _unitOfWork.ProductRepository.GetAll().Where(t => t.price == 0).ToList();
-            //var popularGame = _unitOfWork.ProductRepository
-            //    .getallProductwithCategory().Where(t => t.Categories
-            //    .Contains("Action")).ToList();
-            var topgame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => (t.DevName.Equals("EA")) || (t.DevName.Equals("Rockstar Games"))).ToList();
-            var onegame = _unitOfWork.ProductRepository.GetAll().Where(t => t.Id == 1).ToList();
-            var onegame1 = _unitOfWork.ProductRepository.GetAll().Where(t => t.Id == 2).ToList();
-            var fourgame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals("EA")).ToList();
+            var PopularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => (t.DevName.Equals("EA")) || (t.DevName.Equals("Rockstar Games"))).ToList();
+            var RencentlyReleased = _unitOfWork.ProductRepository.getallProductwithCategory().OrderByDescending(t => t.ReleaseDate).ToList();
             HomePageViewModel homepage = new HomePageViewModel()
             {
                 bestSeller = bestSeller,
                 FreeGames = FreeGame,
-                //PopularGame = popularGame,
-                topgame = topgame,
-                onegame = onegame,
-                onegame1 = onegame1,
-                fourgame = fourgame
+                PopularGame = PopularGame,
+                RecentlyRealeased = RencentlyReleased
             };
             return View(homepage);
         }

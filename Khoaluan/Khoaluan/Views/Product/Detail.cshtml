@@ -26,7 +26,7 @@
 
             <li><span class="fa fa-angle-right"></span></li>
 
-            <li><span>Just then her head </span></li>
+            <li><span>@Model.Name </span></li>
 
         </ul>
     </div>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="col-md-6">
 
-                            <h2 class="nk-product-title h3">Just then her head </h2>
+                            <h2 class="nk-product-title h3">@Model.Name </h2>
 
                             <select class="form-control">
                                 <option value="" disabled selected>Select Platform</option>
@@ -110,7 +110,7 @@
                             <!-- END: Add to Cart -->
                             <!-- START: Meta -->
                             <div class="nk-product-meta">
-                                <div><strong>SKU</strong>: 300-200-503</div>
+                                <div><strong>Developer</strong>: @Model.DevName</div>
                                 <div>
                                     <strong>Categories</strong>:
                                     @foreach (var item in Model.Categories)
@@ -118,7 +118,6 @@
                                     <a href="#">@item,</a>
                                     }
                                 </div>
-                                <div><strong>Tags</strong>: <a href="#">blizzard</a>, <a href="#">action</a>, <a href="#">MMO</a></div>
                             </div>
                             
                             <!-- END: Meta -->
