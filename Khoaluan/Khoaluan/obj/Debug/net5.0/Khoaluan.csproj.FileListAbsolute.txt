@@ -1537,7 +1537,10 @@ D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\ne
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Blog\BlogFull.cshtml.g.cs
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Checkout\Check.cshtml.g.cs
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Home\BlogArticle.cshtml.g.cs
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
@@ -1557,7 +1560,10 @@ D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\ne
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\StoreProduct\ProductStore.cshtml.g.cs
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\StoreProduct\StoreCatalog.cshtml.g.cs
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\StoreProduct\StoreCatalogAlt.cshtml.g.cs
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
@@ -1572,6 +1578,11 @@ D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\ne
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Khoaluan.genruntimeconfig.cache
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\ref\Khoaluan.dll
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Home\BlogArticle.cshtml.g.cs
+D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Product\StoreCatalogAlt.cshtml.g.cs
+>>>>>>> Stashed changes
 =======
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Home\BlogArticle.cshtml.g.cs
 D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Product\StoreCatalogAlt.cshtml.g.cs

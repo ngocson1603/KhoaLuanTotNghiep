@@ -1,5 +1,9 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #pragma checksum "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "14340cc6352309d917062de092369a96fe458656"
+=======
+#pragma checksum "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "0307034fb71a4b711f1c031cc097b0c8fa7f8e79"
+>>>>>>> Stashed changes
 =======
 #pragma checksum "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "0307034fb71a4b711f1c031cc097b0c8fa7f8e79"
 >>>>>>> Stashed changes
@@ -31,7 +35,11 @@ using Khoaluan.Models;
 #line hidden
 #nullable disable
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"14340cc6352309d917062de092369a96fe458656", @"/Views/Product/Detail.cshtml")]
+=======
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0307034fb71a4b711f1c031cc097b0c8fa7f8e79", @"/Views/Product/Detail.cshtml")]
+>>>>>>> Stashed changes
 =======
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0307034fb71a4b711f1c031cc097b0c8fa7f8e79", @"/Views/Product/Detail.cshtml")]
 >>>>>>> Stashed changes
@@ -160,9 +168,15 @@ using Khoaluan.Models;
                                 <div class=""nk-gallery-item-box"">
                                     ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14340cc6352309d917062de092369a96fe45865616532", async() => {
                 WriteLiteral("\r\n                                        <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                        ");
                 __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865616948", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7916532", async() => {
+                WriteLiteral("\r\n                                        <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                        ");
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7916948", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7916532", async() => {
                 WriteLiteral("\r\n                                        <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                        ");
@@ -214,9 +228,15 @@ AddHtmlAttributeValue("", 1566, Url.Content(Model.productDetail.Image), 1566, 39
                                         <div class=""nk-gallery-item-box"">
                                             ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14340cc6352309d917062de092369a96fe45865620011", async() => {
                 WriteLiteral("\r\n                                                <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                                ");
                 __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865620443", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7920011", async() => {
+                WriteLiteral("\r\n                                                <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                                ");
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7920443", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7920011", async() => {
                 WriteLiteral("\r\n                                                <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                                ");
@@ -266,9 +286,15 @@ AddHtmlAttributeValue("", 2293, Url.Content(Model.productDetail.Image), 2293, 39
                                         <div class=""nk-gallery-item-box"">
                                             ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14340cc6352309d917062de092369a96fe45865623427", async() => {
                 WriteLiteral("\r\n                                                <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                                ");
                 __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865623859", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7923427", async() => {
+                WriteLiteral("\r\n                                                <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                                ");
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7923859", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7923427", async() => {
                 WriteLiteral("\r\n                                                <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                                ");
@@ -318,9 +344,15 @@ AddHtmlAttributeValue("", 2946, Url.Content(Model.productDetail.Image), 2946, 39
                                         <div class=""nk-gallery-item-box"">
                                             ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14340cc6352309d917062de092369a96fe45865626843", async() => {
                 WriteLiteral("\r\n                                                <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                                ");
                 __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865627275", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7926843", async() => {
+                WriteLiteral("\r\n                                                <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                                ");
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7927275", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7926843", async() => {
                 WriteLiteral("\r\n                                                <div class=\"nk-gallery-item-overlay\"><span class=\"ion-eye\"></span></div>\r\n                                                ");
@@ -382,7 +414,11 @@ AddHtmlAttributeValue("", 3599, Url.Content(Model.productDetail.Image), 3599, 39
 #nullable disable
             WriteLiteral(" </h2>\r\n\r\n                            <select class=\"form-control\">\r\n                                ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14340cc6352309d917062de092369a96fe45865630756", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7930756", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7930756", async() => {
 >>>>>>> Stashed changes
@@ -408,7 +444,11 @@ AddHtmlAttributeValue("", 3599, Url.Content(Model.productDetail.Image), 3599, 39
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14340cc6352309d917062de092369a96fe45865632581", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7932581", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7932581", async() => {
 >>>>>>> Stashed changes
@@ -428,7 +468,11 @@ AddHtmlAttributeValue("", 3599, Url.Content(Model.productDetail.Image), 3599, 39
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14340cc6352309d917062de092369a96fe45865633772", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7933772", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7933772", async() => {
 >>>>>>> Stashed changes
@@ -448,7 +492,11 @@ AddHtmlAttributeValue("", 3599, Url.Content(Model.productDetail.Image), 3599, 39
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14340cc6352309d917062de092369a96fe45865634966", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7934966", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7934966", async() => {
 >>>>>>> Stashed changes
@@ -476,7 +524,11 @@ AddHtmlAttributeValue("", 3599, Url.Content(Model.productDetail.Image), 3599, 39
 #nullable disable
             WriteLiteral("</p>\r\n                            </div>\r\n\r\n                            <!-- START: Add to Cart -->\r\n                            <div class=\"nk-gap-2\"></div>\r\n                            ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14340cc6352309d917062de092369a96fe45865636749", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7936749", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7936749", async() => {
 >>>>>>> Stashed changes
@@ -609,7 +661,11 @@ AddHtmlAttributeValue("", 3599, Url.Content(Model.productDetail.Image), 3599, 39
                                             <div class=""nk-gap""></div>
                                             ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865644064", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7944064", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7944064", async() => {
 >>>>>>> Stashed changes
@@ -660,7 +716,11 @@ AddHtmlAttributeValue("", 3599, Url.Content(Model.productDetail.Image), 3599, 39
              ");
             WriteLiteral("                   <h3 class=\"h4\">Add a Review</h3>\r\n                                <div class=\"nk-reply\">\r\n                                    ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14340cc6352309d917062de092369a96fe45865647491", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7947491", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7947491", async() => {
 >>>>>>> Stashed changes
@@ -736,7 +796,11 @@ AddHtmlAttributeValue("", 3599, Url.Content(Model.productDetail.Image), 3599, 39
                                         <div class=""nk-comment-meta"">
                                             ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865652960", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7952960", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7952960", async() => {
 >>>>>>> Stashed changes
@@ -768,7 +832,11 @@ AddHtmlAttributeValue("", 3599, Url.Content(Model.productDetail.Image), 3599, 39
                                    ");
             WriteLiteral(" <!-- START: Review -->\r\n                                    <div class=\"nk-comment\">\r\n                                        <div class=\"nk-comment-meta\">\r\n                                            ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865655527", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7955527", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7955527", async() => {
 >>>>>>> Stashed changes
@@ -800,7 +868,11 @@ AddHtmlAttributeValue("", 3599, Url.Content(Model.productDetail.Image), 3599, 39
                                         <div class=""nk-comment-meta"">
                                             ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865657791", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7957791", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7957791", async() => {
 >>>>>>> Stashed changes
@@ -864,7 +936,11 @@ WriteAttributeValue("", 19283, url, 19283, 4, false);
             EndWriteAttribute();
             WriteLiteral(">\r\n                                    ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865661646", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7961646", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7961646", async() => {
 >>>>>>> Stashed changes
@@ -958,7 +1034,11 @@ WriteAttributeValue("", 19548, url, 19548, 4, false);
                         <div class=""nk-widget-content"">
                             ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14340cc6352309d917062de092369a96fe45865666514", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7966514", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7966514", async() => {
 >>>>>>> Stashed changes
@@ -999,6 +1079,10 @@ WriteAttributeValue("", 19548, url, 19548, 4, false);
                                         foreach (var item in Model.cate)
                                         {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+                                            string url = $"/Product/HomePage/Cate/{item.Name}.html";
+>>>>>>> Stashed changes
 =======
                                             string url = $"/Product/HomePage/Cate/{item.Name}.html";
 >>>>>>> Stashed changes
@@ -1007,11 +1091,14 @@ WriteAttributeValue("", 19548, url, 19548, 4, false);
 #line hidden
 #nullable disable
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             WriteLiteral("                                            <li><a href=\"#\">");
 #nullable restore
 #line 364 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
                                                        Write(item.Name);
 =======
+=======
+>>>>>>> Stashed changes
             WriteLiteral("                                            <li><a");
             BeginWriteAttribute("href", " href=\"", 23070, "\"", 23081, 1);
 #nullable restore
@@ -1026,6 +1113,9 @@ WriteAttributeValue("", 23077, url, 23077, 4, false);
 #nullable restore
 #line 365 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
                                                           Write(item.Name);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 #line default
@@ -1034,7 +1124,11 @@ WriteAttributeValue("", 23077, url, 23077, 4, false);
             WriteLiteral("</a></li>\r\n");
 #nullable restore
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #line 365 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+=======
+#line 366 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+>>>>>>> Stashed changes
 =======
 #line 366 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 >>>>>>> Stashed changes
@@ -1047,7 +1141,11 @@ WriteAttributeValue("", 23077, url, 23077, 4, false);
             WriteLiteral("                                    <span id=\"dots\"></span>\r\n                                    <div style=\"border-top: 1px solid #293139;\"></div>\r\n                                    <span id=\"more\">\r\n");
 #nullable restore
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #line 370 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+=======
+#line 371 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+>>>>>>> Stashed changes
 =======
 #line 371 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 >>>>>>> Stashed changes
@@ -1055,6 +1153,7 @@ WriteAttributeValue("", 23077, url, 23077, 4, false);
                                     {
                                         foreach (var item in Model.catesecond)
                                         {
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 =======
                                                 string url = $"/Product/HomePage/Cate/{item.Name}.html";
@@ -1068,6 +1167,26 @@ WriteAttributeValue("", 23077, url, 23077, 4, false);
 #nullable restore
 #line 374 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
                                                        Write(item.Name);
+=======
+            WriteLiteral("                                            <li><a");
+            BeginWriteAttribute("href", " href=\"", 23807, "\"", 23818, 1);
+#nullable restore
+#line 376 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+WriteAttributeValue("", 23814, url, 23814, 4, false);
+=======
+                                                string url = $"/Product/HomePage/Cate/{item.Name}.html";
+>>>>>>> Stashed changes
+
+#line default
+#line hidden
+#nullable disable
+<<<<<<< Updated upstream
+            EndWriteAttribute();
+            WriteLiteral(">");
+#nullable restore
+#line 376 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+                                                          Write(item.Name);
+>>>>>>> Stashed changes
 =======
             WriteLiteral("                                            <li><a");
             BeginWriteAttribute("href", " href=\"", 23807, "\"", 23818, 1);
@@ -1091,7 +1210,11 @@ WriteAttributeValue("", 23814, url, 23814, 4, false);
             WriteLiteral("</a></li>\r\n");
 #nullable restore
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #line 375 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+=======
+#line 377 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+>>>>>>> Stashed changes
 =======
 #line 377 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 >>>>>>> Stashed changes
@@ -1105,6 +1228,10 @@ WriteAttributeValue("", 23814, url, 23814, 4, false);
                                 </ul>
                                 </p>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+                            <div style=""margin-top: 1.5rem""></div>
+>>>>>>> Stashed changes
 =======
                             <div style=""margin-top: 1.5rem""></div>
 >>>>>>> Stashed changes
@@ -1122,10 +1249,13 @@ WriteAttributeValue("", 23814, url, 23814, 4, false);
                                        data-slider-step=""1""
                                        data-slider-value=""[200, 1200]""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                                        data-slider-tooltip=""hide"">
                 ");
             WriteLiteral(@"                <div class=""nk-gap""></div>
 =======
+=======
+>>>>>>> Stashed changes
                 ");
             WriteLiteral(@"                       data-slider-tooltip=""hide"">
                                 <div class=""nk-gap""></div>
@@ -1145,8 +1275,13 @@ WriteAttributeValue("", 23814, url, 23814, 4, false);
                     </div>
                     <div class=""nk-widget nk-widget-highlighted"">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <h4 class=""nk-widget-title""><span><span class=""text-main-1"">We</spa");
             WriteLiteral(@"n> Are Social</span></h4>
+=======
+                       ");
+            WriteLiteral(@" <h4 class=""nk-widget-title""><span><span class=""text-main-1"">We</span> Are Social</span></h4>
+>>>>>>> Stashed changes
 =======
                        ");
             WriteLiteral(@" <h4 class=""nk-widget-title""><span><span class=""text-main-1"">We</span> Are Social</span></h4>
@@ -1160,8 +1295,13 @@ WriteAttributeValue("", 23814, url, 23814, 4, false);
                                 <li><a class=""nk-social-youtube"" href=""#""><span class=""fab fa-youtube""></span></a></li>
                                 <li><a class=""nk-social-twitter"" href=""#"" target=""_blank""><span class=""fab fa-twitter""></span></a></li>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                                 <li><a class=""nk-social-pinterest"" href=""#""><span class=""fab fa-pintere");
             WriteLiteral(@"st-p""></span></a></li>
+=======
+                                <li");
+            WriteLiteral(@"><a class=""nk-social-pinterest"" href=""#""><span class=""fab fa-pinterest-p""></span></a></li>
+>>>>>>> Stashed changes
 =======
                                 <li");
             WriteLiteral(@"><a class=""nk-social-pinterest"" href=""#""><span class=""fab fa-pinterest-p""></span></a></li>
@@ -1177,7 +1317,11 @@ WriteAttributeValue("", 23814, url, 23814, 4, false);
 ");
 #nullable restore
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #line 427 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+=======
+#line 430 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+>>>>>>> Stashed changes
 =======
 #line 430 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 >>>>>>> Stashed changes
@@ -1190,15 +1334,21 @@ WriteAttributeValue("", 23814, url, 23814, 4, false);
 #nullable disable
             WriteLiteral("                                <div class=\"nk-widget-post\">\r\n                                    <a");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             BeginWriteAttribute("href", " href=\"", 27538, "\"", 27549, 1);
 #nullable restore
 #line 431 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 WriteAttributeValue("", 27545, url, 27545, 4, false);
 =======
+=======
+>>>>>>> Stashed changes
             BeginWriteAttribute("href", " href=\"", 27820, "\"", 27831, 1);
 #nullable restore
 #line 434 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 WriteAttributeValue("", 27827, url, 27827, 4, false);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 #line default
@@ -1207,7 +1357,11 @@ WriteAttributeValue("", 27827, url, 27827, 4, false);
             EndWriteAttribute();
             WriteLiteral(" class=\"nk-post-image\">\r\n                                        ");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865675948", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7976960", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7976960", async() => {
 >>>>>>> Stashed changes
@@ -1217,15 +1371,21 @@ WriteAttributeValue("", 27827, url, 27827, 4, false);
             __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper);
             BeginAddHtmlAttributeValues(__tagHelperExecutionContext, "src", 2, global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             AddHtmlAttributeValue("", 27625, "~/Images/", 27625, 9, true);
 #nullable restore
 #line 432 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 AddHtmlAttributeValue("", 27634, item.Image, 27634, 11, false);
 =======
+=======
+>>>>>>> Stashed changes
             AddHtmlAttributeValue("", 27907, "~/Images/", 27907, 9, true);
 #nullable restore
 #line 435 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 AddHtmlAttributeValue("", 27916, item.Image, 27916, 11, false);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 #line default
@@ -1235,8 +1395,13 @@ AddHtmlAttributeValue("", 27916, item.Image, 27916, 11, false);
             BeginAddHtmlAttributeValues(__tagHelperExecutionContext, "alt", 1, global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 #nullable restore
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #line 432 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 AddHtmlAttributeValue("", 27651, item.Name, 27651, 10, false);
+=======
+#line 435 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+AddHtmlAttributeValue("", 27933, item.Name, 27933, 10, false);
+>>>>>>> Stashed changes
 =======
 #line 435 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 AddHtmlAttributeValue("", 27933, item.Name, 27933, 10, false);
@@ -1255,15 +1420,21 @@ AddHtmlAttributeValue("", 27933, item.Name, 27933, 10, false);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                    </a>\r\n                                    <h3 class=\"nk-post-title\"><a");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             BeginWriteAttribute("href", " href=\"", 27770, "\"", 27781, 1);
 #nullable restore
 #line 434 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 WriteAttributeValue("", 27777, url, 27777, 4, false);
 =======
+=======
+>>>>>>> Stashed changes
             BeginWriteAttribute("href", " href=\"", 28052, "\"", 28063, 1);
 #nullable restore
 #line 437 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 WriteAttributeValue("", 28059, url, 28059, 4, false);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 #line default
@@ -1273,7 +1444,11 @@ WriteAttributeValue("", 28059, url, 28059, 4, false);
             WriteLiteral(">");
 #nullable restore
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #line 434 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+=======
+#line 437 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+>>>>>>> Stashed changes
 =======
 #line 437 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 >>>>>>> Stashed changes
@@ -1285,7 +1460,11 @@ WriteAttributeValue("", 28059, url, 28059, 4, false);
             WriteLiteral("</a></h3>\r\n                                    <div class=\"nk-product-rating\">\r\n");
 #nullable restore
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #line 436 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+=======
+#line 439 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+>>>>>>> Stashed changes
 =======
 #line 439 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 >>>>>>> Stashed changes
@@ -1298,7 +1477,11 @@ WriteAttributeValue("", 28059, url, 28059, 4, false);
             WriteLiteral("                                            <i class=\"fa fa-star\"></i>\r\n");
 #nullable restore
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #line 439 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+=======
+#line 442 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+>>>>>>> Stashed changes
 =======
 #line 442 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 >>>>>>> Stashed changes
@@ -1310,7 +1493,11 @@ WriteAttributeValue("", 28059, url, 28059, 4, false);
             WriteLiteral("                                        </div>\r\n                                    <div class=\"nk-product-price\">€ ");
 #nullable restore
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #line 441 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+=======
+#line 444 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+>>>>>>> Stashed changes
 =======
 #line 444 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 >>>>>>> Stashed changes
@@ -1322,7 +1509,11 @@ WriteAttributeValue("", 28059, url, 28059, 4, false);
             WriteLiteral("</div>\r\n                                </div>\r\n");
 #nullable restore
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #line 443 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+=======
+#line 446 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
+>>>>>>> Stashed changes
 =======
 #line 446 "D:\DULIEUHOCTAP\KhoaLuan\backup\KhoaLuanTotNghiep\Khoaluan\Khoaluan\Views\Product\Detail.cshtml"
 >>>>>>> Stashed changes
@@ -1333,7 +1524,11 @@ WriteAttributeValue("", 28059, url, 28059, 4, false);
 #nullable disable
             WriteLiteral("                        </div>\r\n                    </div>\r\n                </aside>\r\n                <!-- END: Sidebar -->\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n</div>\r\n\r\n\r\n\r\n\r\n<!-- START: Page Background -->\r\n\r\n");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865680490", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7981502", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7981502", async() => {
 >>>>>>> Stashed changes
@@ -1353,7 +1548,11 @@ WriteAttributeValue("", 28059, url, 28059, 4, false);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "14340cc6352309d917062de092369a96fe45865681690", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7982702", async() => {
+>>>>>>> Stashed changes
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0307034fb71a4b711f1c031cc097b0c8fa7f8e7982702", async() => {
 >>>>>>> Stashed changes
@@ -1374,7 +1573,11 @@ WriteAttributeValue("", 28059, url, 28059, 4, false);
             WriteLiteral("\r\n");
             DefineSection("Styles", async() => {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 WriteLiteral("\r\n    <style>\r\n        #more {\r\n            display: none;\r\n        }\r\n    </style>\r\n");
+=======
+                WriteLiteral("\r\n    <style>\r\n        #more {\r\n            display: none;\r\n        }\r\n\r\n        p {\r\n            margin-bottom: 0;\r\n        }\r\n        .divreadmore{\r\n            margin-top: 5px;\r\n        }\r\n    </style>\r\n");
+>>>>>>> Stashed changes
 =======
                 WriteLiteral("\r\n    <style>\r\n        #more {\r\n            display: none;\r\n        }\r\n\r\n        p {\r\n            margin-bottom: 0;\r\n        }\r\n        .divreadmore{\r\n            margin-top: 5px;\r\n        }\r\n    </style>\r\n");
 >>>>>>> Stashed changes
