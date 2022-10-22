@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cqKsIsgxV4GVPMGMWgc+qKPELz6laRNcGaxxKZ/sqCWFOiSigfmv9VvPH3CbRCVGxem6TZ7I/Z9SBkJ7QEfnkQ==",
+  "dgSpecHash": "0jAQhFInl778ZO1qvCRJA+jyx7LFFkDQpLgyBHlNK4qcj1ZR3kCOilWxWEl1Do87/ODDqDYcbFiH/ILJ3wXExw==",
   "success": true,
-  "projectFilePath": "D:\\DULIEUHOCTAP\\KhoaLuan\\backup\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj",
+  "projectFilePath": "D:\\DULIEUHOCTAP\\KhoaLuan\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\aspnetcorehero.toastnotification\\1.1.0\\aspnetcorehero.toastnotification.1.1.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
