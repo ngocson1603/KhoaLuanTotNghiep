@@ -59,6 +59,7 @@ namespace Khoaluan.Controllers
             return View(dtp);
         }
         public static string id1;
+        public static int maxPage;
         [Route("/Product/HomePage/Cate/{id}.html", Name = ("ProductCate"))]
         public IActionResult StoreCatalogAlt(string id, int? page)
         {
@@ -68,6 +69,7 @@ namespace Khoaluan.Controllers
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
                 var pageSize = 6;
                 var pro = _unitOfWork.ProductRepository.getCate().Where(t => t.CatID.Equals(id)).ToList();
+                ViewBag.maxPage = int.Parse((pro.Count()%6).ToString());
                 var pl = pro.AsQueryable().ToPagedList(pageNumber, pageSize);
                 var plr = pl.ToList();
                 DetailCate pwc = new DetailCate()
