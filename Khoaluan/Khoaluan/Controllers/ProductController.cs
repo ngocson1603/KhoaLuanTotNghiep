@@ -58,15 +58,29 @@ namespace Khoaluan.Controllers
             };
             return View(dtp);
         }
+        public static string id1;
         [Route("/Product/HomePage/Cate/{id}.html", Name = ("ProductCate"))]
-        public IActionResult StoreCatalogAlt(string id)
+        public IActionResult StoreCatalogAlt(string id, int? page)
         {
-            var pro = _unitOfWork.ProductRepository.getCate().Where(t=>t.CatID.Equals(id)).ToList();
-            DetailCate pwc = new DetailCate()
+            try
             {
-                productwithCate = pro,
-            };
-            return View(pwc);
+                ViewBag.id1 = id.Trim();
+                var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+                var pageSize = 5;
+                var pro = _unitOfWork.ProductRepository.getCate().Where(t => t.CatID.Equals(id)).ToList();
+                var pl = pro.AsQueryable().ToPagedList(pageNumber, pageSize);
+                var plr = pl.ToList();
+                DetailCate pwc = new DetailCate()
+                {
+                    productwithCate = plr,
+                };
+                ViewBag.CurrentPage = pageNumber;
+                return View(pwc);
+            }
+            catch
+            {
+                return RedirectToAction("HomePage", "Product");
+            }
         }
     }
 }
