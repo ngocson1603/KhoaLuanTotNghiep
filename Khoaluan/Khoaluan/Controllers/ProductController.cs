@@ -66,7 +66,7 @@ namespace Khoaluan.Controllers
             {
                 ViewBag.id1 = id.Trim();
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
-                var pageSize = 5;
+                var pageSize = 6;
                 var pro = _unitOfWork.ProductRepository.getCate().Where(t => t.CatID.Equals(id)).ToList();
                 var pl = pro.AsQueryable().ToPagedList(pageNumber, pageSize);
                 var plr = pl.ToList();
