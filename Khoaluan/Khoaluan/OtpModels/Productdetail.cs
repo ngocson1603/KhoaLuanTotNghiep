@@ -54,5 +54,6 @@ namespace Khoaluan.OtpModels
     public class DetailCate
     {
         public List<Productdetail> productwithCate { get; set; }
+        public List<Productdetail> PopularGame1 { get; set; }
     }
 }

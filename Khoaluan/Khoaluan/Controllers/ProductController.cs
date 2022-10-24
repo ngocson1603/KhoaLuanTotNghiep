@@ -74,6 +74,7 @@ namespace Khoaluan.Controllers
                 ViewBag.id1 = id.Trim();
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
                 var pageSize = 6;
+                var popular = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
                 var pro = _unitOfWork.ProductRepository.getCate().Where(t => t.CatID.Equals(id)).ToList();
                 if (pro.Count() <= 6)
                     ViewBag.maxPage = 1;
@@ -88,6 +89,41 @@ namespace Khoaluan.Controllers
                 DetailCate pwc = new DetailCate()
                 {
                     productwithCate = plr,
+                    PopularGame1 = popular
+                };
+                ViewBag.CurrentPage = pageNumber;
+                return View(pwc);
+            }
+            catch
+            {
+                return RedirectToAction("HomePage", "Product");
+            }
+        }
+
+        [Route("/Product/HomePage/Dev/{id}.html", Name = ("ProductDev"))]
+        public IActionResult StoreDevAlt(string id, int? page)
+        {
+            try
+            {
+                ViewBag.id1 = id.Trim();
+                var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+                var pageSize = 6;
+                var popular = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
+                var pro = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals(id)).ToList();
+                if (pro.Count() <= 6)
+                    ViewBag.maxPage = 1;
+                else
+                {
+                    double dMaxPage = Convert.ToDouble(pro.Count());
+                    ViewBag.maxPage = Math.Ceiling(dMaxPage / 6);
+                }
+
+                var pl = pro.AsQueryable().ToPagedList(pageNumber, pageSize);
+                var plr = pl.ToList();
+                DetailCate pwc = new DetailCate()
+                {
+                    productwithCate = plr,
+                    PopularGame1=popular
                 };
                 ViewBag.CurrentPage = pageNumber;
                 return View(pwc);
