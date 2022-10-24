@@ -110,16 +110,25 @@
                             <!-- END: Add to Cart -->
                             <!-- START: Meta -->
                             <div class="nk-product-meta">
-                                <div><strong>Developer</strong>: @Model.productDetail.DevName</div>
+                                <div>
+                                    <strong>Developer</strong>:
+                                    @{
+                                        string name = @Model.productDetail.DevName;
+                                        string url1 = $"/Product/HomePage/Dev/{name}.html";
+                                        <a href="@url1">@Model.productDetail.DevName</a>
+                                    }
+
+                                </div>
                                 <div>
                                     <strong>Categories</strong>:
                                     @foreach (var item in Model.productDetail.Categories)
                                     {
-                                    <a href="#">@item,</a>
+                                        string url = $"/Product/HomePage/Cate/{item}.html";
+                                        <a href="@url">@item,</a>
                                     }
                                 </div>
                             </div>
-                            
+
                             <!-- END: Meta -->
                         </div>
                     </div>
@@ -294,7 +303,7 @@
                 <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Related</span> Products</span></h3>
                 <div class="nk-gap"></div>
                 <div class="row vertical-gap">
-                    @foreach(var p in Model.relateGame)
+                    @foreach (var p in Model.relateGame)
                     {
                         string url = $"/Product/HomePage/{p.Id}.html";
                         <div class="col-md-6">
@@ -310,8 +319,8 @@
                                         {
                                             <i class="fa fa-star"></i>
                                         }
-                                        
-                                        </div>
+
+                                    </div>
                                     <div class="nk-gap-1"></div>
                                     <div class="nk-product-price">€ @p.Price</div>
                                 </div>
@@ -337,24 +346,24 @@
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Category</span> Menu</span></h4>
                         <div class="nk-widget-content">
                             @*<ul class="nk-widget-categories">
-                                @if (Model.cate != null && Model.cate.Count() > 0)
-                                {
-                                    foreach (var item in Model.cate)
+                                    @if (Model.cate != null && Model.cate.Count() > 0)
                                     {
-                                        <li><a href="#">@item.Name</a></li>
+                                        foreach (var item in Model.cate)
+                                        {
+                                            <li><a href="#">@item.Name</a></li>
+                                        }
                                     }
-                                }
-                            </ul>
-                            <p style="text-align:center"><a onclick="javascript:ShowHide('HiddenDiv')"><i class="fa fa-sort-desc" aria-hidden="true"></i></a></p>
-                            <ul class="nk-widget-categories" id="HiddenDiv" style="display: none;">
-                                @if (Model.catesecond != null && Model.catesecond.Count() > 0)
-                                {
-                                    foreach (var item in Model.catesecond)
+                                </ul>
+                                <p style="text-align:center"><a onclick="javascript:ShowHide('HiddenDiv')"><i class="fa fa-sort-desc" aria-hidden="true"></i></a></p>
+                                <ul class="nk-widget-categories" id="HiddenDiv" style="display: none;">
+                                    @if (Model.catesecond != null && Model.catesecond.Count() > 0)
                                     {
-                                        <li><a href="#">@item.Name</a></li>
+                                        foreach (var item in Model.catesecond)
+                                        {
+                                            <li><a href="#">@item.Name</a></li>
+                                        }
                                     }
-                                }
-                            </ul>*@
+                                </ul>*@
                             <p>
                                 <ul class="nk-widget-categories">
                                     @if (Model.cate != null && Model.cate.Count() > 0)
@@ -368,143 +377,144 @@
                                     <span id="dots"></span>
                                     <div style="border-top: 1px solid #293139;"></div>
                                     <span id="more">
-                                    @if (Model.catesecond != null && Model.catesecond.Count() > 0)
-                                    {
-                                        foreach (var item in Model.catesecond)
+                                        @if (Model.catesecond != null && Model.catesecond.Count() > 0)
                                         {
+                                            foreach (var item in Model.catesecond)
+                                            {
                                                 string url = $"/Product/HomePage/Cate/{item.Name}.html";
                                             <li><a href="@url">@item.Name</a></li>
                                         }
                                     }
-                                    </span>
-                                </ul>
+                                        </span>
+                                    </ul>
                                 </p>
-                            <div style="margin-top: 1.5rem"></div>
-                            <button onclick="myFunction()" id="myBtn">Read more</button>
-                        </div>
-                    </div>
-                    <div class="nk-widget nk-widget-highlighted">
-                        <h4 class="nk-widget-title"><span><span class="text-main-1">Price</span> Filter</span></h4>
-                        <div class="nk-widget-content">
-                            <div class="nk-input-slider">
-                                <input type="text"
-                                       name="price-filter"
-                                       data-slider-min="0"
-                                       data-slider-max="1800"
-                                       data-slider-step="1"
-                                       data-slider-value="[200, 1200]"
-                                       data-slider-tooltip="hide">
-                                <div class="nk-gap"></div>
-                                <div>
-                                    <div class="text-white mt-4 float-left">
-                                        PRICE:
-                                        <strong class="text-main-1">€ <span class="nk-input-slider-value-0"></span></strong>
-                                        -
-                                        <strong class="text-main-1">€ <span class="nk-input-slider-value-1"></span></strong>
-                                    </div>
-                                    <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white float-right">Apply</a>
-                                </div>
-                                <div class="clearfix"></div>
+                                <div style="margin-top: 1.5rem"></div>
+                                <button onclick="myFunction()" id="myBtn">Read more</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="nk-widget nk-widget-highlighted">
-                        <h4 class="nk-widget-title"><span><span class="text-main-1">We</span> Are Social</span></h4>
-                        <div class="nk-widget-content">
-                            <ul class="nk-social-links-3 nk-social-links-cols-4">
-                                <li><a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a></li>
-                                <li><a class="nk-social-instagram" href="#"><span class="fab fa-instagram"></span></a></li>
-                                <li><a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a></li>
-                                <li><a class="nk-social-google-plus" href="#"><span class="fab fa-google-plus"></span></a></li>
-                                <li><a class="nk-social-youtube" href="#"><span class="fab fa-youtube"></span></a></li>
-                                <li><a class="nk-social-twitter" href="#" target="_blank"><span class="fab fa-twitter"></span></a></li>
-                                <li><a class="nk-social-pinterest" href="#"><span class="fab fa-pinterest-p"></span></a></li>
-                                <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="nk-widget nk-widget-highlighted">
-                        <h4 class="nk-widget-title"><span><span class="text-main-1">Most</span> Popular</span></h4>
-                        <div class="nk-widget-content">
-
-                            @foreach(var item in Model.popularGame)
-                            {
-                                string url = $"/Product/HomePage/{item.Id}.html";
-                                <div class="nk-widget-post">
-                                    <a href="@url" class="nk-post-image">
-                                        <img src="~/Images/@item.Image" alt=@item.Name>
-                                    </a>
-                                    <h3 class="nk-post-title"><a href="@url">@item.Name</a></h3>
-                                    <div class="nk-product-rating">
-                                        @for (int i = 1; i <= item.Id / 20; i++)
-                                        {
-                                            <i class="fa fa-star"></i>
-                                        }                               
+                        <div class="nk-widget nk-widget-highlighted">
+                            <h4 class="nk-widget-title"><span><span class="text-main-1">Price</span> Filter</span></h4>
+                            <div class="nk-widget-content">
+                                <div class="nk-input-slider">
+                                    <input type="text"
+                                           name="price-filter"
+                                           data-slider-min="0"
+                                           data-slider-max="1800"
+                                           data-slider-step="1"
+                                           data-slider-value="[200, 1200]"
+                                           data-slider-tooltip="hide">
+                                    <div class="nk-gap"></div>
+                                    <div>
+                                        <div class="text-white mt-4 float-left">
+                                            PRICE:
+                                            <strong class="text-main-1">€ <span class="nk-input-slider-value-0"></span></strong>
+                                            -
+                                            <strong class="text-main-1">€ <span class="nk-input-slider-value-1"></span></strong>
                                         </div>
-                                    <div class="nk-product-price">€ @item.Price</div>
+                                        <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white float-right">Apply</a>
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
-                            }                           
+                            </div>
                         </div>
-                    </div>
-                </aside>
-                <!-- END: Sidebar -->
+                        <div class="nk-widget nk-widget-highlighted">
+                            <h4 class="nk-widget-title"><span><span class="text-main-1">We</span> Are Social</span></h4>
+                            <div class="nk-widget-content">
+                                <ul class="nk-social-links-3 nk-social-links-cols-4">
+                                    <li><a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a></li>
+                                    <li><a class="nk-social-instagram" href="#"><span class="fab fa-instagram"></span></a></li>
+                                    <li><a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a></li>
+                                    <li><a class="nk-social-google-plus" href="#"><span class="fab fa-google-plus"></span></a></li>
+                                    <li><a class="nk-social-youtube" href="#"><span class="fab fa-youtube"></span></a></li>
+                                    <li><a class="nk-social-twitter" href="#" target="_blank"><span class="fab fa-twitter"></span></a></li>
+                                    <li><a class="nk-social-pinterest" href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                                    <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="nk-widget nk-widget-highlighted">
+                            <h4 class="nk-widget-title"><span><span class="text-main-1">Most</span> Popular</span></h4>
+                            <div class="nk-widget-content">
+
+                                @foreach (var item in Model.popularGame)
+                                {
+                                    string url = $"/Product/HomePage/{item.Id}.html";
+                                    <div class="nk-widget-post">
+                                        <a href="@url" class="nk-post-image">
+                                            <img src="~/Images/@item.Image" alt=@item.Name>
+                                        </a>
+                                        <h3 class="nk-post-title"><a href="@url">@item.Name</a></h3>
+                                        <div class="nk-product-rating">
+                                            @for (int i = 1; i <= item.Id / 20; i++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                        </div>
+                                        <div class="nk-product-price">€ @item.Price</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </aside>
+                    <!-- END: Sidebar -->
+                </div>
             </div>
         </div>
+
+
+
+
     </div>
 
 
 
 
-</div>
+    <!-- START: Page Background -->
 
-
-
-
-<!-- START: Page Background -->
-
-<img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
-<img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
-@section Styles{
-    <style>
-        #more {
-            display: none;
-        }
-
-        p {
-            margin-bottom: 0;
-        }
-        .divreadmore{
-            margin-top: 5px;
-        }
-    </style>
-}
-@section Scripts {
-    <script type="text/javascript">
-        // <![CDATA[
-        function ShowHide(HiddenDiv) {
-            if (document.getElementById(HiddenDiv).style.display == 'none') {
-                document.getElementById(HiddenDiv).style.display = 'block';
+    <img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
+    <img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
+    @section Styles{
+        <style>
+            #more {
+                display: none;
             }
-            else {
-                document.getElementById(HiddenDiv).style.display = 'none';
-            }
-        }
-                    // ]]></script>
-    <script type="text/javascript">
-        function myFunction() {
-            var dots = document.getElementById("dots");
-            var moreText = document.getElementById("more");
-            var btnText = document.getElementById("myBtn");
 
-            if (dots.style.display === "none") {
-                dots.style.display = "inline";
-                btnText.innerHTML = "Read more";
-                moreText.style.display = "none";
-            } else {
-                dots.style.display = "none";
-                btnText.innerHTML = "Read less";
-                moreText.style.display = "inline";
+            p {
+                margin-bottom: 0;
             }
-        }
-                    </script>
-}
+
+            .divreadmore {
+                margin-top: 5px;
+            }
+        </style>
+    }
+    @section Scripts {
+        <script type="text/javascript">
+            // <![CDATA[
+            function ShowHide(HiddenDiv) {
+                if (document.getElementById(HiddenDiv).style.display == 'none') {
+                    document.getElementById(HiddenDiv).style.display = 'block';
+                }
+                else {
+                    document.getElementById(HiddenDiv).style.display = 'none';
+                }
+            }
+            // ]]></script>
+        <script type="text/javascript">
+            function myFunction() {
+                var dots = document.getElementById("dots");
+                var moreText = document.getElementById("more");
+                var btnText = document.getElementById("myBtn");
+
+                if (dots.style.display === "none") {
+                    dots.style.display = "inline";
+                    btnText.innerHTML = "Read more";
+                    moreText.style.display = "none";
+                } else {
+                    dots.style.display = "none";
+                    btnText.innerHTML = "Read less";
+                    moreText.style.display = "inline";
+                }
+            }
+        </script>
+    }
