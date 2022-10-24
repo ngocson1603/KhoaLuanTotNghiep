@@ -176,7 +176,7 @@
 
             @{
                 string url2 = $"/Product/HomePage/Cate/{@ViewBag.id1}.html";
-                @if (@PageCurrent <= ViewBag.maxPage)
+                @if (@PageCurrent < ViewBag.maxPage)
                 {
 
                     <nav>
