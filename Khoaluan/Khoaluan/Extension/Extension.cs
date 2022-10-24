@@ -12,6 +12,7 @@ namespace Khoaluan.Extension
         {
             return donGia.ToString("#,##0") + " đ";
         }
+
         public static string ToTitleCase(string str)
         {
             string result = str;
