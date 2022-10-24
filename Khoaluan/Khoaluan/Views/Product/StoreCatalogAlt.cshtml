@@ -1,7 +1,7 @@
 ﻿@using PagedList.Core.Mvc
 @model Khoaluan.OtpModels.DetailCate
 @{
-    ViewData["Title"] = "DetailCate" + ViewBag.CurrentPage;
+    ViewData["Title"] = ViewBag.Category;
     Layout = "~/Views/Shared/_Layout.cshtml";
     int PageCurrent = ViewBag.CurrentPage;
     int PageNext = PageCurrent + 1;
@@ -25,7 +25,7 @@
 
             <li><span class="fa fa-angle-right"></span></li>
 
-            <li><span>Action Games</span></li>
+            <li><span>@ViewBag.Category</span></li>
 
         </ul>
     </div>

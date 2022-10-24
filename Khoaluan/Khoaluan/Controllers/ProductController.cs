@@ -76,6 +76,7 @@ namespace Khoaluan.Controllers
                 var pageSize = 6;
                 var popular = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
                 var pro = _unitOfWork.ProductRepository.getCate().Where(t => t.CatID.Equals(id)).ToList();
+                ViewBag.Category = id;
                 if (pro.Count() <= 6)
                     ViewBag.maxPage = 1;
                 else
