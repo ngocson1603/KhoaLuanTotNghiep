@@ -25,6 +25,7 @@ namespace Khoaluan.Helpper
             }
             return null;
         }
+
         public static bool IsValidEmail(string email)
         {
             if (email.Trim().EndsWith("."))
@@ -49,6 +50,7 @@ namespace Khoaluan.Helpper
             if (!folderExists)
                 Directory.CreateDirectory(path);
         }
+
         public static string ToTitleCase(string str)
         {
             string result = str;
@@ -67,6 +69,7 @@ namespace Khoaluan.Helpper
             }
             return result;
         }
+
         public static bool IsInteger(string str)
         {
             Regex regex = new Regex(@"^[0-9]+$");
@@ -92,6 +95,7 @@ namespace Khoaluan.Helpper
             return false;
 
         }
+
         public static string GetRandomKey(int length = 5)
         {
             //chuỗi mẫu (pattern)
@@ -106,6 +110,7 @@ namespace Khoaluan.Helpper
 
             return sb.ToString();
         }
+
         public static string SEOUrl(string url)
         {
             url = url.ToLower();
@@ -136,6 +141,7 @@ namespace Khoaluan.Helpper
             }
             return url;
         }
+
         public static async Task<string> UploadFile(Microsoft.AspNetCore.Http.IFormFile file, string sDirectory, string newname = null)
         {
             try

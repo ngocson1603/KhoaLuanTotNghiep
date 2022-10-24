@@ -11,6 +11,5 @@ namespace Khoaluan.Configurations
             builder.ToTable(nameof(Category));
             builder.HasKey(o => o.Id);
         }
-
     }
 }

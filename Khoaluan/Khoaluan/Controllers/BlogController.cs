@@ -16,10 +16,12 @@ namespace Khoaluan.Controllers
         //{
         //    _context = context;
         //}
+
         public IActionResult Index()
         {
             return View();
         }
+
         //public IActionResult BlogFull(int? page)
         //{
         //    var pageNumber = page == null || page <= 0 ? 1 : page.Value;

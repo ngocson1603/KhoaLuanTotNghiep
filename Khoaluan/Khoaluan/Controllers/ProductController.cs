@@ -16,19 +16,22 @@ namespace Khoaluan.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public ProductController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
+
         public IActionResult Index()
         {
             var x = _unitOfWork.ProductRepository.getallProductwithCategory();
             return View(x);
         }
+
         public IActionResult Homepage()
         {
             var bestSeller = _unitOfWork.ProductRepository.GetAll().Take(10).ToList();
-            var FreeGame = _unitOfWork.ProductRepository.GetAll().Where(t => t.price == 0).ToList();
+            var FreeGame = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price == 0).ToList();
             var PopularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => (t.DevName.Equals("EA")) || (t.DevName.Equals("Rockstar Games"))).ToList();
             var RencentlyReleased = _unitOfWork.ProductRepository.getallProductwithCategory().OrderByDescending(t => t.ReleaseDate).ToList();
             HomePageViewModel homepage = new HomePageViewModel()
@@ -62,6 +65,7 @@ namespace Khoaluan.Controllers
 
         public static string id1;
         public static int maxPage;
+
         [Route("/Product/HomePage/Cate/{id}.html", Name = ("ProductCate"))]
         public IActionResult StoreCatalogAlt(string id, int? page)
         {
