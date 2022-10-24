@@ -1,35 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DULIEUHOCTAP\\KhoaLuan\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj": {}
+    "C:\\Users\\hodan\\OneDrive\\Máy tính\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj": {}
   },
   "projects": {
-    "D:\\DULIEUHOCTAP\\KhoaLuan\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj": {
+    "C:\\Users\\hodan\\OneDrive\\Máy tính\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DULIEUHOCTAP\\KhoaLuan\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj",
+        "projectUniqueName": "C:\\Users\\hodan\\OneDrive\\Máy tính\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj",
         "projectName": "Khoaluan",
-        "projectPath": "D:\\DULIEUHOCTAP\\KhoaLuan\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\DULIEUHOCTAP\\KhoaLuan\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\obj\\",
+        "projectPath": "C:\\Users\\hodan\\OneDrive\\Máy tính\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\Khoaluan.csproj",
+        "packagesPath": "C:\\Users\\hodan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hodan\\OneDrive\\Máy tính\\KhoaLuanTotNghiep\\Khoaluan\\Khoaluan\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\hodan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://www.nuget.org/api/v2/": {},
-          "https://www.nuget.org/api/v2/curated-feeds/microsoftdotnet/": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {

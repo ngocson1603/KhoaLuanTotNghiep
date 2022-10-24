@@ -2514,3 +2514,4 @@ C:\Users\hodan\OneDrive\Máy tính\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug
 C:\Users\hodan\OneDrive\Máy tính\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Khoaluan.pdb
 C:\Users\hodan\OneDrive\Máy tính\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Khoaluan.genruntimeconfig.cache
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Product\StoreDevAlt.cshtml.g.cs
+C:\Users\hodan\OneDrive\Máy tính\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Product\StoreDevAlt.cshtml.g.cs
