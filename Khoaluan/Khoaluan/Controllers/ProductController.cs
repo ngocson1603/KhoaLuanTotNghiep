@@ -40,10 +40,11 @@ namespace Khoaluan.Controllers
             };
             return View(homepage);
         }
+
         [Route("/Product/HomePage/{id}.html", Name = ("ProductDetails"))]
         public IActionResult Detail(int id)
         {
-            var x=_unitOfWork.ProductRepository.getallProductwithCategory().Where(t=>t.Id==id).FirstOrDefault();
+            var x = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
             var relateGame = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
             var popularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals("Rockstar Games")).ToList();
             var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Take(5).ToList();
@@ -51,13 +52,14 @@ namespace Khoaluan.Controllers
             DetailPage dtp = new DetailPage()
             {
                 productDetail = x,
-                relateGame=relateGame,
-                popularGame=popularGame,
+                relateGame = relateGame,
+                popularGame = popularGame,
                 cate = cate,
                 catesecond = catesecond,
             };
             return View(dtp);
         }
+
         public static string id1;
         public static int maxPage;
         [Route("/Product/HomePage/Cate/{id}.html", Name = ("ProductCate"))]
@@ -69,7 +71,14 @@ namespace Khoaluan.Controllers
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
                 var pageSize = 6;
                 var pro = _unitOfWork.ProductRepository.getCate().Where(t => t.CatID.Equals(id)).ToList();
-                ViewBag.maxPage = int.Parse((pro.Count()%6).ToString());
+                if (pro.Count() <= 6)
+                    ViewBag.maxPage = 1;
+                else
+                {
+                    double dMaxPage = Convert.ToDouble(pro.Count());
+                    ViewBag.maxPage = Math.Ceiling(dMaxPage / 6);
+                }
+
                 var pl = pro.AsQueryable().ToPagedList(pageNumber, pageSize);
                 var plr = pl.ToList();
                 DetailCate pwc = new DetailCate()
