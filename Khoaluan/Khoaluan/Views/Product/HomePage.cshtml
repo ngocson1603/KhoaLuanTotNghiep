@@ -4,72 +4,71 @@
     ViewData["Title"] = "Product";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <div class="nk-main">
+<div class="nk-main">
 
-            <!-- START: Breadcrumbs -->
-<div class="nk-gap-1"></div>
-<div class="container">
-    <ul class="nk-breadcrumbs">
-
-
-        <li><a href="index.html">Home</a></li>
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
 
 
-        <li><span class="fa fa-angle-right"></span></li>
-
-        <li><span>Store</span></li>
-
-    </ul>
-</div>
-<div class="nk-gap-1"></div>
-<!-- END: Breadcrumbs -->
+            <li><a href="index.html">Home</a></li>
 
 
+            <li><span class="fa fa-angle-right"></span></li>
 
+            <li><span>Store</span></li>
 
-<div class="container">
-    <!-- START: Categories -->
-    <div class="row vertical-gap">
-        <div class="col-lg-4">
-            <div class="nk-feature-1">
-                <div class="nk-feature-icon">
-                    <img src="~/assets/images/icon-mouse.png" alt="">
-                </div>
-                <div class="nk-feature-cont">
-                    <h3 class="nk-feature-title"><a href="#">PC</a></h3>
-                    <h3 class="nk-feature-title text-main-1"><a href="#">View Games</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="nk-feature-1">
-                <div class="nk-feature-icon">
-                    <img src="~/assets/images/icon-gamepad.png" alt="">
-                </div>
-                <div class="nk-feature-cont">
-                    <h3 class="nk-feature-title"><a href="#">PS4</a></h3>
-                    <h3 class="nk-feature-title text-main-1"><a href="#">View Games</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="nk-feature-1">
-                <div class="nk-feature-icon">
-                    <img src="~/assets/images/icon-gamepad-2.png" alt="">
-                </div>
-                <div class="nk-feature-cont">
-                    <h3 class="nk-feature-title"><a href="#">Xbox</a></h3>
-                    <h3 class="nk-feature-title text-main-1"><a href="#">View Games</a></h3>
-                </div>
-            </div>
-        </div>
+        </ul>
     </div>
-    <!-- END: Categories -->
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
 
-    <!-- START: Some Products -->
-    <div class="nk-gap-2"></div>
-    <div class="row vertical-gap">
-        @if (Model != null && Model.RecentlyRealeased.Count() > 0)
+
+
+
+    <div class="container">
+        <!-- START: Categories -->
+        <div class="row vertical-gap">
+            <div class="col-lg-4">
+                <div class="nk-feature-1">
+                    <div class="nk-feature-icon">
+                        <img src="~/assets/images/icon-mouse.png" alt="">
+                    </div>
+                    <div class="nk-feature-cont">
+                        <h3 class="nk-feature-title"><a href="#">PC</a></h3>
+                        <h3 class="nk-feature-title text-main-1"><a href="#">View Games</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="nk-feature-1">
+                    <div class="nk-feature-icon">
+                        <img src="~/assets/images/icon-gamepad.png" alt="">
+                    </div>
+                    <div class="nk-feature-cont">
+                        <h3 class="nk-feature-title"><a href="#">PS4</a></h3>
+                        <h3 class="nk-feature-title text-main-1"><a href="#">View Games</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="nk-feature-1">
+                    <div class="nk-feature-icon">
+                        <img src="~/assets/images/icon-gamepad-2.png" alt="">
+                    </div>
+                    <div class="nk-feature-cont">
+                        <h3 class="nk-feature-title"><a href="#">Xbox</a></h3>
+                        <h3 class="nk-feature-title text-main-1"><a href="#">View Games</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: Categories -->
+        <!-- START: Some Products -->
+        <div class="nk-gap-2"></div>
+        <div class="row vertical-gap">
+            @if (Model != null && Model.RecentlyRealeased.Count() > 0)
             {
                 foreach (var item in Model.RecentlyRealeased.Take(1))
                 {
@@ -92,7 +91,7 @@
                 foreach (var item in Model.RecentlyRealeased.Skip(5).Take(1))
                 {
                     string url = $"/Product/HomePage/{item.Id}.html";
-            <div class="col-md-6 col-lg-4 order-lg-3">
+                    <div class="col-md-6 col-lg-4 order-lg-3">
                         <div class="nk-gallery-item-box">
                             <a href="@url" class="nk-gallery-item">
                                 <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
@@ -103,10 +102,10 @@
                             </div>
                         </div>
                     </div>
-                      }
+                }
             }
-                    <div class="col-md-12 col-lg-4">
-                        <div class="row vertical-gap">
+            <div class="col-md-12 col-lg-4">
+                <div class="row vertical-gap">
                     @if (Model != null && Model.RecentlyRealeased.Count() > 0)
                     {
                         foreach (var item in Model.RecentlyRealeased.Skip(1).Take(4))
@@ -123,50 +122,48 @@
                         }
                     }
                 </div>
-                    </div>
-        
-    </div>
-    <!-- END: Some Products -->
+            </div>
 
-    <!-- START: Top 10 Best Sellers -->
-    <div class="nk-gap-3"></div>
-    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Top 10</span> Best Sellers</span></h3>
-    <div class="nk-gap"></div>
-    <div class="nk-carousel nk-carousel-x4" data-autoplay="5000" data-dots="false" data-cell-align="left" data-arrows="true">
-        <div class="nk-carousel-inner">
+        </div>
+        <!-- END: Some Products -->
+        <!-- START: Top 10 Best Sellers -->
+        <div class="nk-gap-3"></div>
+        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Top 10</span> Best Sellers</span></h3>
+        <div class="nk-gap"></div>
+        <div class="nk-carousel nk-carousel-x4" data-autoplay="5000" data-dots="false" data-cell-align="left" data-arrows="true">
+            <div class="nk-carousel-inner">
                 @if (Model != null && Model.bestSeller.Count() > 0)
-                 {
+                {
                     foreach (var item in Model.bestSeller)
                     {
                         string url = $"/Product/HomePage/{item.Id}.html";
-                            <div>
-                                <div class="pl-5 pr-5">
-                                    <div class="nk-product-cat-3">
-                                        <a class="nk-product-image" href="@url">
+                        <div>
+                            <div class="pl-5 pr-5">
+                                <div class="nk-product-cat-3">
+                                    <a class="nk-product-image" href="@url">
                                         <img src="~/Images/@item.Image" alt="So saying he unbuckled">
-                                        </a>
-                                        <div class="nk-product-cont">
-                                            <div class="nk-gap-1"></div>
-                                            <h3 class="nk-product-title h5"><a href="@url">@item.Name</a></h3>
-                                            <div class="nk-gap-1"></div>
-                                            <div class="nk-product-price">€ @item.Price</div>
-                                        </div>
+                                    </a>
+                                    <div class="nk-product-cont">
+                                        <div class="nk-gap-1"></div>
+                                        <h3 class="nk-product-title h5"><a href="@url">@item.Name</a></h3>
+                                        <div class="nk-gap-1"></div>
+                                        <div class="nk-product-price">€ @item.Price</div>
                                     </div>
                                 </div>
                             </div>
-                        }
+                        </div>
                     }
+                }
+            </div>
         </div>
-    </div>
-    <!-- END: Top 10 Best Sellers -->
-
-    <!-- START: Featured Games -->
-    <div class="nk-gap-3"></div>
-    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Free</span> Games</span></h3>
-    <div class="nk-gap"></div>
-    <div class="row vertical-gap">
-        @if (Model != null && Model.FreeGames.Count() > 0)
-                 {
+        <!-- END: Top 10 Best Sellers -->
+        <!-- START: Featured Games -->
+        <div class="nk-gap-3"></div>
+        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Free</span> Games</span></h3>
+        <div class="nk-gap"></div>
+        <div class="row vertical-gap">
+            @if (Model != null && Model.FreeGames.Count() > 0)
+            {
                 foreach (var item in Model.FreeGames)
                 {
                     string url = $"/Product/HomePage/{item.Id}.html";
@@ -189,17 +186,16 @@
                         </div>
                     </div>
                 }
-                 }
-    </div>
-    <!-- END: Featured Games -->
-
-    <!-- START: Most Popular -->
-    <div class="nk-gap-3"></div>
-    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Most</span> Popular</span></h3>
-    <div class="nk-gap"></div>
-    <div class="row vertical-gap">
-        @if (Model != null && Model.PopularGame.Count() > 0)
-                 {  
+            }
+        </div>
+        <!-- END: Featured Games -->
+        <!-- START: Most Popular -->
+        <div class="nk-gap-3"></div>
+        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Most</span> Popular</span></h3>
+        <div class="nk-gap"></div>
+        <div class="row vertical-gap">
+            @if (Model != null && Model.PopularGame.Count() > 0)
+            {
                 foreach (var item in Model.PopularGame)
                 {
                     string url = $"/Product/HomePage/{item.Id}.html";
@@ -212,11 +208,11 @@
                                 <h3 class="nk-product-title h5"><a href="@url">@item.Name</a></h3>
                                 <div class="nk-gap-1"></div>
                                 <div class="nk-product-rating" data-rating="3">
-                                    @for(int i = 1;i <= item.Id/20;i++)
+                                    @for (int i = 1; i <= item.Id / 20; i++)
                                     {
                                         <i class="fa fa-star"></i>
                                     }
-                                    
+
                                 </div>
                                 <div class="nk-gap-1"></div>
                                 <div class="nk-product-price">€ @item.Price</div>
@@ -224,19 +220,17 @@
                         </div>
                     </div>
                 }
-                 }
+            }
 
+        </div>
+        <!-- END: Most Popular -->
     </div>
-    <!-- END: Most Popular -->
 </div>
-    </div>
 
 
+<!-- START: Page Background -->
 
-
-        <!-- START: Page Background -->
-
-    <img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
-    <img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
+<img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
+<img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
 
 <!-- END: Page Background -->
