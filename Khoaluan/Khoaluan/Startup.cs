@@ -41,7 +41,7 @@ namespace Khoaluan
                 var implement = allRepositoryImplements.FirstOrDefault(t => t.IsClass && repoType.Name.Substring(1) == t.Name);
                 if (implement != null) services.AddScoped(repoType, implement);
             }
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddNotyf(config =>
             {
                 config.DurationInSeconds = 3;
