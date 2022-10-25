@@ -104,10 +104,10 @@
                                 <div class="input-group">
                                     <input type="number" id="txtsoLuong" name="txtsoLuong" class="form-control" value="1" min="1" max="21">
                                     @{
-                                        int Id = Model.productDetail.Id;
+                                        int productID = Model.productDetail.Id;
                                         <div class="add-to-cart">
                                             <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                            <input hidden asp-for="@Id" />
+                                            <input hidden asp-for="@productID" />
                                         </div>
                                     }
                                 </div>
@@ -499,7 +499,7 @@
             $(document).ready(function () {
                 $(function () {
                     $(".add-to-cart").click(function () {
-                        var productid = $('#Id').val();
+                        var productid = $('#productID').val();
                         var soLuong = $('#txtsoLuong').val();
                         $.ajax({
                             url: '/api/cart/add',
