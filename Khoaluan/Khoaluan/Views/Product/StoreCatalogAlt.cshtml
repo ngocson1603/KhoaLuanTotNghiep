@@ -133,7 +133,7 @@
                     string url = $"/Product/HomePage/{item.Id}.html";
                     <div class="col-lg-6">
                         <div class="nk-product-cat-2">
-                            <a class="nk-product-image" href="store-product.html">
+                            <a class="nk-product-image" href="@url">
                                 <img src="~/Images/@Url.Content(item.Image)" alt="So saying he unbuckled">
                             </a>
                             <div class="nk-product-cont">
@@ -141,7 +141,9 @@
                                 <div class="nk-gap-1"></div>
                                 <div class="nk-product-rating" data-rating="4"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i></div>
                                 <div class="nk-gap-1"></div>
-                                @item.Overview
+                                <div class="line-clamp">
+                                    @item.Overview
+                                </div>
                                 <div class="nk-gap-2"></div>
                                 <div class="nk-product-price">€ 23.00</div>
                                 <div class="nk-gap-1"></div>
@@ -201,58 +203,58 @@
         </div>
 
         @*<div class="col-lg-12">
-            <div class="pagination-area pt-10">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
+                <div class="pagination-area pt-10">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
 
-                        @if (PageCurrent > 1)
-                        {
-                            string url = $"/Product/HomePage/Cate/{@ViewBag.id1}.html";
-                            <li class="page-item">
-                                <a class="page-link" href="@url?page=@(PageCurrent - 1)" aria-label="Previous">
-                                    <span class="fa fa-chevron-left"></span>
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            string url1 = $"/Product/HomePage/Cate/{@ViewBag.id1}.html";
-                            <li class="page-item">
-                                <a class="page-link" href="@url1" aria-label="Previous">
-                                    <span class="fa fa-chevron-left"></span>
-                                </a>
-                            </li>
-                        }
-                        @{
-                            string url2 = $"/Product/HomePage/Cate/{@ViewBag.id1}.html";
-                            @if (@PageCurrent <= ViewBag.maxPage)
+                            @if (PageCurrent > 1)
                             {
-
-                                <li class="page-item active"><a class="page-link" href="@url2?page=@PageCurrent">@PageCurrent</a></li>
-                                <li class="page-item"><a class="page-link" href="@url2?page=@PageNext">@PageNext</a></li>
+                                string url = $"/Product/HomePage/Cate/{@ViewBag.id1}.html";
                                 <li class="page-item">
-                                    <a class="page-link" href="@url2?page=@PageNext" aria-label="Next">
-                                        <span class="fa fa-chevron-right"></span>
+                                    <a class="page-link" href="@url?page=@(PageCurrent - 1)" aria-label="Previous">
+                                        <span class="fa fa-chevron-left"></span>
                                     </a>
                                 </li>
-
                             }
                             else
                             {
-                                <li class="page-item active"><a class="page-link" href="@url2?page=@PageCurrent">@PageCurrent</a></li>
-                                <li class="page-item"><a hidden class="page-link" href="@url2?page=@PageNext">@PageNext</a></li>
+                                string url1 = $"/Product/HomePage/Cate/{@ViewBag.id1}.html";
                                 <li class="page-item">
-                                    <a class="page-link" aria-label="Next">
-                                        <span disabled class="fa fa-chevron-right"></span>
+                                    <a class="page-link" href="@url1" aria-label="Previous">
+                                        <span class="fa fa-chevron-left"></span>
                                     </a>
                                 </li>
                             }
-                        }
+                            @{
+                                string url2 = $"/Product/HomePage/Cate/{@ViewBag.id1}.html";
+                                @if (@PageCurrent <= ViewBag.maxPage)
+                                {
 
-                    </ul>
-                </nav>
-            </div>
-        </div>*@
+                                    <li class="page-item active"><a class="page-link" href="@url2?page=@PageCurrent">@PageCurrent</a></li>
+                                    <li class="page-item"><a class="page-link" href="@url2?page=@PageNext">@PageNext</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="@url2?page=@PageNext" aria-label="Next">
+                                            <span class="fa fa-chevron-right"></span>
+                                        </a>
+                                    </li>
+
+                                }
+                                else
+                                {
+                                    <li class="page-item active"><a class="page-link" href="@url2?page=@PageCurrent">@PageCurrent</a></li>
+                                    <li class="page-item"><a hidden class="page-link" href="@url2?page=@PageNext">@PageNext</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" aria-label="Next">
+                                            <span disabled class="fa fa-chevron-right"></span>
+                                        </a>
+                                    </li>
+                                }
+                            }
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>*@
         <!-- END: Pagination -->
         <!-- START: Most Popular -->
         <div class="nk-gap-3"></div>
@@ -296,3 +298,13 @@
 
 <img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
 <img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
+@section Styles{
+    <style>
+        .line-clamp {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+}

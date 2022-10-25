@@ -133,7 +133,7 @@
                     string url = $"/Product/HomePage/{item.Id}.html";
                     <div class="col-lg-6">
                         <div class="nk-product-cat-2">
-                            <a class="nk-product-image" href="store-product.html">
+                            <a class="nk-product-image" href="@url">
                                 <img src="~/Images/@Url.Content(item.Image)" alt="So saying he unbuckled">
                             </a>
                             <div class="nk-product-cont">
@@ -141,7 +141,9 @@
                                 <div class="nk-gap-1"></div>
                                 <div class="nk-product-rating" data-rating="4"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i></div>
                                 <div class="nk-gap-1"></div>
-                                @item.Overview
+                                <div class="line-clamp">
+                                    @item.Overview
+                                </div>
                                 <div class="nk-gap-2"></div>
                                 <div class="nk-product-price">€ 23.00</div>
                                 <div class="nk-gap-1"></div>
@@ -244,3 +246,14 @@
 
 <img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
 <img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
+@section Styles{
+    <style>
+        .line-clamp {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+}
+}
