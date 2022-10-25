@@ -27,6 +27,8 @@
     <None Include="Views\Home\Privacy.cshtml" />
     <None Include="Views\Home\Support.cshtml" />
     <None Include="Views\ProductCart\Cart.cshtml" />
+    <None Include="Views\Shared\Components\HeaderCart\Default.cshtml" />
+    <None Include="Views\Shared\Components\NumberCart\Default.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_footerPartial.cshtml" />
     <None Include="Views\Shared\_headerPartial.cshtml" />

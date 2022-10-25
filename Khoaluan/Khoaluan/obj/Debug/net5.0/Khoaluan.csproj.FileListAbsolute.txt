@@ -2529,3 +2529,5 @@ C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoa
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\System.Windows.Extensions.dll
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Product\StoreCatalogAlt.cshtml.g.cs
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Product\StoreDevAlt.cshtml.g.cs
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Shared\Components\HeaderCart\Default.cshtml.g.cs
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Shared\Components\NumberCart\Default.cshtml.g.cs
