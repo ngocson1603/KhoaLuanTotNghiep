@@ -167,6 +167,8 @@
                 foreach (var item in Model.FreeGames)
                 {
                     string url = $"/Product/HomePage/{item.Id}.html";
+                    string gia = "free";
+                    string icon = "€";
                     <div class="col-lg-6">
                         <div class="nk-product-cat-2">
                             <a class="nk-product-image" href="@url">
@@ -177,9 +179,20 @@
                                 <div class="nk-gap-1"></div>
                                 <div class="nk-product-rating" data-rating="3.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i> <i class="far fa-star"></i></div>
                                 <div class="nk-gap-1"></div>
-                                @item.Description
+                                <div class="line-clamp">
+                                    @item.Description
+                                </div>
                                 <div class="nk-gap-2"></div>
-                                <div class="nk-product-price">€ @item.Price</div>
+                                <div class="nk-product-price">
+                                    @if (item.Price == 0)
+                                    {
+                                        @gia;
+                                    }
+                                    else
+                                    {
+                                        @icon @item.Price;
+                                    }
+                                </div>
                                 <div class="nk-gap-1"></div>
                                 <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Add to Cart</a>
                             </div>
@@ -199,6 +212,8 @@
                 foreach (var item in Model.PopularGame)
                 {
                     string url = $"/Product/HomePage/{item.Id}.html";
+                    string gia = "free";
+                    string icon = "€";
                     <div class="col-lg-4 col-md-6">
                         <div class="nk-product-cat">
                             <a class="nk-product-image" href="@url">
@@ -215,7 +230,17 @@
 
                                 </div>
                                 <div class="nk-gap-1"></div>
-                                <div class="nk-product-price">€ @item.Price</div>
+                                <div class="nk-product-price">
+                                    @if (int.Parse(item.Price) == 0)
+                                    {
+                                        @gia;
+                                    }
+                                    else
+                                    {
+                                        @icon @item.Price;
+                                    }
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -234,3 +259,13 @@
 <img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
 
 <!-- END: Page Background -->
+@section Styles{
+    <style>
+        .line-clamp {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+}
