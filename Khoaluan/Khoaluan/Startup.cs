@@ -29,6 +29,7 @@ namespace Khoaluan
             {
                 option.UseSqlServer(Configuration.GetConnectionString("conString"));
             });
+            services.AddSession();
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddScoped(typeof(IGameStoreRepository<>), typeof(GameStoreRepository<>));
             var allRepositoryInterfaces = Assembly.GetAssembly(typeof(IGameStoreRepository<>))
@@ -64,7 +65,7 @@ namespace Khoaluan
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
