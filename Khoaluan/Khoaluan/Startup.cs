@@ -1,4 +1,5 @@
 using AspNetCoreHero.ToastNotification;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,15 @@ namespace Khoaluan
                 option.UseSqlServer(Configuration.GetConnectionString("conString"));
             });
             services.AddSession();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(p =>
+                {
+                    //p.Cookie.Name = "UserLoginCookie";
+                    //p.ExpireTimeSpan = TimeSpan.FromDays(1);
+                    p.LoginPath = "/dang-nhap.html";
+                    //p.LogoutPath = "/dang-xuat/html";
+                    p.AccessDeniedPath = "/not-found.html";
+                });
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddScoped(typeof(IGameStoreRepository<>), typeof(GameStoreRepository<>));
             var allRepositoryInterfaces = Assembly.GetAssembly(typeof(IGameStoreRepository<>))
@@ -68,6 +78,7 @@ namespace Khoaluan
             app.UseSession();
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
