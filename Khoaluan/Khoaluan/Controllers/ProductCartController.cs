@@ -33,12 +33,13 @@ namespace DuAnGame.Controllers
                 return gh;
             }
         }
+        public static int idpro;
         [HttpPost]
         [Route("api/cart/add")]
         public IActionResult AddToCart(int productID)
         {
             List<CartItem> cart = GioHang;
-
+            //ViewBag.listpro = cart;
             try
             {
                 //Them san pham vao gio hang
@@ -46,6 +47,7 @@ namespace DuAnGame.Controllers
                 if (item != null) // da co => cap nhat so luong
                 {
                     //luu lai session
+                    ViewBag.idpro = productID;
                     HttpContext.Session.Set<List<CartItem>>("GioHang", cart);
                 }
                 else

@@ -7,7 +7,5 @@ namespace Khoaluan.Interfaces
     public interface IProductRepository:IGameStoreRepository<Product>
     {
         public List<Productdetail> getallProductwithCategory();
-
-        public List<Productdetail> getCate();
     }
 }
