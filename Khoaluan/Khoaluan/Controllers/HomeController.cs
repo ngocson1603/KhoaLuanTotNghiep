@@ -38,7 +38,8 @@ namespace Khoaluan.Controllers
         {
             return View();
         }
-        public IActionResult Privacy()
+        [Route("Privacy.html", Name = "Privacy")]
+        public ActionResult Privacy()
         {
             return View();
         }

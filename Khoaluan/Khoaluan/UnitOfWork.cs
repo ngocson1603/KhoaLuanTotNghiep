@@ -15,7 +15,8 @@ namespace Khoaluan
             IProductCategoryRepository productCategoryRepository,
             IProductRepository productRepository,
             ICategoryRepository categoryRepository,
-            IDeveloperRepository developerRepository
+            IDeveloperRepository developerRepository,
+            IUserRepository userRepository
             )
         {
             Context = context;
@@ -23,6 +24,7 @@ namespace Khoaluan
             ProductRepository= productRepository;
             CategoryRepository= categoryRepository;
             DeveloperRepository= developerRepository;
+            UserRepository = userRepository;
         }
         public void Dispose()
         {
