@@ -1,6 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Khoaluan.Extension;
 using Khoaluan.Helpper;
+using Khoaluan.Models;
 using Khoaluan.ModelViews;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -87,61 +88,57 @@ namespace Khoaluan.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[Route("dang-ky.html", Name = "DangKy")]
-        //public async Task<IActionResult> DangkyTaiKhoan(RegisterViewModel taikhoan)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            string salt = Utilities.GetRandomKey();
-        //            Customer khachhang = new Customer
-        //            {
-        //                FullName = taikhoan.FullName,
-        //                Phone = taikhoan.Phone.Trim().ToLower(),
-        //                Email = taikhoan.Email.Trim().ToLower(),
-        //                Password = (taikhoan.Password + salt.Trim()).ToMD5(),
-        //                Active = true,
-        //                Salt = salt,
-        //                CreateDate = DateTime.Now
-        //            };
-        //            try
-        //            {
-        //                _context.Add(khachhang);
-        //                await _context.SaveChangesAsync();
-        //                //Lưu Session MaKh
-        //                HttpContext.Session.SetString("CustomerId", khachhang.CustomerId.ToString());
-        //                var taikhoanID = HttpContext.Session.GetString("CustomerId");
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("dang-ky.html", Name = "DangKy")]
+        public async Task<IActionResult> DangkyTaiKhoan(RegisterViewModel taikhoan)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    string salt = Utilities.GetRandomKey();
+                    User khachhang = new User
+                    {
+                        HoTen = taikhoan.FullName,
+                        Gmail = taikhoan.Email.Trim().ToLower(),
+                        Password = (taikhoan.Password + salt.Trim()).ToMD5(),
+                        Salt = salt,
+                    };
+                    try
+                    {
+                        _unitOfWork.UserRepository.Create(khachhang);
+                        //Lưu Session MaKh
+                        HttpContext.Session.SetString("Id", khachhang.Id.ToString());
+                        var taikhoanID = HttpContext.Session.GetString("Id");
 
-        //                //Identity
-        //                var claims = new List<Claim>
-        //                {
-        //                    new Claim(ClaimTypes.Name,khachhang.FullName),
-        //                    new Claim("CustomerId", khachhang.CustomerId.ToString())
-        //                };
-        //                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
-        //                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-        //                await HttpContext.SignInAsync(claimsPrincipal);
-        //                _notyfService.Success("Đăng ký thành công");
-        //                return RedirectToAction("Dashboard", "Accounts");
-        //            }
-        //            catch
-        //            {
-        //                return RedirectToAction("DangkyTaiKhoan", "Accounts");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return View(taikhoan);
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        return View(taikhoan);
-        //    }
-        //}
+                        //Identity
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name,khachhang.HoTen),
+                            new Claim("Id", khachhang.Id.ToString())
+                        };
+                        ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
+                        ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                        await HttpContext.SignInAsync(claimsPrincipal);
+                        _notyfService.Success("Đăng ký thành công");
+                        return RedirectToAction("Dashboard", "User");
+                    }
+                    catch
+                    {
+                        return RedirectToAction("DangkyTaiKhoan", "User");
+                    }
+                }
+                else
+                {
+                    return View(taikhoan);
+                }
+            }
+            catch
+            {
+                return View(taikhoan);
+            }
+        }
         [AllowAnonymous]
         [Route("dang-nhap.html", Name = "DangNhap")]
         public IActionResult Login()
@@ -168,12 +165,12 @@ namespace Khoaluan.Controllers
 
                     var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Gmail.Trim() == customer.Gmail);
                     if (khachhang == null) return RedirectToAction("DangkyTaiKhoan");
-                    //string pass = (customer.Password + khachhang.Salt.Trim()).ToMD5();
-                    //if (khachhang.Password != pass)
-                    //{
-                    //    _notyfService.Success("Thông tin đăng nhập chưa chính xác");
-                    //    return View(customer);
-                    //}
+                    string pass = (customer.Password + khachhang.Salt.Trim()).ToMD5();
+                    if (khachhang.Password != pass)
+                    {
+                        _notyfService.Success("Thông tin đăng nhập chưa chính xác");
+                        return View(customer);
+                    }
                     //kiem tra xem account co bi disable hay khong
 
                     //if (khachhang.Active == false)
@@ -216,7 +213,7 @@ namespace Khoaluan.Controllers
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync();
-            HttpContext.Session.Remove("CustomerId");
+            HttpContext.Session.Remove("Id");
             return RedirectToAction("HomePage", "Product");
         }
 
