@@ -10,6 +10,7 @@ namespace Khoaluan
         public IProductRepository ProductRepository { get; set; }   
         public ICategoryRepository CategoryRepository { get; set; }
         public IDeveloperRepository DeveloperRepository { get; set; }
+        public IUserRepository UserRepository { get; set; }
         public UnitOfWork(GameStoreDbContext context,
             IProductCategoryRepository productCategoryRepository,
             IProductRepository productRepository,

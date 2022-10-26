@@ -16,6 +16,7 @@ namespace Khoaluan
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new DeveloperConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
         public DbSet<Khoaluan.Models.Product> Product { get; set; }
     }

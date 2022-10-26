@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Khoaluan.Areas.Admin.Models
+namespace Khoaluan.ModelViews
 {
     public class LoginViewModel
     {
@@ -10,7 +13,7 @@ namespace Khoaluan.Areas.Admin.Models
         [Required(ErrorMessage = ("Vui lòng nhập Email"))]
         [Display(Name = "Địa chỉ Email")]
         [EmailAddress(ErrorMessage = "Sai định dạng Email")]
-        public string UserName { get; set; }
+        public string Gmail { get; set; }
 
         [Display(Name = "Mật khẩu")]
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
