@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Khoaluan.Extension;
 using Khoaluan.ModelViews;
+using Khoaluan.Models;
 
 namespace Khoaluan.Controllers.Components
 {
@@ -11,7 +12,8 @@ namespace Khoaluan.Controllers.Components
     {
         public IViewComponentResult Invoke()
         {
-            var cart = HttpContext.Session.Get<List<CartItem>>("GioHang");
+            var cart = HttpContext.Session.Get<List<Cart>>("GioHang");
+            TempData.Keep("idpro");
             return View(cart);
         }
     }

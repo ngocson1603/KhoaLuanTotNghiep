@@ -3,9 +3,12 @@ using Khoaluan;
 using Khoaluan.Extension;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,48 +24,54 @@ namespace DuAnGame.Controllers
             _notyfService = notyfService;
         }
         
-        public List<CartItem> GioHang
+        public List<Cart> GioHang
         {
             get
             {
-                var gh = HttpContext.Session.Get<List<CartItem>>("GioHang");
-                if (gh == default(List<CartItem>))
+                var gh = HttpContext.Session.Get<List<Cart>>("GioHang");
+                if (gh == default(List<Cart>))
                 {
-                    gh = new List<CartItem>();
+                    gh = new List<Cart>();
                 }
                 return gh;
             }
         }
-        public static int idpro;
+        const string SessionName = "idpro";
+        public List<int> lst = new List<int>();
         [HttpPost]
         [Route("api/cart/add")]
         public IActionResult AddToCart(int productID)
         {
-            List<CartItem> cart = GioHang;
-            //ViewBag.listpro = cart;
+            List<Cart> cart = GioHang;
+            List<int> list = new List<int> { 15,18,31 };
             try
             {
+                //var add = new AddToCart() { ProID = productID };
+                //HttpContext.Session.SetString("ADD",JsonConvert.SerializeObject(add));
+                lst.Add(productID);
+                TempData["idpro"] = list;
+                //TempData["idpro"] = JsonConvert.DeserializeObject<AddToCart>(HttpContext.Session.GetString("ADD"));
                 //Them san pham vao gio hang
-                CartItem item = cart.SingleOrDefault(p => p.product.Id == productID);
-                if (item != null) // da co => cap nhat so luong
+                Cart item = cart.SingleOrDefault(p => p.product.Id == productID);
+                if (item != null) 
                 {
                     //luu lai session
-                    ViewBag.idpro = productID;
-                    HttpContext.Session.Set<List<CartItem>>("GioHang", cart);
+                    TempData["idpro"] = lst;
+                    HttpContext.Session.Set<List<Cart>>("GioHang", cart);
                 }
                 else
                 {
-                    Product hh = _unitOfWork.ProductRepository.GetAll().SingleOrDefault(p => p.Id == productID);
-                    item = new CartItem
+                    Product hh = _unitOfWork.ProductRepository.GetById(productID);
+                    item = new Cart
                     {
                         amount = 1,
                         product = hh
                     };
                     cart.Add(item);//Them vao gio
                 }
-
+                TempData.Keep("idpro");
                 //Luu lai Session
-                HttpContext.Session.Set<List<CartItem>>("GioHang", cart);
+                HttpContext.Session.Set<List<Cart>>("GioHang", cart);
                 _notyfService.Success("Thêm sản phẩm thành công");
                 return Json(new { success = true });
             }
@@ -78,14 +87,14 @@ namespace DuAnGame.Controllers
 
             try
             {
-                List<CartItem> gioHang = GioHang;
-                CartItem item = gioHang.SingleOrDefault(p => p.product.Id == productID);
+                List<Cart> gioHang = GioHang;
+                Cart item = gioHang.SingleOrDefault(p => p.product.Id == productID);
                 if (item != null)
                 {
                     gioHang.Remove(item);
                 }
                 //luu lai session
-                HttpContext.Session.Set<List<CartItem>>("GioHang", gioHang);
+                HttpContext.Session.Set<List<Cart>>("GioHang", gioHang);
                 return Json(new { success = true });
             }
             catch
@@ -96,6 +105,7 @@ namespace DuAnGame.Controllers
         [Route("cart.html", Name = "Cart")]
         public ActionResult Cart()
         {
+            TempData.Keep("idpro");
             return View(GioHang);
         }
     }

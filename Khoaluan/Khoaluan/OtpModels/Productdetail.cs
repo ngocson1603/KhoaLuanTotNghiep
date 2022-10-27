@@ -1,4 +1,5 @@
 ﻿using Khoaluan.Models;
+using Khoaluan.ModelViews;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -50,6 +51,7 @@ namespace Khoaluan.OtpModels
         public List<Productdetail> popularGame { get; set; }
         public List<Category> cate { get; set; }
         public List<Category> catesecond { get; set; }
+        public AddToCart add { get; set; }
     }
     public class DetailCate
     {
