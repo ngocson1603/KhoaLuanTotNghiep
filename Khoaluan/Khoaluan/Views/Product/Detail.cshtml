@@ -105,11 +105,25 @@
                                     <input type="number" id="txtsoLuong" name="txtsoLuong" class="form-control" value="1" min="1" max="21">
                                     @{
                                         int productID = Model.productDetail.Id;
-                                        if (productID.Equals(@ViewBag.idpro))
+
+                                        if (TempData["idpro"] != null)
                                         {
-                                            <div>
-                                                <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</button>
-                                            </div>
+                                            foreach (var item in (dynamic)TempData["idpro"])
+                                            {
+                                                if (item.Equals(productID))
+                                                {
+                                                <div>
+                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</button>
+                                                </div>
+                                                }
+                                                else
+                                                {
+                                                <div class="add-to-cart">
+                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                    <input hidden asp-for="@productID" />
+                                                </div>
+                                                }
+                                            }
                                         }
                                         else
                                         {
@@ -118,7 +132,6 @@
                                                 <input hidden asp-for="@productID" />
                                             </div>
                                         }
-
                                     }
                                 </div>
                             </form>

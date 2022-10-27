@@ -1,25 +1,25 @@
-﻿@model List<Khoaluan.ModelViews.CartItem>
+﻿@model List<Khoaluan.Models.Cart>
 @if (Model != null && Model.Count() > 0)
 {
     <div class="nk-cart-dropdown">
-            @foreach (var item in Model.Take(5))
-            {
+        @foreach (var item in Model.Take(5))
+        {
 
-                string url = $"/Product/HomePage/{item.product.Id}.html";
-                <div class="nk-widget-post">
-                    <a href="@url" class="nk-post-image">
-                        <img src="~/Images/@Url.Content(item.product.Image)" alt="@item.product.Name">
+            string url = $"/Product/HomePage/{item.product.Id}.html";
+            <div class="nk-widget-post">
+                <a href="@url" class="nk-post-image">
+                    <img src="~/Images/@Url.Content(item.product.Image)" alt="@item.product.Name">
+                </a>
+                <h3 class="nk-post-title">
+                    <a href="#" class="nk-cart-remove-item">
+                        <span class="ion-android-close"></span>
                     </a>
-                    <h3 class="nk-post-title">
-                        <a href="#" class="nk-cart-remove-item">
-                            <span class="ion-android-close"></span>
-                        </a>
-                        <a href="@url">@item.product.Name</a>
-                    </h3>
-                    <div class="nk-gap-1"></div>
-                    <div class="nk-product-price">€ @item.product.Price</div>
-                </div>
-                }
+                    <a href="@url">@item.product.Name</a>
+                </h3>
+                <div class="nk-gap-1"></div>
+                <div class="nk-product-price">€ @item.product.Price</div>
+            </div>
+        }
 
         <div class="nk-gap-2"></div>
         <div class="group-btn_wrap d-grid gap-2">
@@ -29,9 +29,9 @@
     </div> }
 else
 {
-<div class="nk-cart-dropdown">
-    <div class="nk-gap-2"></div>
-    <div class="group-btn_wrap d-grid gap-2">
-        <h3 class="btn btn-secondary btn-primary-hover">Giỏ hàng rỗng</h3>
-    </div>
-</div>}
+    <div class="nk-cart-dropdown">
+        <div class="nk-gap-2"></div>
+        <div class="group-btn_wrap d-grid gap-2">
+            <h3 class="btn btn-secondary btn-primary-hover">Giỏ hàng rỗng</h3>
+        </div>
+    </div>}

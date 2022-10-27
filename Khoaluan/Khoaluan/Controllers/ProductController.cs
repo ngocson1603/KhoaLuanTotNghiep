@@ -10,6 +10,8 @@ using Khoaluan.Models;
 using Khoaluan.OtpModels;
 using PagedList.Core;
 using System.Drawing.Printing;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace Khoaluan.Controllers
 {
@@ -24,6 +26,7 @@ namespace Khoaluan.Controllers
 
         public IActionResult Index()
         {
+            TempData.Keep("idpro");
             var x = _unitOfWork.ProductRepository.getallProductwithCategory();
             return View(x);
         }
@@ -41,6 +44,7 @@ namespace Khoaluan.Controllers
                 PopularGame = PopularGame,
                 RecentlyRealeased = RencentlyReleased
             };
+            TempData.Keep("idpro");
             return View(homepage);
         }
 
@@ -52,6 +56,7 @@ namespace Khoaluan.Controllers
             var popularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals("Rockstar Games")).ToList();
             var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Take(5).ToList();
             var catesecond = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Skip(5).ToList();
+            
             DetailPage dtp = new DetailPage()
             {
                 productDetail = x,
@@ -60,6 +65,7 @@ namespace Khoaluan.Controllers
                 cate = cate,
                 catesecond = catesecond,
             };
+            TempData.Keep("idpro");
             return View(dtp);
         }
 
@@ -92,6 +98,7 @@ namespace Khoaluan.Controllers
                     productwithCate = plr,
                     PopularGame1 = popular
                 };
+                TempData.Keep("idpro");
                 ViewBag.CurrentPage = pageNumber;
                 return View(pwc);
             }
@@ -126,6 +133,7 @@ namespace Khoaluan.Controllers
                     productwithCate = plr,
                     PopularGame1=popular
                 };
+                TempData.Keep("idpro");
                 ViewBag.CurrentPage = pageNumber;
                 return View(pwc);
             }
