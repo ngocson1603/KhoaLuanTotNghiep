@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Khoaluan.Migrations
 {
     [DbContext(typeof(GameStoreDbContext))]
-    [Migration("20221028071558_tblUsers")]
+    [Migration("20221028134929_tblUsers")]
     partial class tblUsers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
