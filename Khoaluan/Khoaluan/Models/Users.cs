@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Khoaluan.Models
 {
 
-    public class User: BaseEntity
+    public class Users: BaseEntity
     {
         public string Gmail { get; set; }
         public string Password { get; set; }
