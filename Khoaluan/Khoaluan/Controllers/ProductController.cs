@@ -65,7 +65,7 @@ namespace Khoaluan.Controllers
                 cate = cate,
                 catesecond = catesecond,
             };
-            TempData.Keep("idpro");
+            
             return View(dtp);
         }
 
