@@ -8,6 +8,5 @@ namespace Khoaluan.Models
     public class Cart
     {
         public Product product { get; set; }
-        public int amount { get; set; }
     }
 }

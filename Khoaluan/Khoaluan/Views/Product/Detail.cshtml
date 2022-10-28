@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    TempData.Keep("idpro");
 }
 <div class="nk-main">
 
@@ -105,10 +106,10 @@
                                     <input type="number" id="txtsoLuong" name="txtsoLuong" class="form-control" value="1" min="1" max="21">
                                     @{
                                         int productID = Model.productDetail.Id;
-
                                         if (TempData["idpro"] != null)
                                         {
-                                            foreach (var item in (dynamic)TempData["idpro"])
+                                            ViewBag.id = TempData["idpro"];
+                                            foreach (var item in ViewBag.id)
                                             {
                                                 if (item.Equals(productID))
                                                 {
@@ -138,7 +139,7 @@
                             <div class="nk-gap-3"></div>
                             <!-- END: Add to Cart -->
                             <!-- START: Meta -->
-                            <div class="nk-product-meta">
+                            @*<div class="nk-product-meta">
                                 <div>
                                     <strong>Developer</strong>:
                                     @{
@@ -156,7 +157,7 @@
                                         <a href="@url">@item,</a>
                                     }
                                 </div>
-                            </div>
+                            </div>*@
 
                             <!-- END: Meta -->
                         </div>
@@ -190,7 +191,7 @@
                         <div class="tab-content">
 
                             <!-- START: Tab Description -->
-                            <div role="tabpanel" class="tab-pane fade show active" id="tab-description">
+                            @*<div role="tabpanel" class="tab-pane fade show active" id="tab-description">
                                 <div class="nk-gap"></div>
                                 <strong class="text-white">Release Date: @Model.productDetail.ReleaseDate</strong>
                                 <div class="nk-gap"></div>
@@ -224,7 +225,7 @@
                                         <div class="nk-gap"></div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                             <!-- END: Tab Description -->
                             <!-- START: Tab Reviews -->
                             <div role="tabpanel" class="tab-pane fade" id="tab-reviews">
@@ -331,7 +332,7 @@
                 <div class="nk-gap-3"></div>
                 <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Related</span> Products</span></h3>
                 <div class="nk-gap"></div>
-                <div class="row vertical-gap">
+                @*<div class="row vertical-gap">
                     @foreach (var p in Model.relateGame)
                     {
                         string url = $"/Product/HomePage/{p.Id}.html";
@@ -356,7 +357,7 @@
                             </div>
                         </div>
                     }
-                </div>
+                </div>*@
                 <!-- END: Related Products -->
             </div>
             <div class="col-lg-4">
@@ -374,26 +375,7 @@
                     <div class="nk-widget nk-widget-highlighted">
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Category</span> Menu</span></h4>
                         <div class="nk-widget-content">
-                            @*<ul class="nk-widget-categories">
-                                    @if (Model.cate != null && Model.cate.Count() > 0)
-                                    {
-                                        foreach (var item in Model.cate)
-                                        {
-                                            <li><a href="#">@item.Name</a></li>
-                                        }
-                                    }
-                                </ul>
-                                <p style="text-align:center"><a onclick="javascript:ShowHide('HiddenDiv')"><i class="fa fa-sort-desc" aria-hidden="true"></i></a></p>
-                                <ul class="nk-widget-categories" id="HiddenDiv" style="display: none;">
-                                    @if (Model.catesecond != null && Model.catesecond.Count() > 0)
-                                    {
-                                        foreach (var item in Model.catesecond)
-                                        {
-                                            <li><a href="#">@item.Name</a></li>
-                                        }
-                                    }
-                                </ul>*@
-                            <p>
+                            @*<p>
                                 <ul class="nk-widget-categories">
                                     @if (Model.cate != null && Model.cate.Count() > 0)
                                     {
@@ -416,7 +398,7 @@
                                     }
                                         </span>
                                     </ul>
-                                </p>
+                                </p>*@
                                 <div style="margin-top: 1.5rem"></div>
                                 <button onclick="myFunction()" id="myBtn">Read more</button>
                             </div>
@@ -465,7 +447,7 @@
                             <h4 class="nk-widget-title"><span><span class="text-main-1">Most</span> Popular</span></h4>
                             <div class="nk-widget-content">
 
-                                @foreach (var item in Model.popularGame)
+                                @*@foreach (var item in Model.popularGame)
                                 {
                                     string url = $"/Product/HomePage/{item.Id}.html";
                                     <div class="nk-widget-post">
@@ -481,7 +463,7 @@
                                         </div>
                                         <div class="nk-product-price">€ @item.Price</div>
                                     </div>
-                                }
+                                }*@
                             </div>
                         </div>
                     </aside>
@@ -529,8 +511,7 @@
                             type: "POST",
                             dataType: "JSON",
                             data: {
-                                productID: productid,
-                                amount: soLuong
+                                productID: productid
                             },
                             success: function (response) {
                                 if (response.result == 'Redirect') {
@@ -542,9 +523,9 @@
                                 }
                                 console.log(response); // log to the console to see whether it worked
                             },
-                            error: function (error) {
-                                alert("There was an error posting the data to the server: " + error.responseText);
-                            }
+                            //error: function (error) {
+                            //    alert("There was an error posting the data to the server: " + error.responseText);
+                            //}
                         });
                     });
                 });

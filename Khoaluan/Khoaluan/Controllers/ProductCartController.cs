@@ -48,15 +48,15 @@ namespace DuAnGame.Controllers
             {
                 //var add = new AddToCart() { ProID = productID };
                 //HttpContext.Session.SetString("ADD",JsonConvert.SerializeObject(add));
-                lst.Add(productID);
-                TempData["idpro"] = list;
+                //lst.Add(productID);
+                //TempData["idpro"] = productID;
                 //TempData["idpro"] = JsonConvert.DeserializeObject<AddToCart>(HttpContext.Session.GetString("ADD"));
                 //Them san pham vao gio hang
                 Cart item = cart.SingleOrDefault(p => p.product.Id == productID);
                 if (item != null) 
                 {
                     //luu lai session
-                    TempData["idpro"] = lst;
+                    //TempData["idpro"] = cart;
                     HttpContext.Session.Set<List<Cart>>("GioHang", cart);
                 }
                 else
@@ -64,12 +64,13 @@ namespace DuAnGame.Controllers
                     Product hh = _unitOfWork.ProductRepository.GetById(productID);
                     item = new Cart
                     {
-                        amount = 1,
                         product = hh
                     };
                     cart.Add(item);//Them vao gio
+                    TempData["idpro"] = cart;
+                    
                 }
-                TempData.Keep("idpro");
+                TempData.Peek("idpro");
                 //Luu lai Session
                 HttpContext.Session.Set<List<Cart>>("GioHang", cart);
                 _notyfService.Success("Thêm sản phẩm thành công");
