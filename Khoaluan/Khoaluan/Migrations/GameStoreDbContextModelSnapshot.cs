@@ -19,6 +19,34 @@ namespace Khoaluan.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Khoaluan.ModelViews.RegisterViewModel", b =>
+                {
+                    b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConfirmPassword")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerId");
+
+                    b.ToTable("RegisterViewModel");
+                });
+
             modelBuilder.Entity("Khoaluan.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -99,7 +127,7 @@ namespace Khoaluan.Migrations
                     b.ToTable("ProductCategory");
                 });
 
-            modelBuilder.Entity("Khoaluan.Models.User", b =>
+            modelBuilder.Entity("Khoaluan.Models.Users", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,7 +148,7 @@ namespace Khoaluan.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Khoaluan.Models.Product", b =>

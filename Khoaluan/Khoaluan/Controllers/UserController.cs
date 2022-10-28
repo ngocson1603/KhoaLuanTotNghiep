@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace Khoaluan.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -61,24 +62,23 @@ namespace Khoaluan.Controllers
         [Route("tai-khoan-cua-toi.html", Name = "Dashboard")]
         public IActionResult Dashboard()
         {
-            //var taikhoanID = HttpContext.Session.GetString("Id");
-            //if (taikhoanID != null)
-            //{
-            //    //var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Id == Convert.ToInt32(taikhoanID));
-            //    //if (khachhang != null)
-            //    //{
-            //    //    var lsDonHang = _context.Orders
-            //    //        .Include(x => x.TransactStatus)
-            //    //        .AsNoTracking()
-            //    //        .Where(x => x.CustomerId == khachhang.CustomerId)
-            //    //        .OrderByDescending(x => x.OrderDate)
-            //    //        .ToList();
-            //    //    ViewBag.DonHang = lsDonHang;
-            //    //    return View(khachhang);
-            //    //}
-            //}
-            //return RedirectToAction("Login");
-            return View();
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            if (taikhoanID != null)
+            {
+                var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Id == Convert.ToInt32(taikhoanID));
+                if (khachhang != null)
+                {
+                    //var lsDonHang = _context.Orders
+                    //    .Include(x => x.TransactStatus)
+                    //    .AsNoTracking()
+                    //    .Where(x => x.CustomerId == khachhang.CustomerId)
+                    //    .OrderByDescending(x => x.OrderDate)
+                    //    .ToList();
+                    //ViewBag.DonHang = lsDonHang;
+                    return View(khachhang);
+                }
+            }
+            return RedirectToAction("Login");
         }
         [HttpGet]
         [AllowAnonymous]
@@ -98,7 +98,7 @@ namespace Khoaluan.Controllers
                 if (ModelState.IsValid)
                 {
                     string salt = Utilities.GetRandomKey();
-                    User khachhang = new User
+                    Users khachhang = new Users
                     {
                         HoTen = taikhoan.FullName,
                         Gmail = taikhoan.Email.Trim().ToLower(),
@@ -109,20 +109,21 @@ namespace Khoaluan.Controllers
                     {
                         _unitOfWork.UserRepository.Create(khachhang);
                         //Lưu Session MaKh
-                        HttpContext.Session.SetString("Id", khachhang.Id.ToString());
-                        var taikhoanID = HttpContext.Session.GetString("Id");
+                        HttpContext.Session.SetString("CustomerId", khachhang.Id.ToString());
+                        var taikhoanID = HttpContext.Session.GetString("CustomerId");
 
                         //Identity
                         var claims = new List<Claim>
                         {
                             new Claim(ClaimTypes.Name,khachhang.HoTen),
-                            new Claim("Id", khachhang.Id.ToString())
+                            new Claim("CustomerId", khachhang.Id.ToString())
                         };
                         ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
                         ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                         await HttpContext.SignInAsync(claimsPrincipal);
                         _notyfService.Success("Đăng ký thành công");
-                        return RedirectToAction("Dashboard", "User");
+                        //return RedirectToAction("Dashboard", "User");
+                        return RedirectToAction("DangkyTaiKhoan", "User");
                     }
                     catch
                     {
@@ -143,7 +144,7 @@ namespace Khoaluan.Controllers
         [Route("dang-nhap.html", Name = "DangNhap")]
         public IActionResult Login()
         {
-            var taikhoanID = HttpContext.Session.GetString("Id");
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
             if (taikhoanID != null)
             {
                 return RedirectToAction("Dashboard", "User");
@@ -179,14 +180,14 @@ namespace Khoaluan.Controllers
                     //}
 
                     //Luu Session MaKh
-                    HttpContext.Session.SetString("Id", khachhang.Id.ToString());
-                    var taikhoanID = HttpContext.Session.GetString("Id");
+                    HttpContext.Session.SetString("CustomerId", khachhang.Id.ToString());
+                    var taikhoanID = HttpContext.Session.GetString("CustomerId");
 
                     //Identity
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, khachhang.HoTen),
-                        new Claim("Id", khachhang.Id.ToString())
+                        new Claim("CustomerId", khachhang.Id.ToString())
                     };
                     ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
@@ -213,7 +214,7 @@ namespace Khoaluan.Controllers
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync();
-            HttpContext.Session.Remove("Id");
+            HttpContext.Session.Remove("CustomerId");
             return RedirectToAction("HomePage", "Product");
         }
 

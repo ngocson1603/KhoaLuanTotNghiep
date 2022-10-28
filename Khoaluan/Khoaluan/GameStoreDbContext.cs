@@ -1,6 +1,7 @@
 ﻿using Khoaluan.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Khoaluan.Models;
+using Khoaluan.ModelViews;
 
 namespace Khoaluan
 {
@@ -19,5 +20,7 @@ namespace Khoaluan
             modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
         public DbSet<Khoaluan.Models.Product> Product { get; set; }
+        public DbSet<Khoaluan.ModelViews.RegisterViewModel> RegisterViewModel { get; set; }
+        public DbSet<Khoaluan.Models.Users> User { get; set; }
     }
 }

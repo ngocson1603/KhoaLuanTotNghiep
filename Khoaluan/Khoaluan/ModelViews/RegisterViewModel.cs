@@ -22,13 +22,6 @@ namespace Khoaluan.ModelViews
         [Remote(action: "ValidateEmail", controller: "Accounts")]
         public string Email { get; set; }
 
-        [MaxLength(11)]
-        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
-        [Display(Name = "Điện thoại")]
-        [DataType(DataType.PhoneNumber)]
-        [Remote(action: "ValidatePhone", controller: "Accounts")]
-        public string Phone { get; set; }
-
         [Display(Name = "Mật khẩu")]
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         [MinLength(5, ErrorMessage = "Bạn cần đặt mật khẩu tối thiểu 5 ký tự")]

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Khoaluan.Migrations
 {
     [DbContext(typeof(GameStoreDbContext))]
-    [Migration("20221026070635_tblUser")]
-    partial class tblUser
+    [Migration("20221028071558_tblUsers")]
+    partial class tblUsers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,34 @@ namespace Khoaluan.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Khoaluan.ModelViews.RegisterViewModel", b =>
+                {
+                    b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConfirmPassword")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerId");
+
+                    b.ToTable("RegisterViewModel");
+                });
 
             modelBuilder.Entity("Khoaluan.Models.Category", b =>
                 {
@@ -101,7 +129,7 @@ namespace Khoaluan.Migrations
                     b.ToTable("ProductCategory");
                 });
 
-            modelBuilder.Entity("Khoaluan.Models.User", b =>
+            modelBuilder.Entity("Khoaluan.Models.Users", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -122,7 +150,7 @@ namespace Khoaluan.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Khoaluan.Models.Product", b =>
