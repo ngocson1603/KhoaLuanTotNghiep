@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Khoaluan.Configurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<Users>
+    public class UsersConfiguration : IEntityTypeConfiguration<Users>
     {
         public void Configure(EntityTypeBuilder<Users> builder)
         {
