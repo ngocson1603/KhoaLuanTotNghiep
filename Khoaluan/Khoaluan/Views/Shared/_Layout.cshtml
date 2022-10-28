@@ -258,6 +258,8 @@
     <!-- GoodGames -->
     <script src="~/assets/js/goodgames.min.js"></script>
     <script src="~/assets/js/goodgames-init.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    @await Component.InvokeAsync("Notyf")
     @await RenderSectionAsync("Scripts", required: false)
     <!-- END: Scripts -->
 </body>

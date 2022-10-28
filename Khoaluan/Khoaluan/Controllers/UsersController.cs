@@ -62,24 +62,23 @@ namespace Khoaluan.Controllers
         [Route("tai-khoan-cua-toi.html", Name = "Dashboard")]
         public IActionResult Dashboard()
         {
-            //var taikhoanID = HttpContext.Session.GetString("CustomerId");
-            //if (taikhoanID != null)
-            //{
-            //    var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Id == Convert.ToInt32(taikhoanID));
-            //    if (khachhang != null)
-            //    {
-            //        //var lsDonHang = _context.Orders
-            //        //    .Include(x => x.TransactStatus)
-            //        //    .AsNoTracking()
-            //        //    .Where(x => x.CustomerId == khachhang.CustomerId)
-            //        //    .OrderByDescending(x => x.OrderDate)
-            //        //    .ToList();
-            //        //ViewBag.DonHang = lsDonHang;
-            //        return View(khachhang);
-            //    }
-            //}
-            //return RedirectToAction("Login");
-            return View();
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            if (taikhoanID != null)
+            {
+                var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Id == Convert.ToInt32(taikhoanID));
+                if (khachhang != null)
+                {
+                    //var lsDonHang = _context.Orders
+                    //    .Include(x => x.TransactStatus)
+                    //    .AsNoTracking()
+                    //    .Where(x => x.CustomerId == khachhang.CustomerId)
+                    //    .OrderByDescending(x => x.OrderDate)
+                    //    .ToList();
+                    //ViewBag.DonHang = lsDonHang;
+                    return View(khachhang);
+                }
+            }
+            return RedirectToAction("Login");
         }
         [HttpGet]
         [AllowAnonymous]
@@ -124,8 +123,7 @@ namespace Khoaluan.Controllers
                         ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                         await HttpContext.SignInAsync(claimsPrincipal);
                         _notyfService.Success("Đăng ký thành công");
-                        //return RedirectToAction("Dashboard", "Users");
-                        return RedirectToAction("DangkyTaiKhoan", "Users");
+                        return RedirectToAction("Dashboard", "Users");
                     }
                     catch
                     {

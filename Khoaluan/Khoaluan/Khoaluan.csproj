@@ -769,6 +769,17 @@
     <None Include="wwwroot\assets\js\goodgames-init.js" />
     <None Include="wwwroot\assets\js\goodgames.js" />
     <None Include="wwwroot\assets\js\goodgames.min.js" />
+    <None Include="wwwroot\assets\js\plugins\jquery-ui.min.js" />
+    <None Include="wwwroot\assets\js\plugins\jquery.magnific-popup.min.js" />
+    <None Include="wwwroot\assets\js\plugins\jquery.nice-select.js" />
+    <None Include="wwwroot\assets\js\plugins\parallax.min.js" />
+    <None Include="wwwroot\assets\js\plugins\swiper-bundle.min.js" />
+    <None Include="wwwroot\assets\js\plugins\wow.min.js" />
+    <None Include="wwwroot\assets\js\vendor\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\assets\js\vendor\jquery-3.5.1.min.js" />
+    <None Include="wwwroot\assets\js\vendor\jquery-migrate-3.3.0.min.js" />
+    <None Include="wwwroot\assets\js\vendor\jquery.waypoints.js" />
+    <None Include="wwwroot\assets\js\vendor\modernizr-3.11.2.min.js" />
     <None Include="wwwroot\assets\plugins\nk-share\nk-share.js" />
     <None Include="wwwroot\assets\vendor\bootstrap-slider\dist\bootstrap-slider.min.js" />
     <None Include="wwwroot\assets\vendor\bootstrap\dist\css\bootstrap.min.css.map" />
