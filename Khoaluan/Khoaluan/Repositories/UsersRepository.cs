@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Khoaluan.Repositories
 {
-    public class UserRepository : GameStoreRepository<Users>, IUserRepository
+    public class UsersRepository : GameStoreRepository<Users>, IUsersRepository
     {
-        public UserRepository(GameStoreDbContext context) : base(context)
+        public UsersRepository(GameStoreDbContext context) : base(context)
         {
 
         }

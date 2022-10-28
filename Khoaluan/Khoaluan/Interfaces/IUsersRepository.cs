@@ -2,7 +2,7 @@
 
 namespace Khoaluan.Interfaces
 {
-    public interface IUserRepository:IGameStoreRepository<Users>
+    public interface IUsersRepository:IGameStoreRepository<Users>
     {
     }
 }

@@ -16,11 +16,11 @@ using System.Threading.Tasks;
 namespace Khoaluan.Controllers
 {
     [Authorize]
-    public class UserController : Controller
+    public class UsersController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         public INotyfService _notyfService { get; }
-        public UserController(IUnitOfWork unitOfWork, INotyfService notyfService)
+        public UsersController(IUnitOfWork unitOfWork, INotyfService notyfService)
         {
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
@@ -62,23 +62,24 @@ namespace Khoaluan.Controllers
         [Route("tai-khoan-cua-toi.html", Name = "Dashboard")]
         public IActionResult Dashboard()
         {
-            var taikhoanID = HttpContext.Session.GetString("CustomerId");
-            if (taikhoanID != null)
-            {
-                var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Id == Convert.ToInt32(taikhoanID));
-                if (khachhang != null)
-                {
-                    //var lsDonHang = _context.Orders
-                    //    .Include(x => x.TransactStatus)
-                    //    .AsNoTracking()
-                    //    .Where(x => x.CustomerId == khachhang.CustomerId)
-                    //    .OrderByDescending(x => x.OrderDate)
-                    //    .ToList();
-                    //ViewBag.DonHang = lsDonHang;
-                    return View(khachhang);
-                }
-            }
-            return RedirectToAction("Login");
+            //var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            //if (taikhoanID != null)
+            //{
+            //    var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Id == Convert.ToInt32(taikhoanID));
+            //    if (khachhang != null)
+            //    {
+            //        //var lsDonHang = _context.Orders
+            //        //    .Include(x => x.TransactStatus)
+            //        //    .AsNoTracking()
+            //        //    .Where(x => x.CustomerId == khachhang.CustomerId)
+            //        //    .OrderByDescending(x => x.OrderDate)
+            //        //    .ToList();
+            //        //ViewBag.DonHang = lsDonHang;
+            //        return View(khachhang);
+            //    }
+            //}
+            //return RedirectToAction("Login");
+            return View();
         }
         [HttpGet]
         [AllowAnonymous]
@@ -108,6 +109,7 @@ namespace Khoaluan.Controllers
                     try
                     {
                         _unitOfWork.UserRepository.Create(khachhang);
+                        _unitOfWork.SaveChange();
                         //Lưu Session MaKh
                         HttpContext.Session.SetString("CustomerId", khachhang.Id.ToString());
                         var taikhoanID = HttpContext.Session.GetString("CustomerId");
@@ -122,12 +124,12 @@ namespace Khoaluan.Controllers
                         ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                         await HttpContext.SignInAsync(claimsPrincipal);
                         _notyfService.Success("Đăng ký thành công");
-                        //return RedirectToAction("Dashboard", "User");
-                        return RedirectToAction("DangkyTaiKhoan", "User");
+                        //return RedirectToAction("Dashboard", "Users");
+                        return RedirectToAction("DangkyTaiKhoan", "Users");
                     }
                     catch
                     {
-                        return RedirectToAction("DangkyTaiKhoan", "User");
+                        return RedirectToAction("DangkyTaiKhoan", "Users");
                     }
                 }
                 else
@@ -147,7 +149,7 @@ namespace Khoaluan.Controllers
             var taikhoanID = HttpContext.Session.GetString("CustomerId");
             if (taikhoanID != null)
             {
-                return RedirectToAction("Dashboard", "User");
+                return RedirectToAction("Dashboard", "Users");
             }
             return View();
         }
@@ -195,7 +197,7 @@ namespace Khoaluan.Controllers
                     _notyfService.Success("Đăng nhập thành công");
                     if (string.IsNullOrEmpty(returnUrl))
                     {
-                        return RedirectToAction("Dashboard", "User");
+                        return RedirectToAction("Dashboard", "Users");
                     }
                     else
                     {
