@@ -19,8 +19,5 @@ namespace Khoaluan
             modelBuilder.ApplyConfiguration(new DeveloperConfiguration());
             modelBuilder.ApplyConfiguration(new UsersConfiguration());
         }
-        public DbSet<Khoaluan.Models.Product> Product { get; set; }
-        public DbSet<Khoaluan.ModelViews.RegisterViewModel> RegisterViewModel { get; set; }
-        public DbSet<Khoaluan.Models.Users> User { get; set; }
     }
 }

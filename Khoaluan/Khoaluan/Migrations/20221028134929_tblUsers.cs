@@ -6,8 +6,15 @@ namespace Khoaluan.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "User");
+            migrationBuilder.RenameColumn(
+                name: "price",
+                table: "Product",
+                newName: "Price");
+
+            migrationBuilder.RenameColumn(
+                name: "image",
+                table: "Product",
+                newName: "Image");
 
             migrationBuilder.CreateTable(
                 name: "RegisterViewModel",
@@ -50,21 +57,15 @@ namespace Khoaluan.Migrations
             migrationBuilder.DropTable(
                 name: "Users");
 
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Gmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.Id);
-                });
+            migrationBuilder.RenameColumn(
+                name: "Price",
+                table: "Product",
+                newName: "price");
+
+            migrationBuilder.RenameColumn(
+                name: "Image",
+                table: "Product",
+                newName: "image");
         }
     }
 }
