@@ -36,21 +36,14 @@ namespace DuAnGame.Controllers
                 return gh;
             }
         }
-        const string SessionName = "idpro";
-        public List<int> lst = new List<int>();
         [HttpPost]
         [Route("api/cart/add")]
         public IActionResult AddToCart(int productID)
         {
             List<Cart> cart = GioHang;
-            List<int> list = new List<int> { 15,18,31 };
             try
             {
-                //var add = new AddToCart() { ProID = productID };
-                //HttpContext.Session.SetString("ADD",JsonConvert.SerializeObject(add));
-                //lst.Add(productID);
-                //TempData["idpro"] = productID;
-                //TempData["idpro"] = JsonConvert.DeserializeObject<AddToCart>(HttpContext.Session.GetString("ADD"));
+                //HttpContext.Session.SetString("idpro1", JsonConvert.SerializeObject(productID));
                 //Them san pham vao gio hang
                 Cart item = cart.SingleOrDefault(p => p.product.Id == productID);
                 if (item != null) 
@@ -67,10 +60,13 @@ namespace DuAnGame.Controllers
                         product = hh
                     };
                     cart.Add(item);//Them vao gio
-                    TempData["idpro"] = cart;
+                    HttpContext.Session.SetString("idpro1", JsonConvert.SerializeObject(productID));
+                    var taikhoanID = HttpContext.Session.GetString("idpro1");
+
+                    TempData["idpro"] = taikhoanID;
                     
                 }
-                TempData.Peek("idpro");
+                TempData.Keep("idpro");
                 //Luu lai Session
                 HttpContext.Session.Set<List<Cart>>("GioHang", cart);
                 _notyfService.Success("Thêm sản phẩm thành công");

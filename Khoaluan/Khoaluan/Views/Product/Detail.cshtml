@@ -44,42 +44,42 @@
                     <div class="row vertical-gap">
                         <div class="col-md-6">
                             <!-- START: Product Photos -->
-                            <div class="nk-popup-gallery">
-                                <div class="nk-gallery-item-box">
-                                    <a href="~/assets/images/product-6.jpg" class="nk-gallery-item" data-size="1200x554">
-                                        <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
-                                        <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
-                                    </a>
-                                </div>
+                            @*<div class="nk-popup-gallery">
+                                    <div class="nk-gallery-item-box">
+                                        <a href="~/assets/images/product-6.jpg" class="nk-gallery-item" data-size="1200x554">
+                                            <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
+                                            <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
+                                        </a>
+                                    </div>
 
-                                <div class="nk-gap-1"></div>
-                                <div class="row vertical-gap sm-gap">
-                                    <div class="col-6 col-md-4">
-                                        <div class="nk-gallery-item-box">
-                                            <a href="~/assets/images/product-7.jpg" class="nk-gallery-item" data-size="622x942">
-                                                <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
-                                                <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
-                                            </a>
+                                    <div class="nk-gap-1"></div>
+                                    <div class="row vertical-gap sm-gap">
+                                        <div class="col-6 col-md-4">
+                                            <div class="nk-gallery-item-box">
+                                                <a href="~/assets/images/product-7.jpg" class="nk-gallery-item" data-size="622x942">
+                                                    <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
+                                                    <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4">
+                                            <div class="nk-gallery-item-box">
+                                                <a href="~/assets/images/product-8.jpg" class="nk-gallery-item" data-size="1920x907">
+                                                    <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
+                                                    <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4">
+                                            <div class="nk-gallery-item-box">
+                                                <a href="~/assets/images/product-9.jpg" class="nk-gallery-item" data-size="1500x750">
+                                                    <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
+                                                    <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="nk-gallery-item-box">
-                                            <a href="~/assets/images/product-8.jpg" class="nk-gallery-item" data-size="1920x907">
-                                                <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
-                                                <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="nk-gallery-item-box">
-                                            <a href="~/assets/images/product-9.jpg" class="nk-gallery-item" data-size="1500x750">
-                                                <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
-                                                <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                </div>*@
                             <!-- END: Product Photos -->
                         </div>
                         <div class="col-md-6">
@@ -106,25 +106,27 @@
                                     <input type="number" id="txtsoLuong" name="txtsoLuong" class="form-control" value="1" min="1" max="21">
                                     @{
                                         int productID = Model.productDetail.Id;
-                                        if (TempData["idpro"] != null)
+                                        ViewBag.name = TempData["idpro"];
+
+                                        if (ViewBag.name != null)
                                         {
-                                            ViewBag.id = TempData["idpro"];
-                                            foreach (var item in ViewBag.id)
+                                            int proid = int.Parse(ViewBag.name);
+                                            //foreach (var item in ViewBag.name)
+                                            //{
+                                            if (proid == productID)
                                             {
-                                                if (item.Equals(productID))
-                                                {
                                                 <div>
                                                     <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</button>
                                                 </div>
-                                                }
-                                                else
-                                                {
+                                            }
+                                            else
+                                            {
                                                 <div class="add-to-cart">
                                                     <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
                                                     <input hidden asp-for="@productID" />
                                                 </div>
-                                                }
                                             }
+                                            //}
                                         }
                                         else
                                         {
@@ -140,24 +142,24 @@
                             <!-- END: Add to Cart -->
                             <!-- START: Meta -->
                             @*<div class="nk-product-meta">
-                                <div>
-                                    <strong>Developer</strong>:
-                                    @{
-                                        string name = @Model.productDetail.DevName;
-                                        string url1 = $"/Product/HomePage/Dev/{name}.html";
-                                        <a href="@url1">@Model.productDetail.DevName</a>
-                                    }
+                                    <div>
+                                        <strong>Developer</strong>:
+                                        @{
+                                            string name = @Model.productDetail.DevName;
+                                            string url1 = $"/Product/HomePage/Dev/{name}.html";
+                                            <a href="@url1">@Model.productDetail.DevName</a>
+                                        }
 
-                                </div>
-                                <div>
-                                    <strong>Categories</strong>:
-                                    @foreach (var item in Model.productDetail.Categories)
-                                    {
-                                        string url = $"/Product/HomePage/Cate/{item}.html";
-                                        <a href="@url">@item,</a>
-                                    }
-                                </div>
-                            </div>*@
+                                    </div>
+                                    <div>
+                                        <strong>Categories</strong>:
+                                        @foreach (var item in Model.productDetail.Categories)
+                                        {
+                                            string url = $"/Product/HomePage/Cate/{item}.html";
+                                            <a href="@url">@item,</a>
+                                        }
+                                    </div>
+                                </div>*@
 
                             <!-- END: Meta -->
                         </div>
@@ -192,40 +194,40 @@
 
                             <!-- START: Tab Description -->
                             @*<div role="tabpanel" class="tab-pane fade show active" id="tab-description">
-                                <div class="nk-gap"></div>
-                                <strong class="text-white">Release Date: @Model.productDetail.ReleaseDate</strong>
-                                <div class="nk-gap"></div>
-                                <p>@Model.productDetail.Description</p>
+                                    <div class="nk-gap"></div>
+                                    <strong class="text-white">Release Date: @Model.productDetail.ReleaseDate</strong>
+                                    <div class="nk-gap"></div>
+                                    <p>@Model.productDetail.Description</p>
 
-                                <div class="nk-product-info-row row vertical-gap">
-                                    <div class="col-md-5">
-                                        <div class="nk-product-pegi">
-                                            <div class="nk-gap"></div>
-                                            <img src="~/assets/images/pegi-icon.jpg" alt="">
-                                            <div class="nk-product-pegi-cont">
-                                                <strong class="text-white">Pegi Rating:</strong>
+                                    <div class="nk-product-info-row row vertical-gap">
+                                        <div class="col-md-5">
+                                            <div class="nk-product-pegi">
                                                 <div class="nk-gap"></div>
-                                                Suitable for people aged 12 and over.
+                                                <img src="~/assets/images/pegi-icon.jpg" alt="">
+                                                <div class="nk-product-pegi-cont">
+                                                    <strong class="text-white">Pegi Rating:</strong>
+                                                    <div class="nk-gap"></div>
+                                                    Suitable for people aged 12 and over.
+                                                </div>
+                                                <div class="nk-gap"></div>
                                             </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="nk-gap"></div>
+                                            <strong class="text-white">Genre:</strong>
+                                            <div class="nk-gap"></div>
+                                            TBD
+                                            <div class="nk-gap"></div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="nk-gap"></div>
+                                            <strong class="text-white">Customer Rating:</strong>
+                                            <div class="nk-gap"></div>
+                                            <div class="nk-product-rating" data-rating="4.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i></div>
                                             <div class="nk-gap"></div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="nk-gap"></div>
-                                        <strong class="text-white">Genre:</strong>
-                                        <div class="nk-gap"></div>
-                                        TBD
-                                        <div class="nk-gap"></div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="nk-gap"></div>
-                                        <strong class="text-white">Customer Rating:</strong>
-                                        <div class="nk-gap"></div>
-                                        <div class="nk-product-rating" data-rating="4.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i></div>
-                                        <div class="nk-gap"></div>
-                                    </div>
-                                </div>
-                            </div>*@
+                                </div>*@
                             <!-- END: Tab Description -->
                             <!-- START: Tab Reviews -->
                             <div role="tabpanel" class="tab-pane fade" id="tab-reviews">
@@ -333,31 +335,31 @@
                 <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Related</span> Products</span></h3>
                 <div class="nk-gap"></div>
                 @*<div class="row vertical-gap">
-                    @foreach (var p in Model.relateGame)
-                    {
-                        string url = $"/Product/HomePage/{p.Id}.html";
-                        <div class="col-md-6">
-                            <div class="nk-product-cat">
-                                <a class="nk-product-image" href="@url">
-                                    <img src="~/Images/@p.Image" alt=@p.Name>
-                                </a>
-                                <div class="nk-product-cont">
-                                    <h3 class="nk-product-title h5"><a href="@url">@p.Name</a></h3>
-                                    <div class="nk-gap-1"></div>
-                                    <div class="nk-product-rating">
-                                        @for (int i = 1; i <= p.Id / 10; i++)
-                                        {
-                                            <i class="fa fa-star"></i>
-                                        }
+                        @foreach (var p in Model.relateGame)
+                        {
+                            string url = $"/Product/HomePage/{p.Id}.html";
+                            <div class="col-md-6">
+                                <div class="nk-product-cat">
+                                    <a class="nk-product-image" href="@url">
+                                        <img src="~/Images/@p.Image" alt=@p.Name>
+                                    </a>
+                                    <div class="nk-product-cont">
+                                        <h3 class="nk-product-title h5"><a href="@url">@p.Name</a></h3>
+                                        <div class="nk-gap-1"></div>
+                                        <div class="nk-product-rating">
+                                            @for (int i = 1; i <= p.Id / 10; i++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
 
+                                        </div>
+                                        <div class="nk-gap-1"></div>
+                                        <div class="nk-product-price">€ @p.Price</div>
                                     </div>
-                                    <div class="nk-gap-1"></div>
-                                    <div class="nk-product-price">€ @p.Price</div>
                                 </div>
                             </div>
-                        </div>
-                    }
-                </div>*@
+                        }
+                    </div>*@
                 <!-- END: Related Products -->
             </div>
             <div class="col-lg-4">
@@ -399,55 +401,55 @@
                                         </span>
                                     </ul>
                                 </p>*@
-                                <div style="margin-top: 1.5rem"></div>
-                                <button onclick="myFunction()" id="myBtn">Read more</button>
-                            </div>
+                            <div style="margin-top: 1.5rem"></div>
+                            <button onclick="myFunction()" id="myBtn">Read more</button>
                         </div>
-                        <div class="nk-widget nk-widget-highlighted">
-                            <h4 class="nk-widget-title"><span><span class="text-main-1">Price</span> Filter</span></h4>
-                            <div class="nk-widget-content">
-                                <div class="nk-input-slider">
-                                    <input type="text"
-                                           name="price-filter"
-                                           data-slider-min="0"
-                                           data-slider-max="1800"
-                                           data-slider-step="1"
-                                           data-slider-value="[200, 1200]"
-                                           data-slider-tooltip="hide">
-                                    <div class="nk-gap"></div>
-                                    <div>
-                                        <div class="text-white mt-4 float-left">
-                                            PRICE:
-                                            <strong class="text-main-1">€ <span class="nk-input-slider-value-0"></span></strong>
-                                            -
-                                            <strong class="text-main-1">€ <span class="nk-input-slider-value-1"></span></strong>
-                                        </div>
-                                        <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white float-right">Apply</a>
+                    </div>
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">Price</span> Filter</span></h4>
+                        <div class="nk-widget-content">
+                            <div class="nk-input-slider">
+                                <input type="text"
+                                       name="price-filter"
+                                       data-slider-min="0"
+                                       data-slider-max="1800"
+                                       data-slider-step="1"
+                                       data-slider-value="[200, 1200]"
+                                       data-slider-tooltip="hide">
+                                <div class="nk-gap"></div>
+                                <div>
+                                    <div class="text-white mt-4 float-left">
+                                        PRICE:
+                                        <strong class="text-main-1">€ <span class="nk-input-slider-value-0"></span></strong>
+                                        -
+                                        <strong class="text-main-1">€ <span class="nk-input-slider-value-1"></span></strong>
                                     </div>
-                                    <div class="clearfix"></div>
+                                    <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white float-right">Apply</a>
                                 </div>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
-                        <div class="nk-widget nk-widget-highlighted">
-                            <h4 class="nk-widget-title"><span><span class="text-main-1">We</span> Are Social</span></h4>
-                            <div class="nk-widget-content">
-                                <ul class="nk-social-links-3 nk-social-links-cols-4">
-                                    <li><a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a></li>
-                                    <li><a class="nk-social-instagram" href="#"><span class="fab fa-instagram"></span></a></li>
-                                    <li><a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a></li>
-                                    <li><a class="nk-social-google-plus" href="#"><span class="fab fa-google-plus"></span></a></li>
-                                    <li><a class="nk-social-youtube" href="#"><span class="fab fa-youtube"></span></a></li>
-                                    <li><a class="nk-social-twitter" href="#" target="_blank"><span class="fab fa-twitter"></span></a></li>
-                                    <li><a class="nk-social-pinterest" href="#"><span class="fab fa-pinterest-p"></span></a></li>
-                                    <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
-                                </ul>
-                            </div>
+                    </div>
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">We</span> Are Social</span></h4>
+                        <div class="nk-widget-content">
+                            <ul class="nk-social-links-3 nk-social-links-cols-4">
+                                <li><a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a></li>
+                                <li><a class="nk-social-instagram" href="#"><span class="fab fa-instagram"></span></a></li>
+                                <li><a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a></li>
+                                <li><a class="nk-social-google-plus" href="#"><span class="fab fa-google-plus"></span></a></li>
+                                <li><a class="nk-social-youtube" href="#"><span class="fab fa-youtube"></span></a></li>
+                                <li><a class="nk-social-twitter" href="#" target="_blank"><span class="fab fa-twitter"></span></a></li>
+                                <li><a class="nk-social-pinterest" href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                                <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
+                            </ul>
                         </div>
-                        <div class="nk-widget nk-widget-highlighted">
-                            <h4 class="nk-widget-title"><span><span class="text-main-1">Most</span> Popular</span></h4>
-                            <div class="nk-widget-content">
+                    </div>
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">Most</span> Popular</span></h4>
+                        <div class="nk-widget-content">
 
-                                @*@foreach (var item in Model.popularGame)
+                            @*@foreach (var item in Model.popularGame)
                                 {
                                     string url = $"/Product/HomePage/{item.Id}.html";
                                     <div class="nk-widget-post">
@@ -464,92 +466,92 @@
                                         <div class="nk-product-price">€ @item.Price</div>
                                     </div>
                                 }*@
-                            </div>
                         </div>
-                    </aside>
-                    <!-- END: Sidebar -->
-                </div>
+                    </div>
+                </aside>
+                <!-- END: Sidebar -->
             </div>
         </div>
-
-
-
-
     </div>
 
 
 
 
-    <!-- START: Page Background -->
+</div>
 
-    <img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
-    <img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
-    @section Styles{
-        <style>
-            #more {
-                display: none;
-            }
 
-            p {
-                margin-bottom: 0;
-            }
 
-            .divreadmore {
-                margin-top: 5px;
-            }
-        </style>
-    }
-    @section Scripts {
-        <script>
-            $(document).ready(function () {
-                $(function () {
-                    $(".add-to-cart").click(function () {
-                        var productid = $('#productID').val();
-                        var soLuong = $('#txtsoLuong').val();
-                        $.ajax({
-                            url: '/api/cart/add',
-                            type: "POST",
-                            dataType: "JSON",
-                            data: {
-                                productID: productid
-                            },
-                            success: function (response) {
-                                if (response.result == 'Redirect') {
-                                    window.location = response.url;
-                                }
-                                else {
-                                    loadHeaderCart(); //Add Product success
-                                    location.reload();
-                                }
-                                console.log(response); // log to the console to see whether it worked
-                            },
-                            //error: function (error) {
-                            //    alert("There was an error posting the data to the server: " + error.responseText);
-                            //}
-                        });
+
+<!-- START: Page Background -->
+
+<img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
+<img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
+@section Styles{
+    <style>
+        #more {
+            display: none;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+
+        .divreadmore {
+            margin-top: 5px;
+        }
+    </style>
+}
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $(".add-to-cart").click(function () {
+                    var productid = $('#productID').val();
+                    var soLuong = $('#txtsoLuong').val();
+                    $.ajax({
+                        url: '/api/cart/add',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            productID: productid
+                        },
+                        success: function (response) {
+                            if (response.result == 'Redirect') {
+                                window.location = response.url;
+                            }
+                            else {
+                                loadHeaderCart(); //Add Product success
+                                location.reload();
+                            }
+                            console.log(response); // log to the console to see whether it worked
+                        },
+                        error: function (error) {
+                            alert("There was an error posting the data to the server: " + error.responseText);
+                        }
                     });
                 });
-                function loadHeaderCart() {
-                    $('#miniCart').load("/AjaxContent/HeaderCart");
-                    $('#numberCart').load("/AjaxContent/NumberCart");
-                }
             });
-        </script>
-        <script type="text/javascript">
-            function myFunction() {
-                var dots = document.getElementById("dots");
-                var moreText = document.getElementById("more");
-                var btnText = document.getElementById("myBtn");
-
-                if (dots.style.display === "none") {
-                    dots.style.display = "inline";
-                    btnText.innerHTML = "Read more";
-                    moreText.style.display = "none";
-                } else {
-                    dots.style.display = "none";
-                    btnText.innerHTML = "Read less";
-                    moreText.style.display = "inline";
-                }
+            function loadHeaderCart() {
+                $('#miniCart').load("/AjaxContent/HeaderCart");
+                $('#numberCart').load("/AjaxContent/NumberCart");
             }
-        </script>
-    }
+        });
+    </script>
+    <script type="text/javascript">
+        function myFunction() {
+            var dots = document.getElementById("dots");
+            var moreText = document.getElementById("more");
+            var btnText = document.getElementById("myBtn");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Read more";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Read less";
+                moreText.style.display = "inline";
+            }
+        }
+    </script>
+}

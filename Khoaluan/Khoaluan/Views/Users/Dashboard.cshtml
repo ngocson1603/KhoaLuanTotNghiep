@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Khoaluan.ModelViews.ChangePasswordViewModel changePassword = new Khoaluan.ModelViews.ChangePasswordViewModel();
 }
 
 <h1>Dashboard</h1>
@@ -40,4 +41,6 @@
 <div>
     <a href="/dang-xuat.html">Dang xuat</a>
     <a asp-action="Index">Back to List</a>
+
+     @await Html.PartialAsync("ChangePassword", changePassword)
 </div>

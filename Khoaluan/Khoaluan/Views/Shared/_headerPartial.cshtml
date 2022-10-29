@@ -31,9 +31,20 @@
 
 
                     <li>
-                        <a href="#" data-toggle="modal" data-target="#modalLogin">
-                            <span class="fa fa-user"></span>
-                        </a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="/tai-khoan-cua-toi.html">
+                                <span class="fa fa-user"></span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="#" data-toggle="modal" data-target="#modalLogin">
+                                <span class="fa fa-user"></span>
+                            </a>
+                        }
+
+
                     </li>
 
 

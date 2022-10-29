@@ -2539,3 +2539,4 @@ C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoa
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\DangkyTaiKhoan.cshtml.g.cs
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\Dashboard.cshtml.g.cs
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\Login.cshtml.g.cs
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\ChangePassword.cshtml.g.cs
