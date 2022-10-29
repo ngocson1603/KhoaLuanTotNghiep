@@ -205,7 +205,7 @@ namespace Khoaluan.Controllers
             }
             catch
             {
-                return RedirectToAction("DangkyTaiKhoan", "Accounts");
+                return RedirectToAction("DangkyTaiKhoan", "Users");
             }
             return View(customer);
         }
@@ -218,38 +218,38 @@ namespace Khoaluan.Controllers
             return RedirectToAction("HomePage", "Product");
         }
 
-        //[HttpPost]
-        //public IActionResult ChangePassword(ChangePasswordViewModel model)
-        //{
-        //    try
-        //    {
-        //        var taikhoanID = HttpContext.Session.GetString("CustomerId");
-        //        if (taikhoanID == null)
-        //        {
-        //            return RedirectToAction("Login", "Accounts");
-        //        }
-        //        if (ModelState.IsValid)
-        //        {
-        //            var taikhoan = _context.Customers.Find(Convert.ToInt32(taikhoanID));
-        //            if (taikhoan == null) return RedirectToAction("Login", "Accounts");
-        //            var pass = (model.PasswordNow.Trim() + taikhoan.Salt.Trim()).ToMD5();
-        //            {
-        //                string passnew = (model.Password.Trim() + taikhoan.Salt.Trim()).ToMD5();
-        //                taikhoan.Password = passnew;
-        //                _context.Update(taikhoan);
-        //                _context.SaveChanges();
-        //                _notyfService.Success("Đổi mật khẩu thành công");
-        //                return RedirectToAction("Dashboard", "Accounts");
-        //            }
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        _notyfService.Success("Thay đổi mật khẩu không thành công");
-        //        return RedirectToAction("Dashboard", "Accounts");
-        //    }
-        //    _notyfService.Success("Thay đổi mật khẩu không thành công");
-        //    return RedirectToAction("Dashboard", "Accounts");
-        //}
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            try
+            {
+                var taikhoanID = HttpContext.Session.GetString("CustomerId");
+                if (taikhoanID == null)
+                {
+                    return RedirectToAction("Login", "Users");
+                }
+                if (ModelState.IsValid)
+                {
+                    var taikhoan = _unitOfWork.UserRepository.GetById(Convert.ToInt32(taikhoanID));
+                    if (taikhoan == null) return RedirectToAction("Login", "Users");
+                    var pass = (model.PasswordNow.Trim() + taikhoan.Salt.Trim()).ToMD5();
+                    {
+                        string passnew = (model.Password.Trim() + taikhoan.Salt.Trim()).ToMD5();
+                        taikhoan.Password = passnew;
+                        _unitOfWork.UserRepository.Update(taikhoan);
+                        _unitOfWork.SaveChange();
+                        _notyfService.Success("Đổi mật khẩu thành công");
+                        return RedirectToAction("Dashboard", "Users");
+                    }
+                }
+            }
+            catch
+            {
+                _notyfService.Success("Thay đổi mật khẩu không thành công");
+                return RedirectToAction("Dashboard", "Users");
+            }
+            _notyfService.Success("Thay đổi mật khẩu không thành công");
+            return RedirectToAction("Dashboard", "Users");
+        }
     }
 }
