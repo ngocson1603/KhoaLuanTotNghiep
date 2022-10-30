@@ -2540,3 +2540,6 @@ D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Ra
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\Dashboard.cshtml.g.cs
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\Login.cshtml.g.cs
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\ChangePassword.cshtml.g.cs
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Forum\ForumInD.cshtml.g.cs
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Forum\ForumList.cshtml.g.cs
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Forum\DetailForum.cshtml.g.cs
