@@ -13,7 +13,6 @@ namespace Khoaluan.Controllers.Components
         public IViewComponentResult Invoke()
         {
             var cart = HttpContext.Session.Get<List<Cart>>("GioHang");
-            TempData.Keep("idpro");
             return View(cart);
         }
     }

@@ -5,7 +5,6 @@
     TempData.Keep("idpro");
 }
 <div class="nk-main">
-
     <!-- START: Breadcrumbs -->
     <div class="nk-gap-1"></div>
     <div class="container">
@@ -106,27 +105,41 @@
                                     <input type="number" id="txtsoLuong" name="txtsoLuong" class="form-control" value="1" min="1" max="21">
                                     @{
                                         int productID = Model.productDetail.Id;
-                                        ViewBag.name = TempData["idpro"];
+                                        @*ViewBag.name = TempData["idpro"];
 
-                                        if (ViewBag.name != null)
+            if (ViewBag.name != null)
+            {
+                int proid = int.Parse(ViewBag.name);
+                //foreach (var item in ViewBag.name)
+                //{
+                if (proid == productID)
+                {
+                    <div>
+                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</button>
+                    </div>
+                }
+                else
+                {*@
+
+                                        @if (ViewBag.GioHang != null)
                                         {
-                                            int proid = int.Parse(ViewBag.name);
-                                            //foreach (var item in ViewBag.name)
-                                            //{
-                                            if (proid == productID)
+                                            foreach (var item in ViewBag.GioHang)
                                             {
-                                                <div>
-                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</button>
-                                                </div>
+                                                if (item.product.Id == productID)
+                                                {
+                                                    <div class="add-to-cart">
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
+                                                        <input hidden asp-for="@productID" />
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="add-to-cart">
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                        <input hidden asp-for="@productID" />
+                                                    </div>
+                                                }
                                             }
-                                            else
-                                            {
-                                                <div class="add-to-cart">
-                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                    <input hidden asp-for="@productID" />
-                                                </div>
-                                            }
-                                            //}
                                         }
                                         else
                                         {
@@ -135,6 +148,17 @@
                                                 <input hidden asp-for="@productID" />
                                             </div>
                                         }
+
+                                        @*}
+                //}
+            }
+            else
+            {
+                <div class="add-to-cart">
+                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                    <input hidden asp-for="@productID" />
+                </div>
+            }*@
                                     }
                                 </div>
                             </form>
@@ -505,6 +529,10 @@
     <script>
         $(document).ready(function () {
             $(function () {
+                function loadHeaderCart() {
+                    $('#miniCart').load("/AjaxContent/HeaderCart");
+                    $('#numberCart').load("/AjaxContent/NumberCart");
+                }
                 $(".add-to-cart").click(function () {
                     var productid = $('#productID').val();
                     var soLuong = $('#txtsoLuong').val();
@@ -531,10 +559,6 @@
                     });
                 });
             });
-            function loadHeaderCart() {
-                $('#miniCart').load("/AjaxContent/HeaderCart");
-                $('#numberCart').load("/AjaxContent/NumberCart");
-            }
         });
     </script>
     <script type="text/javascript">

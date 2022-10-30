@@ -12,6 +12,7 @@ using PagedList.Core;
 using System.Drawing.Printing;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
+using Khoaluan.Extension;
 
 namespace Khoaluan.Controllers
 {
@@ -56,7 +57,7 @@ namespace Khoaluan.Controllers
             var popularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals("Rockstar Games")).ToList();
             var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Take(5).ToList();
             var catesecond = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Skip(5).ToList();
-            
+            var cart = HttpContext.Session.Get<List<Cart>>("GioHang");
             DetailPage dtp = new DetailPage()
             {
                 productDetail = x,
@@ -65,7 +66,7 @@ namespace Khoaluan.Controllers
                 cate = cate,
                 catesecond = catesecond,
             };
-            
+            ViewBag.GioHang = cart;
             return View(dtp);
         }
 
