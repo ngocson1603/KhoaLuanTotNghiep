@@ -3,6 +3,7 @@
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
     TempData.Keep("idpro");
+    List<Khoaluan.Models.Cart> carts = ViewBag.GioHang;
 }
 <div class="nk-main">
     <!-- START: Breadcrumbs -->
@@ -123,9 +124,8 @@
 
                                         @if (ViewBag.GioHang != null)
                                         {
-                                            foreach (var item in ViewBag.GioHang)
-                                            {
-                                                if (item.product.Id == productID)
+                                            
+                                                if (carts.Any(t=>t.product.Id == productID))
                                                 {
                                                     <div class="add-to-cart">
                                                         <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
@@ -139,7 +139,6 @@
                                                         <input hidden asp-for="@productID" />
                                                     </div>
                                                 }
-                                            }
                                         }
                                         else
                                         {

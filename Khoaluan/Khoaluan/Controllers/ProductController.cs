@@ -57,7 +57,7 @@ namespace Khoaluan.Controllers
             var popularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals("Rockstar Games")).ToList();
             var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Take(5).ToList();
             var catesecond = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Skip(5).ToList();
-            var cart = HttpContext.Session.Get<List<Cart>>("GioHang");
+            var cart = HttpContext.Session.Get<List<Cart>>("_GioHang");
             DetailPage dtp = new DetailPage()
             {
                 productDetail = x,

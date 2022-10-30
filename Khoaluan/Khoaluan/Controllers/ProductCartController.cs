@@ -28,7 +28,7 @@ namespace DuAnGame.Controllers
         {
             get
             {
-                var gh = HttpContext.Session.Get<List<Cart>>("GioHang");
+                var gh = HttpContext.Session.Get<List<Cart>>("_GioHang");
                 if (gh == default(List<Cart>))
                 {
                     gh = new List<Cart>();
@@ -50,7 +50,7 @@ namespace DuAnGame.Controllers
                 {
                     //luu lai session
                     //TempData["idpro"] = cart;
-                    HttpContext.Session.Set<List<Cart>>("GioHang", cart);
+                    HttpContext.Session.Set<List<Cart>>("_GioHang", cart);
                 }
                 else
                 {
@@ -68,8 +68,7 @@ namespace DuAnGame.Controllers
                 }
                 TempData.Keep("idpro");
                 //Luu lai Session
-                HttpContext.Session.Set<List<Cart>>("GioHang", cart);
-                _unitOfWork.SaveChange();
+                HttpContext.Session.Set<List<Cart>>("_GioHang", cart);
                 ViewBag.GioHang = cart;
                 _notyfService.Success("Thêm sản phẩm thành công");
                 return Json(new { success = true });
@@ -93,7 +92,9 @@ namespace DuAnGame.Controllers
                     gioHang.Remove(item);
                 }
                 //luu lai session
-                HttpContext.Session.Set<List<Cart>>("GioHang", gioHang);
+                HttpContext.Session.Set<List<Cart>>("_GioHang", gioHang);
+                var cart = HttpContext.Session.Get<List<Cart>>("_GioHang");
+                ViewBag.GioHang = cart;
                 return Json(new { success = true });
             }
             catch
