@@ -69,6 +69,8 @@ namespace DuAnGame.Controllers
                 TempData.Keep("idpro");
                 //Luu lai Session
                 HttpContext.Session.Set<List<Cart>>("GioHang", cart);
+                _unitOfWork.SaveChange();
+                ViewBag.GioHang = cart;
                 _notyfService.Success("Thêm sản phẩm thành công");
                 return Json(new { success = true });
             }
