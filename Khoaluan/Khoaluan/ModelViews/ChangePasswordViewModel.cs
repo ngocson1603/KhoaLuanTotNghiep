@@ -8,7 +8,7 @@ namespace Khoaluan.ModelViews
 {
     public class ChangePasswordViewModel
     {
-        [Key]
+        
         public int CustomerId { get; set; }
 
         [Display(Name = "Mật khẩu hiện tại")]

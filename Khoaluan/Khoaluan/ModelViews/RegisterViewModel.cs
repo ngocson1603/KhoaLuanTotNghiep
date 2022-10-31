@@ -9,7 +9,7 @@ namespace Khoaluan.ModelViews
 {
     public class RegisterViewModel
     {
-        [Key]
+       
         public int CustomerId { get; set; }
 
         [Display(Name = "Họ và Tên")]

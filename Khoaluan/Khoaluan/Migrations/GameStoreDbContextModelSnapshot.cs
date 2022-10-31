@@ -19,34 +19,6 @@ namespace Khoaluan.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Khoaluan.ModelViews.RegisterViewModel", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ConfirmPassword")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CustomerId");
-
-                    b.ToTable("RegisterViewModel");
-                });
-
             modelBuilder.Entity("Khoaluan.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -75,6 +47,21 @@ namespace Khoaluan.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Developer");
+                });
+
+            modelBuilder.Entity("Khoaluan.Models.Library", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Library");
                 });
 
             modelBuilder.Entity("Khoaluan.Models.Product", b =>
@@ -151,6 +138,25 @@ namespace Khoaluan.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Khoaluan.Models.Library", b =>
+                {
+                    b.HasOne("Khoaluan.Models.Product", "Product")
+                        .WithMany("Libraries")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Khoaluan.Models.Users", "Users")
+                        .WithMany("Libraries")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Users");
+                });
+
             modelBuilder.Entity("Khoaluan.Models.Product", b =>
                 {
                     b.HasOne("Khoaluan.Models.Developer", "Developer")
@@ -193,7 +199,14 @@ namespace Khoaluan.Migrations
 
             modelBuilder.Entity("Khoaluan.Models.Product", b =>
                 {
+                    b.Navigation("Libraries");
+
                     b.Navigation("ProductCategories");
+                });
+
+            modelBuilder.Entity("Khoaluan.Models.Users", b =>
+                {
+                    b.Navigation("Libraries");
                 });
 #pragma warning restore 612, 618
         }

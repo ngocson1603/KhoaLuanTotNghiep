@@ -13,5 +13,7 @@ namespace Khoaluan.Models
         public string Password { get; set; }
         public string HoTen { get; set; }
         public string Salt { get; set; }
+        public List<Library> Libraries { get; set; }
+
     }
 }

@@ -18,6 +18,7 @@ namespace Khoaluan
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new DeveloperConfiguration());
             modelBuilder.ApplyConfiguration(new UsersConfiguration());
+            modelBuilder.ApplyConfiguration(new LibraryConfiguration());
         }
     }
 }
