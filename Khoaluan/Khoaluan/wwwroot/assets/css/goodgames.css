@@ -7885,7 +7885,7 @@ div.nk-error {
 
 .nk-post-img img {
     width: 100%;
-    height: auto;
+    height: 200px;
     -webkit-transition: -webkit-transform .15s ease-in-out;
     transition: -webkit-transform .15s ease-in-out;
     -o-transition: transform .15s ease-in-out;
