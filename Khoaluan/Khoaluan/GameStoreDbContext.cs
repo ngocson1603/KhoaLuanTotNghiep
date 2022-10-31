@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
+using Khoaluan.OtpModels;
 
 namespace Khoaluan
 {
@@ -20,5 +21,6 @@ namespace Khoaluan
             modelBuilder.ApplyConfiguration(new UsersConfiguration());
             modelBuilder.ApplyConfiguration(new LibraryConfiguration());
         }
+        public DbSet<Khoaluan.OtpModels.LibraryModelDetail> LibraryModelDetail { get; set; }
     }
 }

@@ -11,12 +11,14 @@ namespace Khoaluan
         public ICategoryRepository CategoryRepository { get; set; }
         public IDeveloperRepository DeveloperRepository { get; set; }
         public IUsersRepository UserRepository { get; set; }
+        public ILibraryRepository LibraryRepository { get; set; }
         public UnitOfWork(GameStoreDbContext context,
             IProductCategoryRepository productCategoryRepository,
             IProductRepository productRepository,
             ICategoryRepository categoryRepository,
             IDeveloperRepository developerRepository,
-            IUsersRepository userRepository
+            IUsersRepository userRepository,
+            ILibraryRepository libraryRepository
             )
         {
             Context = context;
@@ -25,6 +27,7 @@ namespace Khoaluan
             CategoryRepository= categoryRepository;
             DeveloperRepository= developerRepository;
             UserRepository = userRepository;
+            LibraryRepository = libraryRepository;
         }
         public void Dispose()
         {
