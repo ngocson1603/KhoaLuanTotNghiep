@@ -17,5 +17,6 @@ namespace Khoaluan.Models
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
         public DateTime ReleaseDate { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
+        public List<Library> Libraries { get; set; }
     }
 }
