@@ -13,5 +13,6 @@ namespace Khoaluan
         IDeveloperRepository DeveloperRepository { get; }   
         IProductCategoryRepository ProductCategoryRepository { get; }
         IUsersRepository UserRepository { get; }
+        ILibraryRepository LibraryRepository { get; }
     }
 }

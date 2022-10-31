@@ -251,5 +251,21 @@ namespace Khoaluan.Controllers
             _notyfService.Success("Thay đổi mật khẩu không thành công");
             return RedirectToAction("Dashboard", "Users");
         }
+        [Route("library.html", Name = "Library")]
+        public IActionResult Library()
+        {
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            if (taikhoanID != null)
+            {
+                var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Id == Convert.ToInt32(taikhoanID));
+                if (khachhang != null)
+                {
+                    var proLib = _unitOfWork.LibraryRepository.getLibrary().Where(t=>t.UserID == khachhang.Id).ToList();
+                    ViewBag.DonHang = proLib;
+                    return View(khachhang);
+                }
+            }
+            return RedirectToAction("Login");
+        }
     }
 }
