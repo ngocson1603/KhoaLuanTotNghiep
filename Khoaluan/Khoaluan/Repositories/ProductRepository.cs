@@ -24,7 +24,7 @@ namespace Khoaluan.Repositories
                         and ProductCategory.CategoryId=Category.Id";
             
             var data=Context.Database.GetDbConnection().Query<ProductDetailModel>(query);
-            var result = from p in data.ToList()
+            var result = from p in data.AsEnumerable()
                          group p.Category by new
                          {
                              p.Id,

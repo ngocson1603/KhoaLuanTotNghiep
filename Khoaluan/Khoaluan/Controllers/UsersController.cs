@@ -260,7 +260,7 @@ namespace Khoaluan.Controllers
                 var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Id == Convert.ToInt32(taikhoanID));
                 if (khachhang != null)
                 {
-                    var proLib = _unitOfWork.LibraryRepository.getLibrary().Where(t=>t.UserID == khachhang.Id).ToList();
+                    var proLib = _unitOfWork.LibraryRepository.getLibrary(khachhang.Id);
                     ViewBag.DonHang = proLib;
                     return View(khachhang);
                 }
