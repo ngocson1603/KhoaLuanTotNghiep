@@ -20,6 +20,11 @@ namespace Khoaluan
             modelBuilder.ApplyConfiguration(new DeveloperConfiguration());
             modelBuilder.ApplyConfiguration(new UsersConfiguration());
             modelBuilder.ApplyConfiguration(new LibraryConfiguration());
+            modelBuilder.ApplyConfiguration(new InventoryConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new MarketConfiguration());
+            modelBuilder.ApplyConfiguration(new RefundConfiguration());
         }
     }
 }

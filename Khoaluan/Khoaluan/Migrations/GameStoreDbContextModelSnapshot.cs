@@ -49,6 +49,44 @@ namespace Khoaluan.Migrations
                     b.ToTable("Developer");
                 });
 
+            modelBuilder.Entity("Khoaluan.Models.Inventory", b =>
+                {
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemID")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserID", "ItemID");
+
+                    b.HasIndex("ItemID");
+
+                    b.ToTable("Inventory");
+                });
+
+            modelBuilder.Entity("Khoaluan.Models.Item", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Item");
+                });
+
             modelBuilder.Entity("Khoaluan.Models.Library", b =>
                 {
                     b.Property<int>("UserId")
@@ -62,6 +100,79 @@ namespace Khoaluan.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Library");
+                });
+
+            modelBuilder.Entity("Khoaluan.Models.Market", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DayCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ItemID")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Market");
+                });
+
+            modelBuilder.Entity("Khoaluan.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DatePurchase")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TotalPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("Khoaluan.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id", "ProductID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("OrderDetail");
                 });
 
             modelBuilder.Entity("Khoaluan.Models.Product", b =>
@@ -114,6 +225,31 @@ namespace Khoaluan.Migrations
                     b.ToTable("ProductCategory");
                 });
 
+            modelBuilder.Entity("Khoaluan.Models.Refund", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Refund");
+                });
+
             modelBuilder.Entity("Khoaluan.Models.Users", b =>
                 {
                     b.Property<int>("Id")
@@ -138,6 +274,36 @@ namespace Khoaluan.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Khoaluan.Models.Inventory", b =>
+                {
+                    b.HasOne("Khoaluan.Models.Item", "Item")
+                        .WithMany("Inventories")
+                        .HasForeignKey("ItemID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Khoaluan.Models.Users", "User")
+                        .WithMany("Inventories")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Khoaluan.Models.Item", b =>
+                {
+                    b.HasOne("Khoaluan.Models.Product", "Product")
+                        .WithMany("Items")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Khoaluan.Models.Library", b =>
                 {
                     b.HasOne("Khoaluan.Models.Product", "Product")
@@ -155,6 +321,55 @@ namespace Khoaluan.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Khoaluan.Models.Market", b =>
+                {
+                    b.HasOne("Khoaluan.Models.Item", "Item")
+                        .WithMany("Markets")
+                        .HasForeignKey("ItemID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Khoaluan.Models.Users", "User")
+                        .WithMany("Markets")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Khoaluan.Models.Order", b =>
+                {
+                    b.HasOne("Khoaluan.Models.Users", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Khoaluan.Models.OrderDetail", b =>
+                {
+                    b.HasOne("Khoaluan.Models.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Khoaluan.Models.Product", "Product")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Khoaluan.Models.Product", b =>
@@ -187,6 +402,25 @@ namespace Khoaluan.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Khoaluan.Models.Refund", b =>
+                {
+                    b.HasOne("Khoaluan.Models.Product", "Product")
+                        .WithMany("Refunds")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Khoaluan.Models.Users", "User")
+                        .WithMany("Refunds")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Khoaluan.Models.Category", b =>
                 {
                     b.Navigation("ProductCategories");
@@ -197,16 +431,42 @@ namespace Khoaluan.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("Khoaluan.Models.Item", b =>
+                {
+                    b.Navigation("Inventories");
+
+                    b.Navigation("Markets");
+                });
+
+            modelBuilder.Entity("Khoaluan.Models.Order", b =>
+                {
+                    b.Navigation("OrderDetails");
+                });
+
             modelBuilder.Entity("Khoaluan.Models.Product", b =>
                 {
+                    b.Navigation("Items");
+
                     b.Navigation("Libraries");
 
+                    b.Navigation("OrderDetails");
+
                     b.Navigation("ProductCategories");
+
+                    b.Navigation("Refunds");
                 });
 
             modelBuilder.Entity("Khoaluan.Models.Users", b =>
                 {
+                    b.Navigation("Inventories");
+
                     b.Navigation("Libraries");
+
+                    b.Navigation("Markets");
+
+                    b.Navigation("Orders");
+
+                    b.Navigation("Refunds");
                 });
 #pragma warning restore 612, 618
         }

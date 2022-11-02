@@ -14,6 +14,9 @@ namespace Khoaluan.Models
         public string HoTen { get; set; }
         public string Salt { get; set; }
         public List<Library> Libraries { get; set; }
-
+        public List<Inventory> Inventories { get; set; }
+        public List<Order> Orders { get; set; }
+        public List<Market> Markets { get; set; }
+        public List<Refund> Refunds { get; set; }
     }
 }
