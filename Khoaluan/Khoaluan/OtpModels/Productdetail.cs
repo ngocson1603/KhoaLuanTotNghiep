@@ -34,17 +34,12 @@ namespace Khoaluan.OtpModels
         public string DevName { get; set; }
         public string CatID { get; set; }
     }
-    public class LibraryModelDetail
+    public class LibraryDetail
     {
         public int UserID { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Overview { get; set; }
-        public string Price { get; set; }
         public string Image { get; set; }
-        public string Description { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime ReleaseDate { get; set; }
     }
     public class HomePageViewModel
     {

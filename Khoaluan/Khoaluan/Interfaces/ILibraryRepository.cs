@@ -9,6 +9,6 @@ namespace Khoaluan.Interfaces
 {
     public interface ILibraryRepository:IGameStoreRepository<Library>
     {
-        public List<LibraryModelDetail> getLibrary();
+        public List<LibraryDetail> getLibrary(int id);
     }
 }
