@@ -18,5 +18,8 @@ namespace Khoaluan.Models
         public DateTime ReleaseDate { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
         public List<Library> Libraries { get; set; }
+        public List<Item> Items { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
+        public List<Refund> Refunds { get; set; }
     }
 }
