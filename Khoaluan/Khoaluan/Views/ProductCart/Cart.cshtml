@@ -1,4 +1,8 @@
-﻿@model List<Khoaluan.Models.Cart>
+﻿@using Khoaluan.OtpModels
+@model List<Khoaluan.Models.Cart>
+@{
+    List<LibraryDetail> DanhSachDonHang = ViewBag.DonHang;
+}
 <div class="nk-main">
 
     <!-- START: Breadcrumbs -->
@@ -42,6 +46,7 @@
                             {
                                 foreach (var item in Model)
                                 {
+
                                     string url = $"/Product/HomePage/{item.product.Id}.html";
                                     <tr>
                                         <td class="nk-product-cart-thumb">
@@ -56,7 +61,19 @@
                                             <h2 class="nk-post-title h4">
                                                 <a href="@url">@item.product.Name</a>
                                             </h2>
+                                            @if (DanhSachDonHang.Any(t => t.UserID == int.Parse(ViewBag.GetId) && t.Id == item.product.Id))
+                                            {
+                                                ViewBag.count = 1;
+
+                                                <h2 class="nk-post-title h4">
+                                                    <a href="#">In library</a>
+                                                </h2>
+                                            }
+                                            else
+                                            {
+                                            }
                                         </td>
+
                                         <td class="nk-product-cart-price">
                                             <h5 class="h6">Price:</h5>
                                             <div class="nk-gap-1"></div>
@@ -79,6 +96,7 @@
                                         </td>
                                         <td class="nk-product-cart-remove"><a href="#" class="removecart" data-mahh="@item.product.Id"><span class="ion-android-close"></span></a></td>
                                     </tr>
+
                                 }
                             }
 
@@ -161,7 +179,14 @@
                 </div>
 
                 <div class="nk-gap-2"></div>
-                <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" asp-area="" asp-controller="Checkout" asp-action="Check">Proceed to Checkout</a>
+                if (ViewBag.count == 1)
+                {
+                    <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" asp-area="" asp-controller="Checkout" asp-action="Check">Có sản phẩm đã mua, vui lòng xóa để thanh toán</a>
+                }
+                else
+                {
+                    <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" asp-area="" asp-controller="Checkout" asp-action="Check">Proceed to Checkout</a>
+                }
                 <div class="clearfix"></div>
             }
             else
