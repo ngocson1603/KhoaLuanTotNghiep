@@ -102,10 +102,26 @@ namespace DuAnGame.Controllers
                 return Json(new { success = false });
             }
         }
+
+        public void GetLibrary()
+        {
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            ViewBag.GetId = taikhoanID;
+            if (taikhoanID != null)
+            {
+                var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Id == Convert.ToInt32(taikhoanID));
+                if (khachhang != null)
+                {
+                    var proLib = _unitOfWork.LibraryRepository.getLibrary(khachhang.Id);
+                    ViewBag.DonHang = proLib;
+                }
+            }
+        }
+
         [Route("cart.html", Name = "Cart")]
         public ActionResult Cart()
         {
-            TempData.Keep("idpro");
+            GetLibrary();
             return View(GioHang);
         }
     }

@@ -1,9 +1,11 @@
-﻿@model Khoaluan.OtpModels.DetailPage
+﻿@using Khoaluan.OtpModels
+@model Khoaluan.OtpModels.DetailPage
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
     TempData.Keep("idpro");
-    List<Khoaluan.Models.Cart> carts = ViewBag.GioHang;
+    List<Cart> carts = ViewBag.GioHang;
+    List<LibraryDetail> DanhSachDonHang = ViewBag.DonHang;
 }
 <div class="nk-main">
     <!-- START: Breadcrumbs -->
@@ -121,11 +123,47 @@
                 }
                 else
                 {*@
-
-                                        @if (ViewBag.GioHang != null)
+                                        @if (User.Identity.IsAuthenticated)
                                         {
-                                            
-                                                if (carts.Any(t=>t.product.Id == productID))
+                                            if (DanhSachDonHang != null)
+                                            {
+                                                if (DanhSachDonHang.Any(t => t.UserID==int.Parse(ViewBag.GetId)  && t.Id == productID))
+                                                {
+                                                    <div class="add-to-cart">
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Library</button>
+                                                        <input hidden asp-for="@productID" />
+                                                    </div>
+                                                }
+                                                else if (ViewBag.GioHang != null)
+                                                {
+
+                                                    if (carts.Any(t => t.product.Id == productID))
+                                                    {
+                                                        <div class="add-to-cart">
+                                                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
+                                                            <input hidden asp-for="@productID" />
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="add-to-cart">
+                                                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                            <input hidden asp-for="@productID" />
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <div class="add-to-cart">
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                        <input hidden asp-for="@productID" />
+                                                    </div>
+                                                }
+                                            }
+                                            else if (ViewBag.GioHang != null)
+                                            {
+
+                                                if (carts.Any(t => t.product.Id == productID))
                                                 {
                                                     <div class="add-to-cart">
                                                         <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
@@ -139,14 +177,46 @@
                                                         <input hidden asp-for="@productID" />
                                                     </div>
                                                 }
+                                            }
+                                            else
+                                            {
+                                                <div class="add-to-cart">
+                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                    <input hidden asp-for="@productID" />
+                                                </div>
+                                            }
                                         }
                                         else
                                         {
-                                            <div class="add-to-cart">
-                                                <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                <input hidden asp-for="@productID" />
-                                            </div>
+                                            @if (ViewBag.GioHang != null)
+                                            {
+
+                                                if (carts.Any(t => t.product.Id == productID))
+                                                {
+                                                    <div class="add-to-cart">
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
+                                                        <input hidden asp-for="@productID" />
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="add-to-cart">
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                        <input hidden asp-for="@productID" />
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="add-to-cart">
+                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                    <input hidden asp-for="@productID" />
+                                                </div>
+                                            }
                                         }
+
+
+
 
                                         @*}
                 //}

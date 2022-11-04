@@ -58,6 +58,7 @@ namespace Khoaluan.Controllers
             var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Take(5).ToList();
             var catesecond = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Skip(5).ToList();
             var cart = HttpContext.Session.Get<List<Cart>>("_GioHang");
+            GetLibrary();
             DetailPage dtp = new DetailPage()
             {
                 productDetail = x,
@@ -69,7 +70,20 @@ namespace Khoaluan.Controllers
             ViewBag.GioHang = cart;
             return View(dtp);
         }
-
+        public void GetLibrary()
+        {
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            ViewBag.GetId = taikhoanID;
+            if (taikhoanID != null)
+            {
+                var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Id == Convert.ToInt32(taikhoanID));
+                if (khachhang != null)
+                {
+                    var proLib = _unitOfWork.LibraryRepository.getLibrary(khachhang.Id);
+                    ViewBag.DonHang = proLib;
+                }
+            }
+        }
         public static string id1;
         public static int maxPage;
 
