@@ -2863,3 +2863,8 @@ C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razo
 C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\Login.cshtml.g.cs
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\Library.cshtml.g.cs
 C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\Library.cshtml.g.cs
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Forum\DetailForum.cshtml.g.cs
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Forum\ForumInD.cshtml.g.cs
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Forum\ForumList.cshtml.g.cs
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\ChangePassword.cshtml.g.cs
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Users\Library.cshtml.g.cs
