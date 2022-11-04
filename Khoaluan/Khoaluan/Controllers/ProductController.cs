@@ -55,8 +55,7 @@ namespace Khoaluan.Controllers
             var x = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
             var relateGame = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
             var popularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals("Rockstar Games")).ToList();
-            var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Take(5).ToList();
-            var catesecond = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).Skip(5).ToList();
+            var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).ToList();
             var cart = HttpContext.Session.Get<List<Cart>>("_GioHang");
             GetLibrary();
             DetailPage dtp = new DetailPage()
@@ -65,7 +64,6 @@ namespace Khoaluan.Controllers
                 relateGame = relateGame,
                 popularGame = popularGame,
                 cate = cate,
-                catesecond = catesecond,
             };
             ViewBag.GioHang = cart;
             return View(dtp);

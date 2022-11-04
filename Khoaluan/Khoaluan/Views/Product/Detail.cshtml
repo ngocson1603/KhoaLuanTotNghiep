@@ -110,24 +110,24 @@
                                         int productID = Model.productDetail.Id;
                                         @*ViewBag.name = TempData["idpro"];
 
-            if (ViewBag.name != null)
-            {
-                int proid = int.Parse(ViewBag.name);
-                //foreach (var item in ViewBag.name)
-                //{
-                if (proid == productID)
-                {
-                    <div>
-                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</button>
-                    </div>
-                }
-                else
-                {*@
+                                            if (ViewBag.name != null)
+                                            {
+                                                int proid = int.Parse(ViewBag.name);
+                                                //foreach (var item in ViewBag.name)
+                                                //{
+                                                if (proid == productID)
+                                                {
+                                                    <div>
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</button>
+                                                    </div>
+                                                }
+                                                else
+                                                {*@
                                         @if (User.Identity.IsAuthenticated)
                                         {
                                             if (DanhSachDonHang != null)
                                             {
-                                                if (DanhSachDonHang.Any(t => t.UserID==int.Parse(ViewBag.GetId)  && t.Id == productID))
+                                                if (DanhSachDonHang.Any(t => t.UserID == int.Parse(ViewBag.GetId) && t.Id == productID))
                                                 {
                                                     <div class="add-to-cart">
                                                         <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Library</button>
@@ -219,15 +219,15 @@
 
 
                                         @*}
-                //}
-            }
-            else
-            {
-                <div class="add-to-cart">
-                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                    <input hidden asp-for="@productID" />
-                </div>
-            }*@
+                                                //}
+                                            }
+                                            else
+                                            {
+                                                <div class="add-to-cart">
+                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                    <input hidden asp-for="@productID" />
+                                                </div>
+                                            }*@
                                     }
                                 </div>
                             </form>
@@ -470,30 +470,29 @@
                     <div class="nk-widget nk-widget-highlighted">
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Category</span> Menu</span></h4>
                         <div class="nk-widget-content">
-                            @*<p>
+                            <p>
                                 <ul class="nk-widget-categories">
                                     @if (Model.cate != null && Model.cate.Count() > 0)
                                     {
-                                        foreach (var item in Model.cate)
+                                        foreach (var item in Model.cate.Take(5))
                                         {
                                             string url = $"/Product/HomePage/Cate/{item.Name}.html";
                                             <li><a href="@url">@item.Name</a></li>
                                         }
-                                    }
-                                    <span id="dots"></span>
-                                    <div style="border-top: 1px solid #293139;"></div>
-                                    <span id="more">
-                                        @if (Model.catesecond != null && Model.catesecond.Count() > 0)
-                                        {
-                                            foreach (var item in Model.catesecond)
+                                        <span id="dots"></span>
+                                        <div style="border-top: 1px solid #293139;"></div>
+                                        <span id="more">
+                                            @foreach (var item in Model.cate.Skip(5))
                                             {
-                                                string url = $"/Product/HomePage/Cate/{item.Name}.html";
-                                            <li><a href="@url">@item.Name</a></li>
+                                            string url = $"/Product/HomePage/Cate/{item.Name}.html";
+                                        <li><a href="@url">@item.Name</a></li>
+
                                         }
-                                    }
                                         </span>
-                                    </ul>
-                                </p>*@
+                                    }
+
+                                </ul>
+                            </p>
                             <div style="margin-top: 1.5rem"></div>
                             <button onclick="myFunction()" id="myBtn">Read more</button>
                         </div>
