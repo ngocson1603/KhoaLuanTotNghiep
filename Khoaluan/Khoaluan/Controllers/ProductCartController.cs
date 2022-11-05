@@ -43,13 +43,10 @@ namespace DuAnGame.Controllers
             List<Cart> cart = GioHang;
             try
             {
-                //HttpContext.Session.SetString("idpro1", JsonConvert.SerializeObject(productID));
                 //Them san pham vao gio hang
                 Cart item = cart.SingleOrDefault(p => p.product.Id == productID);
                 if (item != null) 
                 {
-                    //luu lai session
-                    //TempData["idpro"] = cart;
                     HttpContext.Session.Set<List<Cart>>("_GioHang", cart);
                 }
                 else
@@ -60,13 +57,7 @@ namespace DuAnGame.Controllers
                         product = hh
                     };
                     cart.Add(item);//Them vao gio
-                    HttpContext.Session.SetString("idpro1", JsonConvert.SerializeObject(productID));
-                    var taikhoanID = HttpContext.Session.GetString("idpro1");
-
-                    TempData["idpro"] = taikhoanID;
-                    
                 }
-                TempData.Keep("idpro");
                 //Luu lai Session
                 HttpContext.Session.Set<List<Cart>>("_GioHang", cart);
                 ViewBag.GioHang = cart;

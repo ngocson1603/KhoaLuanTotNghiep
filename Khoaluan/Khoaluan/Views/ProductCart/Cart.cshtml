@@ -61,7 +61,7 @@
                                             <h2 class="nk-post-title h4">
                                                 <a href="@url">@item.product.Name</a>
                                             </h2>
-                                            @if (DanhSachDonHang.Any(t => t.UserID == int.Parse(ViewBag.GetId) && t.Id == item.product.Id))
+                                            @if (DanhSachDonHang!=null && DanhSachDonHang.Any(t => t.UserID == int.Parse(ViewBag.GetId) && t.Id == item.product.Id))
                                             {
                                                 ViewBag.count = 1;
 
