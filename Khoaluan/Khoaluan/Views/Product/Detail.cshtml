@@ -470,7 +470,7 @@
                     <div class="nk-widget nk-widget-highlighted">
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Category</span> Menu</span></h4>
                         <div class="nk-widget-content">
-                            <p>
+                            @*<p>
                                 <ul class="nk-widget-categories">
                                     @if (Model.cate != null && Model.cate.Count() > 0)
                                     {
@@ -492,7 +492,7 @@
                                     }
 
                                 </ul>
-                            </p>
+                            </p>*@
                             <div style="margin-top: 1.5rem"></div>
                             <button onclick="myFunction()" id="myBtn">Read more</button>
                         </div>
@@ -603,7 +603,6 @@
                 }
                 $(".add-to-cart").click(function () {
                     var productid = $('#productID').val();
-                    var soLuong = $('#txtsoLuong').val();
                     $.ajax({
                         url: '/api/cart/add',
                         type: "POST",
