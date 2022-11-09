@@ -15,5 +15,8 @@ namespace Khoaluan
         IUsersRepository UserRepository { get; }
         ILibraryRepository LibraryRepository { get; }
         IOrderRepository OrderRepository { get; }
+        IInventoryRepository InventoryRepository { get; }
+        IMarketRepository MarketRepository { get; }
+        IRefundRepository RefundRepository { get; }
     }
 }
