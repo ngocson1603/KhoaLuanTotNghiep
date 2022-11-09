@@ -846,6 +846,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\php\instagram\cache\" />
   </ItemGroup>
 
