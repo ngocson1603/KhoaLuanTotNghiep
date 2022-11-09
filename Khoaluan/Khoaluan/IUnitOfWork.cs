@@ -14,5 +14,6 @@ namespace Khoaluan
         IProductCategoryRepository ProductCategoryRepository { get; }
         IUsersRepository UserRepository { get; }
         ILibraryRepository LibraryRepository { get; }
+        IOrderRepository OrderRepository { get; }
     }
 }
