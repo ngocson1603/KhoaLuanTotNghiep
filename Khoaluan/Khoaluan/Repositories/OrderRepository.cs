@@ -8,10 +8,9 @@ namespace Khoaluan.Repositories
 {
     public class OrderRepository:GameStoreRepository<Order>, IOrderRepository
     {
-        private readonly IProductRepository _productRepository;
-        public OrderRepository(GameStoreDbContext context,IProductRepository productRepository):base(context)
+        public OrderRepository(GameStoreDbContext context):base(context)
         {
-            _productRepository=productRepository;
+            
         }
         public Order createOrder(int userID, List<Product> productPurchase)
         {
