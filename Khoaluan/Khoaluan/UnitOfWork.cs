@@ -13,6 +13,10 @@ namespace Khoaluan
         public IUsersRepository UserRepository { get; set; }
         public ILibraryRepository LibraryRepository { get; set; }
         public IOrderRepository OrderRepository { get; set; }
+        public IInventoryRepository InventoryRepository { get; set; }
+        public IMarketRepository MarketRepository { get; set; }
+        public IDiscussionRepository DiscussionRepository { get; set; } 
+        public IRefundRepository RefundRepository { get; set; }
         public UnitOfWork(GameStoreDbContext context,
             IProductCategoryRepository productCategoryRepository,
             IProductRepository productRepository,
@@ -20,7 +24,11 @@ namespace Khoaluan
             IDeveloperRepository developerRepository,
             IUsersRepository userRepository,
             ILibraryRepository libraryRepository,
-            IOrderRepository orderRepository
+            IOrderRepository orderRepository,
+            IInventoryRepository inventoryRepository,
+            IMarketRepository marketRepository,
+            IDiscussionRepository discussionRepository,
+            IRefundRepository refundRepository
             )
         {
             Context = context;
@@ -31,6 +39,10 @@ namespace Khoaluan
             UserRepository = userRepository;
             LibraryRepository = libraryRepository;
             OrderRepository = orderRepository;
+            InventoryRepository = inventoryRepository;
+            MarketRepository = marketRepository;
+            DiscussionRepository = discussionRepository;
+            RefundRepository = refundRepository;
         }
         public void Dispose()
         {

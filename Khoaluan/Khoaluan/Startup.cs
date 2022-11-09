@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,9 @@ namespace Khoaluan
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MongoSetting>(Configuration.GetSection("MongoDB"));
+            services.AddSingleton<IMongoSetting>(sp =>
+                sp.GetRequiredService<IOptions<MongoSetting>>().Value);
             services.AddDbContext<GameStoreDbContext>(option =>
             {
                 option.UseSqlServer(Configuration.GetConnectionString("conString"));

@@ -74,6 +74,14 @@
               "target": "Package",
               "version": "[5.0.2, )"
             },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.18.0, )"
+            },
+            "MongoDB.Driver.Core": {
+              "target": "Package",
+              "version": "[2.18.0, )"
+            },
             "PagedList.Core.Mvc": {
               "target": "Package",
               "version": "[3.0.0, )"
