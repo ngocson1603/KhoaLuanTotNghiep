@@ -13,11 +13,10 @@ namespace Khoaluan.Repositories
         {
             _productRepository=productRepository;
         }
-        public Order createOrder()
+        public Order createOrder(int userID, List<Product> productPurchase)
         {
-            var item = _productRepository.GetAll().Take(3);
             List<OrderDetail> detail = new List<OrderDetail>();
-            foreach(var p in item)
+            foreach(var p in productPurchase)
             {
                 OrderDetail orderDetail = new OrderDetail()
                 {
@@ -28,9 +27,9 @@ namespace Khoaluan.Repositories
             }
             Order order = new Order()
             {
-                UserID = 2,
+                UserID = userID,
                 DatePurchase = DateTime.Now,
-                TotalPrice = item.Sum(t => t.Price),
+                TotalPrice = productPurchase.Sum(t => t.Price),
                 OrderDetails = detail
             };
             return order;
