@@ -26,5 +26,14 @@ namespace Khoaluan.Repositories
             var data = Context.Database.GetDbConnection().Query<LibraryDetail>(query,parameter);
             return data.ToList();
         }
+        public void remove(int userID, int productID)
+        {
+            var query = @"delete from Library
+                        where Library.ProductId=@productid and Library.UserID=@id";
+            var parameter = new DynamicParameters();
+            parameter.Add("id", userID);
+            parameter.Add("productid", productID);
+            Context.Database.GetDbConnection().Execute(query, parameter);
+        }
     }
 }

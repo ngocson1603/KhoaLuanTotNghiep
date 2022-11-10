@@ -10,5 +10,6 @@ namespace Khoaluan.Interfaces
     public interface ILibraryRepository:IGameStoreRepository<Library>
     {
         public List<LibraryDetail> getLibrary(int id);
+        public void remove(int userID, int productID);
     }
 }

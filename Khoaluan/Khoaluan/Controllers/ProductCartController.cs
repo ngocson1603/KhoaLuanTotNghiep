@@ -104,6 +104,19 @@ namespace DuAnGame.Controllers
             }
             return RedirectToRoute("Cart");
         }
+        public IActionResult CheckoutFail()
+        {
+            //Tạo đơn hàng trong database với trạng thái thanh toán là "Chưa thanh toán"
+            //Xóa session
+            return View();
+        }
+
+        public IActionResult CheckoutSuccess()
+        {
+            //Tạo đơn hàng trong database với trạng thái thanh toán là "Paypal" và thành công
+            //Xóa session
+            return View();
+        }
         [HttpPost]
         [Route("api/cart/remove")]
         public ActionResult Remove(int productID)

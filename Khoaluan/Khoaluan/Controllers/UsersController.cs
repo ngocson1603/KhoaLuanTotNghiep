@@ -140,6 +140,32 @@ namespace Khoaluan.Controllers
                 return View(taikhoan);
             }
         }
+
+        [Authorize, HttpPost]
+        public IActionResult Refund(int productID)
+        {
+            if (ModelState.IsValid)
+            {
+                var taikhoanID = HttpContext.Session.GetString("CustomerId");
+                var refundID = _unitOfWork.RefundRepository.refundID(int.Parse(taikhoanID), productID);
+                try
+                {
+                    _unitOfWork.LibraryRepository.remove(int.Parse(taikhoanID), productID);
+                    _unitOfWork.RefundRepository.refund(int.Parse(taikhoanID), productID, refundID);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Success("thành công");
+                    return RedirectToRoute("Library");
+                }
+                catch (Exception ex)
+                {
+                    //log
+                    return Redirect("/ProductCart/CheckoutFail");
+                }
+
+            }
+            return Redirect("/ProductCart/Cart");
+        }
+
         [AllowAnonymous]
         [Route("dang-nhap.html", Name = "DangNhap")]
         public IActionResult Login()
