@@ -2889,3 +2889,6 @@ C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\Zstd
 C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\runtimes\linux\native\libmongocrypt.so
 C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\runtimes\win\native\mongocrypt.dll
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Khoaluan.csproj.AssemblyReference.cache
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ProductCart\CheckoutFail.cshtml.g.cs
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ProductCart\CheckoutSuccess.cshtml.g.cs
