@@ -1,8 +1,10 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Khoaluan;
+using Khoaluan.Enums;
 using Khoaluan.Extension;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -68,6 +70,39 @@ namespace DuAnGame.Controllers
             {
                 return Json(new { success = false });
             }
+        }
+        [Authorize, HttpPost]
+        public IActionResult ThanhToan()
+        {
+            if (ModelState.IsValid)
+            {
+                var cart = HttpContext.Session.Get<List<Cart>>("_GioHang");
+                var taikhoanID = HttpContext.Session.GetString("CustomerId");
+                var maKH = _unitOfWork.UserRepository.GetById(int.Parse(taikhoanID));
+                var totalprice = cart.Sum(t => t.product.Price);
+                int type = (int)marketType.buy;
+                if (maKH.Balance > totalprice)
+                {
+                    _notyfService.Success("Số tiền không đủ");
+                    return RedirectToRoute("Cart");
+                }
+                try
+                {
+                    var item = _unitOfWork.OrderRepository.createOrder(int.Parse(taikhoanID.ToString()), cart);
+                    _unitOfWork.OrderRepository.Create(item);
+                    _unitOfWork.UserRepository.updateBalance(int.Parse(taikhoanID.ToString()), totalprice, type);
+                    _unitOfWork.SaveChange();
+                    HttpContext.Session.Remove("_GioHang");
+                    return Redirect("/ProductCart/CheckoutSuccess");
+                }
+                catch (Exception ex)
+                {
+                    //log
+                    return Redirect("/ProductCart/CheckoutFail");
+                }
+
+            }
+            return RedirectToRoute("Cart");
         }
         [HttpPost]
         [Route("api/cart/remove")]
