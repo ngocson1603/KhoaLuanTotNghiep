@@ -6,6 +6,7 @@ namespace Khoaluan
     public class UnitOfWork : IUnitOfWork
     {
         public DbContext Context { get; }
+        public IMongoContext MongoContext { get; }  
         public IProductCategoryRepository ProductCategoryRepository { get; set; }
         public IProductRepository ProductRepository { get; set; }   
         public ICategoryRepository CategoryRepository { get; set; }
@@ -28,9 +29,11 @@ namespace Khoaluan
             IInventoryRepository inventoryRepository,
             IMarketRepository marketRepository,
             IDiscussionRepository discussionRepository,
-            IRefundRepository refundRepository
+            IRefundRepository refundRepository,
+            IMongoContext mongoContext
             )
         {
+            MongoContext = mongoContext;
             Context = context;
             ProductCategoryRepository = productCategoryRepository;
             ProductRepository= productRepository;

@@ -2878,3 +2878,14 @@ D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\Zs
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\runtimes\linux\native\libmongocrypt.so
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\runtimes\osx\native\libmongocrypt.dylib
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\runtimes\win\native\mongocrypt.dll
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\DnsClient.dll
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\MongoDB.Bson.dll
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\MongoDB.Driver.dll
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\MongoDB.Driver.Core.dll
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\MongoDB.Libmongocrypt.dll
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\SharpCompress.dll
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\Snappier.dll
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\ZstdSharp.dll
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\runtimes\linux\native\libmongocrypt.so
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\runtimes\osx\native\libmongocrypt.dylib
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\runtimes\win\native\mongocrypt.dll

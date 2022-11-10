@@ -5,7 +5,7 @@ namespace Khoaluan.Repositories
 {
     public class DiscussionRepository:MongoRepository<Discussion>,IDiscussionRepository
     {
-        public DiscussionRepository(MongodbContext context):base(context)
+        public DiscussionRepository(IMongoContext context):base(context)
         {
 
         }
