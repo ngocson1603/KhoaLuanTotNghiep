@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using static Dapper.SqlMapper;
+using System.Threading.Tasks;
 
 namespace Khoaluan
 {
-    public interface IMongoRepository<T>:IDisposable where T : class
+    public interface IMongoRepository<T>: IDisposable where T : class
     {
-        void add(T entity);
-        T getbyID(string id);
-        List<T> getall();
-        void Update(string id,T entity);
-        void Delete(string id);
+        void Add(T obj);
+        T GetById(string id);
+        List<T> GetAll();
+        void Update(string id,T obj);
+        void Remove(string id);
     }
 }

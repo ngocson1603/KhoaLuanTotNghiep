@@ -1,51 +1,55 @@
-﻿using Khoaluan.Models;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
+using System.Threading.Tasks;
 using System;
-using System.Collections.Generic;
 using static Dapper.SqlMapper;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using SharpCompress.Common;
 
 namespace Khoaluan
 {
-    public class MongoRepository<T> : IMongoRepository<T> where T : class
+    public abstract class MongoRepository<T>: IMongoRepository<T> where T : class
     {
-        private readonly IMongoDatabase database;
-        private readonly IMongoCollection<T> Dbset;
-        public MongoRepository(IMongoContext context)
+        protected readonly IMongoContext Context;
+        protected IMongoCollection<T> DbSet;
+        protected MongoRepository(IMongoContext context)
         {
-            database = context.Database;
-            Dbset = database.GetCollection<T>(typeof(T).Name);
-        }
-        public void add(T entity)
-        {
-            Dbset.InsertOne(entity);
+            Context = context;
+            DbSet = Context.GetCollection<T>(typeof(T).Name);
         }
 
-        public void Delete(string id)
+        public void Add(T obj)
         {
-            var obj = Dbset.DeleteOne(FilterId(id));
+            DbSet.InsertOne(obj);
         }
 
         public void Dispose()
         {
-            GC.SuppressFinalize(this);
+            Context?.Dispose();
         }
 
-        public List<T> getall()
+        public List<T> GetAll()
         {
-            return Dbset.Find(Builders<T>.Filter.Empty).ToList();
+            return DbSet.Find(Builders<T>.Filter.Empty).ToList();
         }
 
-        public T getbyID(string id)
+        public T GetById(string id)
         {
-            return Dbset.Find(FilterId(id)).SingleOrDefault();
+            return DbSet.Find(FilterId(id)).SingleOrDefault();
+        }
+
+        public void Remove(string id)
+        {
+            DbSet.DeleteOne(FilterId(id));
+        }
+
+        public void Update(string id, T obj)
+        {
+            DbSet.ReplaceOne(FilterId(id), obj);
         }
         private static FilterDefinition<T> FilterId(string key)
         {
-            return Builders<T>.Filter.Eq("Id", key);
-        }
-        public void Update(string id, T entity)
-        {
-            Dbset.ReplaceOne(FilterId(id),entity);
+            return Builders<T>.Filter.Eq("postID",key);
         }
     }
 }
