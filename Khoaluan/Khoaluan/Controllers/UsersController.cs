@@ -159,11 +159,11 @@ namespace Khoaluan.Controllers
                 catch (Exception ex)
                 {
                     //log
-                    return Redirect("/ProductCart/CheckoutFail");
+                    return RedirectToRoute("Library");
                 }
 
             }
-            return Redirect("/ProductCart/Cart");
+            return RedirectToRoute("Library");
         }
 
         [AllowAnonymous]
