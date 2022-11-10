@@ -41,7 +41,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <button class="removecart nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" type="submit" data-mahh="@item.Id">Refund</button>
+
                         }
+
                     }
                 </div>
                 <!-- END: Recent Galleries -->
@@ -61,6 +64,31 @@
 <img class="nk-page-background-bottom" src="assets/images/bg-bottom.png" alt="">
 
 <!-- END: Page Background -->
+
+@section Scripts{
+    <script>
+        $(function () {
+            $(".removecart").click(function () {
+                var productid = $(this).attr("data-mahh");
+                $.ajax({
+                    url: "Users/Refund",
+                    type: "POST",
+                    data: {
+                        productID: productid,
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            location.reload();
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Error !")
+                    }
+                });
+            });
+        });
+    </script>
+}
 
 @*<table class="table">
         <tbody>
