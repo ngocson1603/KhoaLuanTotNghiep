@@ -12,23 +12,23 @@ namespace Khoaluan.Repositories
         {
             
         }
-        public Order createOrder(int userID, List<Product> productPurchase)
+        public Order createOrder(int userID, List<Cart> productPurchase)
         {
             List<OrderDetail> detail = new List<OrderDetail>();
-            foreach(var p in productPurchase)
+            foreach (var p in productPurchase)
             {
                 OrderDetail orderDetail = new OrderDetail()
                 {
-                    ProductID = p.Id,
-                    Price=p.Price
+                    ProductID = p.product.Id,
+                    Price = p.product.Price
                 };
-                detail.Add(orderDetail);    
+                detail.Add(orderDetail);
             }
             Order order = new Order()
             {
                 UserID = userID,
                 DatePurchase = DateTime.Now,
-                TotalPrice = productPurchase.Sum(t => t.Price),
+                TotalPrice = productPurchase.Sum(t => t.product.Price),
                 OrderDetails = detail
             };
             return order;

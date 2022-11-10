@@ -5,6 +5,6 @@ namespace Khoaluan.Interfaces
 {
     public interface IOrderRepository:IGameStoreRepository<Order>
     {
-        Order createOrder(int userID,List<Product> productPurcahse);
+        Order createOrder(int userID,List<Cart> productPurcahse);
     }
 }
