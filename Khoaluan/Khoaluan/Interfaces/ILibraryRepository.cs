@@ -9,7 +9,8 @@ namespace Khoaluan.Interfaces
 {
     public interface ILibraryRepository:IGameStoreRepository<Library>
     {
-        public List<LibraryDetail> getLibrary(int id);
-        public void remove(int userID, int productID);
+        List<LibraryDetail> getLibrary(int id);
+        void remove(int userID, int productID);
+        void updateLibrary(int userID, List<Cart> cart);
     }
 }
