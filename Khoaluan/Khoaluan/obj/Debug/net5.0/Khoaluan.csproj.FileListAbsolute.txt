@@ -2892,3 +2892,5 @@ C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\runt
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Khoaluan.csproj.AssemblyReference.cache
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ProductCart\CheckoutFail.cshtml.g.cs
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ProductCart\CheckoutSuccess.cshtml.g.cs
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ProductCart\CheckoutFail.cshtml.g.cs
+C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ProductCart\CheckoutSuccess.cshtml.g.cs
