@@ -14,7 +14,7 @@ namespace Khoaluan.Repositories
     {
         public LibraryRepository(GameStoreDbContext context) : base(context)
         {
-
+            
         }
         public List<LibraryDetail> getLibrary(int id)
         {
@@ -34,6 +34,21 @@ namespace Khoaluan.Repositories
             parameter.Add("id", userID);
             parameter.Add("productid", productID);
             Context.Database.GetDbConnection().Execute(query, parameter);
+        }
+
+        public void updateLibrary(int userID, List<Cart> cart)
+        {
+            List<Library> libraries = new List<Library>();
+            foreach(var p in cart)
+            {
+                Library library = new Library()
+                {
+                    UserId = userID,
+                    ProductId = p.product.Id
+                };
+                libraries.Add(library);
+            }
+            this.BulkInsert(libraries);
         }
     }
 }
