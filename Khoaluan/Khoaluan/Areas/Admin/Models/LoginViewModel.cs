@@ -5,7 +5,6 @@ namespace Khoaluan.Areas.Admin.Models
 {
     public class LoginViewModel
     {
-        [Key]
         [MaxLength(100)]
         [Required(ErrorMessage = ("Vui lòng nhập Email"))]
         [Display(Name = "Địa chỉ Email")]

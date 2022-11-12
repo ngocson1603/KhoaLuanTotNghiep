@@ -25,6 +25,7 @@ namespace Khoaluan
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
             modelBuilder.ApplyConfiguration(new MarketConfiguration());
             modelBuilder.ApplyConfiguration(new RefundConfiguration());
+            modelBuilder.ApplyConfiguration(new AdminConfiguration());
         }
     }
 }
