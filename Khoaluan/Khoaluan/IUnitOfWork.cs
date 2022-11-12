@@ -18,5 +18,6 @@ namespace Khoaluan
         IInventoryRepository InventoryRepository { get; }
         IMarketRepository MarketRepository { get; }
         IRefundRepository RefundRepository { get; }
+        IAdminRepository AdminRepository { get; }
     }
 }

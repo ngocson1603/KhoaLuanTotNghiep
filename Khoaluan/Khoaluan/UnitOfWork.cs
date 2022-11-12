@@ -18,6 +18,7 @@ namespace Khoaluan
         public IMarketRepository MarketRepository { get; set; }
         public IDiscussionRepository DiscussionRepository { get; set; } 
         public IRefundRepository RefundRepository { get; set; }
+        public IAdminRepository AdminRepository { get; set; }
         public UnitOfWork(GameStoreDbContext context,
             IProductCategoryRepository productCategoryRepository,
             IProductRepository productRepository,
@@ -30,6 +31,7 @@ namespace Khoaluan
             IMarketRepository marketRepository,
             IDiscussionRepository discussionRepository,
             IRefundRepository refundRepository,
+            IAdminRepository adminRepository,
             IMongoContext mongoContext
             )
         {
@@ -46,6 +48,7 @@ namespace Khoaluan
             MarketRepository = marketRepository;
             DiscussionRepository = discussionRepository;
             RefundRepository = refundRepository;
+            AdminRepository = adminRepository;
         }
         public void Dispose()
         {

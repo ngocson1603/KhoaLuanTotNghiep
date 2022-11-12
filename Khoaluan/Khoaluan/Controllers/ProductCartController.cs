@@ -81,7 +81,7 @@ namespace DuAnGame.Controllers
                 var maKH = _unitOfWork.UserRepository.GetById(int.Parse(taikhoanID));
                 var totalprice = cart.Sum(t => t.product.Price);
                 int type = (int)marketType.buy;
-                if (maKH.Balance > totalprice)
+                if (maKH.Balance < totalprice)
                 {
                     _notyfService.Success("Số tiền không đủ");
                     return RedirectToRoute("Cart");
@@ -90,6 +90,7 @@ namespace DuAnGame.Controllers
                 {
                     var item = _unitOfWork.OrderRepository.createOrder(int.Parse(taikhoanID.ToString()), cart);
                     _unitOfWork.OrderRepository.Create(item);
+                    _unitOfWork.LibraryRepository.updateLibrary(int.Parse(taikhoanID.ToString()), cart);
                     _unitOfWork.UserRepository.updateBalance(int.Parse(taikhoanID.ToString()), totalprice, type);
                     _unitOfWork.SaveChange();
                     HttpContext.Session.Remove("_GioHang");

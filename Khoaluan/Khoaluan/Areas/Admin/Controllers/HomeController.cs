@@ -7,10 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DuAnGame.Areas.Admin.Controllers
 {
-    //[Authorize(Roles ="Admin")]
+    [Authorize(Roles ="Admin")]
     [Area("Admin")]
     [Route("admin.html", Name = "AdminIndex")]
-    //[Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()
