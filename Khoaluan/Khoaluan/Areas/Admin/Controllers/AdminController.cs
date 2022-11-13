@@ -23,6 +23,20 @@ namespace Khoaluan.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
         }
+
+        public string Role
+        {
+            get
+            {
+                var gh = HttpContext.Session.GetString("Role");
+                if (gh == null)
+                {
+                    gh = "";
+                }
+                return gh;
+            }
+        }
+
         [AllowAnonymous]
         [Route("login.html", Name = "Login")]
         public IActionResult AdminLogin(string returnUrl = null)
@@ -66,13 +80,15 @@ namespace Khoaluan.Areas.Admin.Controllers
                     //identity
                     //luuw seccion Makh
                     HttpContext.Session.SetString("AccountId", kh.TaiKhoan.ToString());
-
+                    HttpContext.Session.SetString("Role", "Admin");
+                    var Roles = HttpContext.Session.GetString("Role");
                     //identity
                     var userClaims = new List<Claim>
                         {
                             new Claim(ClaimTypes.Name, kh.HoTen),
                             new Claim(ClaimTypes.Email, kh.TaiKhoan),
                             new Claim("AccountId", kh.TaiKhoan.ToString()),
+                            new Claim(ClaimTypes.Role, Roles)
                         };
                     var grandmaIdentity = new ClaimsIdentity(userClaims, "User Identity");
                     var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity });
@@ -97,11 +113,12 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 HttpContext.SignOutAsync();
                 HttpContext.Session.Remove("AccountId");
-                return RedirectToAction("AdminLogin", "Account", new { Area = "Admin" });
+                HttpContext.Session.Remove("Role");
+                return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
             }
             catch
             {
-                return RedirectToAction("AdminLogin", "Account", new { Area = "Admin" });
+                return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
             }
         }
     }
