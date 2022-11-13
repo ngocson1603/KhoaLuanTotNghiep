@@ -208,7 +208,7 @@ namespace Khoaluan.Controllers
                     //Luu Session MaKh
                     HttpContext.Session.SetString("CustomerId", khachhang.Id.ToString());
                     var taikhoanID = HttpContext.Session.GetString("CustomerId");
-
+                    HttpContext.Session.SetString("Role", "User");
                     //Identity
                     var claims = new List<Claim>
                     {
