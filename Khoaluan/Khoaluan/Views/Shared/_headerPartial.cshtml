@@ -31,7 +31,7 @@
 
 
                     <li>
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
                         {
                             <a href="/tai-khoan-cua-toi.html">
                                 <span class="fa fa-user"></span>

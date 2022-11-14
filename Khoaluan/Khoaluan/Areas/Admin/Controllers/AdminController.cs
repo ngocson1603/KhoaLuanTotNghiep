@@ -55,6 +55,11 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (User.IsInRole("User"))
+                    {
+                        _notyfService.Warning("Vui lòng đăng xuất ở User");
+                        return RedirectToAction("Dashboard", "Users");
+                    }
                     var kh = _unitOfWork.AdminRepository.GetAll().SingleOrDefault(x => x.TaiKhoan.Trim() == model.UserName);
 
                     if (kh == null)
