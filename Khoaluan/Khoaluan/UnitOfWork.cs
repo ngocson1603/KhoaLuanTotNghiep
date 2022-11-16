@@ -1,4 +1,5 @@
 ﻿using Khoaluan.Interfaces;
+using Khoaluan.InterfacesRepository;
 using Microsoft.EntityFrameworkCore;
 
 namespace Khoaluan
@@ -19,6 +20,7 @@ namespace Khoaluan
         public IDiscussionRepository DiscussionRepository { get; set; } 
         public IRefundRepository RefundRepository { get; set; }
         public IAdminRepository AdminRepository { get; set; }
+        public IOrderDetailRepository OrderDetailRepository { get; set; }
         public UnitOfWork(GameStoreDbContext context,
             IProductCategoryRepository productCategoryRepository,
             IProductRepository productRepository,
@@ -32,7 +34,8 @@ namespace Khoaluan
             IDiscussionRepository discussionRepository,
             IRefundRepository refundRepository,
             IAdminRepository adminRepository,
-            IMongoContext mongoContext
+            IMongoContext mongoContext,
+            IOrderDetailRepository orderDetailRepository
             )
         {
             MongoContext = mongoContext;
@@ -49,6 +52,7 @@ namespace Khoaluan
             DiscussionRepository = discussionRepository;
             RefundRepository = refundRepository;
             AdminRepository = adminRepository;
+            OrderDetailRepository = orderDetailRepository;
         }
         public void Dispose()
         {

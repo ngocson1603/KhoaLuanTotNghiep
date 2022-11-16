@@ -43,6 +43,7 @@ namespace Khoaluan
                     //p.LogoutPath = "/dang-xuat/html";
                     p.AccessDeniedPath = "/not-found.html";
                 });
+            //services.AddScoped(typeof(IService), typeof(Service));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddScoped(typeof(IGameStoreRepository<>), typeof(GameStoreRepository<>));
             var allRepositoryInterfaces = Assembly.GetAssembly(typeof(IGameStoreRepository<>))
@@ -53,6 +54,16 @@ namespace Khoaluan
             {
                 var implement = allRepositoryImplements.FirstOrDefault(t => t.IsClass && repoType.Name.Substring(1) == t.Name);
                 if (implement != null) services.AddScoped(repoType, implement);
+            }
+            var allServicesInterfaces = Assembly.GetAssembly(typeof(IService))
+               ?.GetTypes().Where(t => t.Name.EndsWith("Service")).ToList();
+            var allServiceImplements = Assembly.GetAssembly(typeof(Service))
+                ?.GetTypes().Where(t => t.Name.EndsWith("Service")).ToList();
+
+            foreach (var serviceType in allServicesInterfaces.Where(t => t.IsInterface))
+            {
+                var implement = allServiceImplements.FirstOrDefault(c => c.IsClass && serviceType.Name.Substring(1) == c.Name);
+                if (implement != null) services.AddScoped(serviceType, implement);
             }
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddNotyf(config =>

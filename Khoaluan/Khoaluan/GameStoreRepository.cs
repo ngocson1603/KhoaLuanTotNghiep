@@ -32,9 +32,8 @@ namespace Khoaluan
             Table.Attach(entity);
             Context.Entry(entity).State = EntityState.Modified;
         }
-        public void Delete(int id)
+        public void Delete(T entity)
         {
-            T entity = Table.Find(id);
             Table.Remove(entity);
         }
         public void BulkInsert(List<T> entities)

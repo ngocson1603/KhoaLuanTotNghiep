@@ -12,17 +12,6 @@ namespace Khoaluan.Repositories
 
         }
 
-        public void transaction(int userID, int itemID, int price,int type)
-        {
-            Market cmd=new Market()
-            {
-                UserID=userID,
-                ItemID=itemID,
-                Price=price,
-                DayCreate=DateTime.Now,
-                Status=type
-            };
-            this.Update(cmd);
-        }
+        
     }
 }
