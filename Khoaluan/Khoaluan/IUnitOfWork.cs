@@ -1,4 +1,5 @@
 ﻿using Khoaluan.Interfaces;
+using Khoaluan.InterfacesRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -19,5 +20,6 @@ namespace Khoaluan
         IMarketRepository MarketRepository { get; }
         IRefundRepository RefundRepository { get; }
         IAdminRepository AdminRepository { get; }
+        IOrderDetailRepository OrderDetailRepository { get; }
     }
 }
