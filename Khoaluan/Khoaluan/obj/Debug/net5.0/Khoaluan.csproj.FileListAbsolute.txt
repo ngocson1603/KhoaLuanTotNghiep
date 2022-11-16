@@ -2910,3 +2910,4 @@ C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoa
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Areas\Admin\Views\Admin\AdminLogin.cshtml.g.cs
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ProductCart\CheckoutFail.cshtml.g.cs
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ProductCart\CheckoutSuccess.cshtml.g.cs
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Areas\Admin\Views\Search\ListProductsSearchPartial.cshtml.g.cs
