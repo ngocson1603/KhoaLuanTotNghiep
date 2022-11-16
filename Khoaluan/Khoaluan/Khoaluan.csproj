@@ -14,6 +14,7 @@
   <ItemGroup>
     <None Include="Areas\Admin\Views\AdminProducts\Index.cshtml" />
     <None Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Search\ListProductsSearchPartial.cshtml" />
     <None Include="Areas\Admin\Views\Shared\Error.cshtml" />
     <None Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
     <None Include="Areas\Admin\Views\Shared\_SideNavPartialView.cshtml" />
