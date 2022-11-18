@@ -2502,7 +2502,6 @@ C:\Users\hodan\OneDrive\Máy tính\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug
 C:\Users\hodan\OneDrive\Máy tính\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Khoaluan.genruntimeconfig.cache
 D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Product\StoreDevAlt.cshtml.g.cs
 C:\Users\hodan\OneDrive\Máy tính\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\Product\StoreDevAlt.cshtml.g.cs
-C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\ref\Khoaluan.dll
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\System.CodeDom.dll
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\System.Collections.Immutable.dll
@@ -2914,3 +2913,5 @@ C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razo
 C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Areas\Admin\Views\Admin\AdminLogin.cshtml.g.cs
 C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Areas\Admin\Views\Search\ListProductsSearchPartial.cshtml.g.cs
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\SearchPro\ListSearch.cshtml.g.cs
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Khoaluan.csproj.AssemblyReference.cache
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\refint\Khoaluan.dll
