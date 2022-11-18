@@ -1,9 +1,8 @@
 ﻿@using Khoaluan.OtpModels
 @model IEnumerable<Khoaluan.OtpModels.Productdetail>
 @{
-    ViewData["Title"] = "ABC";
+    ViewData["Title"] = "product";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<Productdetail> DsPro = ViewBag.DsPro;
 }
 <div class="row vertical-gap">
     @foreach (var p in Model)
