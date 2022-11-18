@@ -28,9 +28,7 @@ using Khoaluan.Models;
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1078f2cc64108d04c31992a93c6085c0cedec4bb", @"/Views/StoreProduct/StoreCatalogAlt.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"03f3678a84bfaa5a1015b6e961ae71778d9f87eb", @"/Views/_ViewImports.cshtml")]
-    #nullable restore
     public class Views_StoreProduct_StoreCatalogAlt : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
-    #nullable disable
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/assets/images/icon-mouse.png"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("alt", new global::Microsoft.AspNetCore.Html.HtmlString(""), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -145,7 +143,7 @@ using Khoaluan.Models;
                 <div class=""nk-feature-1"">
                     <div class=""nk-feature-icon"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb22893", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb22847", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -171,7 +169,7 @@ using Khoaluan.Models;
                 <div class=""nk-feature-1"">
                     <div class=""nk-feature-icon"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb24505", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb24459", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -197,7 +195,7 @@ using Khoaluan.Models;
                 <div class=""nk-feature-1"">
                     <div class=""nk-feature-icon"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb26118", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb26072", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -229,7 +227,7 @@ using Khoaluan.Models;
                     <div class=""col-md-4"">
                         <select class=""form-control"">
                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1078f2cc64108d04c31992a93c6085c0cedec4bb27963", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1078f2cc64108d04c31992a93c6085c0cedec4bb27917", async() => {
                 WriteLiteral("Select Platform");
             }
             );
@@ -251,7 +249,7 @@ using Khoaluan.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1078f2cc64108d04c31992a93c6085c0cedec4bb29782", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1078f2cc64108d04c31992a93c6085c0cedec4bb29736", async() => {
                 WriteLiteral("PS4");
             }
             );
@@ -267,7 +265,7 @@ using Khoaluan.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1078f2cc64108d04c31992a93c6085c0cedec4bb30967", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1078f2cc64108d04c31992a93c6085c0cedec4bb30921", async() => {
                 WriteLiteral("Xbox 1");
             }
             );
@@ -283,7 +281,7 @@ using Khoaluan.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1078f2cc64108d04c31992a93c6085c0cedec4bb32155", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1078f2cc64108d04c31992a93c6085c0cedec4bb32109", async() => {
                 WriteLiteral("PC");
             }
             );
@@ -330,7 +328,7 @@ using Khoaluan.Models;
             </div>
             <div class=""col-lg-4"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1078f2cc64108d04c31992a93c6085c0cedec4bb34997", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1078f2cc64108d04c31992a93c6085c0cedec4bb34951", async() => {
                 WriteLiteral(@"
                     <div class=""input-group"">
                         <input type=""text"" class=""form-control"" placeholder=""Type something..."">
@@ -366,7 +364,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat-2"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb37175", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb37129", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -401,7 +399,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat-2"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb39650", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb39604", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -436,7 +434,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat-2"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb42127", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb42081", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -464,7 +462,7 @@ using Khoaluan.Models;
                         <a href=""#"" class=""nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1"">Add to Cart</a>
      ");
             WriteLiteral("               </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-lg-6\">\r\n                <div class=\"nk-product-cat-2\">\r\n                    <a class=\"nk-product-image\" href=\"store-product.html\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb44605", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb44559", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -498,7 +496,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat-2"">
                     <a class=""nk-product-image"" href=""store-");
             WriteLiteral("product.html\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb46844", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb46798", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -526,7 +524,7 @@ using Khoaluan.Models;
                         <a href=""#"" class=""nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1"">Add to Cart</a>
       ");
             WriteLiteral("              </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-lg-6\">\r\n                <div class=\"nk-product-cat-2\">\r\n                    <a class=\"nk-product-image\" href=\"store-product.html\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb49321", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb49275", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -554,7 +552,7 @@ using Khoaluan.Models;
                         <a href=""#"" class=""nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1"">Add to Cart</a>
                     </div>");
             WriteLiteral("\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-lg-6\">\r\n                <div class=\"nk-product-cat-2\">\r\n                    <a class=\"nk-product-image\" href=\"store-product.html\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb51776", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb51730", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -582,7 +580,7 @@ using Khoaluan.Models;
                         <a href=""#"" class=""nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1"">Add to Cart</a>
        ");
             WriteLiteral("             </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-lg-6\">\r\n                <div class=\"nk-product-cat-2\">\r\n                    <a class=\"nk-product-image\" href=\"store-product.html\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb54252", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb54206", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -610,7 +608,7 @@ using Khoaluan.Models;
                         <a href=""#"" class=""nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1"">Add to Cart</a>
          ");
             WriteLiteral("           </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-lg-6\">\r\n                <div class=\"nk-product-cat-2\">\r\n                    <a class=\"nk-product-image\" href=\"store-product.html\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb56726", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb56680", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -638,7 +636,7 @@ using Khoaluan.Models;
                         <a href=""#"" class=""nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1"">Add to Cart</a>
                     <");
             WriteLiteral("/div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-lg-6\">\r\n                <div class=\"nk-product-cat-2\">\r\n                    <a class=\"nk-product-image\" href=\"store-product.html\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb59188", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb59142", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -673,7 +671,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat-2"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb61659", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb61613", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -708,7 +706,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat-2"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb64131", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb64085", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -743,7 +741,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat-2"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb66602", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb66556", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -771,7 +769,7 @@ using Khoaluan.Models;
                         <a href=""#"" class=""nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1"">Add to Cart</a>
       ");
             WriteLiteral("              </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-lg-6\">\r\n                <div class=\"nk-product-cat-2\">\r\n                    <a class=\"nk-product-image\" href=\"store-product.html\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb69079", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb69033", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -806,7 +804,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat-2"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb71560", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb71514", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -834,7 +832,7 @@ using Khoaluan.Models;
                         <a href=""#"" class=""nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1"">Add to Cart</a>
     ");
             WriteLiteral("                </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-lg-6\">\r\n                <div class=\"nk-product-cat-2\">\r\n                    <a class=\"nk-product-image\" href=\"store-product.html\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb74039", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb73993", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -898,7 +896,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb77605", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb77559", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -929,7 +927,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb79606", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb79560", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -960,7 +958,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb81613", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb81567", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -991,7 +989,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb83616", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb83570", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -1022,7 +1020,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb85630", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb85584", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -1053,7 +1051,7 @@ using Khoaluan.Models;
                 <div class=""nk-product-cat"">
                     <a class=""nk-product-image"" href=""store-product.html"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb87635", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb87589", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -1087,7 +1085,7 @@ using Khoaluan.Models;
 <!-- START: Page Background -->
 
 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb89563", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb89517", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -1103,7 +1101,7 @@ using Khoaluan.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb90763", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1078f2cc64108d04c31992a93c6085c0cedec4bb90717", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -1121,26 +1119,16 @@ using Khoaluan.Models;
             WriteLiteral("\r\n");
         }
         #pragma warning restore 1998
-        #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider { get; private set; } = default!;
-        #nullable disable
-        #nullable restore
+        public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.IUrlHelper Url { get; private set; } = default!;
-        #nullable disable
-        #nullable restore
+        public global::Microsoft.AspNetCore.Mvc.IUrlHelper Url { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component { get; private set; } = default!;
-        #nullable disable
-        #nullable restore
+        public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; } = default!;
-        #nullable disable
-        #nullable restore
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<dynamic> Html { get; private set; } = default!;
-        #nullable disable
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<dynamic> Html { get; private set; }
     }
 }
 #pragma warning restore 1591
