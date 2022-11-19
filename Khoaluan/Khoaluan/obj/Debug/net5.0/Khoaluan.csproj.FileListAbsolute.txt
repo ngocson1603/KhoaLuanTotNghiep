@@ -2915,3 +2915,8 @@ C:\Users\Sondo\Desktop\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razo
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\SearchPro\ListSearch.cshtml.g.cs
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Khoaluan.csproj.AssemblyReference.cache
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\ref\Khoaluan.dll
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminProducts\Index.cshtml.g.cs
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Areas\Admin\Views\Search\ListProductsSearchPartial.cshtml.g.cs
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\SearchPro\ListSearch.cshtml.g.cs
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\SearchPro\ProductsByName.cshtml.g.cs
+D:\DULIEUHOCTAP\KhoaLuan\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\SearchPro\_FindProductsByName.cshtml.g.cs

@@ -24,12 +24,9 @@
                 <ul class="nk-contacts-icons">
 
                     <li>
-                        <form action="#" class="nk-form nk-form-style-1" novalidate="novalidate">
-                            <div class="input-group">
-                                <input type="text" id="keywords" name="keywords" class="form-control" placeholder="Type something...">
-                                <button type="button" id="keywordss" class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span></button>
-                            </div>
-                        </form>
+                        <a href="#" data-toggle="modal" data-target="#modalLogin">
+                            <span class="fa fa-search"></span>
+                        </a>
                     </li>
 
 
@@ -266,45 +263,3 @@
     <!-- END: Navbar -->
 
 </header>
-
-<script>
-    $(document).ready(function () {
-        $(function () {
-            $("#keywords").keydown(function (e) {
-                var strkeyword = $('#keywords').val();
-                //alert(e.keyCode);
-                if (e.keyCode == 13) {
-                    $.ajax({
-                        url: '/SearchPro/FindProducts/',
-                        datatype: "json",
-                        data: { keyword: strkeyword },
-                        async: true,
-                        success: function (results) {
-                            location.href = "/SearchPro/ListSearch";
-                        },
-                        error: function (xhr) {
-                            alert('error');
-                        }
-                    });
-                }
-            });
-
-            $("#keywordss").click(function () {
-                var strkeyword = $('#keywords').val();
-                $.ajax({
-                    url: '/SearchPro/FindProducts/',
-                    datatype: "json",
-                    data: { keyword: strkeyword },
-                    async: false,
-                    cache: false,
-                    success: function (results) {
-                        location.href = "/SearchPro/ListSearch";
-                    },
-                    error: function (xhr) {
-                        alert('error');
-                    }
-                });
-            });
-        });
-    });
-</script>

@@ -50,5 +50,9 @@ namespace Khoaluan.Repositories
                          };
             return result.ToList();
         }
+        public List<Product> GetProductByName(string name)
+        {
+            return this.GetAll().Where(t => t.Name.ToLower().Contains(name)).ToList();
+        }
     }
 }

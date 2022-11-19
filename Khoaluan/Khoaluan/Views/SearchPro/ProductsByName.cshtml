@@ -1,0 +1,25 @@
+﻿@model List<Khoaluan.Models.Product>
+@{
+    ViewData["Title"] = "ProductsByName";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row vertical-gap">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6">
+            <div class="nk-gallery-item-group">
+                <a href="#" class="nk-gallery-item">
+                    <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
+                    <img src="~/Images/@item.Image" alt="">
+                </a>
+                <div class="nk-gallery-item-description">
+                    <h4 class="nk-gallery-item-description-title h5">@item.Name</h4>
+                    <div class="nk-gallery-item-description-info">
+                        <span>@item.Price</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
