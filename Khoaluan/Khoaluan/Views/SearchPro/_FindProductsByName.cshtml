@@ -26,10 +26,17 @@
 
 <script>
     function changeHref() {
-        var url = '@Url.Action("ProductsByName", "SearchPro")';
         var value = $('#txtSearch').val();
-        var final = url + '/?name=' + value;
-        location.href = final;
+        var url1;
+        var all = "all";
+        if (value === "") {
+            url1 = '/SearchPro/ProductsByName/name=' + all + '.html';
+        }
+        else {
+            url1 = '/SearchPro/ProductsByName/name=' + value + '.html';
+        }
+        
+        location.href = url1;
     }
     function searchKeyPress(e) {
         // look for window.event in case event isn't passed in
