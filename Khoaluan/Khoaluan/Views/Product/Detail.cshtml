@@ -46,7 +46,7 @@
                     <div class="row vertical-gap">
                         <div class="col-md-6">
                             <!-- START: Product Photos -->
-                            @*<div class="nk-popup-gallery">
+                            <div class="nk-popup-gallery">
                                     <div class="nk-gallery-item-box">
                                         <a href="~/assets/images/product-6.jpg" class="nk-gallery-item" data-size="1200x554">
                                             <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
@@ -81,7 +81,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>*@
+                                </div>
                             <!-- END: Product Photos -->
                         </div>
                         <div class="col-md-6">
@@ -234,7 +234,7 @@
                             <div class="nk-gap-3"></div>
                             <!-- END: Add to Cart -->
                             <!-- START: Meta -->
-                            @*<div class="nk-product-meta">
+                            <div class="nk-product-meta">
                                     <div>
                                         <strong>Developer</strong>:
                                         @{
@@ -252,7 +252,7 @@
                                             <a href="@url">@item,</a>
                                         }
                                     </div>
-                                </div>*@
+                                </div>
 
                             <!-- END: Meta -->
                         </div>
@@ -286,7 +286,7 @@
                         <div class="tab-content">
 
                             <!-- START: Tab Description -->
-                            @*<div role="tabpanel" class="tab-pane fade show active" id="tab-description">
+                            <div role="tabpanel" class="tab-pane fade show active" id="tab-description">
                                     <div class="nk-gap"></div>
                                     <strong class="text-white">Release Date: @Model.productDetail.ReleaseDate</strong>
                                     <div class="nk-gap"></div>
@@ -320,7 +320,7 @@
                                             <div class="nk-gap"></div>
                                         </div>
                                     </div>
-                                </div>*@
+                                </div>
                             <!-- END: Tab Description -->
                             <!-- START: Tab Reviews -->
                             <div role="tabpanel" class="tab-pane fade" id="tab-reviews">
@@ -427,7 +427,7 @@
                 <div class="nk-gap-3"></div>
                 <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Related</span> Products</span></h3>
                 <div class="nk-gap"></div>
-                @*<div class="row vertical-gap">
+                <div class="row vertical-gap">
                         @foreach (var p in Model.relateGame)
                         {
                             string url = $"/Product/HomePage/{p.Id}.html";
@@ -452,7 +452,7 @@
                                 </div>
                             </div>
                         }
-                    </div>*@
+                    </div>
                 <!-- END: Related Products -->
             </div>
             <div class="col-lg-4">
@@ -470,7 +470,7 @@
                     <div class="nk-widget nk-widget-highlighted">
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Category</span> Menu</span></h4>
                         <div class="nk-widget-content">
-                            @*<p>
+                            <p>
                                 <ul class="nk-widget-categories">
                                     @if (Model.cate != null && Model.cate.Count() > 0)
                                     {
@@ -492,7 +492,7 @@
                                     }
 
                                 </ul>
-                            </p>*@
+                            </p>
                             <div style="margin-top: 1.5rem"></div>
                             <button onclick="myFunction()" id="myBtn">Read more</button>
                         </div>
@@ -541,7 +541,7 @@
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Most</span> Popular</span></h4>
                         <div class="nk-widget-content">
 
-                            @*@foreach (var item in Model.popularGame)
+                            @foreach (var item in Model.popularGame)
                                 {
                                     string url = $"/Product/HomePage/{item.Id}.html";
                                     <div class="nk-widget-post">
@@ -557,7 +557,7 @@
                                         </div>
                                         <div class="nk-product-price">€ @item.Price</div>
                                     </div>
-                                }*@
+                                }
                         </div>
                     </div>
                 </aside>
