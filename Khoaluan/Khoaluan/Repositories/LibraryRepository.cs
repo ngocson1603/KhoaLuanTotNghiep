@@ -5,6 +5,7 @@ using Khoaluan.OtpModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,7 +36,15 @@ namespace Khoaluan.Repositories
             parameter.Add("productid", productID);
             Context.Database.GetDbConnection().Execute(query, parameter);
         }
-
+        public List<ProductRefund> GetProductRefunds(int userId)
+        {
+            string query = @"exec listgameRefund @id";
+            var parameters = new DynamicParameters();
+            parameters.Add("id", userId);
+            var result=Context.Database.GetDbConnection().
+                Query<ProductRefund>(query,parameters,commandType: CommandType.StoredProcedure).ToList();
+            return result;
+        }
         public void updateLibrary(int userID, List<Cart> cart)
         {
             List<Library> libraries = new List<Library>();

@@ -1,6 +1,10 @@
 ﻿using Khoaluan.Interfaces;
 using Khoaluan.InterfacesService;
 using Khoaluan.Models;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Khoaluan.Services
 {
@@ -21,6 +25,11 @@ namespace Khoaluan.Services
             };
             post.Comments.Add(cmt);
             _discussionRepository.Update(postID, post);
+        }
+
+        public List<Discussion> listDiscussion(int id)
+        {
+            return _discussionRepository.GetAll().Where(t => t.ProductID == id).ToList();
         }
     }
 }

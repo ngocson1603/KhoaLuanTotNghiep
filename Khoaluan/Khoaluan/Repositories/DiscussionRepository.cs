@@ -1,5 +1,6 @@
 ﻿using Khoaluan.Interfaces;
 using Khoaluan.Models;
+using System.Collections.Generic;
 
 namespace Khoaluan.Repositories
 {
@@ -8,6 +9,6 @@ namespace Khoaluan.Repositories
         public DiscussionRepository(IMongoContext context):base(context)
         {
 
-        }
+        }        
     }
 }

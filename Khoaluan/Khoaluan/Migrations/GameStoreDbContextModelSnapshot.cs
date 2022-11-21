@@ -254,6 +254,12 @@ namespace Khoaluan.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DatePurchase")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
