@@ -31,13 +31,14 @@
         <!-- START: Forums List -->
         <ul class="nk-forum">
             @foreach(var item in Model){
+                string url = $"/forum-topics/{item.Id}.html";
                 <li>
-                    <div class="nk-forum-icon">
+                    <div class="nk-forum-icon" href="@url">
                         <img src="~/Images/@item.Image" alt="Witch Murder" class="rounded-circle" width="45px" height="45px">
                         @*<span class="ion-ios-game-controller-b"></span>*@
                     </div>
                     <div class="nk-forum-title">
-                        <h3><a href="forum-topics.html">@item.Name</a></h3>
+                        <h3><a href="@url">@item.Name</a></h3>
                         <div class="nk-forum-title-sub">Be seed is air female greater was multiply saying great</div>
                     </div>
                     <div class="nk-forum-count">
