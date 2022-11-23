@@ -75,6 +75,7 @@ namespace Khoaluan.Controllers
                     //    .OrderByDescending(x => x.OrderDate)
                     //    .ToList();
                     //ViewBag.DonHang = lsDonHang;
+                    ViewBag.NumberOfGames = _unitOfWork.LibraryRepository.getLibrary(khachhang.Id).Count();
                     return View(khachhang);
                 }
             }

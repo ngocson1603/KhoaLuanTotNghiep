@@ -69,10 +69,14 @@
                 <span class="fa fa-gamepad"></span>
             </div>
             <div class="nk-feature-cont text-center">
-                <h3 class="nk-feature-title">My <span class="text-main-1">Games</span></h3>
+                <h3 class="nk-feature-title">
+                    <a asp-controller="Users" asp-action="Library">
+                        My <span class="text-main-1">Games</span>
+                    </a>
+                </h3>
                 <div class="nk-gap-1"></div>
                 <div class="nk-feature-icon">
-                    <div class="nk-count h2 mb-0">47</div>
+                    <div class="nk-count h2 mb-0">@ViewBag.NumberOfGames</div>
                 </div>
             </div>
         </div>

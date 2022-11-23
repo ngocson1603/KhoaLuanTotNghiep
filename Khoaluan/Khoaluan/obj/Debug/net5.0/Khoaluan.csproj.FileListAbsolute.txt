@@ -2929,8 +2929,6 @@ C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoa
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ForumList\Create.cshtml.g.cs
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ForumList\DashboardDiscuss.cshtml.g.cs
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ForumList\Delete.cshtml.g.cs
-C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\refs\Microsoft.Extensions.Options.ConfigurationExtensions.dll
-C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\refs\Microsoft.Extensions.Options.DataAnnotations.dll
 C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\appsettings.json
 C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\Khoaluan.StaticWebAssets.xml
@@ -3056,6 +3054,8 @@ C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\K
 C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\refs\Microsoft.Extensions.Logging.EventSource.dll
 C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\refs\Microsoft.Extensions.Logging.TraceSource.dll
 C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\refs\Microsoft.Extensions.ObjectPool.dll
+C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\refs\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\refs\Microsoft.Extensions.Options.DataAnnotations.dll
 C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\refs\Microsoft.Extensions.Options.dll
 C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\refs\Microsoft.Extensions.Primitives.dll
 C:\Users\hodan\OneDrive\Máy tính\HK7\KhoaLuanTotNghiep_Son\KhoaLuanTotNghiep\Khoaluan\Khoaluan\bin\Debug\net5.0\refs\Microsoft.Extensions.WebEncoders.dll
