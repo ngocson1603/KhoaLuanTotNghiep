@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Khoaluan.Models.Discussion>
+@{
+    ViewData["Title"] = "DashboardDiscuss";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>DashboardDiscuss</h1>
+<ul class="nk-forum">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <li>
+                <div class="nk-forum-icon">
+                    <span class="ion-pin"></span>
+                </div>
+                <div class="nk-forum-title">
+                    <h3><a href="forum-single-topic.html">@item.Title</a></h3>
+                    <div class="nk-forum-title-sub">@item.Content <a href="#">nK</a> on January 17, 2018</div>
+                </div>
+                <div class="nk-forum-count">
+                    178 posts
+                </div>
+                <div class="nk-forum-activity-avatar">
+                    <a href="forum-single-topic.html">
+                        <img src="assets/images/avatar-1.jpg" alt="Hitman">
+                    </a>
+                </div>
+                <div class="nk-forum-activity">
+                    <div class="nk-forum-activity-title" title="Hitman">
+                        <a href="#">Hitman</a>
+                    </div>
+                    <div class="nk-forum-activity-date">
+                        @item.CreateDate
+                    </div>
+                </div>
+                <div>
+                    <a class="btn btn-primary btn-tone m-r-5" asp-area="" asp-controller="ForumList" asp-action="Details" asp-route-id="@item.postID">Chi tiết</a>
+                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="" asp-controller="ForumList" asp-action="Edit" asp-route-id="@item.postID">Sửa</a>
+                    <a class="btn btn-success btn-tone m-r-5" asp-area="" asp-controller="ForumList" asp-action="Delete" asp-route-id="@item.postID">Xóa</a>
+                </div>
+            </li>
+        }
+    }
+</ul>
