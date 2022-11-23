@@ -1,0 +1,133 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.bodyprofile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+
+.cardprofile {
+    position: relative;
+    width: 350px;
+    height: 190px;
+    margin-right: 15px;
+    background: linear-gradient(45deg, #fbda61, #ff5acd);
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    transition: 0.5s;
+}
+
+    .cardprofile:hover {
+        height: 450px;
+    }
+
+.imgBxprofile {
+    position: absolute;
+    left: 50%;
+    top: -50px;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.cardprofile:hover .imgBxprofile {
+    width: 250px;
+    height: 250px;
+}
+
+.imgBxprofile img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cardprofile .contentprofile {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+    .cardprofile .contentprofile .detailsprofile {
+        padding: 40px;
+        text-align: center;
+        width: 100%;
+        transition: 0.5s;
+        transform: translateY(150px);
+    }
+
+.cardprofile:hover .contentprofile .detailsprofile {
+    transform: translateY(0px);
+}
+
+.cardprofile .contentprofile .detailsprofile h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #555;
+    line-height: 1.2em;
+}
+
+    .cardprofile .contentprofile .detailsprofile h2 span {
+        font-size: 0.75em;
+        font-weight: 500;
+        opacity: 0.5;
+    }
+
+.cardprofile .contentprofile .detailsprofile .dataprofile {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.cardprofile .contentprofile .detailsprofile h3 {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.2em;
+    font-weight: 600;
+}
+
+    .cardprofile .contentprofile .detailsprofile h3 span {
+        font-size: 0.85em;
+        font-weight: 400;
+        opacity: 0.5;
+    }
+
+.cardprofile .contentprofile .detailsprofile .actionBtn {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .cardprofile .contentprofile .detailsprofile .actionBtn button {
+        padding: 10px 30px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        font-size: 1em;
+        font-weight: 500;
+        background: #ff5acd;
+        color: #fff;
+        cursor: pointer;
+    }
+
+        .cardprofile .contentprofile .detailsprofile .actionBtn button:nth-child(2) {
+            border: 1px solid #999;
+            color: #999;
+            background: #fff;
+        }

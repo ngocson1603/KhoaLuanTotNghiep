@@ -1,0 +1,59 @@
+﻿<div class="nk-modal modal fade" id="modalLogin" tabindex="0" autofocus role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="ion-android-close"></span>
+                </button>
+                <h4 class="mb-0">Search <span class="text-main-1">Product</span></h4>
+                <div class="nk-gap-1"></div>
+                <form action="#" class="nk-form text-white">
+                    <div class="row vertical-gap">
+                        <div class="col-md-9">
+                            <input type="text" value="" id="txtSearch"  onkeypress="return searchKeyPress(event);" class="form-control" placeholder="Type something...">
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#" id="btnSearch" onclick="changeHref()" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block">
+                                Go!
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeHref() {
+        var value = $('#txtSearch').val();
+        var url1;
+        var all = "all";
+        if (value === "") {
+            url1 = '/SearchPro/ProductsByName/name=' + all + '.html';
+        }
+        else {
+            url1 = '/SearchPro/ProductsByName/name=' + value + '.html';
+        }
+        
+        location.href = url1;
+    }
+    function searchKeyPress(e) {
+        // look for window.event in case event isn't passed in
+        e = e || window.event;
+        if (e.keyCode == 13) {
+            document.getElementById('btnSearch').click();
+            return false;
+        }
+        return true;
+    }
+    //$('#modalLogin').hover(function() {
+    //    this.focus();
+    //}, function() {
+    //    this.blur();
+    //}).keydown(function(e) {
+    //    if (e.keyCode == 13) {
+    //        changeHref();
+    //    }
+    //});
+</script>

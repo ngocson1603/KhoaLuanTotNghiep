@@ -1,0 +1,89 @@
+﻿@model Khoaluan.Models.Users
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Khoaluan.ModelViews.ChangePasswordViewModel changePassword = new Khoaluan.ModelViews.ChangePasswordViewModel();
+}
+
+<h3 class="nk-decorated-h-3">
+    <span>
+        <span class="text-main-1">
+            My
+        </span>
+        Account
+    </span>
+</h3>
+<div class="nk-gap-1"></div>
+<div class="row vertical-gap">
+    <div class="col-lg-4">
+        <div class="nk-feature-1">
+            <div class="nk-feature-icon">
+                <img class="fa fa-usd" alt="">
+            </div>
+            <div class="nk-feature-cont">
+                <h3 class="nk-feature-title">Balance $<span class="nk-count">@Model.Balance</span></h3>
+                <h3 class="nk-feature-title text-main-1">
+                    <a @*asp-controller="Fund" asp-action="AddFunds"*@>Add Funds</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="nk-feature-1">
+            <div class="nk-feature-icon">
+                <img class="fa fa-shopping-cart" alt="">
+            </div>
+            <div class="nk-feature-cont">
+                <h3 class="nk-feature-title">Purchases</h3>
+                <h3 class="nk-feature-title text-main-1">
+                    <a href="#">View purchase history</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="nk-feature-2">
+            <div class="nk-feature-icon">
+                <span class="fa fa-user-circle"></span>
+            </div>
+            <div class="nk-feature-cont text-center">
+                <h3 class="nk-feature-title">Account <span class="text-main-1">Information</span></h3>
+                <div class="nk-gap-1"></div>
+                Email: @Model.Gmail
+                <div class="nk-gap"></div>
+                Username: @Model.HoTen
+                <div class="nk-gap"></div>
+                Salt: @Model.Salt
+                <div class="nk-gap"></div>
+            </div>
+            <div class="nk-gap-5"></div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        @await Html.PartialAsync("ChangePassword", changePassword)
+    </div>
+    <div class="col-lg-4">
+        <div class="nk-feature-2">
+            <div class="nk-feature-icon">
+                <span class="fa fa-gamepad"></span>
+            </div>
+            <div class="nk-feature-cont text-center">
+                <h3 class="nk-feature-title">
+                    <a asp-controller="Users" asp-action="Library">
+                        My <span class="text-main-1">Games</span>
+                    </a>
+                </h3>
+                <div class="nk-gap-1"></div>
+                <div class="nk-feature-icon">
+                    <div class="nk-count h2 mb-0">@ViewBag.NumberOfGames</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="nk-gap-2"></div>
+<a asp-controller="Users" asp-action="Logout" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-danger">
+    <span class="fa fa fa-sign-out"></span>
+    Logout
+</a>

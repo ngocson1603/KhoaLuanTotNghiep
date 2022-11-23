@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Khoaluan.Models.Product>
+@{
+    ViewData["Title"] = "ForumInD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="nk-main">
+
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a href="index.html">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>Forum</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
+
+
+
+
+    <div class="container">
+
+        <!-- START: Forums List -->
+        <ul class="nk-forum">
+            @foreach(var item in Model){
+                string url = $"/forum-topics/{item.Id}.html";
+                <li>
+                    <div class="nk-forum-icon" href="@url">
+                        <img src="~/Images/@item.Image" alt="Witch Murder" class="rounded-circle" width="45px" height="45px">
+                        @*<span class="ion-ios-game-controller-b"></span>*@
+                    </div>
+                    <div class="nk-forum-title">
+                        <h3><a href="@url">@item.Name</a></h3>
+                        <div class="nk-forum-title-sub">Be seed is air female greater was multiply saying great</div>
+                    </div>
+                    <div class="nk-forum-count">
+                        1267 threads
+                    </div>
+                    <div class="nk-forum-activity-avatar">
+                        <a href="forum-single-topic.html">
+                            <img src="assets/images/avatar-1.jpg" alt="Hitman">
+                        </a>
+                    </div>
+                    <div class="nk-forum-activity">
+                        <div class="nk-forum-activity-title" title="GodLike the only game that I want to play!">
+                            <a href="forum-single-topic.html">GodLike the only game that I want to play!</a>
+                        </div>
+                        <div class="nk-forum-activity-date">
+                            @item.ReleaseDate
+                        </div>
+                    </div>
+                </li>
+            }
+            
+        </ul>
+        <!-- END: Forums List -->
+
+    </div>
+
+    <div class="nk-gap-2"></div>
+
+
+</div>
+
+
+
+
+<!-- START: Page Background -->
+
+<img class="nk-page-background-top" src="assets/images/bg-top.png" alt="">
+<img class="nk-page-background-bottom" src="assets/images/bg-bottom.png" alt="">

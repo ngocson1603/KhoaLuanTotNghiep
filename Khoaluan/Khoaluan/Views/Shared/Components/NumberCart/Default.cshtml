@@ -1,0 +1,13 @@
+﻿@model List<Khoaluan.Models.Cart>
+@if (Model != null && Model.Count() > 0)
+{
+    <span class="nk-cart-toggle">
+        <span class="fa fa-shopping-cart"></span>
+        <span class="nk-badge">@Model.Count()</span>
+    </span> }
+else
+{
+    <span class="nk-cart-toggle">
+        <span class="fa fa-shopping-cart"></span>
+        <span class="nk-badge">0</span>
+    </span>}

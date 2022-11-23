@@ -1,0 +1,30 @@
+﻿@using Khoaluan.OtpModels
+@model IEnumerable<Khoaluan.OtpModels.Productdetail>
+@{
+    ViewData["Title"] = "product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row vertical-gap">
+    @foreach (var p in Model)
+    {
+        string url = $"/Product/HomePage/{p.Id}.html";
+        <div class="col-md-6">
+            <div class="nk-product-cat">
+                <a class="nk-product-image" href="@url">
+                    <img src="~/Images/@p.Image" alt=@p.Name>
+                </a>
+                <div class="nk-product-cont">
+                    <h3 class="nk-product-title h5"><a href="@url">@p.Name</a></h3>
+                    <div class="nk-gap-1"></div>
+                    <div class="nk-product-rating">
+                        @for (int i = 1; i <= p.Id / 10; i++)
+                        {
+                            <i class="fa fa-star"></i>}
+
+                    </div>
+                    <div class="nk-gap-1"></div>
+                    <div class="nk-product-price">€ @p.Price</div>
+                </div>
+            </div>
+        </div>}
+</div>

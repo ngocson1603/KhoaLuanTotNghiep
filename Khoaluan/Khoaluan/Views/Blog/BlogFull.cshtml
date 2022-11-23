@@ -1,0 +1,84 @@
+﻿@*@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<DuAnGame.Models.TinDang>
+@{
+    ViewData["Title"] = "BlogFull";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="nk-main">
+
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a href="index.html">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a href="#">Blog</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>Blog FullWidth</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
+
+
+
+
+    <div class="container">
+        <!-- START: Posts FullWidth -->
+        <div class="nk-blog-fullwidth">
+            @if (Model != null && Model.Count() > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                string url ="";
+                    <!-- START: Post -->
+                                        <div class="nk-blog-post">
+                                            <a href="@url" class="nk-post-img">
+                                                <img src="~/assets/images/@item.Thumb" alt="Smell magic in the air. Or maybe barbecue">
+                                                <span class="nk-post-comments-count">4</span>
+                                            </a>
+                                            <div class="nk-gap-2"></div>
+                                            <div class="row vertical-gap">
+                                                <div class="col-md-8 col-lg-9">
+                                                    <h2 class="nk-post-title h4"><a href="blog-article.html">@item.Title</a></h2>
+                                                    <div class="nk-gap"></div>
+                                                    <div class="nk-post-text">
+                                                        <p>@item.Contents</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-lg-3">
+                                                    <div class="nk-post-by">
+                                                        <img src="~/assets/images/avatar-1.jpg" alt="Hitman" class="rounded-circle" width="60">
+                                                        by <a href="#">Hitman</a>
+
+                                                        <br> in Sep 18, 2018
+                                                        <br> 4 comments
+                                                    </div>
+                                                    <div class="nk-gap-3"></div>
+                                                    <div class="text-right">
+                                                        <a href="blog-article.html" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Xem them</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- END: Post -->
+                                                        }
+            }
+
+            <!-- START: Post -->
+            <!-- END: Pagination -->
+        </div>
+        <!-- END: Posts FullWidth -->
+    </div>
+
+
+</div>
+*@
