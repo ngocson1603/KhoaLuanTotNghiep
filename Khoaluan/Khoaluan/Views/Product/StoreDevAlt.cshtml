@@ -1,0 +1,259 @@
+﻿@using PagedList.Core.Mvc
+@model Khoaluan.OtpModels.DetailCate
+@{
+    ViewData["Title"] = "DevAlt" + ViewBag.CurrentPage;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int PageCurrent = ViewBag.CurrentPage;
+    int PageNext = PageCurrent + 1;
+}
+
+<div class="nk-main">
+
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a href="index.html">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a href="store.html">Store</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>Action Games</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
+
+
+
+
+    <div class="container">
+        <!-- START: Categories -->
+        <div class="row vertical-gap">
+            <div class="col-lg-4">
+                <div class="nk-feature-1">
+                    <div class="nk-feature-icon">
+                        <img src="~/assets/images/icon-mouse.png" alt="">
+                    </div>
+                    <div class="nk-feature-cont">
+                        <h3 class="nk-feature-title"><a href="#">PC</a></h3>
+                        <h3 class="nk-feature-title text-main-1"><a href="#">View Games</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="nk-feature-1">
+                    <div class="nk-feature-icon">
+                        <img src="~/assets/images/icon-gamepad.png" alt="">
+                    </div>
+                    <div class="nk-feature-cont">
+                        <h3 class="nk-feature-title"><a href="#">PS4</a></h3>
+                        <h3 class="nk-feature-title text-main-1"><a href="#">View Games</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="nk-feature-1">
+                    <div class="nk-feature-icon">
+                        <img src="~/assets/images/icon-gamepad-2.png" alt="">
+                    </div>
+                    <div class="nk-feature-cont">
+                        <h3 class="nk-feature-title"><a href="#">Xbox</a></h3>
+                        <h3 class="nk-feature-title text-main-1"><a href="#">View Games</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: Categories -->
+        <!-- START: Products Filter -->
+        <div class="nk-gap-2"></div>
+        <div class="row vertical-gap">
+            <div class="col-lg-8">
+                <div class="row vertical-gap">
+                    <div class="col-md-4">
+                        <select class="form-control">
+                            <option value="" disabled selected>Select Platform</option>
+                            <option value="ps4">PS4</option>
+                            <option value="xbox">Xbox 1</option>
+                            <option value="pc">PC</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="nk-input-slider-inline">
+                            <div class="nk-input-slider">
+                                <div class="nk-input-slider-content text-white">
+                                    PRICE:
+                                    <strong class="text-main-1">€ <span class="nk-input-slider-value-0"></span></strong>
+                                    -
+                                    <strong class="text-main-1">€ <span class="nk-input-slider-value-1"></span></strong>
+                                </div>
+                                <div class="nk-input-slider-input">
+                                    <input type="text"
+                                           name="price-filter"
+                                           data-slider-min="0"
+                                           data-slider-max="1800"
+                                           data-slider-step="1"
+                                           data-slider-value="[200, 1200]"
+                                           data-slider-tooltip="hide">
+                                </div>
+                            </div>
+                            <div>
+                                <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white">Apply</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <form action="#" class="nk-form" novalidate="novalidate">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Type something...">
+                        <button class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END: Products Filter -->
+
+        <div class="nk-gap-2"></div>
+        <!-- START: Products -->
+        <div class="row vertical-gap">
+            @if (Model != null && Model.productwithCate.Count() > 0)
+            {
+                foreach (var item in Model.productwithCate)
+                {
+                    string url = $"/Product/HomePage/{item.Id}.html";
+                    <div class="col-lg-6">
+                        <div class="nk-product-cat-2">
+                            <a class="nk-product-image" href="@url">
+                                <img src="~/Images/@Url.Content(item.Image)" alt="So saying he unbuckled">
+                            </a>
+                            <div class="nk-product-cont">
+                                <h3 class="nk-product-title h5"><a href="@url">@item.Name</a></h3>
+                                <div class="nk-gap-1"></div>
+                                <div class="nk-product-rating" data-rating="4"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i></div>
+                                <div class="nk-gap-1"></div>
+                                <div class="line-clamp">
+                                    @item.Overview
+                                </div>
+                                <div class="nk-gap-2"></div>
+                                <div class="nk-product-price">€ 23.00</div>
+                                <div class="nk-gap-1"></div>
+                                <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+        <!-- END: Products -->
+        <!-- START: Pagination -->
+        <div class="nk-gap-3"></div>
+
+        <div class="nk-pagination nk-pagination-center">
+
+            @if (PageCurrent > 1)
+            {
+                string url = $"/Product/HomePage/Dev/{@ViewBag.id1}.html";
+                <a href="@url?page=@(PageCurrent - 1)" class="nk-pagination-prev">
+                    <span class="ion-ios-arrow-back"></span>
+                </a>
+            }
+            else
+            {
+                string url1 = $"/Product/HomePage/Dev/{@ViewBag.id1}.html";
+                <a href="@url1" class="nk-pagination-prev">
+                    <span class="ion-ios-arrow-back"></span>
+                </a>
+            }
+
+            @{
+                string url2 = $"/Product/HomePage/Dev/{@ViewBag.id1}.html";
+                @if (@PageCurrent < ViewBag.maxPage)
+                {
+
+                    <nav>
+                        <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                        <a href="@url2?page=@PageNext">@PageNext</a>
+                    </nav>
+                    <a class="nk-pagination-next" href="@url2?page=@PageNext">
+                        <span class="ion-ios-arrow-forward"></span>
+                    </a>
+                }
+                else
+                {
+                    <nav>
+                        <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                        <a hidden href="@url2?page=@PageNext">@PageNext</a>
+                    </nav>
+                    <a class="nk-pagination-next">
+                        <span disabled class="ion-ios-arrow-forward"></span>
+                    </a>
+                }
+            }
+        </div>
+
+
+        <!-- END: Pagination -->
+        <!-- START: Most Popular -->
+        <div class="nk-gap-3"></div>
+        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Most</span> Popular</span></h3>
+        <div class="nk-gap"></div>
+        <div class="row vertical-gap">
+            @if (Model != null && Model.PopularGame1.Count() > 0)
+            {
+                foreach (var item in Model.PopularGame1)
+                {
+                    string url = $"/Product/HomePage/{item.Id}.html";
+                    <div class="col-lg-4 col-md-6">
+                        <div class="nk-product-cat">
+                            <a class="nk-product-image" href="@url">
+                                <img src="~/Images/@Url.Content(item.Image)" alt="She gave my mother">
+                            </a>
+                            <div class="nk-product-cont">
+                                <h3 class="nk-product-title h5"><a href="@url">@item.Name</a></h3>
+                                <div class="nk-gap-1"></div>
+                                <div class="nk-product-rating" data-rating="3">
+                                    @for (int i = 1; i <= item.Id / 20; i++)
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+
+                                </div>
+                                <div class="nk-gap-1"></div>
+                                <div class="nk-product-price">€ @item.Price</div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+        <!-- END: Most Popular -->
+    </div>
+</div>
+
+<!-- START: Page Background -->
+
+<img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
+<img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
+@section Styles{
+    <style>
+        .line-clamp {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+}
+}

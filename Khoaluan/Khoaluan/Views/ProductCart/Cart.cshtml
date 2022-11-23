@@ -1,0 +1,263 @@
+﻿@using Khoaluan.OtpModels
+@model List<Khoaluan.Models.Cart>
+@{
+    List<LibraryDetail> DanhSachDonHang = ViewBag.DonHang;
+}
+<div class="nk-main">
+
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a href="index.html">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a href="store.html">Store</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>Cart</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
+
+
+
+
+    <div class="container">
+        <div class="nk-store nk-store-cart">
+            <form asp-controller="ProductCart" asp-action="ThanhToan" method="post">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    <div class="table-responsive">
+
+                        <!-- START: Products in Cart -->
+
+                        <table class="table nk-store-cart-products">
+
+                            <tbody>
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+
+                                        string url = $"/Product/HomePage/{item.product.Id}.html";
+                                        <tr>
+                                            <td class="nk-product-cart-thumb">
+                                                <a href="@url" class="nk-image-box-1 nk-post-image">
+                                                    <img src="~/Images/@Url.Content(item.product.Image)" alt="@item.product.Name" width="115">
+                                                </a>
+                                            </td>
+                                            <td class="nk-product-cart-title">
+                                                <h5 class="h6">Product:</h5>
+                                                <div class="nk-gap-1"></div>
+
+                                                <h2 class="nk-post-title h4">
+                                                    <a href="@url">@item.product.Name</a>
+                                                </h2>
+                                                @if (DanhSachDonHang != null && DanhSachDonHang.Any(t => t.UserID == int.Parse(ViewBag.GetId) && t.Id == item.product.Id))
+                                                {
+                                                    ViewBag.count = 1;
+
+                                                    <h2 class="nk-post-title h4">
+                                                        <a href="#">In library</a>
+                                                    </h2>
+                                                }
+                                                else
+                                                {
+                                                }
+                                            </td>
+
+                                            <td class="nk-product-cart-price">
+                                                <h5 class="h6">Price:</h5>
+                                                <div class="nk-gap-1"></div>
+
+                                                <strong>€ @item.product.Price</strong>
+                                            </td>
+                                            <td class="nk-product-cart-quantity">
+                                                <h5 class="h6">Quantity:</h5>
+                                                <div class="nk-gap-1"></div>
+
+                                                <div class="nk-form">
+                                                    <input type="number" class="form-control" value="1" min="1" max="1">
+                                                </div>
+                                            </td>
+                                            <td class="nk-product-cart-total">
+                                                <h5 class="h6">Total:</h5>
+                                                <div class="nk-gap-1"></div>
+
+                                                <strong>€ @item.product.Price</strong>
+                                            </td>
+                                            <td class="nk-product-cart-remove"><a href="#" class="removecart" data-mahh="@item.product.Id"><span class="ion-android-close"></span></a></td>
+                                        </tr>
+
+                                    }
+                                }
+
+
+
+                            </tbody>
+
+
+                        </table>
+                        <!-- END: Products in Cart -->
+
+                    </div>
+                    <div class="nk-gap-1"></div>
+                    <a class="nk-btn nk-btn-rounded nk-btn-color-white float-right" href="#">Update Cart</a>
+
+                    <div class="clearfix"></div>
+                    <div class="nk-gap-2"></div>
+                    <div class="row vertical-gap">
+                        <div class="col-md-6">
+
+                            <!-- START: Calculate Shipping -->
+                            @*<h3 class="nk-title h4">Calculate Shipping</h3>
+                                <form action="#" class="nk-form">
+                                    <label for="country-sel">Country <span class="text-main-1">*</span>:</label>
+                                    <select name="country" class="form-control required" id="country-sel">
+                                        <option value="">Select a country...</option>
+                                    </select>
+
+                                    <div class="nk-gap-1"></div>
+                                    <div class="row vertical-gap">
+                                        <div class="col-sm-6">
+                                            <label for="state">State / Country <span class="text-main-1">*</span>:</label>
+                                            <input type="text" class="form-control required" name="state" id="state">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="zip">Postcode / ZIP <span class="text-main-1">*</span>:</label>
+                                            <input type="tel" class="form-control required" name="zip" id="zip">
+                                        </div>
+                                    </div>
+
+                                    <div class="nk-gap-1"></div>
+                                    <a class="nk-btn nk-btn-rounded nk-btn-color-white float-right" href="#">Update Totals</a>
+                                </form>*@
+                            <!-- END: Calculate Shipping -->
+
+                        </div>
+                        <div class="col-md-6">
+                            <!-- START: Cart Totals -->
+                            <h3 class="nk-title h4">Cart Totals</h3>
+                            <table class="nk-table nk-table-sm">
+                                <tbody>
+                                    <tr class="nk-store-cart-totals-subtotal">
+                                        <td>
+                                            Subtotal
+                                        </td>
+                                        <td>
+                                            @Model.Sum(x => x.product.Price).ToString("#,##0")
+                                        </td>
+                                    </tr>
+                                    <tr class="nk-store-cart-totals-shipping">
+                                        <td>
+                                            Shipping
+                                        </td>
+                                        <td>
+                                            Free Shipping
+                                        </td>
+                                    </tr>
+                                    <tr class="nk-store-cart-totals-total">
+                                        <td>
+                                            Total
+                                        </td>
+                                        <td>
+                                            € 52.00
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- END: Cart Totals -->
+                        </div>
+                    </div>
+
+                    <div class="nk-gap-2"></div>
+                    if (ViewBag.count == 1)
+                    {
+                        <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" asp-area="" asp-controller="Checkout" asp-action="Check">Có sản phẩm đã mua, vui lòng xóa để thanh toán</a>
+                    }
+                    else
+                    {
+
+                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" type="submit">Proceed to Checkout</button>
+
+                    }
+                    <div class="clearfix"></div>
+                }
+                else
+                {
+                    <p>Chưa có hàng hóa trong giỏ hàng.Bạn hãy tích cực mua sắm đi nào</p>
+                }
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<!-- START: Page Background -->
+
+<img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
+<img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
+
+<!-- END: Page Background -->
+@section Scripts{
+    <script>
+        $(function () {
+            function loadHeaderCart() {
+                $('#miniCart').load("/AjaxContent/HeaderCart");
+                $('#numberCart').load("/AjaxContent/NumberCart");
+            }
+            $(".removecart").click(function () {
+                var productid = $(this).attr("data-mahh");
+                $.ajax({
+                    url: "api/cart/remove",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { productID: productid },
+                    success: function (result) {
+                        if (result.success) {
+                            loadHeaderCart();//Reload lai gio hang
+                            location.reload();
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Remove Cart Error !")
+                    }
+                });
+            });
+            $(".cartItem").click(function () {
+                var productid = $(this).attr("data-mahh");
+                var soluong = parseInt($(this).val());
+                $.ajax({
+                    url: "api/cart/update",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        productID: productid,
+                        amount: soluong
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            loadHeaderCart();//Reload lai gio hang
+                            window.location = 'cart.html';
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Cập nhật Cart Error !")
+                    }
+                });
+            });
+        });
+    </script>
+}

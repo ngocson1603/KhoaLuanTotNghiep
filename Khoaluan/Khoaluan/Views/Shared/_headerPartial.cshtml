@@ -1,0 +1,274 @@
+﻿<header class="nk-header nk-header-opaque">
+
+
+
+    <!-- START: Top Contacts -->
+    <div class="nk-contacts-top">
+        <div class="container">
+            <div class="nk-contacts-left">
+                <ul class="nk-social-links">
+                    <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
+                    <li><a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a></li>
+                    <li><a class="nk-social-steam" href="#"><span class="fab fa-steam"></span></a></li>
+                    <li><a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a></li>
+                    <li><a class="nk-social-google-plus" href="#"><span class="fab fa-google-plus"></span></a></li>
+                    <li>
+                        <a class="nk-social-twitter" href="#" target="_blank">
+                            <span class="fab fa-twitter"></span>
+                        </a>
+                    </li>
+                    <li><a class="nk-social-pinterest" href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                </ul>
+            </div>
+            <div class="nk-contacts-right">
+                <ul class="nk-contacts-icons">
+
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#modalLogin">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+                        {
+                            <a href="/tai-khoan-cua-toi.html">
+                                <span class="fa fa-user"></span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/dang-nhap.html">
+                                <span class="fa fa-user"></span>
+                            </a>
+                        }
+                        @*{
+            <a href="/tai-khoan-cua-toi.html">
+                <span class="fa fa-user"></span>
+            </a>
+        }
+        else
+        {
+            <a href="#" data-toggle="modal" data-target="#modalLogin">
+                <span class="fa fa-user"></span>
+            </a>
+        }*@
+                    </li>
+
+
+                    <li id="numberCart" xml:id="miniCart">
+                        @await Component.InvokeAsync("NumberCart")
+                        @await Component.InvokeAsync("HeaderCart")
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- END: Top Contacts -->
+    <!--
+        START: Navbar
+
+        Additional Classes:
+            .nk-navbar-sticky
+            .nk-navbar-transparent
+            .nk-navbar-autohide
+    -->
+    <nav class="nk-navbar nk-navbar-top nk-navbar-sticky nk-navbar-autohide">
+        <div class="container">
+            <div class="nk-nav-table">
+
+                <a href="index.html" class="nk-nav-logo">
+                    <img src="~/assets/images/logo.png" alt="GoodGames" width="199">
+                </a>
+
+                <ul class="nk-nav nk-nav-right d-none d-lg-table-cell" data-nav-mobile="#nk-nav-mobile">
+
+                    <li class=" nk-drop-item">
+                        <a href="elements.html">
+                            Features
+
+                        </a>
+                        <ul class="dropdown">
+
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Support">Support</a>
+                            </li>
+                            <li class=" nk-drop-item">
+                                <a href="/forum.html">
+                                    Forum
+
+                                </a>
+                                <ul class="dropdown">
+
+                                    <li>
+                                        <a href="/forum.html">
+                                            Forum
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="forum-topics.html">
+                                            Topics
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="forum-single-topic.html">
+                                            Single Topic
+
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="mydiscuss.html">
+                                    Widgets
+
+                                </a>
+                            </li>
+                            <li>
+                                <a href="coming-soon.html">
+                                    Coming Soon
+
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Go to admin</a>
+                            </li>
+                            <li>
+                                <a href="offline.html">
+                                    Offline
+
+                                </a>
+                            </li>
+                            <li>
+                                <a href="404.html">
+                                    404
+
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class=" nk-drop-item">
+                        <a href="blog-list.html">
+                            Blog
+
+                        </a>
+                        <ul class="dropdown">
+
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="News">News</a>
+                            </li>
+                            <li class=" nk-drop-item">
+                                <a href="blog-grid.html">
+                                    Blog With Sidebar
+
+                                </a>
+                                <ul class="dropdown">
+
+                                    <li>
+                                        <a href="blog-grid.html">
+                                            Blog Grid
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="blog-list.html">
+                                            Blog List
+
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="Blog" asp-action="BlogFull">BlogFull</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="BlogArticle">BlogArticle</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-link" asp-area="" asp-controller="StoreProduct" asp-action="Galery">Galery</a>
+                    </li>
+                    <li class=" nk-drop-item">
+                        <a href="tournaments.html">
+                            Tournaments
+
+                        </a>
+                        <ul class="dropdown">
+
+                            <li>
+                                <a href="tournaments.html">
+                                    Tournament
+
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tournaments-teams.html">
+                                    Teams
+
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tournaments-teammate.html">
+                                    Teammate
+
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class=" nk-drop-item">
+                        <a class="nav-link" asp-area="" asp-controller="Product" asp-action="HomePage">Store</a>
+                        <ul class="dropdown">
+
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="Product" asp-action="_ListProduct">Store</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="StoreProduct" asp-action="ProductStore">Product</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="StoreProduct" asp-action="StoreCatalog">Catalog</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="StoreProduct" asp-action="StoreCatalogAlt">CatalogAlt</a>
+                            </li>
+                            <li>
+                                <a href="store-checkout.html">
+                                    Checkout
+
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="ProductCart" asp-action="Cart">Cart</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-link" asp-area="" asp-controller="About" asp-action="AboutUs">About Us</a>
+                    </li>
+                </ul>
+
+                <ul class="nk-nav nk-nav-right nk-nav-icons">
+
+                    <li class="single-icon d-lg-none">
+                        <a href="#" class="no-link-effect" data-nav-toggle="#nk-nav-mobile">
+                            <span class="nk-icon-burger">
+                                <span class="nk-t-1"></span>
+                                <span class="nk-t-2"></span>
+                                <span class="nk-t-3"></span>
+                            </span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END: Navbar -->
+
+</header>
