@@ -301,5 +301,6 @@ namespace Khoaluan.Controllers
             }
             return RedirectToAction("Login");
         }
+        
     }
 }

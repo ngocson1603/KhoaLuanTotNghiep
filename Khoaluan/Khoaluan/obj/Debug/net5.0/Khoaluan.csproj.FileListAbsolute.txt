@@ -2927,3 +2927,5 @@ C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoa
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ForumList\ForumList.cshtml.g.cs
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ForumList\_CreatePartialView.cshtml.g.cs
 C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ForumList\Create.cshtml.g.cs
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ForumList\DashboardDiscuss.cshtml.g.cs
+C:\Users\Admins\OneDrive\Máy tính\khoaluantest\KhoaLuanTotNghiep\Khoaluan\Khoaluan\obj\Debug\net5.0\Razor\Views\ForumList\Delete.cshtml.g.cs
