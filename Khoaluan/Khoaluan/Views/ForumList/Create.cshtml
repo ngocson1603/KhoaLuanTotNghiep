@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Khoaluan.Models.Discussion>
+
+    @{
+    ViewData["Title"] = "ForumList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Khoaluan.ModelViews.DiscussionViewModel discussion = new Khoaluan.ModelViews.DiscussionViewModel();
+    }
+
+    <div class="nk-main">
+
+        <!-- START: Breadcrumbs -->
+        <div class="nk-gap-1"></div>
+        <div class="container">
+            <ul class="nk-breadcrumbs">
+
+
+                <li><a href="index.html">Home</a></li>
+
+
+                <li><span class="fa fa-angle-right"></span></li>
+
+                <li><a href="forum.html">Forum</a></li>
+
+
+                <li><span class="fa fa-angle-right"></span></li>
+
+                <li><span>Main Game Discussions</span></li>
+
+            </ul>
+        </div>
+        <div class="nk-gap-1"></div>
+        <!-- END: Breadcrumbs -->
+
+
+
+
+
+        <div class="container">
+
+            <!-- START: Pagination -->
+            <div class="row justify-content-end">
+                <a class="btn btn-primary" asp-area="" asp-controller="ForumList" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm mới</span></a>
+                <div class="col-md-3 text-right">
+                    <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalLogin1">New Topic</a>
+                    @await Html.PartialAsync("~/Views/ForumList/_CreatePartialView.cshtml", discussion)
+                </div>
+
+            </div>
+            <!-- END: Pagination -->
+
+            <div class="nk-gap-2"></div>
+
+            <!-- START: Forums List -->
+            <ul class="nk-forum">
+                @if (Model != null)
+                {
+                foreach (var item in Model)
+                {
+                <li>
+                    <div class="nk-forum-icon">
+                        <span class="ion-pin"></span>
+                    </div>
+                    <div class="nk-forum-title">
+                        <h3><a href="forum-single-topic.html">@item.Title</a></h3>
+                        <div class="nk-forum-title-sub">Started by <a href="#">nK</a> on January 17, 2018</div>
+                    </div>
+                    <div class="nk-forum-count">
+                        178 posts
+                    </div>
+                    <div class="nk-forum-activity-avatar">
+                        <a href="forum-single-topic.html">
+                            <img src="assets/images/avatar-1.jpg" alt="Hitman">
+                        </a>
+                    </div>
+                    <div class="nk-forum-activity">
+                        <div class="nk-forum-activity-title" title="Hitman">
+                            <a href="#">Hitman</a>
+                        </div>
+                        <div class="nk-forum-activity-date">
+                            September 11, 2018
+                        </div>
+                    </div>
+                </li>
+                }
+                }
+            </ul>
+            <!-- END: Forums List -->
+
+            <div class="nk-gap-2"></div>
+
+            <!-- START: Pagination -->
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="nk-pagination nk-pagination-left">
+                        <a href="#" class="nk-pagination-prev">
+                            <span class="ion-ios-arrow-back"></span>
+                        </a>
+                        <nav>
+                            <a class="nk-pagination-current" href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <span>...</span>
+                            <a href="#">14</a>
+                        </nav>
+                        <a href="#" class="nk-pagination-next">
+                            <span class="ion-ios-arrow-forward"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Pagination -->
+        </div>
+
+        <div class="nk-gap-2"></div>
+    </div>
+
+
+
+
+    <!-- START: Page Background -->
+
+    <img class="nk-page-background-top" src="assets/images/bg-top.png" alt="">
+    <img class="nk-page-background-bottom" src="assets/images/bg-bottom.png" alt="">
+
+    <!-- END: Page Background -->
