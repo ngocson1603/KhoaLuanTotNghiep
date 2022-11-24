@@ -15,5 +15,7 @@ namespace Khoaluan.ModelViews
         [Required(ErrorMessage = ("Vui lòng nhập Content"))]
         [Display(Name = "Địa chỉ Content")]
         public string Content { get; set; }
+        public int ProductID { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

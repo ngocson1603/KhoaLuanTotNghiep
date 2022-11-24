@@ -79,24 +79,47 @@ namespace Khoaluan.Controllers
         }
 
         // GET: ForumListController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var discuss = _unitOfWork.DiscussionRepository.GetById(id);
+            if (discuss == null)
+            {
+                return NotFound();
+            }
+
+            return View(discuss);
         }
 
         // POST: ForumListController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(string id, DiscussionViewModel discussion)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                string url = "/mydiscuss.html";
+                var taikhoanID = HttpContext.Session.GetString("CustomerId");
+                Discussion discussion1 = new Discussion
+                {
+                    postID = id,
+                    Title = discussion.Title,
+                    Content = discussion.Content,
+                    CreateDate = discussion.CreateDate,
+                    ProductID = discussion.ProductID,
+                    Name = User.Identity.Name,
+                    UserName = int.Parse(taikhoanID),
+                };
+                _unitOfWork.DiscussionRepository.Update(id,discussion1);
+                //_unitOfWork.SaveChange();
+                _notyfService.Success("Sửa thành công");
+                return Redirect(url);/*RedirectToRoute(ForumList(idpro));*/
             }
-            catch
-            {
-                return View();
-            }
+            return View(discussion);
         }
 
         // GET: ForumListController/Delete/5
