@@ -57,12 +57,14 @@
             {
                 foreach (var item in Model)
                 {
+                    string postUrl = $"/forum-single-topic/{item.postID}.html";
+
                     <li>
                         <div class="nk-forum-icon">
                             <span class="ion-pin"></span>
                         </div>
                         <div class="nk-forum-title">
-                            <h3><a href="forum-single-topic.html">@item.Title</a></h3>
+                            <h3><a href="@postUrl">@item.Title</a></h3>
                             <div class="nk-forum-title-sub">Started by <a href="#">nK</a> on January 17, 2018</div>
                         </div>
                         <div class="nk-forum-count">

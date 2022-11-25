@@ -5,7 +5,7 @@ namespace Khoaluan.InterfacesService
 {
     public interface IDiscussionService
     {
-        void comment(string postID, string userName, string message);
+        int comment(string postID, string userName, string message);
         List<Discussion> listDiscussion(int id);
     }
 }

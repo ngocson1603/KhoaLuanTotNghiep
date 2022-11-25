@@ -15,7 +15,7 @@ namespace Khoaluan.Services
         {
             _discussionRepository = discussionRepository;
         }
-        public void comment(string postID, string userName, string message)
+        public int comment(string postID, string userName, string message)
         {
             var post = _discussionRepository.GetById(postID);
             Comment cmt = new Comment()
@@ -23,8 +23,16 @@ namespace Khoaluan.Services
                 UserName = userName,
                 Message = message,
             };
+
+            if (post.Comments == null)
+            {
+                post.Comments = new List<Comment>();
+            }   
+            
             post.Comments.Add(cmt);
             _discussionRepository.Update(postID, post);
+
+            return 1;
         }
 
         public List<Discussion> listDiscussion(int id)

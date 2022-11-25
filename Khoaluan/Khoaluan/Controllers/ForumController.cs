@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Khoaluan.InterfacesService;
+using Khoaluan.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,10 +15,11 @@ namespace Khoaluan.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDiscussionService _discussionService;
         public INotyfService _notyfService { get; }
-        public ForumController(IUnitOfWork unitOfWork, INotyfService notyfService)
+        public ForumController(IUnitOfWork unitOfWork, INotyfService notyfService, IDiscussionService discussionService)
         {
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
+            _discussionService = discussionService;
         }
         ////[Route("/Forum/{id}.html", Name = ("Forum"))]
         //[Route("forum.html", Name = ("Forum"))]
@@ -106,10 +108,20 @@ namespace Khoaluan.Controllers
                 return View();
             }
         }
-        [Route("forum-single-topic.html", Name = ("DetailForum"))]
-        public IActionResult DetailForum()
+
+        [Route("forum-single-topic/{id}.html", Name = ("DetailForum"))]
+        public IActionResult DetailForum(string id)
         {
-            return View();
+            Discussion model = _unitOfWork.DiscussionRepository.GetById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult PostComment(string postId, string message)
+        {
+            int kq = _discussionService.comment(postId, "Test user", message);
+            return RedirectToAction("DetailForum", new { id = postId });
         }
     }
 }
