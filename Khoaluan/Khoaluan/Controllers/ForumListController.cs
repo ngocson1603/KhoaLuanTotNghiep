@@ -169,21 +169,40 @@ namespace Khoaluan.Controllers
             var list = _unitOfWork.DiscussionRepository.GetAll().Where(t => t.ProductID == id);
             return View(list);
         }
+        public static string idpost;
         [Route("forum-single-topic/{id}.html", Name = ("DetailForum"))]
         public IActionResult DetailForum(string id)
         {
+            idpost = id;
             Discussion model = _unitOfWork.DiscussionRepository.GetById(id);
-
             return View(model);
         }
 
+        //[HttpPost]
+        //public IActionResult PostComment(string postId, string message)
+        //{
+        //    _discussionService.comment(postId, "Test user", message);
+        //    return RedirectToAction("DetailForum", new { id = postId });
+        //}
         [HttpPost]
-        public IActionResult PostComment(string postId, string message)
+        [ValidateAntiForgeryToken]
+        public IActionResult Comment(CommentViewModel comment)
         {
-            _discussionService.comment(postId, "Test user", message);
-            return RedirectToAction("DetailForum", new { id = postId });
+            string name = User.Identity.Name;
+            string comm = comment.Message;
+            string url = "/forum-single-topic/" + idpost + ".html";
+            try
+            {
+                _discussionService.comment(idpost, name, comm);
+                _notyfService.Success("Tạo mới thành công");
+                return Redirect(url);
+            }
+            catch
+            {
+                _notyfService.Success("Tạo mới không thành công");
+                return Redirect(url);
+            }
         }
-
         [Route("Forum.html", Name = ("Forum"))]
         public IActionResult ForumInD()
         {
