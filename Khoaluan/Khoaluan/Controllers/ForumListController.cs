@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Khoaluan.Interfaces;
+using Khoaluan.InterfacesService;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
 using Microsoft.AspNetCore.Http;
@@ -15,10 +16,12 @@ namespace Khoaluan.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         public INotyfService _notyfService { get; }
-        public ForumListController(IUnitOfWork unitOfWork, INotyfService notyfService)
+        public IDiscussionService _discussionService;
+        public ForumListController(IUnitOfWork unitOfWork, INotyfService notyfService, IDiscussionService discussionService)
         {
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
+            _discussionService = discussionService;
         }
         // GET: ForumListController
         public ActionResult Index()
@@ -166,11 +169,21 @@ namespace Khoaluan.Controllers
             var list = _unitOfWork.DiscussionRepository.GetAll().Where(t => t.ProductID == id);
             return View(list);
         }
-        [Route("forum-single-topic.html", Name = ("DetailForum"))]
-        public IActionResult DetailForum()
+        [Route("forum-single-topic/{id}.html", Name = ("DetailForum"))]
+        public IActionResult DetailForum(string id)
         {
-            return View();
+            Discussion model = _unitOfWork.DiscussionRepository.GetById(id);
+
+            return View(model);
         }
+
+        [HttpPost]
+        public IActionResult PostComment(string postId, string message)
+        {
+            _discussionService.comment(postId, "Test user", message);
+            return RedirectToAction("DetailForum", new { id = postId });
+        }
+
         [Route("Forum.html", Name = ("Forum"))]
         public IActionResult ForumInD()
         {

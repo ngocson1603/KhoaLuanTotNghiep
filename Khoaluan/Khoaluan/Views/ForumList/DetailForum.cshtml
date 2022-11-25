@@ -148,7 +148,7 @@
         <div id="forum-reply"></div>
         <div class="nk-gap-4"></div>
         <!-- START: Reply -->
-        <form method="post" action="@Url.Action("PostComment","Forum", new { postId = Model.postID, message = "T" })" novalidate>
+        <form method="post" action="@Url.Action("PostComment","ForumList", new { postId = Model.postID, message = "T" })" novalidate>
             <h3 class="h4">Reply</h3>
             <div class="nk-gap-1"></div>
             <textarea name="reply" cols="30" rows="10" class="nk-summernote form-control"></textarea>
