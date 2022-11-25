@@ -31,8 +31,6 @@ namespace Khoaluan.Services
             
             post.Comments.Add(cmt);
             _discussionRepository.Update(postID, post);
-
-            return 1;
         }
 
         public List<Discussion> listDiscussion(int id)
