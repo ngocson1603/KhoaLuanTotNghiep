@@ -1,0 +1,174 @@
+﻿@model Khoaluan.Models.Discussion
+@{
+    ViewData["Title"] = "DetailForum";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="nk-main">
+
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a href="index.html">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a href="forum.html">Forum</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a href="forum-topics.html">Main Game Discussions</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>@Model.Title</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
+
+
+
+
+
+    <div class="container">
+
+        <!-- START: Pagination -->
+        <div class="row justify-content-end">
+            <div class="col-md-3 text-right">
+                <a href="#forum-reply" class="nk-btn nk-btn-rounded nk-btn-color-white nk-anchor">Reply</a>
+            </div>
+        </div>
+        <!-- END: Pagination -->
+
+        <div class="nk-gap-2"></div>
+
+        <!-- START: Forums List -->
+        <ul class="nk-forum nk-forum-topic">
+            <li>
+                <div class="nk-forum-topic-author">
+                    <a href="#">
+                        <img src="assets/images/avatar-1.jpg" alt="Hitman">
+                    </a>
+                    <div class="nk-forum-topic-author-name" title="Hitman">
+                        <a href="#">@Model.Name</a>
+                    </div>
+                    <div class="nk-forum-topic-author-role">Keymaster</div>
+                    <div class="nk-forum-topic-author-since">
+                        Member since January 13, 2018
+                    </div>
+                </div>
+                <div class="nk-forum-topic-content">
+                    <p>
+                        @Model.Content
+                    </p>
+
+                </div>
+                <div class="nk-forum-topic-footer">
+                    <span class="nk-forum-topic-date">June 18, 2018</span>
+
+                    <span class="nk-forum-action-btn">
+                        <a href="#forum-reply" class="nk-anchor"><span class="fa fa-reply"></span> Reply</a>
+                    </span>
+                    <span class="nk-forum-action-btn">
+                        <a href="#"><span class="fa fa-flag"></span> Spam</a>
+                    </span>
+                </div>
+            </li>
+
+            @if (Model.Comments == null) 
+            { 
+            
+            }
+            else
+            {
+                foreach (var item in Model.Comments)
+                {
+                    <li>
+                        <div class="nk-forum-topic-author">
+                            <a href="#">
+                                <img src="assets/images/avatar-2.jpg" alt="Witch Murder">
+                            </a>
+                            <div class="nk-forum-topic-author-name" title="Witch Murder">
+                                <a href="#">@item.UserName</a>
+                            </div>
+                            <div class="nk-forum-topic-author-role">Participant</div>
+                            <div class="nk-forum-topic-author-since">
+                                Member since March 27, 2018
+                            </div>
+                        </div>
+                        <div class="nk-forum-topic-content">
+                            <p>
+                                @item.Message
+                            </p>
+                        </div>
+                        <div class="nk-forum-topic-footer">
+                            <span class="nk-forum-topic-date">June 19, 2018</span>
+
+                            <span class="nk-forum-action-btn">
+                                <a href="#forum-reply" class="nk-anchor"><span class="fa fa-reply"></span> Reply</a>
+                            </span>
+                            <span class="nk-forum-action-btn">
+                                <a href="#"><span class="fa fa-flag"></span> Spam</a>
+                            </span>
+                        </div>
+                    </li>
+                }
+            }
+        </ul>
+        <!-- END: Forums List -->
+
+        <div class="nk-gap-2"></div>
+
+        <!-- START: Pagination -->
+        <div class="nk-pagination nk-pagination-left">
+            <a href="#" class="nk-pagination-prev">
+                <span class="ion-ios-arrow-back"></span>
+            </a>
+            <nav>
+                <a class="nk-pagination-current" href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <span>...</span>
+                <a href="#">14</a>
+            </nav>
+            <a href="#" class="nk-pagination-next">
+                <span class="ion-ios-arrow-forward"></span>
+            </a>
+        </div>
+        <!-- END: Pagination -->
+
+        <div id="forum-reply"></div>
+        <div class="nk-gap-4"></div>
+        <!-- START: Reply -->
+        <form method="post" action="@Url.Action("PostComment","Forum", new { postId = Model.postID, message = "T" })" novalidate>
+            <h3 class="h4">Reply</h3>
+            <div class="nk-gap-1"></div>
+            <textarea name="reply" cols="30" rows="10" class="nk-summernote form-control"></textarea>
+            <div class="nk-gap-1"></div>
+            <button type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white">Reply</button>
+        </form>
+        <!-- END: Reply -->
+    </div>
+
+    <div class="nk-gap-2"></div>
+
+
+</div>
+
+
+
+
+<!-- START: Page Background -->
+
+<img class="nk-page-background-top" src="assets/images/bg-top.png" alt="">
+<img class="nk-page-background-bottom" src="assets/images/bg-bottom.png" alt="">
+
+<!-- END: Page Background -->
