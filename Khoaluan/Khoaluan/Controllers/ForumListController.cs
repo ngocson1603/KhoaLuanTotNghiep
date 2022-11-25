@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Khoaluan.Extension;
+using System.Text.RegularExpressions;
 
 namespace Khoaluan.Controllers
 {
@@ -184,6 +186,26 @@ namespace Khoaluan.Controllers
         //    _discussionService.comment(postId, "Test user", message);
         //    return RedirectToAction("DetailForum", new { id = postId });
         //}
+
+        public string SetSizeImage(string source)
+        {
+            string final = source;
+            IEnumerable<int> indexes = source.AllIndexesOf("width: ");
+            foreach (var index in indexes)
+            {
+                int start, end;
+                start = index + 6;
+                end = source.IndexOf("px", start);
+                int imgWidth = int.Parse(source.Substring(start, end - start));
+
+                if (imgWidth > 840)
+                    final = Regex.Replace(final, $"style=\"width: {imgWidth}px;\"", "style=\"width: 840px;\"");
+            }
+
+            return final;
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Comment(CommentViewModel comment)
@@ -191,6 +213,12 @@ namespace Khoaluan.Controllers
             string name = User.Identity.Name;
             string comm = comment.Message;
             string url = "/forum-single-topic/" + idpost + ".html";
+
+            if (comm.Contains("img") && comm.Contains("style"))
+            {
+                comm = SetSizeImage(comm);
+            }
+
             try
             {
                 _discussionService.comment(idpost, name, comm);
