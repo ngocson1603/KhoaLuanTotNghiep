@@ -71,10 +71,10 @@ namespace Khoaluan.Controllers
                     UserName = int.Parse(taikhoanID),
                 };
                 _unitOfWork.DiscussionRepository.Add(discussion1);
-                //_unitOfWork.SaveChange();
-                _notyfService.Success("Tạo mới thành công");
-                return Redirect(url);/*RedirectToRoute(ForumList(idpro));*/
+                _notyfService.Success("Thêm thành công");
+                return Redirect(url);
             }
+            _notyfService.Success("Đã có lỗi xảy ra");
             return View(discussion);
         }
 
@@ -117,8 +117,9 @@ namespace Khoaluan.Controllers
                 _unitOfWork.DiscussionRepository.Update(id,discussion1);
                 //_unitOfWork.SaveChange();
                 _notyfService.Success("Sửa thành công");
-                return Redirect(url);/*RedirectToRoute(ForumList(idpro));*/
+                return Redirect(url);
             }
+            _notyfService.Success("Đã có lỗi xảy ra");
             return View(discussion);
         }
 
@@ -144,9 +145,18 @@ namespace Khoaluan.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            _unitOfWork.DiscussionRepository.Remove(id);
-            _notyfService.Success("Xóa quyền truy cập thành công");
-            return RedirectToAction(nameof(Index));
+            string url = "/mydiscuss.html";
+            try
+            {
+                _unitOfWork.DiscussionRepository.Remove(id);
+                _notyfService.Success("Xóa quyền truy cập thành công");
+                return Redirect(url);
+            }
+            catch
+            {
+                _notyfService.Success("Đã có lỗi xảy ra");
+                return Redirect(url);
+            }
         }
         public static int idpro;
         [Route("/forum-topics/{id}.html", Name = ("ForumList"))]
@@ -156,10 +166,16 @@ namespace Khoaluan.Controllers
             var list = _unitOfWork.DiscussionRepository.GetAll().Where(t => t.ProductID == id);
             return View(list);
         }
-        //[Route("forum-single-topic.html", Name = ("DetailForum"))]
-        //public IActionResult DetailForum()
-        //{
-        //    return View();
-        //}
+        [Route("forum-single-topic.html", Name = ("DetailForum"))]
+        public IActionResult DetailForum()
+        {
+            return View();
+        }
+        [Route("Forum.html", Name = ("Forum"))]
+        public IActionResult ForumInD()
+        {
+            var ls1 = _unitOfWork.ProductRepository.GetAll().ToList();
+            return View(ls1);
+        }
     }
 }

@@ -8,36 +8,35 @@
 <div class="page-header">
     <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
-            @*<a asp-area="" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
-            <a asp-area="" asp-controller="AdminRoles" asp-action="Index" class="breadcrumb-item">Danh sách quyền truy cập</a>*@
-            <span class="breadcrumb-item active">Xác nhận xóa quyền truy cập</span>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <span class="breadcrumb-item active">Confirm Delete</span>
         </nav>
     </div>
 </div>
 
 <div class="card-body">
-    <h4 class="card-title">Xác nhận xóa quyền truy cập</h4>
+    <h4 class="card-title">Confirm Delete</h4>
     <div class="table-responsive">
         <table class="product-info-table m-t-20">
             <tbody>
                 <tr>
-                    <td>ID:</td>
-                    <td class="text-dark font-weight-semibold">@Model.postID</td>
-                </tr>
-                <tr>
-                    <td>Tên quyền truy cập:</td>
+                    <td>Title:</td>
                     <td>@Model.Title</td>
                 </tr>
                 <tr>
-                    <td>Mô tả:</td>
+                    <td>Content:</td>
                     <td>@Model.Content</td>
                 </tr>
                 <tr>
-                    <td>Xác nhận xóa:</td>
+                    <td>CreateDate:</td>
+                    <td>@Model.CreateDate</td>
+                </tr>
+                <tr>
+                    <td>Delete:</td>
                     <td>
                         <form asp-action="DeleteConfirmed" asp-route-id="@Model.postID">
                             <input type="hidden" asp-for="postID" />
-                            <input type="submit" value="Xác nhận xóa" class="btn btn-danger" />
+                            <input type="submit" value="Confirm Delete" class="btn btn-danger" />
                         </form>
                     </td>
                 </tr>
