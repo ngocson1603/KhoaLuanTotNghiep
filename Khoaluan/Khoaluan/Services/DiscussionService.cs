@@ -15,7 +15,7 @@ namespace Khoaluan.Services
         {
             _discussionRepository = discussionRepository;
         }
-        public int comment(string postID, string userName, string message)
+        public void comment(string postID, string userName, string message)
         {
             var post = _discussionRepository.GetById(postID);
             Comment cmt = new Comment()
