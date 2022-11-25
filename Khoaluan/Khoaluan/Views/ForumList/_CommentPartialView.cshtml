@@ -1,0 +1,13 @@
+﻿@model Khoaluan.ModelViews.CommentViewModel
+
+<form asp-action="Comment" novalidate>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="nk-gap-1"></div>
+    <div class="form-group">
+        <label asp-for="Message" class="control-label"></label>
+        <textarea asp-for="Message" cols="30" rows="10" class="nk-summernote form-control"></textarea>
+        <span asp-validation-for="Message" class="text-danger"></span>
+    </div>
+    <div class="nk-gap-1"></div>
+    <input type="submit" value="Reply" class="nk-btn nk-btn-rounded nk-btn-color-white" />
+</form>

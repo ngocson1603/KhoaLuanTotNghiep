@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "DetailForum";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Khoaluan.ModelViews.CommentViewModel commentViewModel = new Khoaluan.ModelViews.CommentViewModel();
 }
 <div class="nk-main">
 
@@ -82,9 +83,9 @@
                 </div>
             </li>
 
-            @if (Model.Comments == null) 
-            { 
-            
+            @if (Model.Comments == null)
+            {
+
             }
             else
             {
@@ -148,13 +149,17 @@
         <div id="forum-reply"></div>
         <div class="nk-gap-4"></div>
         <!-- START: Reply -->
-        <form method="post" action="@Url.Action("PostComment","ForumList", new { postId = Model.postID, message = "T" })" novalidate>
+        @*<form method="post" action="@Url.Action("PostComment","ForumList", new { postId = Model.postID, message = "T" })" novalidate>
             <h3 class="h4">Reply</h3>
             <div class="nk-gap-1"></div>
             <textarea name="reply" cols="30" rows="10" class="nk-summernote form-control"></textarea>
             <div class="nk-gap-1"></div>
             <button type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white">Reply</button>
-        </form>
+        </form>*@
+        @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+        {
+            @await Html.PartialAsync("~/Views/ForumList/_CommentPartialView.cshtml", commentViewModel)
+        }
         <!-- END: Reply -->
     </div>
 
