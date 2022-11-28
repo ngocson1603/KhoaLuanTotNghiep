@@ -111,12 +111,15 @@ namespace Khoaluan.Controllers
                     //Lưu Session MaKh
                     HttpContext.Session.SetString("CustomerId", khachhang.Id.ToString());
                     var taikhoanID = HttpContext.Session.GetString("CustomerId");
+                    HttpContext.Session.SetString("Role", "User");
 
+                    var Roles = HttpContext.Session.GetString("Role");
                     //Identity
                     var claims = new List<Claim>
                         {
                             new Claim(ClaimTypes.Name,khachhang.HoTen),
-                            new Claim("CustomerId", khachhang.Id.ToString())
+                            new Claim("CustomerId", khachhang.Id.ToString()),
+                            new Claim(ClaimTypes.Role, Roles)
                         };
                     ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
