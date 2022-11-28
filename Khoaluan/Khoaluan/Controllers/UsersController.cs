@@ -94,51 +94,44 @@ namespace Khoaluan.Controllers
         [Route("dang-ky.html", Name = "DangKy")]
         public async Task<IActionResult> DangkyTaiKhoan(RegisterViewModel taikhoan)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                string salt = Utilities.GetRandomKey();
+                Users khachhang = new Users
                 {
-                    string salt = Utilities.GetRandomKey();
-                    Users khachhang = new Users
-                    {
-                        HoTen = taikhoan.FullName,
-                        Gmail = taikhoan.Email.Trim().ToLower(),
-                        Password = (taikhoan.Password + salt.Trim()).ToMD5(),
-                        Salt = salt,
-                    };
-                    try
-                    {
-                        _unitOfWork.UserRepository.Create(khachhang);
-                        _unitOfWork.SaveChange();
-                        //Lưu Session MaKh
-                        HttpContext.Session.SetString("CustomerId", khachhang.Id.ToString());
-                        var taikhoanID = HttpContext.Session.GetString("CustomerId");
+                    HoTen = taikhoan.FullName,
+                    Gmail = taikhoan.Email.Trim().ToLower(),
+                    Password = (taikhoan.Password + salt.Trim()).ToMD5(),
+                    Salt = salt,
+                };
+                try
+                {
+                    _unitOfWork.UserRepository.Create(khachhang);
+                    _unitOfWork.SaveChange();
+                    //Lưu Session MaKh
+                    HttpContext.Session.SetString("CustomerId", khachhang.Id.ToString());
+                    var taikhoanID = HttpContext.Session.GetString("CustomerId");
 
-                        //Identity
-                        var claims = new List<Claim>
+                    //Identity
+                    var claims = new List<Claim>
                         {
                             new Claim(ClaimTypes.Name,khachhang.HoTen),
                             new Claim("CustomerId", khachhang.Id.ToString())
                         };
-                        ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
-                        ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                        await HttpContext.SignInAsync(claimsPrincipal);
-                        _notyfService.Success("Đăng ký thành công");
-                        return RedirectToAction("Dashboard", "Users");
-                    }
-                    catch
-                    {
-                        return RedirectToAction("DangkyTaiKhoan", "Users");
-                    }
+                    ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
+                    ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                    await HttpContext.SignInAsync(claimsPrincipal);
+                    _notyfService.Success("Đăng ký thành công");
+                    return RedirectToAction("Dashboard", "Users");
                 }
-                else
+                catch
                 {
-                    return View(taikhoan);
+                    return RedirectToAction("Index", "Home");
                 }
             }
-            catch
+            else
             {
-                return View(taikhoan);
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -184,66 +177,61 @@ namespace Khoaluan.Controllers
         [Route("dang-nhap.html", Name = "DangNhap")]
         public async Task<IActionResult> Login(LoginViewModel customer, string returnUrl)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                if (User.IsInRole("Admin"))
                 {
-                    if (User.IsInRole("Admin"))
-                    {
-                        _notyfService.Warning("Vui lòng đăng xuất ở Admin");
-                        return RedirectToAction("Index", "Home", new { Area = "Admin" });
-                    }
-                    bool isEmail = Utilities.IsValidEmail(customer.Gmail);
-                    if (!isEmail) return View(customer);
+                    _notyfService.Warning("Vui lòng đăng xuất ở Admin");
+                    return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                }
+                bool isEmail = Utilities.IsValidEmail(customer.Gmail);
+                if (!isEmail) return RedirectToAction("Index", "Home");
 
-                    var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Gmail.Trim() == customer.Gmail);
-                    if (khachhang == null) return RedirectToAction("DangkyTaiKhoan");
-                    string pass = (customer.Password + khachhang.Salt.Trim()).ToMD5();
-                    if (khachhang.Password != pass)
-                    {
-                        _notyfService.Success("Thông tin đăng nhập chưa chính xác");
-                        return View(customer);
-                    }
-                    //kiem tra xem account co bi disable hay khong
+                var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Gmail.Trim() == customer.Gmail);
+                if (khachhang == null) return RedirectToAction("Index", "Home");
+                string pass = (customer.Password + khachhang.Salt.Trim()).ToMD5();
+                if (khachhang.Password != pass)
+                {
+                    _notyfService.Success("Thông tin đăng nhập chưa chính xác");
+                    return RedirectToAction("Index", "Home");
+                }
+                //kiem tra xem account co bi disable hay khong
 
-                    //if (khachhang.Active == false)
-                    //{
-                    //    return RedirectToAction("ThongBao", "Accounts");
-                    //}
+                //if (khachhang.Active == false)
+                //{
+                //    return RedirectToAction("ThongBao", "Accounts");
+                //}
 
-                    //Luu Session MaKh
-                    HttpContext.Session.SetString("CustomerId", khachhang.Id.ToString());
-                    var taikhoanID = HttpContext.Session.GetString("CustomerId");
-                    HttpContext.Session.SetString("Role", "User");
+                //Luu Session MaKh
+                HttpContext.Session.SetString("CustomerId", khachhang.Id.ToString());
+                var taikhoanID = HttpContext.Session.GetString("CustomerId");
+                HttpContext.Session.SetString("Role", "User");
 
-                    var Roles = HttpContext.Session.GetString("Role");
-                    //Identity
-                    var claims = new List<Claim>
+                var Roles = HttpContext.Session.GetString("Role");
+                //Identity
+                var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, khachhang.HoTen),
                         new Claim("CustomerId", khachhang.Id.ToString()),
                         new Claim(ClaimTypes.Role, Roles)
                     };
-                    ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
-                    ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                    await HttpContext.SignInAsync(claimsPrincipal);
-                    _notyfService.Success("Đăng nhập thành công");
-                    if (string.IsNullOrEmpty(returnUrl))
-                    {
-                        return RedirectToAction("Dashboard", "Users");
-                    }
-                    else
-                    {
-                        return Redirect(returnUrl);
-                    }
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
+                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                await HttpContext.SignInAsync(claimsPrincipal);
+                _notyfService.Success("Đăng nhập thành công");
+                if (string.IsNullOrEmpty(returnUrl))
+                {
+                    return RedirectToAction("Dashboard", "Users");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
                 }
             }
-            catch
-            {
-                return RedirectToAction("DangkyTaiKhoan", "Users");
-            }
-            return View(customer);
+
+            return RedirectToAction("Index", "Home");
         }
+
         [HttpGet]
         [Route("dang-xuat.html", Name = "DangXuat")]
         public IActionResult Logout()
@@ -302,6 +290,6 @@ namespace Khoaluan.Controllers
             }
             return RedirectToAction("Login");
         }
-        
+
     }
 }
