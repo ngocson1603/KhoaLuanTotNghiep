@@ -850,6 +850,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Forum\" />
     <Folder Include="wwwroot\php\instagram\cache\" />

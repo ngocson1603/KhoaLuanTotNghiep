@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Khoaluan.Migrations
 {
     [DbContext(typeof(GameStoreDbContext))]
-    [Migration("20221102101714_addmarketorder")]
-    partial class addmarketorder
+    [Migration("20221127040704_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,28 @@ namespace Khoaluan.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Khoaluan.Models.Admin", b =>
+                {
+                    b.Property<string>("TaiKhoan")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HoTen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastLogin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TaiKhoan");
+
+                    b.ToTable("Admin");
+                });
 
             modelBuilder.Entity("Khoaluan.Models.Category", b =>
                 {
@@ -227,12 +249,46 @@ namespace Khoaluan.Migrations
                     b.ToTable("ProductCategory");
                 });
 
+            modelBuilder.Entity("Khoaluan.Models.Refund", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DatePurchase")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Refund");
+                });
+
             modelBuilder.Entity("Khoaluan.Models.Users", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Balance")
+                        .HasColumnType("int");
 
                     b.Property<string>("Gmail")
                         .HasColumnType("nvarchar(max)");
@@ -379,6 +435,25 @@ namespace Khoaluan.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Khoaluan.Models.Refund", b =>
+                {
+                    b.HasOne("Khoaluan.Models.Product", "Product")
+                        .WithMany("Refunds")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Khoaluan.Models.Users", "User")
+                        .WithMany("Refunds")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Khoaluan.Models.Category", b =>
                 {
                     b.Navigation("ProductCategories");
@@ -410,6 +485,8 @@ namespace Khoaluan.Migrations
                     b.Navigation("OrderDetails");
 
                     b.Navigation("ProductCategories");
+
+                    b.Navigation("Refunds");
                 });
 
             modelBuilder.Entity("Khoaluan.Models.Users", b =>
@@ -421,6 +498,8 @@ namespace Khoaluan.Migrations
                     b.Navigation("Markets");
 
                     b.Navigation("Orders");
+
+                    b.Navigation("Refunds");
                 });
 #pragma warning restore 612, 618
         }
