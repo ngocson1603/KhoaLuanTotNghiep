@@ -91,11 +91,11 @@
                                 <div class="nk-input-slider-content text-white">
                                     PRICE:
                                     <strong class="text-main-1">
-                                        € <span class="nk-input-slider-value-0"></span>
+                                        € <span id="value0" class="nk-input-slider-value-0"></span>
                                     </strong>
                                     -
                                     <strong class="text-main-1">
-                                        € <span class="nk-input-slider-value-1"></span>
+                                        € <span id="value1" class="nk-input-slider-value-1"></span>
                                     </strong>
                                 </div>
                                 <div class="nk-input-slider-input">
@@ -105,7 +105,7 @@
                                 </div>
                             </div>
                             <div>
-                                <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white">Apply</a>
+                                <input type="button" id="keywords" class="nk-btn nk-btn-rounded nk-btn-color-white" value="Apply" />
                             </div>
                         </div>
                     </div>
@@ -123,95 +123,97 @@
         <!-- END: Products Filter -->
 
         <div class="nk-gap-2"></div>
-        <!-- START: Products -->
-        <div class="row vertical-gap">
-            @foreach (var item in Model)
-            {
-                string url = $"/Product/HomePage/{item.Id}.html";
-                string gia = "free";
-                string icon = "€";
-                <div class="col-lg-6">
-                    <div class="nk-product-cat-2">
-                        <a class="nk-product-image" href="@url">
-                            <img src="~/Images/@item.Image" alt="">
-                        </a>
-                        <div class="nk-product-cont">
-                            <h3 class="nk-product-title h5"><a href="@url">@item.Name</a></h3>
-                            <div class="nk-gap-1"></div>
-                            <div class="nk-product-rating" data-rating="4">
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i>
+        <div id="records_table">
+            <!-- START: Products -->
+            <div class="row vertical-gap">
+                @foreach (var item in Model)
+                {
+                    string url = $"/Product/HomePage/{item.Id}.html";
+                    string gia = "free";
+                    string icon = "€";
+                    <div class="col-lg-6">
+                        <div class="nk-product-cat-2">
+                            <a class="nk-product-image" href="@url">
+                                <img src="~/Images/@item.Image" alt="">
+                            </a>
+                            <div class="nk-product-cont">
+                                <h3 class="nk-product-title h5"><a href="@url">@item.Name</a></h3>
+                                <div class="nk-gap-1"></div>
+                                <div class="nk-product-rating" data-rating="4">
+                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i>
+                                </div>
+                                <div class="nk-gap-1"></div>
+                                <div class="line-clamp">
+                                    @item.Description
+                                </div>
+                                <div class="nk-gap-2"></div>
+                                <div class="nk-product-price">
+                                    @if (item.Price == 0)
+                                    {
+                                        @gia;
+                                    }
+                                    else
+                                    {
+                                        @icon @item.Price;
+                                    }
+                                </div>
+                                <div class="nk-gap-1"></div>
                             </div>
-                            <div class="nk-gap-1"></div>
-                            <div class="line-clamp">
-                                @item.Description
-                            </div>
-                            <div class="nk-gap-2"></div>
-                            <div class="nk-product-price">
-                                @if (item.Price == 0)
-                                {
-                                    @gia;
-                                }
-                                else
-                                {
-                                    @icon @item.Price;
-                                }
-                            </div>
-                            <div class="nk-gap-1"></div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
-        <!-- END: Products -->
-        <!-- START: Pagination -->
-        <div class="nk-gap-3"></div>
-        <div class="nk-pagination nk-pagination-center">
+                }
+            </div>
+            <!-- END: Products -->
+            <!-- START: Pagination -->
+            <div class="nk-gap-3"></div>
+            <div class="nk-pagination nk-pagination-center">
 
-            @if (PageCurrent > 1)
-            {
-                string url = $"/SearchPro/ProductsByName/name={@ViewBag.nameSearch}.html";
-                <a href="@url?page=@(PageCurrent - 1)" class="nk-pagination-prev">
-                    <span class="ion-ios-arrow-back"></span>
-                </a>
-            }
-            else
-            {
-                string url1 = $"/SearchPro/ProductsByName/name={@ViewBag.nameSearch}.html";
-                <a href="@url1" class="nk-pagination-prev">
-                    <span class="ion-ios-arrow-back"></span>
-                </a>
-            }
-
-            @{
-                string url2 = $"/SearchPro/ProductsByName/name={@ViewBag.nameSearch}.html";
-                @if (@PageCurrent < ViewBag.maxPage)
+                @if (PageCurrent > 1)
                 {
-
-                    <nav>
-                        <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
-                        <a href="@url2?page=@PageNext">@PageNext</a>
-                    </nav>
-                    <a class="nk-pagination-next" href="@url2?page=@PageNext">
-                        <span class="ion-ios-arrow-forward"></span>
+                    string url = $"/SearchPro/ProductsByName/name={@ViewBag.nameSearch}.html";
+                    <a href="@url?page=@(PageCurrent - 1)" class="nk-pagination-prev">
+                        <span class="ion-ios-arrow-back"></span>
                     </a>
                 }
                 else
                 {
-                    <nav>
-                        <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
-                        <a hidden href="@url2?page=@PageNext">@PageNext</a>
-                    </nav>
-                    <a class="nk-pagination-next">
-                        <span disabled class="ion-ios-arrow-forward"></span>
+                    string url1 = $"/SearchPro/ProductsByName/name={@ViewBag.nameSearch}.html";
+                    <a href="@url1" class="nk-pagination-prev">
+                        <span class="ion-ios-arrow-back"></span>
                     </a>
                 }
-            }
+
+                @{
+                    string url2 = $"/SearchPro/ProductsByName/name={@ViewBag.nameSearch}.html";
+                    @if (@PageCurrent < ViewBag.maxPage)
+                    {
+
+                        <nav>
+                            <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                            <a href="@url2?page=@PageNext">@PageNext</a>
+                        </nav>
+                        <a class="nk-pagination-next" href="@url2?page=@PageNext">
+                            <span class="ion-ios-arrow-forward"></span>
+                        </a>
+                    }
+                    else
+                    {
+                        <nav>
+                            <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                            <a hidden href="@url2?page=@PageNext">@PageNext</a>
+                        </nav>
+                        <a class="nk-pagination-next">
+                            <span disabled class="ion-ios-arrow-forward"></span>
+                        </a>
+                    }
+                }
+            </div>
+            <!-- END: Pagination -->
         </div>
-        <!-- END: Pagination -->
     </div>
 
-    <div class="nk-gap-2"></div>
-</div>
+        <div class="nk-gap-2"></div>
+    </div>
 @section Styles{
     <style>
         .line-clamp {
@@ -221,4 +223,36 @@
             overflow: hidden;
         }
     </style>
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#keywords").click(function () {
+                var strkeyword = $('#keyword').val();
+                var value0 = document.getElementById("value0").innerText;
+                var value1 = document.getElementById("value1").innerText;
+                //alert(value0);
+                //alert(value1);
+                $.ajax({
+                    url: '/SearchPro/FindProducts/',
+                    datatype: "json",
+                    type: "POST",
+                    data: {
+                        firstprice: value0,
+                        secondprice: value1
+                    },
+                    async: false,
+                    change: false,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+    </script>
 }
