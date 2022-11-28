@@ -19,5 +19,7 @@ namespace Khoaluan.Models
         public List<Order> Orders { get; set; }
         public List<Market> Markets { get; set; }
         public List<Refund> Refunds { get; set; }
+        public List<MarketTransaction> Buys { get; set; }
+        public List<MarketTransaction> Sells { get; set; }
     }
 }
