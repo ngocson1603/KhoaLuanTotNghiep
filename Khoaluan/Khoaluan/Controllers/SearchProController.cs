@@ -20,6 +20,39 @@ namespace Khoaluan.Controllers
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
         }
+
+        public string NamePro
+        {
+            get
+            {
+                var gh = HttpContext.Session.GetString("NamePro");
+                if (gh == null)
+                {
+                    gh = "";
+                }
+                return gh;
+            }
+        }
+
+        [HttpPost]
+        public IActionResult FindProducts(int firstprice, int secondprice)
+        {
+            var name = HttpContext.Session.GetString("NamePro");
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price >= firstprice && t.Price <= secondprice).ToList();
+            if(name != "all")
+            {
+                ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price >= firstprice && t.Price <= secondprice && t.Name.ToLower().Contains(name.Trim().ToLower())).ToList();
+            }
+            if (ls == null)
+            {
+                return PartialView("ListProductsSearchPartials", null);
+            }
+            else
+            {
+                return PartialView("ListProductsSearchPartials", ls);
+            }
+        }
+
         [HttpGet]
         public IActionResult FindProductsByName()
         {
@@ -30,6 +63,7 @@ namespace Khoaluan.Controllers
         public IActionResult ProductsByName(string name, int? page)
         {
             ViewBag.nameSearch = name.Trim();
+            HttpContext.Session.SetString("NamePro", name);
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 6;
             List<Product> products = new List<Product>();
