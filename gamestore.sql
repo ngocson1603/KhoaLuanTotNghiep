@@ -12,7 +12,7 @@ values('Santa Monica Studio'),
 ('Valve'),('Ubisoft'),
 ('Infinity Ward'),('DICE'),('Capcom'),('EA'),('2K Game'),('Bethesda'),('CD PROJEKT RED'),('Rockstar Games')
 set dateformat dmy
-insert into Product
+INSERT [dbo].[Product] ([Name], [Overview], [Price], [Image], [DevId], [Description], [ReleaseDate])
 values('Conquerors Blade',
 'Conquerors Blade gives you a chance to be a true warlord. Commanding medieval troops in epic 15 vs. 15 siege battles, conquering cities with allies in the open world or fighting against players from all over the world – its you who make the choice.'
 ,0,'Apex Legends.jpg',7,
