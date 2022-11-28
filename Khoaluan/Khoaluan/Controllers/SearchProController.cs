@@ -34,44 +34,13 @@ namespace Khoaluan.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult FindProducts(int firstprice, int secondprice)
-        {
-            var name = HttpContext.Session.GetString("NamePro");
-            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price >= firstprice && t.Price <= secondprice).ToList();
-            if(name != "all")
-            {
-                ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price >= firstprice && t.Price <= secondprice && t.Name.ToLower().Contains(name.Trim().ToLower())).ToList();
-            }
-            if (ls == null)
-            {
-                return PartialView("ListProductsSearchPartials", null);
-            }
-            else
-            {
-                return PartialView("ListProductsSearchPartials", ls);
-            }
-        }
+        
 
         [HttpGet]
         public IActionResult FindProductsByName()
         {
             return View();
         }
-
-        public string NamePro
-        {
-            get
-            {
-                var gh = HttpContext.Session.GetString("NamePro");
-                if (gh == null)
-                {
-                    gh = "";
-                }
-                return gh;
-            }
-        }
-
         [HttpPost]
         public IActionResult FindProducts(int firstprice, int secondprice)
         {
