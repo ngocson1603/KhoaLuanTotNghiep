@@ -10,5 +10,6 @@ namespace Khoaluan.Models
         public int TotalPrice { get; set; }
         public Users User { get; set; }
         public List<OrderDetail>OrderDetails { get; set; }
+        public List<Refund> Refunds { get; set; }
     }
 }

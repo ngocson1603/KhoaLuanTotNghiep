@@ -4,14 +4,16 @@ using Khoaluan;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Khoaluan.Migrations
 {
     [DbContext(typeof(GameStoreDbContext))]
-    partial class GameStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221128072050_addmarkettransaction")]
+    partial class addmarkettransaction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -304,9 +306,6 @@ namespace Khoaluan.Migrations
                     b.Property<DateTime>("DatePurchase")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderID")
-                        .HasColumnType("int");
-
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
@@ -320,8 +319,6 @@ namespace Khoaluan.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderID");
 
                     b.HasIndex("ProductID");
 
@@ -522,12 +519,6 @@ namespace Khoaluan.Migrations
 
             modelBuilder.Entity("Khoaluan.Models.Refund", b =>
                 {
-                    b.HasOne("Khoaluan.Models.Order", "Order")
-                        .WithMany("Refunds")
-                        .HasForeignKey("OrderID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Khoaluan.Models.Product", "Product")
                         .WithMany("Refunds")
                         .HasForeignKey("ProductID")
@@ -539,8 +530,6 @@ namespace Khoaluan.Migrations
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Order");
 
                     b.Navigation("Product");
 
@@ -574,8 +563,6 @@ namespace Khoaluan.Migrations
             modelBuilder.Entity("Khoaluan.Models.Order", b =>
                 {
                     b.Navigation("OrderDetails");
-
-                    b.Navigation("Refunds");
                 });
 
             modelBuilder.Entity("Khoaluan.Models.Product", b =>
