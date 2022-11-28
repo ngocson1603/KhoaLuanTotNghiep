@@ -20,11 +20,6 @@ namespace Khoaluan.Controllers
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
         }
-        [HttpGet]
-        public IActionResult FindProductsByName()
-        {
-            return View();
-        }
 
         public string NamePro
         {
@@ -39,6 +34,13 @@ namespace Khoaluan.Controllers
             }
         }
 
+        
+
+        [HttpGet]
+        public IActionResult FindProductsByName()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult FindProducts(int firstprice, int secondprice)
         {
