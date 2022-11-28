@@ -10,6 +10,7 @@ namespace Khoaluan.Configurations
         {
             builder.ToTable(nameof(Refund));
             builder.HasKey(o => o.Id);
+            builder.HasOne(o=>o.Order).WithMany(y=>y.Refunds).HasForeignKey(t=>t.OrderID).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(o => o.User).WithMany(y => y.Refunds).HasForeignKey(t => t.UserID).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(o => o.Product).WithMany(y => y.Refunds).HasForeignKey(t => t.ProductID).OnDelete(DeleteBehavior.Restrict);
         }
