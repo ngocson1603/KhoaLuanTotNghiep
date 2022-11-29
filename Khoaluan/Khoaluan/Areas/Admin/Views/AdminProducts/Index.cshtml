@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Khoaluan.Models.Product>
 
-@{ 
-   // int CurrentPage = ViewBag.CurrentPage;
+@{
+    // int CurrentPage = ViewBag.CurrentPage;
     ViewData["Title"] = "Danh sách sản phẩm";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml"; 
-    }
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
 <div class="page-header">
     <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
@@ -73,22 +73,22 @@
                                 <td>1</td>
                                 <td>
                                     @*@if (item.UnitsInStock.Value > 0)
-                                    {
-                                        <div class="d-flex align-items-center">
-                                            <div class="badge badge-success badge-dot m-r-10"></div>
-                                            <div>Còn hàng</div>
-                                        </div> }
-                                    else
-                                    {
-                                        <div class="d-flex align-items-center">
-                                            <div class="badge badge-success badge-dot m-r-10"></div>
-                                            <div>Hết hàng</div>
-                                        </div>}*@
+                                        {
+                                            <div class="d-flex align-items-center">
+                                                <div class="badge badge-success badge-dot m-r-10"></div>
+                                                <div>Còn hàng</div>
+                                            </div> }
+                                        else
+                                        {
+                                            <div class="d-flex align-items-center">
+                                                <div class="badge badge-success badge-dot m-r-10"></div>
+                                                <div>Hết hàng</div>
+                                            </div>}*@
 
                                 <td>
-                                    @*<a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Details" asp-route-id="@item.ProductId">Chi tiết</a>
-                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Edit" asp-route-id="@item.ProductId">Sửa</a>
-                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Delete" asp-route-id="@item.ProductId">Xóa</a>*@
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Details" asp-route-id="@item.Id">Chi tiết</a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
 
                                 </td>
                             </tr>
@@ -100,8 +100,8 @@
             </table>
             <div aria-label="Page navigation example">
                 @*<ul class="pagination">
-                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminProducts" asp-route-CatID="@ViewBag.CurrentCateID" asp-action="Index" />
-                </ul>*@
+                        <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminProducts" asp-route-CatID="@ViewBag.CurrentCateID" asp-action="Index" />
+                    </ul>*@
             </div>
         </div>
     </div>
@@ -109,50 +109,50 @@
 
 @section Scripts{
     <script>
-    $(document).ready(function () {
-        jQuery("#txtCatID").change(function () {
-            var catID = jQuery(this).children(":selected").attr("value");
-            catID = parseFloat(catID);
-            $('#txtCatID option')
-                .removeAttr('selected');
-            $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
-            $.ajax({
-                url: '/Admin/AdminProducts/Filtter',
-                datatype: "json",
-                type: "GET",
-                data: {
-                    CatID: catID
-                },
-                async: true,
-                success: function (results) {
-                    if (results.status == "success") {
-                        window.location.href = results.redirectUrl;
+        $(document).ready(function () {
+            jQuery("#txtCatID").change(function () {
+                var catID = jQuery(this).children(":selected").attr("value");
+                catID = parseFloat(catID);
+                $('#txtCatID option')
+                    .removeAttr('selected');
+                $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
+                $.ajax({
+                    url: '/Admin/AdminProducts/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        CatID: catID
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
                     }
-                },
-                error: function (xhr) {
-                    alert('error');
-                }
+                });
             });
-        });
 
-        $("#keyword").keyup(function () {
-            var strkeyword = $('#keyword').val();
-            $.ajax({
-                url: '/Admin/Search/FindProduct/',
-                datatype: "json",
-                type: "POST",
-                data: { keyword: strkeyword },
-                async: true,
-                success: function (results) {
-                    $("#records_table").html("");
-                    $("#records_table").html(results);
-                },
-                error: function (xhr) {
-                    alert('error');
-                }
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                $.ajax({
+                    url: '/Admin/Search/FindProduct/',
+                    datatype: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
             });
         });
-    });
     </script>
 
 }
