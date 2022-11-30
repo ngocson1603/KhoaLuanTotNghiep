@@ -51,6 +51,7 @@
 </head>
 @{
     Khoaluan.ModelViews.LoginViewModel loginViewModel = new Khoaluan.ModelViews.LoginViewModel();
+    Khoaluan.ModelViews.RegisterViewModel registerViewModel = new Khoaluan.ModelViews.RegisterViewModel();
 }
 <body>
 
@@ -119,7 +120,8 @@
     @await Html.PartialAsync("~/Views/SearchPro/_FindProductsByName.cshtml")
     <!-- END: Search Modal -->
     <!-- START: Login Modal -->
-    @await Html.PartialAsync("~/Views/Users/_LoginPartialView.cshtml", loginViewModel)
+    @await Html.PartialAsync("~/Views/Users/_SignIn.cshtml", loginViewModel)
+    @await Html.PartialAsync("~/Views/Users/_SignUp.cshtml", registerViewModel)
     <!-- END: Login Modal -->
     <!-- START: Scripts -->
     <!-- Object Fit Polyfill -->

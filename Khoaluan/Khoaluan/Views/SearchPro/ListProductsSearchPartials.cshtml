@@ -1,0 +1,46 @@
+﻿@using Khoaluan.OtpModels
+@model List<Product>
+@if (Model != null)
+{
+    <div class="row vertical-gap">
+        @foreach (var item in Model)
+        {
+            string url = $"/Product/HomePage/{item.Id}.html";
+            string gia = "free";
+            string icon = "€";
+            <div class="col-lg-6">
+                <div class="nk-product-cat-2">
+                    <a class="nk-product-image" href="@url">
+                        <img src="~/Images/@item.Image" alt="">
+                    </a>
+                    <div class="nk-product-cont">
+                        <h3 class="nk-product-title h5"><a href="@url">@item.Name</a></h3>
+                        <div class="nk-gap-1"></div>
+                        <div class="nk-product-rating" data-rating="4">
+                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i>
+                        </div>
+                        <div class="nk-gap-1"></div>
+                        <div class="line-clamp">
+                            @item.Description
+                        </div>
+                        <div class="nk-gap-2"></div>
+                        <div class="nk-product-price">
+                            @if (item.Price == 0)
+                            {
+                                @gia;
+                            }
+                            else
+                            {
+                                @icon @item.Price;
+                            }
+                        </div>
+                        <div class="nk-gap-1"></div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <!-- END: Products -->
+    <!-- START: Pagination -->
+    <div class="nk-gap-3"></div>
+}
