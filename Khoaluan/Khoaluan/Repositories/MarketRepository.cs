@@ -2,6 +2,8 @@
 using Khoaluan.Interfaces;
 using Khoaluan.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Khoaluan.Repositories
 {
@@ -12,6 +14,10 @@ namespace Khoaluan.Repositories
 
         }
 
-        
+        public List<Market> getlistMarket(int MarketType)
+        {
+            var x=GetAll().Where(t=>t.Status==MarketType).ToList();
+            return x;
+        }    
     }
 }
