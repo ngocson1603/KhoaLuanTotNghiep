@@ -50,8 +50,8 @@ namespace Khoaluan.Services
                     market.Status = (int)marketType.purchased;
                 }
             }
-            Inventory buyerInventory = _inventoryService.updateInventory(request.buyerID,request.itemID, (int)marketType.buy);
-            Inventory sellerInventory = _inventoryService.updateInventory(request.sellerID, request.itemID, (int)marketType.sell);
+            Inventory buyerInventory = _inventoryService.updateInventory(request.buyerID,request.itemID, (int)marketType.buy,request.quantity);
+            Inventory sellerInventory = _inventoryService.updateInventory(request.sellerID, request.itemID, (int)marketType.sell,request.quantity);
             TransactionModel model = new TransactionModel()
             {
                 Market = market,

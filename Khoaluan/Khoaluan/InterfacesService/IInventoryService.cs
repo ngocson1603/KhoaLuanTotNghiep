@@ -5,6 +5,6 @@ namespace Khoaluan.InterfacesService
 {
     public interface IInventoryService
     {
-        Inventory updateInventory(int userID, int ItemID,int marketype);
+        Inventory updateInventory(int userID, int ItemID,int marketype,int quantity);
     }
 }
