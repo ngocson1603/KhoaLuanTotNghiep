@@ -12,5 +12,6 @@ namespace Khoaluan
         IProductService ProductService { get; }
         IRefundService RefundService { get; }
         IUserService UserService { get; }
+        IMarketTransactionService MarketTransactionService { get; }
     }
 }
