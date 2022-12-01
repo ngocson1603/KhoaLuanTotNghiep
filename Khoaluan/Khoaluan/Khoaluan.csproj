@@ -23,6 +23,7 @@
     <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Views\About\AboutUs.cshtml" />
     <None Include="Views\Checkout\Check.cshtml" />
+    <None Include="Views\Dev\LoginDev.cshtml" />
     <None Include="Views\Home\BlogArticle.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\News.cshtml" />
