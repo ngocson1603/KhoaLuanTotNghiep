@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace DuAnGame.Controllers
@@ -71,6 +73,63 @@ namespace DuAnGame.Controllers
                 return Json(new { success = false });
             }
         }
+
+        public void sendemail(string emailaddress, List<Cart> cart, int id_dh)
+        {
+            if (emailaddress.Length == 0)
+            {
+
+            }
+            else
+            {
+                if (Khoaluan.Helpper.Utilities.IsValidEmail(emailaddress))
+                {
+                    SmtpClient client = new SmtpClient()
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential()
+                        {
+                            UserName = "sondovipro123@gmail.com",
+                            Password = "caofqthenhkakkgl"
+                        }
+                    };
+                    MailAddress fromemail = new MailAddress("sondovipro123@gmail.com", "Xin chao");
+                    MailAddress toemail = new MailAddress(emailaddress, "someone");
+                    MailMessage mess = new MailMessage()
+                    {
+                        From = fromemail,
+                        Subject = "chúc mừng bạn đặt hàng thành công",
+                        IsBodyHtml = true,
+                    };
+                    mess.Body += "<h1>Xin chào:" + User.Identity.Name + "</h1>";
+                    mess.Body += "<h3>Đơn hàng của bạn đã đặt thành công<h3>";
+                    mess.Body += "<h3>Mã đơn hàng của bạn:" + id_dh.ToString() + "</h3>";
+                    mess.Body += "<h3>Danh sách các mặt hàng đã đặt</h3>";
+                    mess.Body += "<table><thead>";
+                    mess.Body += "<tr><th>Mã sản phẩm</th><th>Tên sản phẩm</th><th>Số lượng</th><th>Đơn giá</th></thead>";
+                    mess.Body += "<tbody>";
+                    int countprice = 0;
+                    foreach (var item in cart)
+                    {
+                        mess.Body += "<tr><td>" + item.product.Id.ToString() + "</td>" + "<td>" + item.product.Name + "</td>" + "<td>" + 1 + "</td>" + "<td>" + item.product.Price.ToString() + "Đ</td></tr>";
+                        countprice += item.product.Price;
+                    }
+                    mess.Body += "</tbody></table>";
+                    mess.Body += "<h4>Tổng tiền:" + countprice.ToString() + "Đ</h4>";
+                    mess.To.Add(toemail);
+                    client.Send(mess);
+                }
+                else
+                {
+
+                }
+            }
+        }
+
         [Authorize, HttpPost]
         public IActionResult ThanhToan()
         {
@@ -93,6 +152,8 @@ namespace DuAnGame.Controllers
                     _unitOfWork.LibraryRepository.updateLibrary(int.Parse(taikhoanID.ToString()), cart);
                     _unitOfWork.UserRepository.updateBalance(int.Parse(taikhoanID.ToString()), totalprice, type);
                     _unitOfWork.SaveChange();
+                    int madh = _unitOfWork.OrderRepository.orderID(int.Parse(taikhoanID));
+                    sendemail(maKH.Gmail, cart, madh);
                     HttpContext.Session.Remove("_GioHang");
                     return Redirect("/ProductCart/CheckoutSuccess");
                 }
