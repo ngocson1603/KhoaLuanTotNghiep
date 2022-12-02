@@ -152,8 +152,8 @@ namespace DuAnGame.Controllers
                     _unitOfWork.LibraryRepository.updateLibrary(int.Parse(taikhoanID.ToString()), cart);
                     _unitOfWork.UserRepository.updateBalance(int.Parse(taikhoanID.ToString()), totalprice, type);
                     _unitOfWork.SaveChange();
-                    int madh = _unitOfWork.OrderRepository.orderID(int.Parse(taikhoanID));
-                    sendemail(maKH.Gmail, cart, madh);
+                    //int madh = _unitOfWork.OrderRepository.orderID(int.Parse(taikhoanID));
+                    //sendemail(maKH.Gmail, cart, madh);
                     HttpContext.Session.Remove("_GioHang");
                     return Redirect("/ProductCart/CheckoutSuccess");
                 }

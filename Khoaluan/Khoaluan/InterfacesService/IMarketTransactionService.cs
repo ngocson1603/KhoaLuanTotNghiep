@@ -1,10 +1,11 @@
 ﻿using Khoaluan.Models;
 using Khoaluan.OtpModels;
+using System.Transactions;
 
 namespace Khoaluan.InterfacesService
 {
     public interface IMarketTransactionService
     {
-        TransactionModel Transaction(TransactionRequest request);
+        MarketTransaction Transaction(TransactionRequest request);
     }
 }

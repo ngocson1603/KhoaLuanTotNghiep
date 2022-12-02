@@ -20,4 +20,10 @@ namespace Khoaluan.Enums
         decline=2,
         release=3,
     }
+    public enum RefundType
+    {
+        pending=0,
+        accept=1,
+        decline=2
+    }
 }

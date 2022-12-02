@@ -20,7 +20,7 @@ namespace Khoaluan.Services
             _inventoryService = inventoryService;
         }
 
-        public TransactionModel Transaction(TransactionRequest request)
+        public MarketTransaction Transaction(TransactionRequest request)
         {
             MarketTransaction transaction = new MarketTransaction()
             {
@@ -32,35 +32,7 @@ namespace Khoaluan.Services
                 TotalPrice=request.totalprice,
                 DateTransaction=DateTime.Now
             };
-            Users buyer = _userService.updateBalance(request.buyerID, request.totalprice, (int)marketType.buy);
-            Users seller=_userService.updateBalance(request.sellerID,request.totalprice,(int)marketType.sell);
-            Market market=_marketRepository.GetById(request.MarketID);
-            market.Quantity = market.Quantity - request.quantity;
-            if(market.Status==(int)marketType.sell)
-            {
-                if(market.Quantity==0)
-                {
-                    market.Status = (int)marketType.soldout;
-                }
-            }
-            else if(market.Status==(int)marketType.order)
-            {
-                if(market.Quantity==0)
-                {
-                    market.Status = (int)marketType.purchased;
-                }
-            }
-            Inventory buyerInventory = _inventoryService.updateInventory(request.buyerID,request.itemID, (int)marketType.buy,request.quantity);
-            Inventory sellerInventory = _inventoryService.updateInventory(request.sellerID, request.itemID, (int)marketType.sell,request.quantity);
-            TransactionModel model = new TransactionModel()
-            {
-                Market = market,
-                Buyer = buyer,
-                Seller=seller,
-                BuyerInventory=buyerInventory,
-                SellerInventory=sellerInventory,
-            };
-            return model;
+            return transaction;
         }
     }
 }
