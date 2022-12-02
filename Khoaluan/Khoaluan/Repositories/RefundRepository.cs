@@ -1,7 +1,9 @@
 ﻿using Dapper;
 using Khoaluan.Interfaces;
 using Khoaluan.Models;
+using Khoaluan.OtpModels;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Principal;
 
 namespace Khoaluan.Repositories
 {
@@ -37,6 +39,18 @@ namespace Khoaluan.Repositories
             parameter.Add("productID", productID);
             int id = Context.Database.GetDbConnection().QuerySingle<int>(query, parameter);
             return id;
+        }
+        public RefundRequest lastestOrder(int productId,int UserID)
+        {
+            var query = @"select  top 1.o.Id as OrderId,Price,DatePurchase
+                        from [Order] o,OrderDetail od
+                        where o.Id=od.Id
+                        and ProductID=@id and od.UserID=@userid";
+            var parameter = new DynamicParameters();
+            parameter.Add("id",productId);
+            parameter.Add("userid", UserID);
+            RefundRequest request = Context.Database.GetDbConnection().QuerySingle<RefundRequest>(query, parameter);
+            return request;
         }
     }
 }
