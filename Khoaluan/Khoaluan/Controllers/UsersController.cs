@@ -191,7 +191,11 @@ namespace Khoaluan.Controllers
                 if (!isEmail) return RedirectToAction("Index", "Home");
 
                 var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Gmail.Trim() == customer.Gmail);
-                if (khachhang == null) return RedirectToAction("Index", "Home");
+                if (khachhang == null)
+                {
+                    _notyfService.Success("Tài khoản không tồn tại");
+                    return RedirectToAction("Index", "Home");
+                }
                 string pass = (customer.Password + khachhang.Salt.Trim()).ToMD5();
                 if (khachhang.Password != pass)
                 {
