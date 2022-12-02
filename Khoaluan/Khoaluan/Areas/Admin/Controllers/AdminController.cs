@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Khoaluan.Areas.Admin.Models;
+using Khoaluan.ModelViews;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -36,7 +37,20 @@ namespace Khoaluan.Areas.Admin.Controllers
                 return gh;
             }
         }
-
+        [Route("tai-khoan.html", Name = "Info")]
+        public IActionResult Info()
+        {
+            var taikhoanID = HttpContext.Session.GetString("AccountId");
+            if (taikhoanID != null)
+            {
+                var khachhang = _unitOfWork.AdminRepository.GetAll().SingleOrDefault(x => x.TaiKhoan ==taikhoanID);
+                if (khachhang != null)
+                {
+                    return View(khachhang);
+                }
+            }
+            return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
+        }
         [AllowAnonymous]
         [Route("login.html", Name = "Login")]
         public IActionResult AdminLogin(string returnUrl = null)
@@ -57,10 +71,12 @@ namespace Khoaluan.Areas.Admin.Controllers
                 {
                     if (User.IsInRole("User"))
                     {
-                        _notyfService.Warning("Vui lòng đăng xuất ở User");
-                        return RedirectToAction("Dashboard", "Users");
+                        await HttpContext.SignOutAsync();
+                        HttpContext.Session.Remove("CustomerId");
+                        //_notyfService.Warning("Vui lòng đăng xuất ở User");
+                        //return RedirectToAction("Dashboard", "Users");
                     }
-                    var kh = _unitOfWork.AdminRepository.GetAll().SingleOrDefault(x => x.TaiKhoan.Trim() == model.UserName);
+                    var kh = _unitOfWork.AdminRepository.GetAll().SingleOrDefault(x => x.TaiKhoan.Trim() == model.Gmail);
 
                     if (kh == null)
                     {
@@ -110,7 +126,39 @@ namespace Khoaluan.Areas.Admin.Controllers
             }
             return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
         }
-
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            try
+            {
+                var taikhoanID = HttpContext.Session.GetString("AccountId");
+                if (taikhoanID == null)
+                {
+                    return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
+                }
+                if (ModelState.IsValid)
+                {
+                    var taikhoan = _unitOfWork.AdminRepository.GetById(Convert.ToInt32(taikhoanID));
+                    if (taikhoan == null) return RedirectToAction("Login", "Users");
+                    var pass = (model.PasswordNow.Trim());
+                    {
+                        string passnew = (model.Password.Trim());
+                        taikhoan.Password = passnew;
+                        _unitOfWork.AdminRepository.Update(taikhoan);
+                        _unitOfWork.SaveChange();
+                        _notyfService.Success("Đổi mật khẩu thành công");
+                        return RedirectToAction("Info", "Admin", new { Area = "Admin" });
+                    }
+                }
+            }
+            catch
+            {
+                _notyfService.Success("Thay đổi mật khẩu không thành công");
+                return RedirectToAction("Info", "Admin", new { Area = "Admin" });
+            }
+            _notyfService.Success("Thay đổi mật khẩu không thành công");
+            return RedirectToAction("Info", "Admin", new { Area = "Admin" });
+        }
         [Route("logout.html", Name = "Logout")]
         public IActionResult AdminLogout()
         {

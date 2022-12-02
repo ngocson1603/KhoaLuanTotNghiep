@@ -184,8 +184,10 @@ namespace Khoaluan.Controllers
             {
                 if (User.IsInRole("Admin"))
                 {
-                    _notyfService.Warning("Vui lòng đăng xuất ở Admin");
-                    return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    //_notyfService.Warning("Vui lòng đăng xuất ở Admin");
+                    //return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    await HttpContext.SignOutAsync();
+                    HttpContext.Session.Remove("AccountId");
                 }
                 bool isEmail = Utilities.IsValidEmail(customer.Gmail);
                 if (!isEmail) return RedirectToAction("Index", "Home");
