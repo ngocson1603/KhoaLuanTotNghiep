@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <None Include="Areas\Admin\Views\AdminProducts\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Dev\LoginDev.cshtml" />
     <None Include="Areas\Admin\Views\Home\Index.cshtml" />
     <None Include="Areas\Admin\Views\Search\ListProductsSearchPartial.cshtml" />
     <None Include="Areas\Admin\Views\Shared\Error.cshtml" />
@@ -23,7 +24,6 @@
     <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Views\About\AboutUs.cshtml" />
     <None Include="Views\Checkout\Check.cshtml" />
-    <None Include="Views\Dev\LoginDev.cshtml" />
     <None Include="Views\Home\BlogArticle.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\News.cshtml" />

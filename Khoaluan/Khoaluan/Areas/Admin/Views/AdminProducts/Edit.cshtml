@@ -59,10 +59,20 @@
                                 <option value="" disabled selected>Chọn danh mục</option>
                             </select>
                         </div>
+                        <div class="form-group col-6">
+                            <label class="font-weight-semibold" for="productCategory">Danh mục sản phẩm</label>
+                            <select class="custom-select" asp-for="Status" style="min-width: 200px;">
+                                <option value="0" disabled selected>Chọn danh mục</option>
+                                <option value="1">Mục 1</option>
+                                <option value="2">Mục 2</option>
+                                <option value="3">Mục 3</option>
+                                <option value="4">Mục 4</option>
+                            </select>
+                        </div>
                         @*<div class="form-group col-6">
-                                <label class="font-weight-semibold" for="productName">Hàng tồn kho</label>
-                                <input type="text" class="form-control" asp-for="UnitsInStock">
-                            </div>*@
+            <label class="font-weight-semibold" for="productName">Hàng tồn kho</label>
+            <input type="text" class="form-control" asp-for="UnitsInStock">
+        </div>*@
                     </div>
                     <div class="form-group">
                         <label class="font-weight-semibold" for="productBrand">Ảnh đại diện</label>

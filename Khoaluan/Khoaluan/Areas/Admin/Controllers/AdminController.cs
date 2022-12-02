@@ -64,13 +64,13 @@ namespace Khoaluan.Areas.Admin.Controllers
 
                     if (kh == null)
                     {
-                        ViewBag.Error = "Thông tin đăng nhập chưa chính xác";
+                        ViewBag.Eror = "Thông tin đăng nhập chưa chính xác";
                     }
                     string pass = (model.Password.Trim());
                     // + kh.Salt.Trim()
                     if (kh.Password.Trim() != pass)
                     {
-                        ViewBag.Error = "Thông tin đăng nhập chưa chính xác";
+                        ViewBag.Eror = "Thông tin đăng nhập chưa chính xác";
                         return View(model);
                     }
                     //đăng nhập thành công
