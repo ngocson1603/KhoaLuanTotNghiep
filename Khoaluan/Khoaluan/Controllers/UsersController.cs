@@ -80,7 +80,7 @@ namespace Khoaluan.Controllers
                 }
             }
 
-            return View("Homepage", "Product");
+            return RedirectToAction("Homepage", "Product");
         }
         [HttpGet]
         [AllowAnonymous]
@@ -243,12 +243,11 @@ namespace Khoaluan.Controllers
         }
 
         [HttpGet]
-        [Route("dang-xuat.html", Name = "DangXuat")]
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync();
             HttpContext.Session.Remove("CustomerId");
-            return RedirectToAction("HomePage", "Product");
+            return RedirectToAction("Homepage", "Product");
         }
 
         [HttpPost]

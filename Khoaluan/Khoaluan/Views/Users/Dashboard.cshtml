@@ -83,7 +83,45 @@
     </div>
 </div>
 <div class="nk-gap-2"></div>
-<a asp-controller="Users" asp-action="Logout" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-danger">
+<a href="#" id="logout" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-danger">
     <span class="fa fa fa-sign-out"></span>
     Logout
 </a>
+
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#logout").click(function () {
+                $.ajax({
+                    success: function (res) {
+                        Swal.fire({
+                            title: "<h5 style='color:white'>Are you leaving</h5>",
+                            icon: 'question',
+                            iconColor: '#dd163b',
+                            allowOutsideClick: false,
+                            showCloseButton: true,
+                            showDenyButton: true,
+                            confirmButtonColor: '#3A833A',
+                            denyButtonColor: '#3085d6',
+                            confirmButtonText: 'Yes',
+                            denyButtonText: 'Cancel',
+                            background: '#232930'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.ajax({
+                                    url: "/Users/Logout",
+                                    success: function (res) {
+                                        window.location.href = "/Product/HomePage";
+                                    }
+                                })
+                            }
+                        })
+                    }
+                });
+            });
+        });
+    </script>
+}
