@@ -211,7 +211,7 @@ namespace Khoaluan.Controllers
                     // Thanh toán thành công -> khi này cập nhật wallet balance của tài khoản nạp
                     if (result.Status.Trim().ToUpper() == "COMPLETED")
                     {
-                        _unitOfWork.UserRepository.updateBalance(Convert.ToInt32(accountId), (int)marketType.paypal, fund.Price);
+                        _unitOfWork.UserRepository.updateBalance(Convert.ToInt32(accountId), fund.Price, (int)marketType.paypal);
                         _unitOfWork.SaveChange();
                         _notyfService.Success("Thanh toán thành công!");
                         _notyfService.Information("Cập nhật số dư ví thành công!");
