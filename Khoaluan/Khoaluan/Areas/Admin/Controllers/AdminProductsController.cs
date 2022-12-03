@@ -2,6 +2,7 @@
 using Khoaluan.Enums;
 using Khoaluan.Helpper;
 using Khoaluan.Models;
+using Khoaluan.OtpModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -54,12 +55,18 @@ namespace Khoaluan.Areas.Admin.Controllers
             }
 
             var ls = _unitOfWork.ProductRepository.GetById((int)id);
+            var item = _unitOfWork.ItemRepository.GetAll().Where(t=>t.ProductId == id).ToList();
             if (ls == null)
             {
                 return NotFound();
             }
             HttpContext.Session.SetString("ProductID", id.ToString());
-            return View(ls);
+            AdminProduct pwc = new AdminProduct()
+            {
+                product = ls,
+                item = item
+            };
+            return View(pwc);
         }
 
         // GET: AdminProductsController/Create

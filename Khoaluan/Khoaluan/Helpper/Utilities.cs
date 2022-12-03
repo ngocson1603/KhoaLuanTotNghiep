@@ -142,14 +142,14 @@ namespace Khoaluan.Helpper
             return url;
         }
 
-        public static async Task<string> UploadFile(Microsoft.AspNetCore.Http.IFormFile file, string sDirectory, string newname = null)
+        public static async Task<string> UploadFile(Microsoft.AspNetCore.Http.IFormFile file, string newname = null)
         {
             try
             {
                 if (newname == null) newname = file.FileName;
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", sDirectory);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images");
                 CreateIfMissing(path);
-                string pathFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", sDirectory, newname);
+                string pathFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", newname);
                 var supportedTypes = new[] { "jpg", "jpeg", "png", "gif" };
                 var fileExt = System.IO.Path.GetExtension(file.FileName).Substring(1);
                 if (!supportedTypes.Contains(fileExt.ToLower())) /// Khác các file định nghĩa
