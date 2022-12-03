@@ -79,7 +79,8 @@ namespace Khoaluan.Controllers
                     return View(khachhang);
                 }
             }
-            return RedirectToAction("Login");
+
+            return View("Homepage", "Product");
         }
         [HttpGet]
         [AllowAnonymous]
