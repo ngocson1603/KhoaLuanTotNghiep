@@ -24,6 +24,22 @@ namespace Khoaluan.Controllers
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
         }
+
+        [Route("tai-khoan-dev.html", Name = "InfoDev")]
+        public IActionResult InfoDev()
+        {
+            var taikhoanID = HttpContext.Session.GetString("AccountId");
+            if (taikhoanID != null)
+            {
+                var khachhang = _unitOfWork.DeveloperRepository.GetById(int.Parse(taikhoanID));
+                if (khachhang != null)
+                {
+                    return View(khachhang);
+                }
+            }
+            return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
+        }
+
         [AllowAnonymous]
         [Route("logindev.html", Name = "Logindev")]
         public IActionResult LoginDev(string returnUrl = null)
@@ -52,6 +68,7 @@ namespace Khoaluan.Controllers
                     if (kh == null)
                     {
                         ViewBag.Eror = "Thông tin đăng nhập chưa chính xác";
+                        return View(model);
                     }
                     string pass = (model.Password.Trim());
                     // + kh.Salt.Trim()
@@ -159,6 +176,53 @@ namespace Khoaluan.Controllers
             catch
             {
                 return View();
+            }
+        }
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            try
+            {
+                var taikhoanID = HttpContext.Session.GetString("AccountId");
+                if (taikhoanID == null)
+                {
+                    return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
+                }
+                if (ModelState.IsValid)
+                {
+                    var taikhoan = _unitOfWork.DeveloperRepository.GetById(int.Parse(taikhoanID));
+                    if (taikhoan == null) return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
+                    var pass = (model.PasswordNow.Trim());
+                    {
+                        string passnew = (model.Password.Trim());
+                        taikhoan.Passwork = passnew;
+                        _unitOfWork.DeveloperRepository.Update(taikhoan);
+                        _unitOfWork.SaveChange();
+                        _notyfService.Success("Đổi mật khẩu thành công");
+                        return RedirectToAction("InfoDev", "Dev", new { Area = "Admin" });
+                    }
+                }
+            }
+            catch
+            {
+                _notyfService.Success("Thay đổi mật khẩu không thành công");
+                return RedirectToAction("Info", "Admin", new { Area = "Admin" });
+            }
+            _notyfService.Success("Thay đổi mật khẩu không thành công");
+            return RedirectToAction("Info", "Admin", new { Area = "Admin" });
+        }
+        public IActionResult LogoutDev()
+        {
+            try
+            {
+                HttpContext.SignOutAsync();
+                HttpContext.Session.Remove("AccountId");
+                HttpContext.Session.Remove("Role");
+                return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
+            }
+            catch
+            {
+                return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
             }
         }
     }

@@ -43,7 +43,7 @@ namespace Khoaluan.Areas.Admin.Controllers
             var taikhoanID = HttpContext.Session.GetString("AccountId");
             if (taikhoanID != null)
             {
-                var khachhang = _unitOfWork.AdminRepository.GetAll().SingleOrDefault(x => x.TaiKhoan ==taikhoanID);
+                var khachhang = _unitOfWork.AdminRepository.GetAll().SingleOrDefault(x => x.TaiKhoan == taikhoanID);
                 if (khachhang != null)
                 {
                     return View(khachhang);
@@ -71,16 +71,17 @@ namespace Khoaluan.Areas.Admin.Controllers
                 {
                     if (User.IsInRole("User"))
                     {
-                        await HttpContext.SignOutAsync();
-                        HttpContext.Session.Remove("CustomerId");
-                        //_notyfService.Warning("Vui lòng đăng xuất ở User");
-                        //return RedirectToAction("Dashboard", "Users");
+                        //await HttpContext.SignOutAsync();
+                        //HttpContext.Session.Remove("CustomerId");
+                        _notyfService.Warning("Vui lòng đăng xuất ở User");
+                        return RedirectToAction("Dashboard", "Users");
                     }
                     var kh = _unitOfWork.AdminRepository.GetAll().SingleOrDefault(x => x.TaiKhoan.Trim() == model.Gmail);
 
                     if (kh == null)
                     {
                         ViewBag.Eror = "Thông tin đăng nhập chưa chính xác";
+                        return View(model);
                     }
                     string pass = (model.Password.Trim());
                     // + kh.Salt.Trim()
@@ -138,8 +139,8 @@ namespace Khoaluan.Areas.Admin.Controllers
                 }
                 if (ModelState.IsValid)
                 {
-                    var taikhoan = _unitOfWork.AdminRepository.GetById(Convert.ToInt32(taikhoanID));
-                    if (taikhoan == null) return RedirectToAction("Login", "Users");
+                    var taikhoan = _unitOfWork.AdminRepository.GetAll().Where(t => t.TaiKhoan == taikhoanID).FirstOrDefault();
+                    if (taikhoan == null) return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
                     var pass = (model.PasswordNow.Trim());
                     {
                         string passnew = (model.Password.Trim());
