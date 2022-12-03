@@ -64,6 +64,11 @@ namespace Khoaluan.OtpModels
         public List<Productdetail> productwithCate { get; set; }
         public List<Productdetail> PopularGame1 { get; set; }
     }
+    public class AdminProduct
+    {
+        public Product product { get; set; }
+        public List<Item> item { get; set; }
+    }
     public class GameRefund
     {
         public int productid { get; set; }

@@ -1,0 +1,103 @@
+﻿@model Khoaluan.ModelViews.CheckOutViewModel;
+@{
+    ViewData["Title"] = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var taxTotal = Model.Fund.Price * Model.Fund.Tax;
+    var total = taxTotal + Model.Fund.Price;
+    var wallet = Model.Account.Balance + Model.Fund.Price;
+}
+
+<img class="nk-page-background-top" src="~/assets/images/bg-top-2.png" alt="">
+
+<h3 class="nk-decorated-h-3">
+    <span>
+        <span class="text-main-1">
+            Check
+        </span>
+        Out
+    </span>
+</h3>
+<div class="nk-gap-1"></div>
+<div class="row vertical-gap">
+    <div class="col-lg-4">
+        <div class="nk-feature-2" style="border-radius: 0px">
+            <div class="nk-feature-icon">
+                <span class="fa fa-user-circle"></span>
+            </div>
+            <div class="nk-feature-cont text-center">
+                <h3 class="nk-feature-title">Account <span class="text-main-1">Information</span></h3>
+                <div class="nk-gap-1"></div>
+                Email: @Model.Account.Gmail
+                <div class="nk-gap"></div>
+                Username: @Model.Account.HoTen
+                <div class="nk-gap"></div>
+                Wallet Balance: $@Model.Account.Balance <i class="fa fa-arrow-right" aria-hidden="true"></i> $@wallet
+                <div class="nk-gap"></div>
+                <div class="nk-gap"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="table-responsive">
+            <table class="nk-table nk-table-sm">
+                <thead class="thead-default">
+                    <tr>
+                        <th class="nk-product-cart-title">Product</th>
+                        <th class="nk-product-cart-total">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="nk-product-cart-title">
+                            @Model.Fund.Name
+                        </td>
+                        <td class="nk-product-cart-total">
+                            $@Model.Fund.Price
+                        </td>
+                    </tr>
+                    <tr class="nk-store-cart-totals-subtotal">
+                        <td>
+                            Subtotal
+                        </td>
+                        <td>
+                            $@Model.Fund.Price
+                        </td>
+                    </tr>
+                    <tr class="nk-store-cart-totals-shipping">
+                        <td>
+                            Tax
+                        </td>
+                        <td>
+                            $@Math.Round((decimal)taxTotal, 2)
+                        </td>
+                    </tr>
+                    <tr class="nk-store-cart-totals-total">
+                        <td>
+                            Total
+                        </td>
+                        <td>
+                            $@Math.Round((decimal)total, 2)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="nk-gap-2"></div>
+<a href="#" onclick="CallPaypal();" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-success">
+    <span class="fa fa-paypal"></span>
+    Paypal
+</a>
+&nbsp;&nbsp;
+<a asp-controller="Fund" asp-action="AddFunds" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-danger">
+    <span class="fa fa-arrow-left"></span>
+    Return
+</a>
+
+<script>
+    function CallPaypal() {
+        window.location.href = '@Url.Action("Paypalvtwo", "Fund", new { id = Model.Fund.Id })';
+    }
+</script>
+

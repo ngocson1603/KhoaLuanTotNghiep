@@ -25,15 +25,34 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 return PartialView("ListProductsSearchPartial", ls1);
             }
-            var ls = _unitOfWork.ProductRepository.GetAll().Where(t=>t.Name.Contains(keyword)).ToList(); ;
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t=>t.Name.ToLower().Contains(keyword.Trim().ToLower())).ToList(); ;
             
-            if (ls == null)
+            if (ls == null || ls.Count == 0)
             {
                 return PartialView("ListProductsSearchPartial", null);
             }
             else
             {
                 return PartialView("ListProductsSearchPartial", ls);
+            }
+        }
+        [HttpPost]
+        public IActionResult FindItem(string keyword)
+        {
+            var ls1 = _unitOfWork.ItemRepository.getItem();
+            if (string.IsNullOrEmpty(keyword) || keyword.Length < 1)
+            {
+                return PartialView("ListItemSearchPartial", ls1);
+            }
+            var ls = _unitOfWork.ItemRepository.getItem().Where(t => t.Name.ToLower().Contains(keyword.Trim().ToLower())).ToList();
+
+            if (ls == null || ls.Count == 0)
+            {
+                return PartialView("ListItemSearchPartial", null);
+            }
+            else
+            {
+                return PartialView("ListItemSearchPartial", ls);
             }
         }
         public IActionResult Index()

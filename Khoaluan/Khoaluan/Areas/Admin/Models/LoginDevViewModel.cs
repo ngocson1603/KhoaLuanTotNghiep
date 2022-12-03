@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Khoaluan.Areas.Admin.Models
 {
-    public class LoginViewModel
+    public class LoginDevViewModel
     {
         [MaxLength(100)]
         [Required(ErrorMessage = ("Vui lòng nhập Email"))]

@@ -79,7 +79,8 @@ namespace Khoaluan.Controllers
                     return View(khachhang);
                 }
             }
-            return RedirectToAction("Login");
+
+            return RedirectToAction("Homepage", "Product");
         }
         [HttpGet]
         [AllowAnonymous]
@@ -184,14 +185,20 @@ namespace Khoaluan.Controllers
             {
                 if (User.IsInRole("Admin"))
                 {
-                    _notyfService.Warning("Vui lòng đăng xuất ở Admin");
-                    return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    //_notyfService.Warning("Vui lòng đăng xuất ở Admin");
+                    //return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    await HttpContext.SignOutAsync();
+                    HttpContext.Session.Remove("AccountId");
                 }
                 bool isEmail = Utilities.IsValidEmail(customer.Gmail);
                 if (!isEmail) return RedirectToAction("Index", "Home");
 
                 var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Gmail.Trim() == customer.Gmail);
-                if (khachhang == null) return RedirectToAction("Index", "Home");
+                if (khachhang == null)
+                {
+                    _notyfService.Success("Tài khoản không tồn tại");
+                    return RedirectToAction("Index", "Home");
+                }
                 string pass = (customer.Password + khachhang.Salt.Trim()).ToMD5();
                 if (khachhang.Password != pass)
                 {
@@ -236,12 +243,11 @@ namespace Khoaluan.Controllers
         }
 
         [HttpGet]
-        [Route("dang-xuat.html", Name = "DangXuat")]
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync();
             HttpContext.Session.Remove("CustomerId");
-            return RedirectToAction("HomePage", "Product");
+            return RedirectToAction("Homepage", "Product");
         }
 
         [HttpPost]

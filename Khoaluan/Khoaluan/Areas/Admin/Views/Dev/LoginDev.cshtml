@@ -1,4 +1,5 @@
-﻿@{ Layout = null; }
+﻿@model Khoaluan.Areas.Admin.Models.LoginDevViewModel
+@{ Layout = null; }
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,12 +49,13 @@
                             <div class="col-md-8 col-lg-7 col-xl-6 mx-auto">
                                 <h2>Sign In</h2>
                                 <p class="m-b-30">Enter your credential to get access</p>
-                                <form>
+                                <form asp-action="LoginDev" method="post">
                                     <div class="form-group">
                                         <label class="font-weight-semibold" for="userName">Username:</label>
                                         <div class="input-affix">
                                             <i class="prefix-icon anticon anticon-user"></i>
-                                            <input type="text" class="form-control" id="userName" placeholder="Username">
+                                            <input type="text" class="form-control" asp-for="UserName" placeholder="Username">
+                                            <span asp-validation-for="UserName" class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -61,7 +63,8 @@
                                         <a class="float-right font-size-13 text-muted" href="">Forget Password?</a>
                                         <div class="input-affix m-b-10">
                                             <i class="prefix-icon anticon anticon-lock"></i>
-                                            <input type="password" class="form-control" id="password" placeholder="Password">
+                                            <input type="password" class="form-control" asp-for="Password" placeholder="Mật khẩu">
+                                            <span asp-validation-for="Password" class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -71,6 +74,7 @@
                                                 <a class="small" href=""> Signup</a>
                                             </span>
                                             <button class="btn btn-primary">Sign In</button>
+                                            <p class="mg-b-0">@ViewBag.Eror</p>
                                         </div>
                                     </div>
                                 </form>

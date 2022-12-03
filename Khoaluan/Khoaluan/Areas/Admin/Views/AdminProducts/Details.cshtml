@@ -1,83 +1,233 @@
-@model Khoaluan.Models.Product
+@model Khoaluan.OtpModels.AdminProduct
 
-@{ ViewData["Title"] = "Thông tin sản phẩm" + Model.Name;
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml"; }
+@{ ViewData["Title"] = "Thông tin sản phẩm" + Model.product.Name;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Khoaluan.Models.Item item = new Khoaluan.Models.Item();
 
-<div class="page-header">
-    <div class="header-sub-title">
-        <nav class="breadcrumb breadcrumb-dash">
-            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
-            <a asp-area="Admin" asp-controller="AdminProducts" asp-action="Index" class="breadcrumb-item">Danh sách sản phẩm</a>
-            <span class="breadcrumb-item active">Thông tin sản phẩm : @Model.Name</span>
-        </nav>
+}
+@if (User.IsInRole("Admin"))
+{
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+                <a asp-area="Admin" asp-controller="AdminProducts" asp-action="Index" class="breadcrumb-item">Danh sách sản phẩm</a>
+                <span class="breadcrumb-item active">Thông tin sản phẩm : @Model.product.Name</span>
+            </nav>
+        </div>
     </div>
-</div>
+    <div class="card-body">
+        <h4 class="card-title">Thông tin sản phẩm : @Model.product.Name</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.product.Id</td>
+                    </tr>
+                    <tr>
+                        <td>Tên sản phẩm:</td>
+                        <td>@Model.product.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả ngắn:</td>
+                        <td>@Html.Raw(Model.product.Description)</td>
+                    </tr>
+                    <tr>
+                        <td>Giá:</td>
+                        <td>@Model.product.Price</td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>
+                            @if (Model.product.Status == 0)
+                            {
+                                <div class="d-flex align-items-center">
+                                    <div class="badge badge-success badge-dot m-r-10"></div>
+                                    <div>pending</div>
+                                </div>
+                            }
+                            else if (Model.product.Status == 1)
+                            {
+                                <div class="d-flex align-items-center">
+                                    <div class="badge badge-dot badge-dot m-r-10"></div>
+                                    <div>accept</div>
+                                </div>
+                            }
+                            else if (Model.product.Status == 2)
+                            {
+                                <div class="d-flex align-items-center">
+                                    <div class="badge badge-green badge-dot m-r-10"></div>
+                                    <div>decline</div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="d-flex align-items-center">
+                                    <div class="badge badge-geekblue badge-dot m-r-10"></div>
+                                    <div>release</div>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ngày tạo:</td>
+                        <td>@Model.product.ReleaseDate</td>
+                    </tr>
+                    <tr>
+                        <td>Tiêu đề:</td>
+                        <td>@Model.product.Overview</td>
+                    </tr>
+                    <tr>
+                        <td>Ảnh đại diện:</td>
+                        <td>
+                            <img width="200" height="200" src="~/Images/@Url.Content(Model.product.Image)" alt="@Model.product.Name" />
+                        </td>
+                    </tr>
 
-<div class="card-body">
-    <h4 class="card-title">Thông tin sản phẩm : @Model.Name</h4>
-    <div class="table-responsive">
-        <table class="product-info-table m-t-20">
-            <tbody>
-                <tr>
-                    <td>ID:</td>
-                    <td class="text-dark font-weight-semibold">@Model.Id</td>
-                </tr>
-                <tr>
-                    <td>Tên sản phẩm:</td>
-                    <td>@Model.Name</td>
-                </tr>
-                <tr>
-                    <td>Mô tả ngắn:</td>
-                    <td>@Model.Description</td>
-                </tr>
-                <tr>
-                    <td>Giá:</td>
-                    <td>@Model.Price</td>
-                </tr>
-                @*<tr>
-                    <td>Trạng thái:</td>
-                    <td>
-                        @if (Model.Active)
-                        {
-                            <div class="switch m-r-10">
-                                <input type="checkbox" id="switch-1" checked="" disabled/>
-                                <label for="switch-1"></label>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="switch m-r-10">
-                                <input type="checkbox" id="switch-1" disabled/>
-                                <label for="switch-1"></label>
-                            </div>
-                        }
-                    </td>
-                </tr>*@
-
-                @*<tr>
-                    <td>Danh mục:</td>
-                    <td>@Model.Cat.CatName</td>
-                </tr>*@
-                <tr>
-                    <td>Ngày tạo:</td>
-                    <td>@Model.ReleaseDate</td>
-                </tr>
-                <tr>
-                    <td>Tiêu đề:</td>
-                    <td>@Model.Overview</td>
-                </tr>
-                <tr>
-                    <td>Ảnh đại diện:</td>
-                    <td>
-                        <img width="200" height="200" src="~/Images/@Url.Content(Model.Image)" alt="@Model.Name" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Mô tả sản phẩm:</td>
-                    <td>@Html.Raw(Model.Description)</td>
-                </tr>
-
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+    <h5>Item</h5>
+    <div class="m-t-20">
+        @if (Model.item != null)
+        {
+            foreach (var itemm in Model.item)
+            {
+                <div class="media m-b-30">
+                    <div class="avatar avatar-image">
+                        <img src="~/Images/@Url.Content(itemm.Image)" alt="">
+                    </div>
+                    <div class="media-body m-l-20">
+                        <h6 class="m-b-0">@itemm.Name</h6>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+}
+else
+{
+    <div class="page-header no-gutters has-tab">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#product-edit-basic">Basic Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#product-edit-option">Option Info</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content m-t-15">
+        <div class="tab-pane fade show active" id="product-edit-basic">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Thông tin sản phẩm : @Model.product.Name</h4>
+                    <div class="table-responsive">
+                        <table class="product-info-table m-t-20">
+                            <tbody>
+                                <tr>
+                                    <td>ID:</td>
+                                    <td class="text-dark font-weight-semibold">@Model.product.Id</td>
+                                </tr>
+                                <tr>
+                                    <td>Tên sản phẩm:</td>
+                                    <td>@Model.product.Name</td>
+                                </tr>
+                                <tr>
+                                    <td>Mô tả ngắn:</td>
+                                    <td>@Html.Raw(Model.product.Description)</td>
+                                </tr>
+                                <tr>
+                                    <td>Giá:</td>
+                                    <td>@Model.product.Price</td>
+                                </tr>
+                                <tr>
+                                    <td>Trạng thái:</td>
+                                    <td>
+                                        @if (Model.product.Status == 0)
+                                        {
+                                            <div class="d-flex align-items-center">
+                                                <div class="badge badge-success badge-dot m-r-10"></div>
+                                                <div>pending</div>
+                                            </div>
+                                        }
+                                        else if (Model.product.Status == 1)
+                                        {
+                                            <div class="d-flex align-items-center">
+                                                <div class="badge badge-dot badge-dot m-r-10"></div>
+                                                <div>accept</div>
+                                            </div>
+                                        }
+                                        else if (Model.product.Status == 2)
+                                        {
+                                            <div class="d-flex align-items-center">
+                                                <div class="badge badge-green badge-dot m-r-10"></div>
+                                                <div>decline</div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="d-flex align-items-center">
+                                                <div class="badge badge-geekblue badge-dot m-r-10"></div>
+                                                <div>release</div>
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ngày tạo:</td>
+                                    <td>@Model.product.ReleaseDate</td>
+                                </tr>
+                                <tr>
+                                    <td>Tiêu đề:</td>
+                                    <td>@Html.Raw(Model.product.Overview)</td>
+                                </tr>
+                                <tr>
+                                    <td>Ảnh đại diện:</td>
+                                    <td>
+                                        <img width="200" height="200" src="~/Images/@Url.Content(Model.product.Image)" alt="@Model.product.Name" />
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <h5>Item</h5>
+            <div class="m-t-20">
+                @if (Model.item != null)
+                {
+                    foreach (var itemmm in Model.item)
+                    {
+                        <div class="media m-b-30">
+                            <div class="avatar avatar-image">
+                                <img src="~/Images/@Url.Content(itemmm.Image)" alt="">
+                            </div>
+                            <div class="media-body m-l-20">
+                                <h6 class="m-b-0">@itemmm.Name</h6>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div class="tab-pane fade" id="product-edit-option">
+            <div class="card">
+                <div class="card-body">
+                    @await Html.PartialAsync("CreateItemPartialView", item)
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script>
+        $("#txtFile").change(function (event) {
+            var files = event.target.files;
+            $("#imgView").attr("src", window.URL.createObjectURL(files[0]));
+        })
+    </script>
+}

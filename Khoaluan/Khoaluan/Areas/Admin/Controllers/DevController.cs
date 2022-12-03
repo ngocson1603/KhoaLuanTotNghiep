@@ -11,49 +11,38 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Khoaluan.Areas.Admin.Controllers
+namespace Khoaluan.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class AdminController : Controller
+    public class DevController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         public INotyfService _notyfService { get; }
-        public AdminController(IUnitOfWork unitOfWork, INotyfService notyfService)
+        public DevController(IUnitOfWork unitOfWork, INotyfService notyfService)
         {
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
         }
 
-        public string Role
-        {
-            get
-            {
-                var gh = HttpContext.Session.GetString("Role");
-                if (gh == null)
-                {
-                    gh = "";
-                }
-                return gh;
-            }
-        }
-        [Route("tai-khoan.html", Name = "Info")]
-        public IActionResult Info()
+        [Route("tai-khoan-dev.html", Name = "InfoDev")]
+        public IActionResult InfoDev()
         {
             var taikhoanID = HttpContext.Session.GetString("AccountId");
             if (taikhoanID != null)
             {
-                var khachhang = _unitOfWork.AdminRepository.GetAll().SingleOrDefault(x => x.TaiKhoan == taikhoanID);
+                var khachhang = _unitOfWork.DeveloperRepository.GetById(int.Parse(taikhoanID));
                 if (khachhang != null)
                 {
                     return View(khachhang);
                 }
             }
-            return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
+            return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
         }
+
         [AllowAnonymous]
-        [Route("login.html", Name = "Login")]
-        public IActionResult AdminLogin(string returnUrl = null)
+        [Route("logindev.html", Name = "Logindev")]
+        public IActionResult LoginDev(string returnUrl = null)
         {
             var taikhoanID = HttpContext.Session.GetString("AccountId");
             if (taikhoanID != null) return RedirectToAction("Index", "Home", new { Area = "Admin" });
@@ -62,8 +51,8 @@ namespace Khoaluan.Areas.Admin.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        [Route("login.html", Name = "Login")]
-        public async Task<IActionResult> AdminLogin(LoginViewModel model, string returnUrl = null)
+        [Route("logindev.html", Name = "Logindev")]
+        public async Task<IActionResult> LoginDev(LoginDevViewModel model, string returnUrl = null)
         {
             try
             {
@@ -71,12 +60,10 @@ namespace Khoaluan.Areas.Admin.Controllers
                 {
                     if (User.IsInRole("User"))
                     {
-                        //await HttpContext.SignOutAsync();
-                        //HttpContext.Session.Remove("CustomerId");
                         _notyfService.Warning("Vui lòng đăng xuất ở User");
                         return RedirectToAction("Dashboard", "Users");
                     }
-                    var kh = _unitOfWork.AdminRepository.GetAll().SingleOrDefault(x => x.TaiKhoan.Trim() == model.Gmail);
+                    var kh = _unitOfWork.DeveloperRepository.getDev(model.UserName);
 
                     if (kh == null)
                     {
@@ -85,34 +72,29 @@ namespace Khoaluan.Areas.Admin.Controllers
                     }
                     string pass = (model.Password.Trim());
                     // + kh.Salt.Trim()
-                    if (kh.Password.Trim() != pass)
+                    if (kh.Passwork.Trim() != pass)
                     {
                         ViewBag.Eror = "Thông tin đăng nhập chưa chính xác";
                         return View(model);
                     }
                     //đăng nhập thành công
 
-                    //ghi nhận thời gian đăng nhập
-                    kh.LastLogin = DateTime.Now;
-                    _unitOfWork.AdminRepository.Update(kh);
-                    _unitOfWork.SaveChange();
-
 
                     var taikhoanID = HttpContext.Session.GetString("AccountId");
                     //identity
                     //luuw seccion Makh
-                    HttpContext.Session.SetString("AccountId", kh.TaiKhoan.ToString());
-                    HttpContext.Session.SetString("Role", "Admin");
+                    HttpContext.Session.SetString("AccountId", kh.Id.ToString());
+                    HttpContext.Session.SetString("Role", "Dev");
                     var Roles = HttpContext.Session.GetString("Role");
                     //identity
                     var userClaims = new List<Claim>
                         {
-                            new Claim(ClaimTypes.Name, kh.HoTen),
-                            new Claim(ClaimTypes.Email, kh.TaiKhoan),
-                            new Claim("AccountId", kh.TaiKhoan.ToString()),
+                            new Claim(ClaimTypes.Name, kh.Name),
+                            new Claim(ClaimTypes.Email, kh.UserName),
+                            new Claim("AccountId", kh.Id.ToString()),
                             new Claim(ClaimTypes.Role, Roles)
                         };
-                    var grandmaIdentity = new ClaimsIdentity(userClaims, "User Identity");
+                    var grandmaIdentity = new ClaimsIdentity(userClaims, "Dev Identity");
                     var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity });
                     await HttpContext.SignInAsync(userPrincipal);
 
@@ -123,9 +105,78 @@ namespace Khoaluan.Areas.Admin.Controllers
             }
             catch
             {
-                return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
+                return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
             }
-            return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
+            return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
+        }
+
+        // GET: DevController/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: DevController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: DevController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: DevController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: DevController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: DevController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: DevController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
         [HttpPost]
         public IActionResult ChangePassword(ChangePasswordViewModel model)
@@ -135,20 +186,20 @@ namespace Khoaluan.Areas.Admin.Controllers
                 var taikhoanID = HttpContext.Session.GetString("AccountId");
                 if (taikhoanID == null)
                 {
-                    return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
+                    return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
                 }
                 if (ModelState.IsValid)
                 {
-                    var taikhoan = _unitOfWork.AdminRepository.GetAll().Where(t => t.TaiKhoan == taikhoanID).FirstOrDefault();
-                    if (taikhoan == null) return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
+                    var taikhoan = _unitOfWork.DeveloperRepository.GetById(int.Parse(taikhoanID));
+                    if (taikhoan == null) return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
                     var pass = (model.PasswordNow.Trim());
                     {
                         string passnew = (model.Password.Trim());
-                        taikhoan.Password = passnew;
-                        _unitOfWork.AdminRepository.Update(taikhoan);
+                        taikhoan.Passwork = passnew;
+                        _unitOfWork.DeveloperRepository.Update(taikhoan);
                         _unitOfWork.SaveChange();
                         _notyfService.Success("Đổi mật khẩu thành công");
-                        return RedirectToAction("Info", "Admin", new { Area = "Admin" });
+                        return RedirectToAction("InfoDev", "Dev", new { Area = "Admin" });
                     }
                 }
             }
@@ -160,19 +211,18 @@ namespace Khoaluan.Areas.Admin.Controllers
             _notyfService.Success("Thay đổi mật khẩu không thành công");
             return RedirectToAction("Info", "Admin", new { Area = "Admin" });
         }
-        [Route("logout.html", Name = "Logout")]
-        public IActionResult AdminLogout()
+        public IActionResult LogoutDev()
         {
             try
             {
                 HttpContext.SignOutAsync();
                 HttpContext.Session.Remove("AccountId");
                 HttpContext.Session.Remove("Role");
-                return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
+                return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
             }
             catch
             {
-                return RedirectToAction("AdminLogin", "Admin", new { Area = "Admin" });
+                return RedirectToAction("LoginDev", "Dev", new { Area = "Admin" });
             }
         }
     }
