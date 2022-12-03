@@ -23,5 +23,6 @@ namespace Khoaluan
         IOrderDetailRepository OrderDetailRepository { get; }
 
         IDiscussionRepository DiscussionRepository { get; }
+        IFundRepository FundRepository { get; }
     }
 }
