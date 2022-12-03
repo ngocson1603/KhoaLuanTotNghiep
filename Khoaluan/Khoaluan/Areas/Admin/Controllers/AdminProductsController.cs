@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Khoaluan.Enums;
 using Khoaluan.Helpper;
 using Khoaluan.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,18 @@ namespace Khoaluan.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
         }
+        public int ProductID
+        {
+            get
+            {
+                int? gh = int.Parse(HttpContext.Session.GetString("ProductID"));
+                if (gh == null)
+                {
+                    gh = 0;
+                }
+                return (int)gh;
+            }
+        }
         // GET: AdminProductsController
         public IActionResult Index()
         {
@@ -45,7 +58,7 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
+            HttpContext.Session.SetString("ProductID", id.ToString());
             return View(ls);
         }
 
@@ -59,10 +72,11 @@ namespace Khoaluan.Areas.Admin.Controllers
         // POST: AdminProductsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Create([Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (ModelState.IsValid)
             {
+                int type = (int)productType.pending;
                 product.Name = Utilities.ToTitleCase(product.Name);
                 if (fThumb != null)
                 {
@@ -72,7 +86,7 @@ namespace Khoaluan.Areas.Admin.Controllers
                 }
                 if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
                 product.ReleaseDate = DateTime.Now;
-
+                product.Status = type;
                 _unitOfWork.ProductRepository.Create(product);
                 _unitOfWork.SaveChange();
                 _notyfService.Success("Thêm mới thành công");
@@ -80,6 +94,31 @@ namespace Khoaluan.Areas.Admin.Controllers
             }
             ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
             return View(product);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateItem([Bind("Id,Name,Image,ProductId,MinPrice,MaxPrice")] Item item, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        {
+            if (ModelState.IsValid)
+            {
+                item.Name = Utilities.ToTitleCase(item.Name);
+                if (fThumb != null)
+                {
+                    string extension = Path.GetExtension(fThumb.FileName);
+                    string image = Utilities.SEOUrl(item.Name) + extension;
+                    item.Image = await Utilities.UploadFile(fThumb, image.ToLower());
+                }
+                if (string.IsNullOrEmpty(item.Image)) item.Image = "default.jpg";
+                var idproduct = HttpContext.Session.GetString("ProductID");
+                item.ProductId = int.Parse(idproduct);
+                _unitOfWork.ItemRepository.Create(item);
+                _unitOfWork.SaveChange();
+                _notyfService.Success("Thêm mới thành công");
+                return RedirectToAction(nameof(Index));
+            }
+            return View(item);
         }
 
         // GET: AdminProductsController/Edit/5

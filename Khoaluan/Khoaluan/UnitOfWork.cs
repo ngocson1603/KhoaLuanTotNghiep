@@ -22,6 +22,7 @@ namespace Khoaluan
         public IAdminRepository AdminRepository { get; set; }
         public IOrderDetailRepository OrderDetailRepository { get; set; }
         public IFundRepository FundRepository { get; set; }
+        public IItemRepository ItemRepository { get; set; }
         public UnitOfWork(GameStoreDbContext context,
             IProductCategoryRepository productCategoryRepository,
             IProductRepository productRepository,
@@ -37,7 +38,8 @@ namespace Khoaluan
             IAdminRepository adminRepository,
             IMongoContext mongoContext,
             IOrderDetailRepository orderDetailRepository,
-            IFundRepository fundRepository
+            IFundRepository fundRepository,
+            IItemRepository itemRepository
             )
         {
             MongoContext = mongoContext;
@@ -56,6 +58,7 @@ namespace Khoaluan
             AdminRepository = adminRepository;
             OrderDetailRepository = orderDetailRepository;
             FundRepository = fundRepository;
+            ItemRepository = itemRepository;
         }
         public void Dispose()
         {

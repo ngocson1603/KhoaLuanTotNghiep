@@ -12,7 +12,9 @@
             @*<span class="breadcrumb-item active">Danh sách sản phẩm : trang @CurrentPage</span>*@
         </nav>
     </div>
+
 </div>
+
 <div class="card">
     <div class="card-body">
         <div class="row m-b-30">
@@ -79,18 +81,34 @@
                                 <td>@item.Price.ToString("#,##0") VNĐ</td>
                                 <td>1</td>
                                 <td>
-                                    @*@if (item.UnitsInStock.Value > 0)
-                                        {
-                                            <div class="d-flex align-items-center">
-                                                <div class="badge badge-success badge-dot m-r-10"></div>
-                                                <div>Còn hàng</div>
-                                            </div> }
-                                        else
-                                        {
-                                            <div class="d-flex align-items-center">
-                                                <div class="badge badge-success badge-dot m-r-10"></div>
-                                                <div>Hết hàng</div>
-                                            </div>}*@
+                                    @if (item.Status == 0)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div>pending</div>
+                                        </div>
+                                    }
+                                    else if (item.Status == 1)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-dot badge-dot m-r-10"></div>
+                                            <div>accept</div>
+                                        </div>
+                                    }
+                                    else if (item.Status == 2)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-green badge-dot m-r-10"></div>
+                                            <div>decline</div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-geekblue badge-dot m-r-10"></div>
+                                            <div>release</div>
+                                        </div>
+                                    }
 
                                 <td>
                                     @if (User.IsInRole("Dev"))

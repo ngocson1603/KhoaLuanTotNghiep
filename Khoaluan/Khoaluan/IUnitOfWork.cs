@@ -21,7 +21,7 @@ namespace Khoaluan
         IRefundRepository RefundRepository { get; }
         IAdminRepository AdminRepository { get; }
         IOrderDetailRepository OrderDetailRepository { get; }
-
+        IItemRepository ItemRepository { get; }
         IDiscussionRepository DiscussionRepository { get; }
         IFundRepository FundRepository { get; }
     }
