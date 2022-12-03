@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Khoaluan.Enums;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
 using Microsoft.AspNetCore.Http;
@@ -210,8 +211,10 @@ namespace Khoaluan.Controllers
                     // Thanh toán thành công -> khi này cập nhật wallet balance của tài khoản nạp
                     if (result.Status.Trim().ToUpper() == "COMPLETED")
                     {
-                        // int kq = _service.AccountService.UpdateWalletBalance(Convert.ToInt32(accountId), (int)TransactionTypes.paypal, fund.Price);
+                        _unitOfWork.UserRepository.updateBalance(Convert.ToInt32(accountId), (int)marketType.paypal, fund.Price);
+                        _unitOfWork.SaveChange();
                         _notyfService.Success("Thanh toán thành công!");
+                        _notyfService.Information("Cập nhật số dư ví thành công!");
                         paymentResultList.Add("Payment Successful. Thank you.");
 
                         //switch (kq)

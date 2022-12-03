@@ -28,6 +28,10 @@ namespace Khoaluan.Repositories
             {
                 user.Balance=user.Balance+price;
             }
+            else if (type == (int)marketType.paypal)
+            {
+                user.Balance = user.Balance + price;
+            }    
             this.Update(user);
         }
     }

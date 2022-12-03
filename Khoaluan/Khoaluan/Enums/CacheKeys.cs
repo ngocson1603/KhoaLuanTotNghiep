@@ -12,6 +12,7 @@ namespace Khoaluan.Enums
         buy=2,  
         soldout=3,
         purchased=4,
+        paypal = 5
     }
     public enum productType
     {
