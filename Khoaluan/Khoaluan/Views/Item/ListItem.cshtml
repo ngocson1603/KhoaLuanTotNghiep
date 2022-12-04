@@ -1,8 +1,7 @@
-﻿@model IEnumerable<Khoaluan.Models.Item>
+﻿@model Khoaluan.OtpModels.AdminProduct
 @{
     ViewData["Title"] = "ListItem";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Khoaluan.Models.Item itemsell = new Khoaluan.Models.Item();
 }
 
 <div class="nk-main">
@@ -40,9 +39,9 @@
                 <!-- START: Posts Grid -->
                 <div class="nk-blog-grid">
                     <div class="row">
-                        @if (Model != null && Model.Count() > 0)
+                        @if (Model.item != null && Model.item.Count() > 0)
                         {
-                            foreach (var item in Model)
+                            foreach (var item in Model.item)
                             {
                                 <div class="col-md-6">
                                     <!-- START: Post -->
@@ -105,7 +104,41 @@
                     {
                         <div class="nk-widget nk-widget-highlighted">
                             <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalItem">New Item</a>
-                            @await Html.PartialAsync("~/Views/Item/_SellItemPartialView.cshtml", itemsell)
+                            <div class="nk-modal modal fade" id="modalItem" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span class="ion-android-close"></span>
+                                            </button>
+
+                                            <h4 class="mb-0"><span class="text-main-1">Ban</span> Item</h4>
+
+                                            <div class="nk-gap-1"></div>
+                                            @if (Model.itembyID != null && Model.itembyID.Count() > 0)
+                                            {
+                                                foreach (var lst in Model.itembyID)
+                                                {
+                                                    int Id = lst.Id;
+                                                    <div class="col-md-6">
+                                                        <!-- START: Post -->
+                                                        <div class="nk-blog-post">
+                                                            <a href="blog-article.html" class="nk-post-img">
+                                                                <img src="~/Images/@Url.Content(lst.Image)" alt="">
+                                                            </a>
+                                                            <h2 class="nk-post-title h4"><a href="blog-article.html">@lst.Name</a></h2>
+                                                            <a href="/ListItem.html" class="sell-item" data-mahh="@lst.Id"><span class="ion-android-close"></span></a>
+                                                        </div>
+
+                                                        <!-- END: Post -->
+                                                    </div>
+
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     }
                     <div class="nk-widget nk-widget-highlighted">
@@ -337,17 +370,17 @@
         $(document).ready(function () {
             $(function () {
                 $(".sell-item").click(function () {
-                    var itemid = $('#itemID').val();
+                    var itemid = $(this).attr("data-mahh");
                     $.ajax({
-                        url: '/sell/item',
+                        url: '/api/item/sell',
                         type: "POST",
                         dataType: "JSON",
                         data: {
-                            itemId: itemid
+                            Id: itemid
                         },
                         async: true,
                         success: function (response) {
-                            location.reload();
+                            window.location.href = "/ListItem.html";
                         },
                     });
                 });

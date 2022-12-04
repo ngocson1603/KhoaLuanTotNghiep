@@ -2,6 +2,7 @@
 using Khoaluan.Enums;
 using Khoaluan.InterfacesService;
 using Khoaluan.Models;
+using Khoaluan.OtpModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,12 +29,16 @@ namespace Khoaluan.Controllers
             var taikhoanID = HttpContext.Session.GetString("CustomerId");
             var ls = _unitOfWork.ItemRepository.GetAll();
             var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID));
-            ViewBag.ListItem = item;
-            return View(ls);
+            AdminProduct ad = new AdminProduct()
+            {
+                item = ls,
+                itembyID = item
+            };
+            return View(ad);
         }
         [HttpPost]
-        [Route("sell/item")]
-        public IActionResult SellItem(int itemId)
+        [Route("api/item/sell")]
+        public ActionResult SellItem(int Id)
         {
             if (ModelState.IsValid)
             {
@@ -41,17 +46,20 @@ namespace Khoaluan.Controllers
                 int type = (int)marketType.sell;
                 try
                 {
-                    _inventoryService.updateInventory(int.Parse(taikhoanID), itemId, type,1);
-                    return Redirect("/ProductCart/CheckoutSuccess");
+                    _inventoryService.updateInventory(int.Parse(taikhoanID), Id, type,1);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Success("thành công");
+                    return RedirectToRoute("ListItem");
                 }
                 catch (Exception ex)
                 {
-                    //log
-                    return Redirect("/ProductCart/CheckoutFail");
+                    _notyfService.Success("khong thành công");
+                    return RedirectToRoute("ListItem");
                 }
 
             }
-            return RedirectToRoute("Cart");
+            _notyfService.Success("khong thành công");
+            return RedirectToRoute("ListItem");
         }
     }
 }
