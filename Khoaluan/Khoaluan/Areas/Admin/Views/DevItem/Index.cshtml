@@ -36,16 +36,6 @@
                     </div>
                 </div>
             </div>
-            @if (User.IsInRole("Dev"))
-            {
-                <div class="col-lg-4 text-right">
-                    <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminProducts" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm sản phẩm</span></a>
-                </div>
-            }
-            else
-            {
-
-            }
 
         </div>
         <div class="table-responsive">
@@ -75,7 +65,6 @@
                         <td>
                             <div class="d-flex align-items-center">
                                 <img class="img-fluid rounded" src="~/Images/@Url.Content(item.Image)" style="max-width: 60px" alt="">
-                                <h6 class="m-b-0 m-l-10">@item.Name</h6>
                             </div>
                         </td>
                         <td>@item.ProductId</td>
@@ -83,17 +72,9 @@
                         <td>@item.MaxPrice.ToString("#,##0") VNĐ</td>
                         <td>
                         <td>
-                            @if (User.IsInRole("Dev"))
-                            {
-                                <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Details" asp-route-id="@item.Id">Chi tiết</a>
-                            }
-                            else
-                            {
-                                <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Details" asp-route-id="@item.Id">Chi tiết</a>
-                                <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
-                                <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
-                            }
-
+                            <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Details" asp-route-id="@item.Id">Chi tiết</a>
+                            <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
+                            <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
                         </td>
                     </tr>
                         }

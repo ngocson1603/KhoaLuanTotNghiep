@@ -45,7 +45,7 @@ namespace Khoaluan.Areas.Admin.Controllers
 
             return View(ls);
         }
-
+        
         // GET: AdminProductsController/Details/5
         public IActionResult Details(int? id)
         {
