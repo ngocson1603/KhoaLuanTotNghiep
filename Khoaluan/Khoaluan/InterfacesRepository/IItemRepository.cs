@@ -11,5 +11,6 @@ namespace Khoaluan.InterfacesRepository
     {
         List<ItemModelView> getItem(int id);
         ItemModelView getItemById(int id);
+        List<Item> getItemByUser(int id);
     }
 }
