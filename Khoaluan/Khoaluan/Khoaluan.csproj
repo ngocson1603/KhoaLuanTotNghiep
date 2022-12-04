@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="Areas\Admin\Views\AdminProducts\Index.cshtml" />
     <None Include="Areas\Admin\Views\Dev\LoginDev.cshtml" />
     <None Include="Areas\Admin\Views\Home\Index.cshtml" />

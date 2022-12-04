@@ -64,5 +64,14 @@ namespace Khoaluan.Repositories
             var result = Context.Database.GetDbConnection().Query<GameRefund>(query, parameter);
             return result.ToList();
         }
+
+        public List<Product> listProductDev(int id)
+        {
+            var query = @"select * from Product where Product.DevId = @id";
+            var parameter = new DynamicParameters();
+            parameter.Add("id", id);
+            var result = Context.Database.GetDbConnection().Query<Product>(query, parameter);
+            return result.ToList();
+        }
     }
 }

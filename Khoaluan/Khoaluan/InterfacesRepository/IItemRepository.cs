@@ -9,6 +9,8 @@ namespace Khoaluan.InterfacesRepository
 {
     public interface IItemRepository : IGameStoreRepository<Item>
     {
-        List<ItemModelView> getItem();
+        List<ItemModelView> getItem(int id);
+        ItemModelView getItemById(int id);
+        List<Item> getItemByUser(int id);
     }
 }

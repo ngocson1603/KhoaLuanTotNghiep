@@ -1,9 +1,13 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Khoaluan.Helpper;
+using Khoaluan.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,15 +27,31 @@ namespace Khoaluan.Areas.Admin.Controllers
         // GET: DevItemController
         public ActionResult Index()
         {
-            var ls = _unitOfWork.ItemRepository.getItem();
+            var taikhoanID = HttpContext.Session.GetString("AccountId");
+            var ls = _unitOfWork.ItemRepository.getItem(int.Parse(taikhoanID));
 
             return View(ls);
         }
-
-        // GET: DevItemController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult IndexDev()
         {
-            return View();
+            var taikhoanID = HttpContext.Session.GetString("AccountId");
+            var ls = _unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)).ToList();
+            return View(ls);
+        }
+        // GET: DevItemController/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var item = _unitOfWork.ItemRepository.getItemById((int)id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return View(item);
         }
 
         // GET: DevItemController/Create
@@ -56,30 +76,62 @@ namespace Khoaluan.Areas.Admin.Controllers
         }
 
         // GET: DevItemController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var item = _unitOfWork.ItemRepository.GetById((int)id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var taikhoanID = HttpContext.Session.GetString("AccountId");
+            ViewData["Item"] = new SelectList(_unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)), "Id", "Name", item.ProductId);
+            return View(item);
         }
 
-        // POST: DevItemController/Edit/5
+        // POST: AdminProductsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Image,ProductId,MaxPrice,MinPrice")] Item item, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
-            try
+            if (id != item.Id)
             {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                item.Name = Utilities.ToTitleCase(item.Name);
+                if (fThumb != null)
+                {
+
+
+                    string extension = Path.GetExtension(fThumb.FileName);
+                    string images = Utilities.SEOUrl(item.Name) + extension;
+                    item.Image = await Utilities.UploadFile(fThumb, images.ToLower());
+                }
+                if (string.IsNullOrEmpty(item.Image)) item.Image = "default.jpg";
+
+                _unitOfWork.ItemRepository.Update(item);
+                _unitOfWork.SaveChange();
+                _notyfService.Success("Cập nhật thành công");
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            var taikhoanID = HttpContext.Session.GetString("AccountId");
+            ViewData["Item"] = new SelectList(_unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)), "Id", "Name", item.ProductId);
+            return View(item);
         }
-
         // GET: DevItemController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var product = _unitOfWork.ItemRepository.GetById(id);
+            _unitOfWork.ItemRepository.Delete(product);
+            _unitOfWork.SaveChange();
+            _notyfService.Success("Xóa thành công");
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: DevItemController/Delete/5
