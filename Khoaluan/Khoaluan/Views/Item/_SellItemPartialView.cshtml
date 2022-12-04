@@ -1,7 +1,4 @@
-﻿@model Khoaluan.Models.Item
-@{
-    List<Item> item = ViewBag.ListItem;
-}
+﻿@model Khoaluan.OtpModels.AdminProduct
 <div class="nk-modal modal fade" id="modalItem" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -13,27 +10,23 @@
                 <h4 class="mb-0"><span class="text-main-1">Ban</span> Item</h4>
 
                 <div class="nk-gap-1"></div>
-                @if (item != null && item.Count() > 0)
+                @if (Model.itembyID != null && Model.itembyID.Count() > 0)
                 {
-                    foreach (var lst in item)
+                    foreach (var lst in Model.itembyID)
                     {
-                        <form asp-action="SellItem">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <input id="itemID" type="text" asp-for="@lst.Id" />
-                            <div class="form-group">
-                                <div class="col-md-6">
-                                    <!-- START: Post -->
-                                    <div class="nk-blog-post">
-                                        <a href="blog-article.html" class="nk-post-img">
-                                            <img src="~/Images/@Url.Content(lst.Image)" alt="">
-                                        </a>
-                                        <h2 class="nk-post-title h4"><a href="blog-article.html">@lst.Name</a></h2>
-                                    </div>
-                                    <!-- END: Post -->
-                                </div>
-                                <input type="submit" value="Create" class="sell-item btn btn-primary" />
+                        <div class="col-md-6">
+                            <!-- START: Post -->
+                            <div class="nk-blog-post">
+                                <a href="blog-article.html" class="nk-post-img">
+                                    <img src="~/Images/@Url.Content(lst.Image)" alt="">
+                                </a>
+                                <h2 class="nk-post-title h4"><a href="blog-article.html">@lst.Name</a></h2>
+                                <a class="btn btn-success btn-tone m-r-5" asp-area="" asp-controller="Item" asp-action="SellItem" asp-route-id="@lst.Id">Sell</a>
                             </div>
-                        </form>
+
+                            <!-- END: Post -->
+                        </div>
+                        
                     }
                 }
             </div>
@@ -41,24 +34,24 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $(function () {
-            $(".sell-item").click(function () {
-                var itemid = $('#itemID').val();
-                $.ajax({
-                    url: '/sell/item',
-                    type: "POST",
-                    dataType: "JSON",
-                    data: {
-                        itemId: itemid
-                    },
-                    async: true,
-                    success: function (response) {
-                        location.reload();
-                    },
+@*<script>
+        $(document).ready(function () {
+            $(function () {
+                $(".sell-item").click(function () {
+                    var itemid = $('#itemID').val();
+                    $.ajax({
+                        url: '/sell/item',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            itemId: itemid
+                        },
+                        async: true,
+                        success: function (response) {
+                            location.reload();
+                        },
+                    });
                 });
             });
         });
-    });
-</script>
+    </script>*@

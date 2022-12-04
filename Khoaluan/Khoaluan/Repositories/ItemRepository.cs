@@ -37,7 +37,7 @@ namespace Khoaluan.Repositories
 
         public List<Item> getItemByUser(int id)
         {
-            var query = @"select Item.Id,Item.Name,Item.Image,MinPrice,MaxPrice,Quantity from Item,Inventory where Item.Id = Inventory.ItemID and Inventory.UserID = @id";
+            var query = @"select Item.Id as Id,Item.Name,Item.Image,MinPrice,MaxPrice,Quantity from Item,Inventory where Item.Id = Inventory.ItemID and Inventory.UserID = @id";
             var parameter = new DynamicParameters();
             parameter.Add("id", id);
             var data = Context.Database.GetDbConnection().Query<Item>(query, parameter);
