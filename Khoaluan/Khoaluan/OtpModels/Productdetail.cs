@@ -66,7 +66,9 @@ namespace Khoaluan.OtpModels
     }
     public class AdminProduct
     {
+        public Developer dev { get; set; }
         public Product product { get; set; }
+        public List<Product> productdev { get; set; }
         public List<Item> item { get; set; }
         public List<Item> itembyID { get; set; }
     }

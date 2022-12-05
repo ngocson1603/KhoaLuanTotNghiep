@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Khoaluan.Models.Developer>
+@{
+    // int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách dev";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-header no-gutters">
+    <div class="row align-items-md-center">
+        <div class="col-md-6">
+            <div class="media m-v-10">
+                <div class="avatar avatar-cyan avatar-icon avatar-square">
+                    <i class="anticon anticon-star"></i>
+                </div>
+                <div class="media-body m-l-15">
+                    <h6 class="mb-0">All Members (9)</h6>
+                    <span class="text-gray font-size-13">Dev Team</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-right">
+            <a class="btn btn-primary" asp-area="Admin" asp-controller="Admin" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm dev</span></a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-11 mx-auto">
+        <!-- Card View -->
+        <div class="row" id="card-view">
+            @if (Model != null || Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="m-t-20 text-center">
+                                    <div class="avatar avatar-image" style="height: 100px; width: 100px;">
+                                        <img src="~/Adminassets/images/avatars/thumb-1.jpg" alt="">
+                                    </div>
+                                    <h4 class="m-t-30">@item.Name</h4>
+                                    <p>@item.UserName</p>
+                                </div>
+                                <div class="text-center m-t-15">
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Admin" asp-action="Details" asp-route-id="@item.Id">Chi tiết</a>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Admin" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Admin" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+
+        </div>
+    </div>
+</div>

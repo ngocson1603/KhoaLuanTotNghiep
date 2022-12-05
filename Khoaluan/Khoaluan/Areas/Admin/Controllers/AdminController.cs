@@ -1,6 +1,8 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Khoaluan.Areas.Admin.Models;
+using Khoaluan.Models;
 using Khoaluan.ModelViews;
+using Khoaluan.OtpModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,7 +26,93 @@ namespace Khoaluan.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
         }
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var product = _unitOfWork.DeveloperRepository.GetById((int)id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
+
+        // POST: AdminProductsController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, [Bind("Id,Name,Passwork,UserName")] Developer developer)
+        {
+            if (id != developer.Id)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.DeveloperRepository.Update(developer);
+                _unitOfWork.SaveChange();
+                _notyfService.Success("Cập nhật thành công");
+                return RedirectToAction(nameof(Index));
+            }
+            return View(developer);
+        }
+        public ActionResult Delete(int id)
+        {
+            var product = _unitOfWork.DeveloperRepository.GetById(id);
+            _unitOfWork.DeveloperRepository.Delete(product);
+            _unitOfWork.SaveChange();
+            _notyfService.Success("Xóa thành công");
+            return RedirectToAction(nameof(Index));
+        }
+        public ActionResult Index()
+        {
+            var ls = _unitOfWork.DeveloperRepository.GetAll().ToList();
+            return View(ls);
+        }
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var dev = _unitOfWork.DeveloperRepository.GetAll().Where(t => t.Id == id).FirstOrDefault();
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.DevId == id).ToList();
+            var item = _unitOfWork.ItemRepository.GetAll().Where(t => t.Id == id).ToList();
+            if (ls == null)
+            {
+                return NotFound();
+            }
+            HttpContext.Session.SetString("ProductID", id.ToString());
+            AdminProduct pwc = new AdminProduct()
+            {
+                dev = dev,
+                productdev = ls,
+                item = item
+            };
+            return View(pwc);
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: AdminProductsController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind("Id,Name,Passwork,UserName")] Developer developer)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.DeveloperRepository.Create(developer);
+                _unitOfWork.SaveChange();
+                _notyfService.Success("Thêm mới thành công");
+                return RedirectToAction(nameof(Index));
+            }
+            return View(developer);
+        }
         public string Role
         {
             get

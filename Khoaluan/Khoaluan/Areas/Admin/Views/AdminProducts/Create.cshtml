@@ -48,15 +48,6 @@
                             <input type="text" class="form-control" asp-for="Price">
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <label class="font-weight-semibold" for="productCategory">Danh mục sản phẩm</label>
-                            <select class="custom-select" asp-for="DevId" style="min-width: 200px;" asp-items="ViewBag.Developer">
-                                <option value="" disabled selected>Chọn danh mục</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label class="font-weight-semibold" for="productBrand">Ảnh đại diện</label>
                         <input id="txtFile" name="fThumb" type="file" class="form-control-file" asp-for="Image" />
