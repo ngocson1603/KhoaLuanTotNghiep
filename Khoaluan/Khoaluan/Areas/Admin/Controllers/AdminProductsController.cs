@@ -97,6 +97,8 @@ namespace Khoaluan.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult PostSelectedValues(PostSelectedViewModel model)
         {
+            List<int> lst = model.SelectedIds.ToList();
+            lst.Remove(2);
             return View();
         }
 
@@ -169,7 +171,8 @@ namespace Khoaluan.Areas.Admin.Controllers
                 data.Add(new MultiDropDownListViewModel { Id = item.Id, Name = item.Name });
             }
             MultiDropDownListViewModel model = new();
-            model.ItemList = data.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+
+            model.ItemList = data.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(),Selected=true}).Where(t=>t.Text.Equals(cate)).ToList();
 
             ProCate pwc = new ProCate()
             {
@@ -177,14 +180,14 @@ namespace Khoaluan.Areas.Admin.Controllers
                 muti = model
             };
 
-            //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
+            ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
             return View(pwc);
         }
 
         // POST: AdminProductsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status")] Product product, PostSelectedViewModel model, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (id != product.Id)
             {
@@ -192,6 +195,15 @@ namespace Khoaluan.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
+                var searchProCate = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
+                List<int> lst = model.SelectedIds.ToList();
+                List<int> lst2 = new List<int>();
+                foreach(var item in searchProCate.Select(t => t.CategoryId))
+                {
+                    lst2.Add(item);
+                }
+                var result = lst.Except(lst2).ToList();
+
                 product.Name = Utilities.ToTitleCase(product.Name);
                 if (fThumb != null)
                 {
@@ -220,7 +232,7 @@ namespace Khoaluan.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
+            ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
             return View(product);
         }
 
