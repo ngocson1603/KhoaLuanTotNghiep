@@ -90,6 +90,7 @@ namespace Khoaluan.Areas.Admin.Controllers
             }
             MultiDropDownListViewModel model = new();
             model.ItemList = data.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+            ViewData["Cate"] = model;
             return View(model);
         }
 
@@ -162,8 +163,22 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 ViewData["Category"] = "";
             }
+            var data = new List<MultiDropDownListViewModel>();
+            foreach (var item in _unitOfWork.CategoryRepository.GetAll())
+            {
+                data.Add(new MultiDropDownListViewModel { Id = item.Id, Name = item.Name });
+            }
+            MultiDropDownListViewModel model = new();
+            model.ItemList = data.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+
+            ProCate pwc = new ProCate()
+            {
+                product = product,
+                muti = model
+            };
+
             //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
-            return View(product);
+            return View(pwc);
         }
 
         // POST: AdminProductsController/Edit/5
