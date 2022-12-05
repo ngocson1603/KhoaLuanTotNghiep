@@ -38,6 +38,29 @@ namespace Khoaluan.Areas.Admin.Controllers
             var ls = _unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)).ToList();
             return View(ls);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateItem([Bind("Id,Name,Image,ProductId,MinPrice,MaxPrice")] Item item, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        {
+            if (ModelState.IsValid)
+            {
+                item.Name = Utilities.ToTitleCase(item.Name);
+                if (fThumb != null)
+                {
+                    string extension = Path.GetExtension(fThumb.FileName);
+                    string image = Utilities.SEOUrl(item.Name) + extension;
+                    item.Image = await Utilities.UploadFile(fThumb, image.ToLower());
+                }
+                if (string.IsNullOrEmpty(item.Image)) item.Image = "default.jpg";
+                var idproduct = HttpContext.Session.GetString("ProductID");
+                item.ProductId = int.Parse(idproduct);
+                _unitOfWork.ItemRepository.Create(item);
+                _unitOfWork.SaveChange();
+                _notyfService.Success("Thêm mới thành công");
+                return RedirectToAction(nameof(Index));
+            }
+            return View(item);
+        }
         // GET: DevItemController/Details/5
         public ActionResult Details(int? id)
         {
@@ -45,12 +68,15 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
+            List<string> cate = new List<string>();
             var item = _unitOfWork.ItemRepository.getItemById((int)id);
+            var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
             if (item == null)
             {
                 return NotFound();
             }
+            cate.AddRange(product1.Categories);
+            ViewData["Category"] = cate;
             return View(item);
         }
 

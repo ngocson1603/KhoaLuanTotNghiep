@@ -84,7 +84,17 @@
                             <img width="200" height="200" src="~/Images/@Url.Content(Model.product.Image)" alt="@Model.product.Name" />
                         </td>
                     </tr>
-
+                    <tr>
+                        <td>Thể loại:</td>
+                        <td>
+                            <div class="form-group col-6">
+                                @foreach (var itemca in ViewBag.Category)
+                                {
+                                    <label class="font-weight-semibold" for="productPrice">@itemca,</label>
+                                }
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -190,7 +200,17 @@ else
                                         <img width="200" height="200" src="~/Images/@Url.Content(Model.product.Image)" alt="@Model.product.Name" />
                                     </td>
                                 </tr>
-
+                                <tr>
+                                    <td>Thể loại:</td>
+                                    <td>
+                                        <div class="form-group col-6">
+                                            @foreach (var itemca in ViewBag.Category)
+                                            {
+                                                <label class="font-weight-semibold" for="productPrice">@itemca,</label>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
