@@ -38,7 +38,7 @@ namespace Khoaluan.Controllers
         }
         [HttpPost]
         [Route("api/item/sell")]
-        public ActionResult SellItem(int Id)
+        public ActionResult SellItem(int Id,int number)
         {
             if (ModelState.IsValid)
             {
@@ -46,7 +46,7 @@ namespace Khoaluan.Controllers
                 int type = (int)marketType.sell;
                 try
                 {
-                    _inventoryService.updateInventory(int.Parse(taikhoanID), Id, type,1);
+                    _inventoryService.updateInventory(int.Parse(taikhoanID), Id, type, number);
                     _unitOfWork.SaveChange();
                     _notyfService.Success("thành công");
                     return RedirectToRoute("ListItem");

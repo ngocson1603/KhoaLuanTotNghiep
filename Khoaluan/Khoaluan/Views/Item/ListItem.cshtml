@@ -127,7 +127,26 @@
                                                                 <img src="~/Images/@Url.Content(lst.Image)" alt="">
                                                             </a>
                                                             <h2 class="nk-post-title h4"><a href="blog-article.html">@lst.Name</a></h2>
-                                                            <a href="/ListItem.html" class="sell-item" data-mahh="@lst.Id"><span class="ion-android-close"></span></a>
+                                                            <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalNumber">SELL</a>
+                                                            <div class="nk-modal modal fade" id="modalNumber" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                <div class="modal-dialog modal-sm" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-body">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span class="ion-android-close"></span>
+                                                                            </button>
+
+                                                                            <h4 class="mb-0"><span class="text-main-1">Sign</span> In</h4>
+
+                                                                            <div class="nk-gap-1"></div>
+                                                                            <div class="form-group">
+                                                                                <input type="number" id="number" class="number btn btn-primary" />
+                                                                            </div>
+                                                                            <a href="/ListItem.html" class="sell-item" data-mahh="@lst.Id"><span class="ion-android-close"></span></a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
 
                                                         <!-- END: Post -->
@@ -371,14 +390,17 @@
             $(function () {
                 $(".sell-item").click(function () {
                     var itemid = $(this).attr("data-mahh");
+                    var number = $('#number').val();
                     $.ajax({
                         url: '/api/item/sell',
                         type: "POST",
                         dataType: "JSON",
                         data: {
-                            Id: itemid
+                            Id: itemid,
+                            number: number
                         },
-                        async: true,
+                        async: false,
+                        cache:false,
                         success: function (response) {
                             window.location.href = "/ListItem.html";
                         },
