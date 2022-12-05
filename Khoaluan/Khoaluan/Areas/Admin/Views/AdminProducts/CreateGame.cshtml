@@ -1,0 +1,36 @@
+﻿@model Khoaluan.Areas.Admin.Models.MultiDropDownListViewModel
+@{
+    ViewData["Title"] = "CreateGame";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>CreateGame</h1>
+<link href="~/multiselect/example-styles.css" rel="stylesheet" />
+<div class="container">
+    <div class="card">
+        <div class="card-text text-center">
+            <h1>Multi Dropdownlist example</h1>
+        </div>
+        <form asp-controller="AdminProducts" asp-action="PostSelectedValues">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <select id="dropDownList-example" name="SelectedIds"
+                                asp-items="@Model.ItemList" multiple class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/multiselect/jquery.multi-select.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dropDownList-example').multiSelect();
+        });
+    </script>
+
+}

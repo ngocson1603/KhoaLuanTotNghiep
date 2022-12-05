@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Khoaluan.Areas.Admin.Models;
 using Khoaluan.Enums;
 using Khoaluan.Helpper;
 using Khoaluan.Models;
@@ -79,6 +80,23 @@ namespace Khoaluan.Areas.Admin.Controllers
             }
             
             return View(pwc);
+        }
+        public IActionResult CreateGame()
+        {
+            var data = new List<MultiDropDownListViewModel>();
+            foreach (var item in _unitOfWork.CategoryRepository.GetAll())
+            {
+                data.Add(new MultiDropDownListViewModel { Id = item.Id, Name = item.Name });
+            }
+            MultiDropDownListViewModel model = new();
+            model.ItemList = data.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult PostSelectedValues(PostSelectedViewModel model)
+        {
+            return View();
         }
 
         // GET: AdminProductsController/Create
