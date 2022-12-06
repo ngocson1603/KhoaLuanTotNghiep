@@ -5,6 +5,6 @@ namespace Khoaluan.Interfaces
 {
     public interface IMarketRepository:IGameStoreRepository<Market>
     {
-        List<Market> getlistMarket(int MarketType);
+        List<Market> getlistMarket(int MarketType,int itemID);
     }
 }

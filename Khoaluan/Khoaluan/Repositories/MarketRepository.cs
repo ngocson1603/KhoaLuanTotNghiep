@@ -14,9 +14,9 @@ namespace Khoaluan.Repositories
 
         }
 
-        public List<Market> getlistMarket(int MarketType)
+        public List<Market> getlistMarket(int MarketType,int itemID)
         {
-            var x=GetAll().Where(t=>t.Status==MarketType).ToList();
+            var x=GetAll().Where(t=>(t.Status==MarketType)&& (t.ItemID==itemID)).ToList();
             return x;
         }    
     }
