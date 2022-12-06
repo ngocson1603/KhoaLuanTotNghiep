@@ -18,47 +18,57 @@ namespace Khoaluan.Controllers
     [Authorize]
     public class UsersController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
         public INotyfService _notyfService { get; }
-        public UsersController(IUnitOfWork unitOfWork, INotyfService notyfService)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IService _service;
+
+        public UsersController(INotyfService notyfService, IUnitOfWork unitOfWork, IService service)
         {
-            _unitOfWork = unitOfWork;
             _notyfService = notyfService;
+            _unitOfWork = unitOfWork;
+            _service = service;
         }
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public IActionResult ValidatePhone(string Phone)
-        //{
-        //    try
-        //    {
-        //        var khachhang = _context.Customers.AsNoTracking().SingleOrDefault(x => x.Phone.ToLower() == Phone.ToLower());
-        //        if (khachhang != null)
-        //            return Json(data: "Số điện thoại : " + Phone + "đã được sử dụng");
 
-        //        return Json(data: true);
+        /* ValidatePhone
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ValidatePhone(string Phone)
+        {
+            try
+            {
+                var khachhang = _context.Customers.AsNoTracking().SingleOrDefault(x => x.Phone.ToLower() == Phone.ToLower());
+                if (khachhang != null)
+                    return Json(data: "Số điện thoại : " + Phone + "đã được sử dụng");
 
-        //    }
-        //    catch
-        //    {
-        //        return Json(data: true);
-        //    }
-        //}
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public IActionResult ValidateEmail(string Email)
-        //{
-        //    try
-        //    {
-        //        var khachhang = _context.Customers.AsNoTracking().SingleOrDefault(x => x.Email.ToLower() == Email.ToLower());
-        //        if (khachhang != null)
-        //            return Json(data: "Email : " + Email + " đã được sử dụng");
-        //        return Json(data: true);
-        //    }
-        //    catch
-        //    {
-        //        return Json(data: true);
-        //    }
-        //}
+                return Json(data: true);
+
+            }
+            catch
+            {
+                return Json(data: true);
+            }
+        }
+        */
+
+        /* ValidateEmail
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ValidateEmail(string Email)
+        {
+            try
+            {
+                var khachhang = _context.Customers.AsNoTracking().SingleOrDefault(x => x.Email.ToLower() == Email.ToLower());
+                if (khachhang != null)
+                    return Json(data: "Email : " + Email + " đã được sử dụng");
+                return Json(data: true);
+            }
+            catch
+            {
+                return Json(data: true);
+            }
+        }
+        */
+
         [Route("tai-khoan-cua-toi.html", Name = "Dashboard")]
         public IActionResult Dashboard()
         {
@@ -82,6 +92,7 @@ namespace Khoaluan.Controllers
 
             return RedirectToAction("Homepage", "Product");
         }
+
         [HttpGet]
         [AllowAnonymous]
         [Route("dang-ky.html", Name = "DangKy")]
@@ -93,48 +104,58 @@ namespace Khoaluan.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("dang-ky.html", Name = "DangKy")]
-        public async Task<IActionResult> DangkyTaiKhoan(RegisterViewModel taikhoan)
+        public async Task<IActionResult> DangkyTaiKhoanAsync(RegisterViewModel taikhoan)
         {
+            if (taikhoan.ConfirmPassword != taikhoan.Password)
+            {
+                _notyfService.Warning("The password confirmation does not match");
+                return RedirectToAction("Index", "Home");
+            }
+
             if (ModelState.IsValid)
             {
-                string salt = Utilities.GetRandomKey();
-                Users khachhang = new Users
+                int kq = _service.UserService.SignUp(taikhoan);
+
+                if (kq == -1)
                 {
-                    HoTen = taikhoan.FullName,
-                    Gmail = taikhoan.Email.Trim().ToLower(),
-                    Password = (taikhoan.Password + salt.Trim()).ToMD5(),
-                    Salt = salt,
-                };
-                try
+                    _notyfService.Warning("This email is already in use");
+                }
+                else if (kq == 0)
                 {
-                    _unitOfWork.UserRepository.Create(khachhang);
+                    _notyfService.Error("Registration failed");
+                }
+                else
+                {
                     _unitOfWork.SaveChange();
-                    //Lưu Session MaKh
-                    HttpContext.Session.SetString("CustomerId", khachhang.Id.ToString());
+
+                    // Lưu Session KH
+                    var user = _unitOfWork.UserRepository.FindByEmail(taikhoan.Email);
+                    HttpContext.Session.SetString("CustomerId", user.Id.ToString());
                     var taikhoanID = HttpContext.Session.GetString("CustomerId");
                     HttpContext.Session.SetString("Role", "User");
 
                     var Roles = HttpContext.Session.GetString("Role");
-                    //Identity
+                    // Identity
                     var claims = new List<Claim>
                         {
-                            new Claim(ClaimTypes.Name,khachhang.HoTen),
-                            new Claim("CustomerId", khachhang.Id.ToString()),
+                            new Claim(ClaimTypes.Name, user.HoTen),
+                            new Claim("CustomerId", user.Id.ToString()),
                             new Claim(ClaimTypes.Role, Roles)
                         };
+
                     ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
-                    _notyfService.Success("Đăng ký thành công");
-                    return RedirectToAction("Dashboard", "Users");
+                    _notyfService.Success("Registration successful");
+
+                    return RedirectToAction("Dashboard");
                 }
-                catch
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+
+                return RedirectToAction("Index", "Home");
             }
             else
             {
+                _notyfService.Warning("Please check your information and try again");
                 return RedirectToAction("Index", "Home");
             }
         }

@@ -165,14 +165,26 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 ViewData["Category"] = "";
             }
-            var data = new List<MultiDropDownListViewModel>();
+
+            var data = new List<SelectListItem>();
             foreach (var item in _unitOfWork.CategoryRepository.GetAll())
             {
-                data.Add(new MultiDropDownListViewModel { Id = item.Id, Name = item.Name });
+                data.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Name });
             }
-            MultiDropDownListViewModel model = new();
 
-            model.ItemList = data.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(),Selected=true}).Where(t=>t.Text.Equals(cate)).ToList();
+            foreach (var item_1 in cate)
+            {
+                foreach (var item_2 in data)
+                {
+                    if (item_2.Text.Equals(item_1))
+                    {
+                        item_2.Selected = true;
+                    }    
+                }
+            }
+
+            MultiDropDownListViewModel model = new();
+            model.ItemList = data;
 
             ProCate pwc = new ProCate()
             {
@@ -195,14 +207,14 @@ namespace Khoaluan.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                var searchProCate = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
-                List<int> lst = model.SelectedIds.ToList();
-                List<int> lst2 = new List<int>();
-                foreach(var item in searchProCate.Select(t => t.CategoryId))
-                {
-                    lst2.Add(item);
-                }
-                var result = lst.Except(lst2).ToList();
+                //var searchProCate = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
+                //List<int> lst = model.SelectedIds.ToList();
+                //List<int> lst2 = new List<int>();
+                //foreach(var item in searchProCate.Select(t => t.CategoryId))
+                //{
+                //    lst2.Add(item);
+                //}
+                //var result = lst.Except(lst2).ToList();
 
                 product.Name = Utilities.ToTitleCase(product.Name);
                 if (fThumb != null)
