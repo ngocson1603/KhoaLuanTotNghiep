@@ -24,5 +24,6 @@ namespace Khoaluan
         IItemRepository ItemRepository { get; }
         IDiscussionRepository DiscussionRepository { get; }
         IFundRepository FundRepository { get; }
+        IMarketTransactionRepository MarketTransactionRepository { get; }
     }
 }

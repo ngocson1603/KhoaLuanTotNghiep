@@ -68,7 +68,7 @@ namespace Khoaluan
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddNotyf(config =>
             {
-                config.DurationInSeconds = 3;
+                config.DurationInSeconds = 13;
                 config.IsDismissable = true;
                 config.Position = NotyfPosition.TopRight;
             });

@@ -31,7 +31,14 @@ namespace Khoaluan.Services
             }
             else if(marketype==(int)marketType.sell)
             {
-                inventory.Quantity=inventory.Quantity - quantity;
+                if(quantity == inventory.Quantity)
+                {
+                    _inventoryRepository.Delete(inventory);
+                }    
+                else if (quantity < inventory.Quantity)
+                {
+                    inventory.Quantity = inventory.Quantity - quantity;
+                } 
             }
             return inventory;
         }
