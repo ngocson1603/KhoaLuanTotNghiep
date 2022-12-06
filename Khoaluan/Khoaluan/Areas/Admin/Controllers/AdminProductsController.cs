@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 namespace Khoaluan.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
     public class AdminProductsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -39,6 +38,7 @@ namespace Khoaluan.Areas.Admin.Controllers
                 return (int)gh;
             }
         }
+        [Authorize(Roles = "Admin")]
         // GET: AdminProductsController
         public IActionResult Index()
         {
@@ -46,8 +46,9 @@ namespace Khoaluan.Areas.Admin.Controllers
 
             return View(ls);
         }
-        
+
         // GET: AdminProductsController/Details/5
+        [Authorize(Roles = "Admin,Dev")]
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -103,44 +104,11 @@ namespace Khoaluan.Areas.Admin.Controllers
         }
 
         // GET: AdminProductsController/Create
-        public IActionResult Create()
-        {
-            //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name");
-            return View();
-        }
-
-        // POST: AdminProductsController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
-        {
-            if (ModelState.IsValid)
-            {
-                int type = (int)productType.pending;
-                product.Name = Utilities.ToTitleCase(product.Name);
-                if (fThumb != null)
-                {
-                    string extension = Path.GetExtension(fThumb.FileName);
-                    string image = Utilities.SEOUrl(product.Name) + extension;
-                    product.Image = await Utilities.UploadFile(fThumb, image.ToLower());
-                }
-                if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
-                product.ReleaseDate = DateTime.Now;
-                var taikhoanID = HttpContext.Session.GetString("AccountId");
-                product.Status = type;
-                product.DevId = int.Parse(taikhoanID);
-                _unitOfWork.ProductRepository.Create(product);
-                _unitOfWork.SaveChange();
-                _notyfService.Success("Thêm mới thành công");
-                return RedirectToAction(nameof(Index));
-            }
-            //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
-            return View(product);
-        }
 
 
-        
 
+
+        [Authorize(Roles = "Admin")]
         // GET: AdminProductsController/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -195,7 +163,7 @@ namespace Khoaluan.Areas.Admin.Controllers
             ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
             return View(pwc);
         }
-
+        [Authorize(Roles = "Admin")]
         // POST: AdminProductsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -215,7 +183,11 @@ namespace Khoaluan.Areas.Admin.Controllers
                 //    lst2.Add(item);
                 //}
                 //var result = lst.Except(lst2).ToList();
-
+                if (model.SelectedIds == null)
+                {
+                    _notyfService.Warning("Vui lòng chọn danh mục");
+                    return RedirectToAction(nameof(Index));
+                }
                 product.Name = Utilities.ToTitleCase(product.Name);
                 if (fThumb != null)
                 {
@@ -227,8 +199,10 @@ namespace Khoaluan.Areas.Admin.Controllers
                 }
                 if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
                 product.ReleaseDate = DateTime.Now;
-
+                var catepro = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
                 _unitOfWork.ProductRepository.Update(product);
+                _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
+                _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
                 _unitOfWork.SaveChange();
                 _notyfService.Success("Cập nhật thành công");
                 List<string> cate = new List<string>();
@@ -249,6 +223,7 @@ namespace Khoaluan.Areas.Admin.Controllers
         }
 
         // GET: AdminProductsController/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var product = _unitOfWork.ProductRepository.GetById(id);
@@ -259,6 +234,7 @@ namespace Khoaluan.Areas.Admin.Controllers
         }
 
         // POST: AdminProductsController/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

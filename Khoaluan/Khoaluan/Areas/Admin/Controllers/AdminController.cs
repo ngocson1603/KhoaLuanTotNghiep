@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace Khoaluan.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

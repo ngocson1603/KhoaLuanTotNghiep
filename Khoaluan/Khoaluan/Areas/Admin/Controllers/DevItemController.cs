@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Khoaluan.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Dev")]
     public class DevItemController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
