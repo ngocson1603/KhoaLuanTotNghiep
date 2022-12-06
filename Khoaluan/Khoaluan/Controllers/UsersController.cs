@@ -204,12 +204,12 @@ namespace Khoaluan.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (User.IsInRole("Admin"))
+                if (User.IsInRole("Admin") || User.IsInRole("Dev"))
                 {
-                    //_notyfService.Warning("Vui lòng đăng xuất ở Admin");
-                    //return RedirectToAction("Index", "Home", new { Area = "Admin" });
-                    await HttpContext.SignOutAsync();
-                    HttpContext.Session.Remove("AccountId");
+                    _notyfService.Warning("Vui lòng đăng xuất");
+                    return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    //await HttpContext.SignOutAsync();
+                    //HttpContext.Session.Remove("AccountId");
                 }
                 bool isEmail = Utilities.IsValidEmail(customer.Gmail);
                 if (!isEmail) return RedirectToAction("Index", "Home");

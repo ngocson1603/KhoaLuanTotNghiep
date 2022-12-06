@@ -56,64 +56,35 @@
 
                     <div class="row">
                         <div class="form-group col-6">
-                            <label class="font-weight-semibold" for="productCategory">Danh mục sản phẩm</label>
+                            <label class="font-weight-semibold" for="productCategory">Nhà phát triển</label>
                             <select class="custom-select" asp-for="@Model.product.DevId" style="min-width: 200px;" asp-items="ViewBag.Developer">
                                 <option value="" disabled selected>Chọn danh mục</option>
                             </select>
 
                         </div>
                         <div class="form-group col-6">
+                            <label class="font-weight-semibold" for="productCategory">Danh mục</label>
                             @foreach (var itemca in ViewBag.Category)
                             {
                                 <label class="font-weight-semibold" for="productPrice">@itemca,</label>
                             }
                         </div>
                         <div class="form-group col-6">
-                            <label class="font-weight-semibold" for="productCategory">Danh mục sản phẩm</label>
+                            <label class="font-weight-semibold" for="productCategory">Tình trạng</label>
                             <select class="custom-select" asp-for="@Model.product.Status" style="min-width: 200px;">
-                                <option value="0" disabled selected>Chọn danh mục</option>
-                                <option value="1">Mục 1</option>
-                                <option value="2">Mục 2</option>
-                                <option value="3">Mục 3</option>
-                                <option value="4">Mục 4</option>
+                                <option disabled selected>Chọn danh mục</option>
+                                <option value="0">pending</option>
+                                <option value="1">accept</option>
+                                <option value="2">decline</option>
+                                <option value="3">release</option>
                             </select>
                         </div>
-                        @*<div class="form-group col-6">
-                                <label class="font-weight-semibold" for="productName">Hàng tồn kho</label>
-                                <input type="text" class="form-control" asp-for="UnitsInStock">
-                            </div>*@
                     </div>
                     <div class="form-group">
                         <label class="font-weight-semibold" for="productBrand">Ảnh đại diện</label>
                         <input id="txtFile" name="fThumb" type="file" class="form-control-file" asp-for="@Model.product.Image" />
                         <span asp-validation-for="@Model.product.Image" class="text-danger"></span>
                         <img id="imgView" width="400" height="559" src="~/Images/@Url.Content(Model.product.Image)" alt="@Model.product.Name" />
-                    </div>
-                    <div class="row">
-                        @*<div class="m-t-25">
-                                <div class="form-group d-flex align-items-center">
-                                    <div class="switch m-r-10">
-                                        <input type="checkbox" asp-for="Active">
-                                        <label for="Active"></label>
-                                    </div>
-                                    <label>Public</label>
-                                </div>
-                                <div class="form-group d-flex align-items-center">
-                                    <div class="switch m-r-10">
-                                        <input type="checkbox" asp-for="HomeFlag">
-                                        <label for="HomeFlag"></label>
-                                    </div>
-                                    <label>HomeFlag</label>
-                                </div>
-                                <div class="form-group d-flex align-items-center">
-                                    <div class="switch m-r-10">
-                                        <input type="checkbox" asp-for="BestSellers">
-                                        <label for="BestSellers"></label>
-                                    </div>
-                                    <label>BestSellers</label>
-                                </div>
-
-                            </div>*@
                     </div>
 
                 </div>
@@ -128,6 +99,22 @@
                     </div>
                 </div>
             </div>
+            <h1>CreateGame</h1>
+            <div class="container">
+                <div class="card">
+                    <div class="card-text text-center">
+                        <h1>Multi Dropdownlist example</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <select id="dropDownList-example" name="SelectedIds"
+                                        asp-items="@Model.muti.ItemList" multiple class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="tab-pane fade" id="product-edit-description">
             <div class="card">
@@ -138,22 +125,6 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-    <h1>CreateGame</h1>
-    <div class="container">
-        <div class="card">
-            <div class="card-text text-center">
-                <h1>Multi Dropdownlist example</h1>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <select id="dropDownList-example" name="SelectedIds"
-                                asp-items="@Model.muti.ItemList" multiple class="form-control"></select>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </form>

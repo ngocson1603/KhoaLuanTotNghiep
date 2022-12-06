@@ -1,5 +1,8 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Khoaluan.Areas.Admin.Models;
+using Khoaluan.Enums;
+using Khoaluan.Helpper;
+using Khoaluan.Models;
 using Khoaluan.ModelViews;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -14,7 +18,7 @@ using System.Threading.Tasks;
 namespace Khoaluan.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Dev")]
     public class DevController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -117,24 +121,39 @@ namespace Khoaluan.Controllers
         }
 
         // GET: DevController/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
+            //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name");
             return View();
         }
 
-        // POST: DevController/Create
+        // POST: AdminProductsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
-            try
+            if (ModelState.IsValid)
             {
+                int type = (int)productType.pending;
+                product.Name = Utilities.ToTitleCase(product.Name);
+                if (fThumb != null)
+                {
+                    string extension = Path.GetExtension(fThumb.FileName);
+                    string image = Utilities.SEOUrl(product.Name) + extension;
+                    product.Image = await Utilities.UploadFile(fThumb, image.ToLower());
+                }
+                if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
+                product.ReleaseDate = DateTime.Now;
+                var taikhoanID = HttpContext.Session.GetString("AccountId");
+                product.Status = type;
+                product.DevId = int.Parse(taikhoanID);
+                _unitOfWork.ProductRepository.Create(product);
+                _unitOfWork.SaveChange();
+                _notyfService.Success("Thêm mới thành công");
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
+            return View(product);
         }
 
         // GET: DevController/Edit/5

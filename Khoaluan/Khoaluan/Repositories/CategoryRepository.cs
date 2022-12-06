@@ -1,5 +1,7 @@
-﻿using Khoaluan.Interfaces;
+﻿using Khoaluan.Areas.Admin.Models;
+using Khoaluan.Interfaces;
 using Khoaluan.Models;
+using System.Collections.Generic;
 
 namespace Khoaluan.Repositories
 {
