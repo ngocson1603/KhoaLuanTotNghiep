@@ -4,6 +4,7 @@ using Khoaluan.InterfacesService;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
 using Khoaluan.OtpModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace Khoaluan.Controllers
 {
+    [Authorize]
     public class ItemController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -157,7 +159,11 @@ namespace Khoaluan.Controllers
                             _unitOfWork.InventoryRepository.Update(invenbuyer);
                         }
                         _unitOfWork.MarketTransactionRepository.Create(transaction);
-                        _unitOfWork.InventoryRepository.Update(invenseller);
+
+                        if(invenseller!= null)
+                        {
+                            _unitOfWork.InventoryRepository.Update(invenseller);
+                        }
                         _unitOfWork.UserRepository.Update(buyer);
                         _unitOfWork.UserRepository.Update(seller);
                         _unitOfWork.SaveChange();
