@@ -13,5 +13,6 @@ namespace Khoaluan.ModelViews
         public string ProductId { get; set; }
         public int MaxPrice { get; set; }
         public int MinPrice { get; set; }
+        public int Quantity { get; set; }
     }
 }

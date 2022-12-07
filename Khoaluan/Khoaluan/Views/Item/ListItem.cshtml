@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "ListItem";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Khoaluan.ModelViews.SellitemModelView itemsell = new Khoaluan.ModelViews.SellitemModelView();
 }
 
 <div class="nk-main">
@@ -39,20 +40,20 @@
                 <!-- START: Posts Grid -->
                 <div class="nk-blog-grid">
                     <div class="row">
-                        @if (Model.item != null && Model.item.Count() > 0)
+                        @if (Model.itembySell != null && Model.itembySell.Count() > 0)
                         {
-                            foreach (var item in Model.item)
+                            foreach (var item in Model.itembySell)
                             {
                                 <div class="col-md-6">
                                     <!-- START: Post -->
                                     <div class="nk-blog-post">
-                                        <a href="blog-article.html" class="nk-post-img">
+                                        <a asp-controller="Item" asp-action="Details" asp-route-id="@item.Id" class="nk-post-img">
                                             <img src="~/Images/@Url.Content(item.Image)" alt="">
                                         </a>
                                         <div class="nk-gap"></div>
-                                        <h2 class="nk-post-title h4"><a href="blog-article.html">@item.Name</a></h2>
+                                        <h2 class="nk-post-title h4"><a asp-area="" asp-controller="Item" asp-action="Details" asp-route-id="@item.Id">@item.NameItem</a></h2>
                                         <div class="nk-post-by">
-                                            <img src="~/assets/images/avatar-1.jpg" alt="" class="rounded-circle" width="35"> by <a href="#">Hitman</a> in Sep 18, 2018
+                                            <img src="~/assets/images/avatar-1.jpg" alt="" class="rounded-circle" width="35"> by <a href="#">@item.HoTen</a> @item.DayCreate
                                         </div>
                                         <div class="nk-gap"></div>
                                     </div>
@@ -126,30 +127,9 @@
                                                             <a href="blog-article.html" class="nk-post-img">
                                                                 <img src="~/Images/@Url.Content(lst.Image)" alt="">
                                                             </a>
-                                                            <h2 class="nk-post-title h4"><a href="blog-article.html">@lst.Name</a></h2>
-                                                            <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalNumber">SELL</a>
-                                                            <div class="nk-modal modal fade" id="modalNumber" tabindex="-1" role="dialog" aria-hidden="true">
-                                                                <div class="modal-dialog modal-sm" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-body">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span class="ion-android-close"></span>
-                                                                            </button>
-
-                                                                            <h4 class="mb-0"><span class="text-main-1">Sign</span> In</h4>
-
-                                                                            <div class="nk-gap-1"></div>
-                                                                            <div class="form-group">
-                                                                                <input type="number" id="number" class="number btn btn-primary" />
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <input type="number" id="price" class="price btn btn-primary" />
-                                                                            </div>
-                                                                            <a href="/ListItem.html" class="sell-item" data-mahh="@lst.Id"><span class="ion-android-close"></span></a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            <h2 class="nk-post-title h4"><a href="blog-article.html">@lst.NameItem</a></h2>
+                                                            <a href="#" class="sell-item nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalNumber" data-mahh="@Id">SELL</a>
+                                                            @await Html.PartialAsync("~/Views/Item/ListItemUserPartialView.cshtml", itemsell)
                                                         </div>
 
                                                         <!-- END: Post -->
@@ -393,21 +373,12 @@
             $(function () {
                 $(".sell-item").click(function () {
                     var itemid = $(this).attr("data-mahh"); 
-                    var number = $('#number').val();
-                    var price = $('#price').val();
                     $.ajax({
-                        url: '/api/item/sell',
+                        url: '/api/item/getid',
                         type: "POST",
                         dataType: "JSON",
                         data: {
                             Id: itemid,
-                            number: number,
-                            price: price
-                        },
-                        async: false,
-                        cache:false,
-                        success: function (response) {
-                            window.location.href = "/ListItem.html";
                         },
                     });
                 });

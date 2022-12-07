@@ -1,0 +1,28 @@
+﻿@model Khoaluan.ModelViews.SellitemModelView
+
+<div class="nk-modal modal fade" id="modalNumber" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="ion-android-close"></span>
+                </button>
+
+                <h4 class="mb-0"><span class="text-main-1">Sign</span> In</h4>
+
+                <div class="nk-gap-1"></div>
+
+                <form asp-controller="Item" asp-action="SellItem" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data" class="nk-product-addtocart">
+                    <div class="nk-gap-1"></div>
+                    <div class="input-group">
+                        <input type="number" asp-for="@Model.Quantity" class="form-control" value="1" min="1" max="21">
+                        <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
+                        <input type="number" asp-for="@Model.PricePerItem" class="form-control" value="1" min="1" max="21">
+                        <span asp-validation-for="@Model.PricePerItem" class="text-danger"></span>
+                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1">Sell</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
