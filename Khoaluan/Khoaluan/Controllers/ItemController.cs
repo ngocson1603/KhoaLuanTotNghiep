@@ -38,18 +38,41 @@ namespace Khoaluan.Controllers
             };
             return View(ad);
         }
+        public ActionResult DetailsItemSell(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID));
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return PartialView("ListItemUserPartialView", item);
+        }
+        [HttpPost]
+        [Route("api/item/getid")]
+        public void GetID(int id)
+        {
+            HttpContext.Session.SetInt32("SetIdItem",id);
+        }
+
         [HttpPost]
         [Route("api/item/sell")]
-        public ActionResult SellItem(int Id, int number, int price)
+        public ActionResult SellItem(SellitemModelView sellitem)
         {
             if (ModelState.IsValid)
             {
+                int Id = (int)HttpContext.Session.GetInt32("SetIdItem");
                 var taikhoanID = HttpContext.Session.GetString("CustomerId");                
                 var inventory = _unitOfWork.InventoryRepository.GetAll().Where(t => (t.UserID == int.Parse(taikhoanID)) && (t.ItemID == Id)).Single();
                 var user = _unitOfWork.UserRepository.GetById(int.Parse(taikhoanID));
                 try
                 {
-                    if (number > inventory.Quantity)
+                    if (sellitem.Quantity > inventory.Quantity)
                     {
                         _notyfService.Warning("số lượng không đủ");
                         return RedirectToAction(nameof(ListItem));
@@ -59,14 +82,14 @@ namespace Khoaluan.Controllers
                     {
                         UserID = int.Parse(taikhoanID),
                         ItemID = Id,
-                        Price = price,
+                        Price = sellitem.PricePerItem,
                         DayCreate = DateTime.Now,
                         Status = (int)marketType.sell,
-                        PricePerItem = price,
-                        Quantity = number
+                        PricePerItem = sellitem.PricePerItem,
+                        Quantity = sellitem.Quantity
                     };
                     _unitOfWork.MarketRepository.Create(mk);
-                    _service.InventoryService.updateInventory(int.Parse(taikhoanID), Id, (int)marketType.sell, number);                   
+                    _service.InventoryService.updateInventory(int.Parse(taikhoanID), Id, (int)marketType.sell, sellitem.Quantity);                   
                     _unitOfWork.SaveChange();
                     _notyfService.Success("thành công");
                     return RedirectToRoute("ListItem");

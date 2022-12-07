@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "ListItem";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Khoaluan.ModelViews.SellitemModelView itemsell = new Khoaluan.ModelViews.SellitemModelView();
 }
 
 <div class="nk-main">
@@ -126,30 +127,9 @@
                                                             <a href="blog-article.html" class="nk-post-img">
                                                                 <img src="~/Images/@Url.Content(lst.Image)" alt="">
                                                             </a>
-                                                            <h2 class="nk-post-title h4"><a href="blog-article.html">@lst.Name</a></h2>
-                                                            <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalNumber">SELL</a>
-                                                            <div class="nk-modal modal fade" id="modalNumber" tabindex="-1" role="dialog" aria-hidden="true">
-                                                                <div class="modal-dialog modal-sm" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-body">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span class="ion-android-close"></span>
-                                                                            </button>
-
-                                                                            <h4 class="mb-0"><span class="text-main-1">Sign</span> In</h4>
-
-                                                                            <div class="nk-gap-1"></div>
-                                                                            <div class="form-group">
-                                                                                <input type="number" id="number" min="1" max="21" class="number btn btn-primary" />
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <input type="number" id="price" min="1" max="21" class="price btn btn-primary" />
-                                                                            </div>
-                                                                            <a href="/ListItem.html" class="sell-item nk-btn nk-btn-rounded nk-btn-color-white" data-mahh="@Id"></a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            <h2 class="nk-post-title h4"><a href="blog-article.html">@lst.NameItem</a></h2>
+                                                            <a href="#" class="sell-item nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalNumber" data-mahh="@Id">SELL</a>
+                                                            @await Html.PartialAsync("~/Views/Item/ListItemUserPartialView.cshtml", itemsell)
                                                         </div>
 
                                                         <!-- END: Post -->
@@ -393,24 +373,14 @@
             $(function () {
                 $(".sell-item").click(function () {
                     var itemid = $(this).attr("data-mahh"); 
-                    var number = $('#number').val();
-                    var price = $('#price').val();
-                    alert(itemid);
-                    //$.ajax({
-                    //    url: '/api/item/sell',
-                    //    type: "POST",
-                    //    dataType: "JSON",
-                    //    data: {
-                    //        Id: itemid,
-                    //        number: number,
-                    //        price: price
-                    //    },
-                    //    async: false,
-                    //    cache:false,
-                    //    success: function (response) {
-                    //        window.location.href = "/ListItem.html";
-                    //    },
-                    //});
+                    $.ajax({
+                        url: '/api/item/getid',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            Id: itemid,
+                        },
+                    });
                 });
             });
         });

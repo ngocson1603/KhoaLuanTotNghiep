@@ -35,12 +35,12 @@ namespace Khoaluan.Repositories
             return data;
         }
 
-        public List<Item> getItemByUser(int id)
+        public List<SellitemModelView> getItemByUser(int id)
         {
             var query = @"select Item.Id as Id,Item.Name,Item.Image,MinPrice,MaxPrice,Quantity from Item,Inventory where Item.Id = Inventory.ItemID and Inventory.UserID = @id";
             var parameter = new DynamicParameters();
             parameter.Add("id", id);
-            var data = Context.Database.GetDbConnection().Query<Item>(query, parameter);
+            var data = Context.Database.GetDbConnection().Query<SellitemModelView>(query, parameter);
             return data.ToList();
         }
 
