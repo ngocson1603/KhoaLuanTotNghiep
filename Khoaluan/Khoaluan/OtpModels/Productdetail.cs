@@ -72,6 +72,7 @@ namespace Khoaluan.OtpModels
         public List<Product> productdev { get; set; }
         public List<Item> item { get; set; }
         public List<Item> itembyID { get; set; }
+        public List<SellitemModelView> itembySell { get; set; }
     }
     public class ProCate
     {

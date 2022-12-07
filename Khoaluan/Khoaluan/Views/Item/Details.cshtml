@@ -1,11 +1,9 @@
-﻿@using Khoaluan.OtpModels
-@model Khoaluan.OtpModels.DetailPage
+﻿@model Khoaluan.ModelViews.SellitemModelView
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    TempData.Keep("idpro");
-    List<Cart> carts = ViewBag.GioHang;
-    List<LibraryDetail> DanhSachDonHang = ViewBag.DonHang;
+    //List<Cart> carts = ViewBag.GioHang;
+    //List<LibraryDetail> DanhSachDonHang = ViewBag.DonHang;
 }
 <div class="nk-main">
     <!-- START: Breadcrumbs -->
@@ -29,7 +27,7 @@
 
             <li><span class="fa fa-angle-right"></span></li>
 
-            <li><span>@Model.productDetail.Name </span></li>
+            <li><span>@Model.NameItem </span></li>
 
         </ul>
     </div>
@@ -50,7 +48,7 @@
                                     <div class="nk-gallery-item-box">
                                         <a href="~/assets/images/product-6.jpg" class="nk-gallery-item" data-size="1200x554">
                                             <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
-                                            <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
+                                            <img src="~/Images/@Url.Content(Model.Image)" alt="">
                                         </a>
                                     </div>
                                 </div>
@@ -58,7 +56,7 @@
                         </div>
                         <div class="col-md-6">
 
-                            <h2 class="nk-product-title h3">@Model.productDetail.Name </h2>
+                            <h2 class="nk-product-title h3">@Model.NameItem </h2>
 
                             <select class="form-control">
                                 <option value="" disabled selected>Select Platform</option>
@@ -67,162 +65,33 @@
                                 <option value="pc">PC</option>
                             </select>
 
-                            <div class="nk-product-description">
-                                <p>@Model.productDetail.Overview</p>
-                            </div>
-
                             <!-- START: Add to Cart -->
                             <div class="nk-gap-2"></div>
-                            <form action="#" class="nk-product-addtocart">
-                                <div class="nk-product-price">€ @Model.productDetail.Price</div>
+                            <form asp-controller="Item" asp-action="BuyItem" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data" class="nk-product-addtocart">
+                                <input type="hidden" asp-for="@Model.Id" />
+                                <input type="hidden" asp-for="@Model.PricePerItem" />
+                                <div class="nk-product-price">€ @Model.PricePerItem</div>
+                                <div class="nk-product-price">Số lượng: @Model.Quantity</div>
                                 <div class="nk-gap-1"></div>
                                 <div class="input-group">
-                                    <input type="number" id="txtsoLuong" name="txtsoLuong" class="form-control" value="1" min="1" max="21">
-                                    @{
-                                        int productID = Model.productDetail.Id;
-                                        @*ViewBag.name = TempData["idpro"];
-
-                                            if (ViewBag.name != null)
-                                            {
-                                                int proid = int.Parse(ViewBag.name);
-                                                //foreach (var item in ViewBag.name)
-                                                //{
-                                                if (proid == productID)
-                                                {
-                                                    <div>
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</button>
-                                                    </div>
-                                                }
-                                                else
-                                                {*@
-                                        @if (User.Identity.IsAuthenticated)
-                                        {
-                                            if (DanhSachDonHang != null)
-                                            {
-                                                if (DanhSachDonHang.Any(t => t.UserID == int.Parse(ViewBag.GetId) && t.Id == productID))
-                                                {
-                                                    <div>
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Library</button>
-                                                        <input hidden asp-for="@productID" />
-                                                    </div>
-                                                }
-                                                else if (ViewBag.GioHang != null)
-                                                {
-
-                                                    if (carts.Any(t => t.product.Id == productID))
-                                                    {
-                                                        <div>
-                                                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
-                                                            <input hidden asp-for="@productID" />
-                                                        </div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="add-to-cart">
-                                                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                            <input hidden asp-for="@productID" />
-                                                        </div>
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    <div class="add-to-cart">
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                        <input hidden asp-for="@productID" />
-                                                    </div>
-                                                }
-                                            }
-                                            else if (ViewBag.GioHang != null)
-                                            {
-
-                                                if (carts.Any(t => t.product.Id == productID))
-                                                {
-                                                    <div>
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
-                                                        <input hidden asp-for="@productID" />
-                                                    </div>
-                                                }
-                                                else
-                                                {
-                                                    <div class="add-to-cart">
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                        <input hidden asp-for="@productID" />
-                                                    </div>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                <div class="add-to-cart">
-                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                    <input hidden asp-for="@productID" />
-                                                </div>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            @if (ViewBag.GioHang != null)
-                                            {
-
-                                                if (carts.Any(t => t.product.Id == productID))
-                                                {
-                                                    <div>
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
-                                                        <input hidden asp-for="@productID" />
-                                                    </div>
-                                                }
-                                                else
-                                                {
-                                                    <div class="add-to-cart">
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                        <input hidden asp-for="@productID" />
-                                                    </div>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                <div class="add-to-cart">
-                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                    <input hidden asp-for="@productID" />
-                                                </div>
-                                            }
-                                        }
-
-
-
-
-                                        @*}
-                                                //}
-                                            }
-                                            else
-                                            {
-                                                <div class="add-to-cart">
-                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                    <input hidden asp-for="@productID" />
-                                                </div>
-                                            }*@
-                                    }
+                                    <input type="number" asp-for="@Model.Count" class="form-control" value="1" min="1" max="21">
+                                    <span asp-validation-for="@Model.Count" class="text-danger"></span>
+                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1">Buy</button>
                                 </div>
                             </form>
                             <div class="nk-gap-3"></div>
                             <!-- END: Add to Cart -->
+
                             <!-- START: Meta -->
                             <div class="nk-product-meta">
                                     <div>
-                                        <strong>Developer</strong>:
+                                        <strong>Game</strong>:
                                         @{
-                                            string name = @Model.productDetail.DevName;
+                                            string name = @Model.NameGame;
                                             string url1 = $"/Product/HomePage/Dev/{name}.html";
-                                            <a href="@url1">@Model.productDetail.DevName</a>
+                                            <a href="@url1">@Model.NameGame</a>
                                         }
 
-                                    </div>
-                                    <div>
-                                        <strong>Categories</strong>:
-                                        @foreach (var item in Model.productDetail.Categories)
-                                        {
-                                            string url = $"/Product/HomePage/Cate/{item}.html";
-                                            <a href="@url">@item,</a>
-                                        }
                                     </div>
                                 </div>
 
@@ -260,9 +129,8 @@
                             <!-- START: Tab Description -->
                             <div role="tabpanel" class="tab-pane fade show active" id="tab-description">
                                     <div class="nk-gap"></div>
-                                    <strong class="text-white">Release Date: @Model.productDetail.ReleaseDate</strong>
+                                    <strong class="text-white">Release Date: @Model.DayCreate</strong>
                                     <div class="nk-gap"></div>
-                                    <p>@Model.productDetail.Description</p>
 
                                     <div class="nk-product-info-row row vertical-gap">
                                         <div class="col-md-5">
@@ -399,7 +267,7 @@
                 <div class="nk-gap-3"></div>
                 <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Related</span> Products</span></h3>
                 <div class="nk-gap"></div>
-                <div class="row vertical-gap">
+                @*<div class="row vertical-gap">
                         @foreach (var p in Model.relateGame)
                         {
                             string url = $"/Product/HomePage/{p.Id}.html";
@@ -424,7 +292,7 @@
                                 </div>
                             </div>
                         }
-                    </div>
+                    </div>*@
                 <!-- END: Related Products -->
             </div>
             <div class="col-lg-4">
@@ -444,7 +312,7 @@
                         <div class="nk-widget-content">
                             <p>
                                 <ul class="nk-widget-categories">
-                                    @if (Model.cate != null && Model.cate.Count() > 0)
+                                    @*@if (Model.cate != null && Model.cate.Count() > 0)
                                     {
                                         foreach (var item in Model.cate.Take(5))
                                         {
@@ -461,7 +329,7 @@
 
                                         }
                                         </span>
-                                    }
+                                    }*@
 
                                 </ul>
                             </p>
@@ -513,7 +381,7 @@
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Most</span> Popular</span></h4>
                         <div class="nk-widget-content">
 
-                            @foreach (var item in Model.popularGame)
+                            @*@foreach (var item in Model.popularGame)
                                 {
                                     string url = $"/Product/HomePage/{item.Id}.html";
                                     <div class="nk-widget-post">
@@ -529,7 +397,7 @@
                                         </div>
                                         <div class="nk-product-price">€ @item.Price</div>
                                     </div>
-                                }
+                                }*@
                         </div>
                     </div>
                 </aside>
