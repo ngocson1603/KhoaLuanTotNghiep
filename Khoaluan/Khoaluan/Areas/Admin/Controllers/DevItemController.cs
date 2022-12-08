@@ -29,7 +29,7 @@ namespace Khoaluan.Areas.Admin.Controllers
         {
             var taikhoanID = HttpContext.Session.GetString("AccountId");
             var ls = _unitOfWork.ItemRepository.getItem(int.Parse(taikhoanID));
-
+            ViewData["GameItem"] = new SelectList(_unitOfWork.ProductRepository.GetAll(), "Id", "Name");
             return View(ls);
         }
         

@@ -47,8 +47,7 @@ namespace Khoaluan.Repositories
         public List<SellitemModelView> getItemSell()
         {
             var query = @"select Market.Id as Id, Item.Image as Image, PricePerItem, Market.Quantity as Quantity, 
-Item.Name as NameItem, DayCreate, Market.UserID as UserId, HoTen, Product.Name as NameGame 
-from Market, Item, Users, Product
+Item.Name as NameItem, DayCreate, Market.UserID as UserId, HoTen, Product.Name as NameGame from Market, Item, Users, Product
 where Market.ItemID = Item.Id and Users.Id = Market.UserId and Item.ProductId = Product.Id and Market.Status=1";
             var parameter = new DynamicParameters();
             var data = Context.Database.GetDbConnection().Query<SellitemModelView>(query, parameter);
