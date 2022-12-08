@@ -46,18 +46,20 @@ namespace Khoaluan.Repositories
 
         public List<SellitemModelView> getItemSell()
         {
-            var query = @"select Market.Id as Id, Item.Image as Image, PricePerItem, Market.Quantity as Quantity, Item.Name as NameItem, DayCreate, Market.UserID as UserId, HoTen, Product.Name as NameGame
-from Inventory,Market,Item, Users, Product
-where Inventory.ItemID = Market.ItemID and Market.ItemID = Item.Id and Inventory.UserID = Users.Id and Item.ProductId = Product.Id";
+            var query = @"select Market.Id as Id, Item.Image as Image, PricePerItem, Market.Quantity as Quantity, 
+Item.Name as NameItem, DayCreate, Market.UserID as UserId, HoTen, Product.Name as NameGame 
+from Market, Item, Users, Product
+where Market.ItemID = Item.Id and Users.Id = Market.UserId and Item.ProductId = Product.Id and Market.Status=1";
             var parameter = new DynamicParameters();
             var data = Context.Database.GetDbConnection().Query<SellitemModelView>(query, parameter);
             return data.ToList();
         }
         public SellitemModelView getItemSellbyId(int id)
         {
-            var query = @"select Market.Id as Id, Item.Image as Image, PricePerItem, Market.Quantity as Quantity, Item.Name as NameItem, DayCreate, Market.UserID as UserId, HoTen, Product.Name as NameGame
-from Inventory,Market,Item, Users, Product
-where Inventory.ItemID = Market.ItemID and Market.ItemID = Item.Id and Inventory.UserID = Users.Id and Item.ProductId = Product.Id and Market.Id = @id ";
+            var query = @"select Market.Id as Id, Item.Image as Image, PricePerItem, Market.Quantity as Quantity, 
+Item.Name as NameItem, DayCreate, Market.UserID as UserId, HoTen, Product.Name as NameGame 
+from Market, Item, Users, Product
+where Market.ItemID = Item.Id and Users.Id = Market.UserId and Item.ProductId = Product.Id and Market.Id = @id ";
             var parameter = new DynamicParameters();
             parameter.Add("id", id);
             var data = Context.Database.GetDbConnection().QuerySingle<SellitemModelView>(query, parameter);

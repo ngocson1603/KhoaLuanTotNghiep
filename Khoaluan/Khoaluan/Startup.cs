@@ -39,7 +39,7 @@ namespace Khoaluan
                 {
                     p.Cookie.Name = "UserLoginCookie";
                     p.ExpireTimeSpan = TimeSpan.FromDays(1);
-                    //p.LoginPath = "/dang-nhap.html";
+                    p.LoginPath = "/dang-nhap.html";
                     //p.LogoutPath = "/dang-xuat/html";
                     p.AccessDeniedPath = "/not-found.html";
                 });
@@ -68,7 +68,7 @@ namespace Khoaluan
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddNotyf(config =>
             {
-                config.DurationInSeconds = 13;
+                config.DurationInSeconds = 3;
                 config.IsDismissable = true;
                 config.Position = NotyfPosition.TopRight;
             });

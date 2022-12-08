@@ -123,53 +123,57 @@
         </div>
     </div>
 </div>
-
+@section Styles{
+    <link href="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+}
 @section Scripts{
-    <script>
-        $(document).ready(function () {
-            jQuery("#txtCatID").change(function () {
-                var catID = jQuery(this).children(":selected").attr("value");
-                catID = parseFloat(catID);
-                $('#txtCatID option')
-                    .removeAttr('selected');
-                $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
-                $.ajax({
-                    url: '/Admin/AdminProducts/Filtter',
-                    datatype: "json",
-                    type: "GET",
-                    data: {
-                        CatID: catID
-                    },
-                    async: true,
-                    success: function (results) {
-                        if (results.status == "success") {
-                            window.location.href = results.redirectUrl;
+    @*<script>
+            $(document).ready(function () {
+                jQuery("#txtCatID").change(function () {
+                    var catID = jQuery(this).children(":selected").attr("value");
+                    catID = parseFloat(catID);
+                    $('#txtCatID option')
+                        .removeAttr('selected');
+                    $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
+                    $.ajax({
+                        url: '/Admin/AdminProducts/Filtter',
+                        datatype: "json",
+                        type: "GET",
+                        data: {
+                            CatID: catID
+                        },
+                        async: true,
+                        success: function (results) {
+                            if (results.status == "success") {
+                                window.location.href = results.redirectUrl;
+                            }
+                        },
+                        error: function (xhr) {
+                            alert('error');
                         }
-                    },
-                    error: function (xhr) {
-                        alert('error');
-                    }
+                    });
+                });
+
+                $("#keyword").keyup(function () {
+                    var strkeyword = $('#keyword').val();
+                    $.ajax({
+                        url: '/Admin/Search/FindProductDev/',
+                        datatype: "json",
+                        type: "POST",
+                        data: { keyword: strkeyword },
+                        async: true,
+                        success: function (results) {
+                            $("#records_table").html("");
+                            $("#records_table").html(results);
+                        },
+                        error: function (xhr) {
+                            alert('error');
+                        }
+                    });
                 });
             });
-
-            $("#keyword").keyup(function () {
-                var strkeyword = $('#keyword').val();
-                $.ajax({
-                    url: '/Admin/Search/FindProductDev/',
-                    datatype: "json",
-                    type: "POST",
-                    data: { keyword: strkeyword },
-                    async: true,
-                    success: function (results) {
-                        $("#records_table").html("");
-                        $("#records_table").html(results);
-                    },
-                    error: function (xhr) {
-                        alert('error');
-                    }
-                });
-            });
-        });
-    </script>
-
+        </script>*@
+    <script src="~/Adminassets/js/pages/e-commerce-order-list.js"></script>
+    <script src="~/Adminassets/vendors/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.js"></script>
 }
