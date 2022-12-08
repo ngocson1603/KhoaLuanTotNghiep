@@ -56,27 +56,26 @@
                     {
                         foreach (var item in Model)
                         {
-                    <tr>
+                            <tr>
 
-                        <td>
-                            @item.Id
-                        </td>
-                        <td>@item.Name</td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img class="img-fluid rounded" src="~/Images/@Url.Content(item.Image)" style="max-width: 60px" alt="">
-                            </div>
-                        </td>
-                        <td>@item.ProductId</td>
-                        <td>@item.MinPrice.ToString("#,##0") VNĐ</td>
-                        <td>@item.MaxPrice.ToString("#,##0") VNĐ</td>
-                        <td>
-                        <td>
-                            <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Details" asp-route-id="@item.Id">Chi tiết</a>
-                            <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
-                            <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
-                        </td>
-                    </tr>
+                                <td>
+                                    @item.Id
+                                </td>
+                                <td>@item.Name</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img class="img-fluid rounded" src="~/Images/@Url.Content(item.Image)" style="max-width: 60px" alt="">
+                                    </div>
+                                </td>
+                                <td>@item.ProductId</td>
+                                <td>@item.MinPrice.ToString("#,##0") VNĐ</td>
+                                <td>@item.MaxPrice.ToString("#,##0") VNĐ</td>
+                                <td>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Details" asp-route-id="@item.Id"><i class="anticon anticon-zoom-in"></i></a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Edit" asp-route-id="@item.Id"><i class="anticon anticon-edit"></i></a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Delete" asp-route-id="@item.Id"><i class="anticon anticon-delete"></i></a>
+                                </td>
+                            </tr>
                         }
                     }
 
@@ -91,55 +90,59 @@
         </div>
     </div>
 </div>
-
+@section Styles{
+    <link href="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+}
 @section Scripts{
-    <script>
-        $(document).ready(function () {
-            jQuery("#txtCatID").change(function () {
-                var catID = jQuery(this).children(":selected").attr("value");
-                catID = parseFloat(catID);
-                $('#txtCatID option')
-                    .removeAttr('selected');
-                $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
-                $.ajax({
-                    url: '/Admin/AdminProducts/Filtter',
-                    datatype: "json",
-                    type: "GET",
-                    data: {
-                        CatID: catID
-                    },
-                    async: true,
-                    success: function (results) {
-                        if (results.status == "success") {
-                            window.location.href = results.redirectUrl;
-                        }
-                    },
-                    error: function (xhr) {
-                        alert('error');
-                    }
-                });
-            });
+    @*<script>
+                    $(document).ready(function () {
+                        jQuery("#txtCatID").change(function () {
+                            var catID = jQuery(this).children(":selected").attr("value");
+                            catID = parseFloat(catID);
+                            $('#txtCatID option')
+                                .removeAttr('selected');
+                            $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
+                            $.ajax({
+                                url: '/Admin/AdminProducts/Filtter',
+                                datatype: "json",
+                                type: "GET",
+                                data: {
+                                    CatID: catID
+                                },
+                                async: true,
+                                success: function (results) {
+                                    if (results.status == "success") {
+                                        window.location.href = results.redirectUrl;
+                                    }
+                                },
+                                error: function (xhr) {
+                                    alert('error');
+                                }
+                            });
+                        });
 
-            $("#keyworditem").keyup(function () {
-                var strkeyword = $('#keyworditem').val();
-                $.ajax({
-                    url: '/Admin/Search/FindItem/',
-                    datatype: "json",
-                    type: "POST",
-                    data: { keyword: strkeyword },
-                    async: true,
-                    success: function (results) {
-                        $("#records_tables").html("");
-                        $("#records_tables").html(results);
-                    },
-                    error: function (xhr) {
-                        alert('error');
-                    }
-                });
-            });
-        });
-    </script>
-
+                        $("#keyworditem").keyup(function () {
+                            var strkeyword = $('#keyworditem').val();
+                            $.ajax({
+                                url: '/Admin/Search/FindItem/',
+                                datatype: "json",
+                                type: "POST",
+                                data: { keyword: strkeyword },
+                                async: true,
+                                success: function (results) {
+                                    $("#records_tables").html("");
+                                    $("#records_tables").html(results);
+                                },
+                                error: function (xhr) {
+                                    alert('error');
+                                }
+                            });
+                        });
+                    });
+        </script>*@
+    <script src="~/Adminassets/js/pages/e-commerce-order-list.js"></script>
+    <script src="~/Adminassets/vendors/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.js"></script>
 }
 
 
