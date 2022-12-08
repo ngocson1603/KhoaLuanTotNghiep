@@ -74,21 +74,21 @@
 
                         @if (PageCurrent > 1)
                         {
-                            string url = $"/ListItem.html";
+                            string url = $"/ListItem/{ViewBag.idproitem}.html";
                             <a href="@url?page=@(PageCurrent - 1)" class="nk-pagination-prev">
                                 <span class="ion-ios-arrow-back"></span>
                             </a>
                         }
                         else
                         {
-                            string url1 = $"/ListItem.html";
+                            string url1 = $"/ListItem/{ViewBag.idproitem}.html";
                             <a href="@url1" class="nk-pagination-prev">
                                 <span class="ion-ios-arrow-back"></span>
                             </a>
                         }
 
                         @{
-                            string url2 = $"/ListItem.html";
+                            string url2 = $"/ListItem/{ViewBag.idproitem}.html";
                             @if (@PageCurrent < ViewBag.maxPage)
                             {
 

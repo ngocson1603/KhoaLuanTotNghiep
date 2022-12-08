@@ -7,6 +7,8 @@ using Khoaluan.OtpModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using PagedList.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,18 +30,72 @@ namespace Khoaluan.Controllers
             _service = service;
         }
         [Route("ListItem.html", Name = "ListItem")]
-        public IActionResult ListItem()
+        public IActionResult ListItem(int? page)
         {
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 10;
             var taikhoanID = HttpContext.Session.GetString("CustomerId");
             var ls = _unitOfWork.ItemRepository.getItemSell();
             var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID));
+            var product = _unitOfWork.ProductRepository.GetAll().OrderBy(i => i.Id).ToList();
+            if (ls.Count() <= 10)
+                ViewBag.maxPage = 1;
+            else
+            {
+                double dMaxPage = Convert.ToDouble(ls.Count());
+                ViewBag.maxPage = Math.Ceiling(dMaxPage / 10);
+            }
+            var pl = ls.AsQueryable().ToPagedList(pageNumber, pageSize);
+            var plr = pl.ToList();
             AdminProduct ad = new AdminProduct()
             {
-                itembySell = ls,
-                itembyID = item
+                itembySell = plr,
+                itembyID = item,
+                productdev = product
             };
+            ViewData["GameItem"] = new SelectList(_unitOfWork.ProductRepository.GetAll(), "Id", "Name");
+            ViewBag.CurrentPage = pageNumber;
             return View(ad);
         }
+
+        [Route("/ListItem/{id}.html", Name = ("ListItemProduct"))]
+        public IActionResult ItemProduct(string id, int? page)
+        {
+            try
+            {
+                ViewBag.idproitem = id.Trim();
+                var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+                var pageSize = 10;
+                var taikhoanID = HttpContext.Session.GetString("CustomerId");
+                var ls = _unitOfWork.ItemRepository.getItemSell().Where(t=>t.NameGame.Equals(id)).ToList();
+                var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID));
+                var product = _unitOfWork.ProductRepository.GetAll().OrderBy(i => i.Id).ToList();
+                if (ls.Count() <= 10)
+                    ViewBag.maxPage = 1;
+                else
+                {
+                    double dMaxPage = Convert.ToDouble(ls.Count());
+                    ViewBag.maxPage = Math.Ceiling(dMaxPage / 10);
+                }
+
+                var pl = ls.AsQueryable().ToPagedList(pageNumber, pageSize);
+                var plr = pl.ToList();
+                AdminProduct ad = new AdminProduct()
+                {
+                    itembySell = plr,
+                    itembyID = item,
+                    productdev = product
+                };
+                ViewData["GameItem"] = new SelectList(_unitOfWork.ProductRepository.GetAll(), "Id", "Name");
+                ViewBag.CurrentPage = pageNumber;
+                return View(ad);
+            }
+            catch
+            {
+                return RedirectToRoute("ListItem");
+            }
+        }
+
         public ActionResult DetailsItemSell(int? id)
         {
             if (id == null)

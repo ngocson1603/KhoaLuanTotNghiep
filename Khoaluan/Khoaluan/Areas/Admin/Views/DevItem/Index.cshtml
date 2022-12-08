@@ -26,14 +26,6 @@
                             <input id="keyworditem" name="keyworditem" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="input-affix m-v-10">
-                            <select class="custom-select" id="txtCatID" name="txtCatID" style="min-width: 200px;" asp-items="ViewBag.DanhMuc">
-                                <option selected>Chọn danh mục</option>
-                                <option value="0">Chọn tất cả</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -94,52 +86,6 @@
     <link href="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
 }
 @section Scripts{
-    @*<script>
-                    $(document).ready(function () {
-                        jQuery("#txtCatID").change(function () {
-                            var catID = jQuery(this).children(":selected").attr("value");
-                            catID = parseFloat(catID);
-                            $('#txtCatID option')
-                                .removeAttr('selected');
-                            $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
-                            $.ajax({
-                                url: '/Admin/AdminProducts/Filtter',
-                                datatype: "json",
-                                type: "GET",
-                                data: {
-                                    CatID: catID
-                                },
-                                async: true,
-                                success: function (results) {
-                                    if (results.status == "success") {
-                                        window.location.href = results.redirectUrl;
-                                    }
-                                },
-                                error: function (xhr) {
-                                    alert('error');
-                                }
-                            });
-                        });
-
-                        $("#keyworditem").keyup(function () {
-                            var strkeyword = $('#keyworditem').val();
-                            $.ajax({
-                                url: '/Admin/Search/FindItem/',
-                                datatype: "json",
-                                type: "POST",
-                                data: { keyword: strkeyword },
-                                async: true,
-                                success: function (results) {
-                                    $("#records_tables").html("");
-                                    $("#records_tables").html(results);
-                                },
-                                error: function (xhr) {
-                                    alert('error');
-                                }
-                            });
-                        });
-                    });
-        </script>*@
     <script src="~/Adminassets/js/pages/e-commerce-order-list.js"></script>
     <script src="~/Adminassets/vendors/datatables/jquery.dataTables.min.js"></script>
     <script src="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.js"></script>

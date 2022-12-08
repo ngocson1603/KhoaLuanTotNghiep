@@ -29,15 +29,10 @@ namespace Khoaluan.Areas.Admin.Controllers
         {
             var taikhoanID = HttpContext.Session.GetString("AccountId");
             var ls = _unitOfWork.ItemRepository.getItem(int.Parse(taikhoanID));
-
+            ViewData["GameItem"] = new SelectList(_unitOfWork.ProductRepository.GetAll(), "Id", "Name");
             return View(ls);
         }
-        public IActionResult IndexDev()
-        {
-            var taikhoanID = HttpContext.Session.GetString("AccountId");
-            var ls = _unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)).ToList();
-            return View(ls);
-        }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateItem([Bind("Id,Name,Image,ProductId,MinPrice,MaxPrice")] Item item, Microsoft.AspNetCore.Http.IFormFile fThumb)
