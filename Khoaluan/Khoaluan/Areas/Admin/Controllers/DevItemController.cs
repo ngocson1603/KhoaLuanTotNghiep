@@ -32,12 +32,7 @@ namespace Khoaluan.Areas.Admin.Controllers
 
             return View(ls);
         }
-        public IActionResult IndexDev()
-        {
-            var taikhoanID = HttpContext.Session.GetString("AccountId");
-            var ls = _unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)).ToList();
-            return View(ls);
-        }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateItem([Bind("Id,Name,Image,ProductId,MinPrice,MaxPrice")] Item item, Microsoft.AspNetCore.Http.IFormFile fThumb)

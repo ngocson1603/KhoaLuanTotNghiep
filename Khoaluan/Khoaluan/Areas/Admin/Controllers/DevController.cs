@@ -126,7 +126,12 @@ namespace Khoaluan.Controllers
             //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name");
             return View();
         }
-
+        public IActionResult IndexDev()
+        {
+            var taikhoanID = HttpContext.Session.GetString("AccountId");
+            var ls = _unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)).ToList();
+            return View(ls);
+        }
         // POST: AdminProductsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -150,7 +155,7 @@ namespace Khoaluan.Controllers
                 _unitOfWork.ProductRepository.Create(product);
                 _unitOfWork.SaveChange();
                 _notyfService.Success("Thêm mới thành công");
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexDev));
             }
             //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
             return View(product);
