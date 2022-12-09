@@ -18,11 +18,11 @@ namespace Khoaluan.Services
 
         public Refund refund(int userID, int productID)
         {
-            RefundRequest request=_refundRepository.lastestOrder(productID,userID);
+            RefundRequest request=_refundRepository.refundRequest(productID,userID);
             Refund rf=new Refund()
             {
                 UserID=userID,
-                OrderID=request.OrderId,
+                OrderID=request.OrderID,
                 ProductID=productID,
                 Price=request.Price,
                 Status=(int)RefundType.pending,

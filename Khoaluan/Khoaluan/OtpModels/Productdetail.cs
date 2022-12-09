@@ -80,10 +80,4 @@ namespace Khoaluan.OtpModels
         public MultiDropDownListViewModel muti { get; set; }
         public Product product { get; set; }
     }
-    public class GameRefund
-    {
-        public int productid { get; set; }
-        public string Name { get; set; }
-        public string Image { get; set; }
-    }
 }
