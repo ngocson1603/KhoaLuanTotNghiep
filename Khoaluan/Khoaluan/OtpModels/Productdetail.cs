@@ -73,16 +73,11 @@ namespace Khoaluan.OtpModels
         public List<Item> item { get; set; }
         public List<SellitemModelView> itembyID { get; set; }
         public List<SellitemModelView> itembySell { get; set; }
+        public SellitemModelView itembyIDDetails { get; set; }
     }
     public class ProCate
     {
         public MultiDropDownListViewModel muti { get; set; }
         public Product product { get; set; }
-    }
-    public class GameRefund
-    {
-        public int productid { get; set; }
-        public string Name { get; set; }
-        public string Image { get; set; }
     }
 }

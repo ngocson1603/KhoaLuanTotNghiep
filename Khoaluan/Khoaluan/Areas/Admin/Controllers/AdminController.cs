@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Khoaluan.Areas.Admin.Models;
+using Khoaluan.Helpper;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
 using Khoaluan.OtpModels;
@@ -108,6 +109,7 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 _unitOfWork.DeveloperRepository.Create(developer);
                 _unitOfWork.SaveChange();
+                Utilities.sendemaildev(developer.UserName, developer);
                 _notyfService.Success("Thêm mới thành công");
                 return RedirectToAction(nameof(Index));
             }

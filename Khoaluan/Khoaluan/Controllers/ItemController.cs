@@ -53,7 +53,6 @@ namespace Khoaluan.Controllers
                 itembyID = item,
                 productdev = product
             };
-            ViewData["GameItem"] = new SelectList(_unitOfWork.ProductRepository.GetAll(), "Id", "Name");
             ViewBag.CurrentPage = pageNumber;
             return View(ad);
         }
@@ -86,7 +85,6 @@ namespace Khoaluan.Controllers
                     itembyID = item,
                     productdev = product
                 };
-                ViewData["GameItem"] = new SelectList(_unitOfWork.ProductRepository.GetAll(), "Id", "Name");
                 ViewBag.CurrentPage = pageNumber;
                 return View(ad);
             }

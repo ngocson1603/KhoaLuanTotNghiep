@@ -166,11 +166,11 @@ namespace Khoaluan.Controllers
             if (ModelState.IsValid)
             {
                 var taikhoanID = HttpContext.Session.GetString("CustomerId");
-                var refundID = _unitOfWork.RefundRepository.refundID(int.Parse(taikhoanID), productID);
+                int userid = int.Parse(taikhoanID);
                 try
                 {
-                    _unitOfWork.LibraryRepository.remove(int.Parse(taikhoanID), productID);
-                    _unitOfWork.RefundRepository.refund(int.Parse(taikhoanID), productID, refundID);
+                    Models.Refund refundrequest = _service.RefundService.refund(userid, productID);
+                    _unitOfWork.RefundRepository.Create(refundrequest);
                     _unitOfWork.SaveChange();
                     _notyfService.Success("thành công");
                     return RedirectToRoute("Library");
