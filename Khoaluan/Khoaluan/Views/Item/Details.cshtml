@@ -308,36 +308,6 @@
                         </div>
                     </div>
                     <div class="nk-widget nk-widget-highlighted">
-                        <h4 class="nk-widget-title"><span><span class="text-main-1">Category</span> Menu</span></h4>
-                        <div class="nk-widget-content">
-                            <p>
-                                <ul class="nk-widget-categories">
-                                    @*@if (Model.cate != null && Model.cate.Count() > 0)
-                                    {
-                                        foreach (var item in Model.cate.Take(5))
-                                        {
-                                            string url = $"/Product/HomePage/Cate/{item.Name}.html";
-                                            <li><a href="@url">@item.Name</a></li>
-                                        }
-                                        <span id="dots"></span>
-                                        <div style="border-top: 1px solid #293139;"></div>
-                                        <span id="more">
-                                            @foreach (var item in Model.cate.Skip(5))
-                                            {
-                                            string url = $"/Product/HomePage/Cate/{item.Name}.html";
-                                        <li><a href="@url">@item.Name</a></li>
-
-                                        }
-                                        </span>
-                                    }*@
-
-                                </ul>
-                            </p>
-                            <div style="margin-top: 1.5rem"></div>
-                            <button onclick="myFunction()" id="myBtn">Read more</button>
-                        </div>
-                    </div>
-                    <div class="nk-widget nk-widget-highlighted">
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Price</span> Filter</span></h4>
                         <div class="nk-widget-content">
                             <div class="nk-input-slider">
@@ -377,29 +347,6 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="nk-widget nk-widget-highlighted">
-                        <h4 class="nk-widget-title"><span><span class="text-main-1">Most</span> Popular</span></h4>
-                        <div class="nk-widget-content">
-
-                            @*@foreach (var item in Model.popularGame)
-                                {
-                                    string url = $"/Product/HomePage/{item.Id}.html";
-                                    <div class="nk-widget-post">
-                                        <a href="@url" class="nk-post-image">
-                                            <img src="~/Images/@item.Image" alt=@item.Name>
-                                        </a>
-                                        <h3 class="nk-post-title"><a href="@url">@item.Name</a></h3>
-                                        <div class="nk-product-rating">
-                                            @for (int i = 1; i <= item.Id / 20; i++)
-                                            {
-                                                <i class="fa fa-star"></i>
-                                            }
-                                        </div>
-                                        <div class="nk-product-price">€ @item.Price</div>
-                                    </div>
-                                }*@
-                        </div>
-                    </div>
                 </aside>
                 <!-- END: Sidebar -->
             </div>
@@ -434,42 +381,6 @@
     </style>
 }
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            $(function () {
-                function loadHeaderCart() {
-                    $('#miniCart').load("/AjaxContent/HeaderCart");
-                    $('#numberCart').load("/AjaxContent/NumberCart");
-                }
-                $(".add-to-cart").click(function () {
-                    var productid = $('#productID').val();
-                    $.ajax({
-                        url: '/api/cart/add',
-                        type: "POST",
-                        dataType: "JSON",
-                        data: {
-                            productID: productid
-                        },
-                        async: false,
-                        cache: false,
-                        success: function (response) {
-                            if (response.result == 'Redirect') {
-                                window.location = response.url;
-                            }
-                            else {
-                                loadHeaderCart(); //Add Product success
-                                location.reload();
-                            }
-                            console.log(response); // log to the console to see whether it worked
-                        },
-                        error: function (error) {
-                            alert("There was an error posting the data to the server: " + error.responseText);
-                        }
-                    });
-                });
-            });
-        });
-    </script>
     <script type="text/javascript">
         function myFunction() {
             var dots = document.getElementById("dots");
