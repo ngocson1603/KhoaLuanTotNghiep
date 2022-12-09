@@ -54,14 +54,14 @@ namespace Khoaluan.Repositories
         {
             return this.GetAll().Where(t => t.Name.ToLower().Contains(name)).ToList();
         }
-        public List<GameRefund> listGameRefund(int Userid)
+        public List<gameRefund> listGameRefund(int Userid)
         {
             var query = @"select distinct productid,p.Name,Image from 
                         [order] o,orderdetail od,Product p
                         where o.id=od.id and od.ProductID=p.Id and datediff(day,datepurchase,getdate())<=7 and UserID=@id";
             var parameter = new DynamicParameters();
             parameter.Add("id", Userid);
-            var result = Context.Database.GetDbConnection().Query<GameRefund>(query, parameter);
+            var result = Context.Database.GetDbConnection().Query<gameRefund>(query, parameter);
             return result.ToList();
         }
 
