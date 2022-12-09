@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Khoaluan.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -14,7 +17,7 @@ namespace Khoaluan.Helpper
         {
             try
             {
-                if(!string.IsNullOrEmpty(input))
+                if (!string.IsNullOrEmpty(input))
                 {
                     return Regex.Replace(input, "<.*?>", String.Empty);
                 }
@@ -30,7 +33,7 @@ namespace Khoaluan.Helpper
         {
             if (email.Trim().EndsWith("."))
             {
-                return false; 
+                return false;
             }
             try
             {
@@ -168,6 +171,55 @@ namespace Khoaluan.Helpper
             catch
             {
                 return null;
+            }
+        }
+
+        public static void sendemaildev(string emailaddress, Developer dev)
+        {
+            if (emailaddress.Length == 0)
+            {
+
+            }
+            else
+            {
+                if (Khoaluan.Helpper.Utilities.IsValidEmail(emailaddress))
+                {
+                    SmtpClient client = new SmtpClient()
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential()
+                        {
+                            UserName = "sondovipro123@gmail.com",
+                            Password = "caofqthenhkakkgl"
+                        }
+                    };
+                    MailAddress fromemail = new MailAddress("sondovipro123@gmail.com", "Xin chao");
+                    MailAddress toemail = new MailAddress(emailaddress, "someone");
+                    MailMessage mess = new MailMessage()
+                    {
+                        From = fromemail,
+                        Subject = "tài khoản của bạn",
+                        IsBodyHtml = true,
+                    };
+                    mess.Body += "<h1>Xin chào:" + dev.Name + "</h1>";
+                    mess.Body += "<h3>Tài khoản của bạn đã đăng kí thành công thành công<h3>";
+                    mess.Body += "<h3>thông tin tài khoản</h3>";
+                    mess.Body += "<table><thead>";
+                    mess.Body += "<tr><th>Username</th><th>password</th></thead>";
+                    mess.Body += "<tbody>";
+                    mess.Body += "<tr><td>" + dev.UserName + "</td>" + "<td>" + dev.Passwork + "</td></tr>";
+                    mess.Body += "</tbody></table>";
+                    mess.To.Add(toemail);
+                    client.Send(mess);
+                }
+                else
+                {
+
+                }
             }
         }
     }
