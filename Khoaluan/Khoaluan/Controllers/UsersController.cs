@@ -112,52 +112,48 @@ namespace Khoaluan.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            if (ModelState.IsValid)
-            {
-                int kq = _service.UserService.SignUp(taikhoan);
-
-                if (kq == -1)
-                {
-                    _notyfService.Warning("This email is already in use");
-                }
-                else if (kq == 0)
-                {
-                    _notyfService.Error("Registration failed");
-                }
-                else
-                {
-                    _unitOfWork.SaveChange();
-
-                    // Lưu Session KH
-                    var user = _unitOfWork.UserRepository.FindByEmail(taikhoan.Email);
-                    HttpContext.Session.SetString("CustomerId", user.Id.ToString());
-                    var taikhoanID = HttpContext.Session.GetString("CustomerId");
-                    HttpContext.Session.SetString("Role", "User");
-
-                    var Roles = HttpContext.Session.GetString("Role");
-                    // Identity
-                    var claims = new List<Claim>
-                        {
-                            new Claim(ClaimTypes.Name, user.HoTen),
-                            new Claim("CustomerId", user.Id.ToString()),
-                            new Claim(ClaimTypes.Role, Roles)
-                        };
-
-                    ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
-                    ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                    await HttpContext.SignInAsync(claimsPrincipal);
-                    _notyfService.Success("Registration successful");
-
-                    return RedirectToAction("Dashboard");
-                }
-
-                return RedirectToAction("Index", "Home");
-            }
-            else
+            if (!ModelState.IsValid)
             {
                 _notyfService.Warning("Please check your information and try again");
                 return RedirectToAction("Index", "Home");
             }
+
+            int kq = _service.UserService.SignUp(taikhoan);
+
+            if (kq == -1)
+            {
+                _notyfService.Warning("This email is already in use");
+            }
+            else if (kq == 0)
+            {
+                _notyfService.Error("Registration failed");
+            }
+            else
+            {
+                _unitOfWork.SaveChange();
+
+                // Lưu Session KH
+                var user = _unitOfWork.UserRepository.FindByEmail(taikhoan.Email);
+                HttpContext.Session.SetString("CustomerId", user.Id.ToString());
+                HttpContext.Session.SetString("Role", "User");
+
+                // Identity
+                var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name, user.HoTen),
+                            new Claim("CustomerId", user.Id.ToString()),
+                            new Claim(ClaimTypes.Role, "User")
+                        };
+
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
+                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                await HttpContext.SignInAsync(claimsPrincipal);
+                _notyfService.Success("Registration successful");
+
+                return RedirectToAction("Dashboard");
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize, HttpPost]
@@ -200,64 +196,51 @@ namespace Khoaluan.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("dang-nhap.html", Name = "DangNhap")]
-        public async Task<IActionResult> Login(LoginViewModel customer, string returnUrl)
+        public async Task<IActionResult> Login(LoginViewModel customer)
         {
-            if (ModelState.IsValid)
+            if (User.IsInRole("Admin") || User.IsInRole("Dev"))
             {
-                if (User.IsInRole("Admin") || User.IsInRole("Dev"))
-                {
-                    _notyfService.Warning("Vui lòng đăng xuất");
-                    return RedirectToAction("Index", "Home", new { Area = "Admin" });
-                    //await HttpContext.SignOutAsync();
-                    //HttpContext.Session.Remove("AccountId");
-                }
-                bool isEmail = Utilities.IsValidEmail(customer.Gmail);
-                if (!isEmail) return RedirectToAction("Index", "Home");
+                _notyfService.Warning("Please logout your user account first");
+                return RedirectToAction("Index", "Home", new { Area = "Admin" });
+            }
 
-                var khachhang = _unitOfWork.UserRepository.GetAll().SingleOrDefault(x => x.Gmail.Trim() == customer.Gmail);
-                if (khachhang == null)
-                {
-                    _notyfService.Success("Tài khoản không tồn tại");
-                    return RedirectToAction("Index", "Home");
-                }
-                string pass = (customer.Password + khachhang.Salt.Trim()).ToMD5();
-                if (khachhang.Password != pass)
-                {
-                    _notyfService.Success("Thông tin đăng nhập chưa chính xác");
-                    return RedirectToAction("Index", "Home");
-                }
-                //kiem tra xem account co bi disable hay khong
+            if (!ModelState.IsValid)
+            {
+                _notyfService.Warning("Please check your information and try again");
+                return RedirectToAction("Index", "Home");
+            }
 
-                //if (khachhang.Active == false)
-                //{
-                //    return RedirectToAction("ThongBao", "Accounts");
-                //}
+            int kq = _service.UserService.SignIn(customer);
 
-                //Luu Session MaKh
-                HttpContext.Session.SetString("CustomerId", khachhang.Id.ToString());
-                var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            if (kq == -1)
+            {
+                _notyfService.Warning("Couldn't find your account");
+            }
+            else if (kq == 2)
+            {
+                _notyfService.Error("Incorrect email or password");
+            }
+            else
+            {
+                // Lưu Session KH
+                var user = _unitOfWork.UserRepository.FindByEmail(customer.Gmail);
+                HttpContext.Session.SetString("CustomerId", user.Id.ToString());
                 HttpContext.Session.SetString("Role", "User");
 
-                var Roles = HttpContext.Session.GetString("Role");
-                //Identity
+                // Identity
                 var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.Name, khachhang.HoTen),
-                        new Claim("CustomerId", khachhang.Id.ToString()),
-                        new Claim(ClaimTypes.Role, Roles)
+                        new Claim(ClaimTypes.Name, user.HoTen),
+                        new Claim("CustomerId", user.Id.ToString()),
+                        new Claim(ClaimTypes.Role, "User")
                     };
+
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
                 ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
-                _notyfService.Success("Đăng nhập thành công");
-                if (string.IsNullOrEmpty(returnUrl))
-                {
-                    return RedirectToAction("Dashboard", "Users");
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+                _notyfService.Success($"Welcome back, {user.HoTen}!");
+
+                return RedirectToAction("Dashboard");
             }
 
             return RedirectToAction("Index", "Home");

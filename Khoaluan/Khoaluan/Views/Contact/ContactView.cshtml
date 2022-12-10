@@ -34,16 +34,38 @@
 
     <div class="container">
         <!-- START: Posts FullWidth -->
-        <div class="nk-blog-fullwidth">
-
-            <!-- START: Post -->
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.0624766574447!2d106.62667301471868!3d10.806526992301084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be2853ce7cd%3A0x4111b3b3c2aca14a!2zMTQwIEzDqiBUcuG7jW5nIFThuqVuLCBTxqFuIEvhu7MsIFTDom4gUGjDuiwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1669962810513!5m2!1svi!2s" width="1150" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+        <div class="row vertical-gap">
+            <div class="col-lg-12">
+                <!-- START: Post -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109552.36514741898!2d75.78663299443437!3d30.900326335681108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a837462345a7d%3A0x681102348ec60610!2sLudhiana%2C+Punjab!5e0!3m2!1sen!2sin!4v1542822206775" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <!-- END: Posts FullWidth -->
+            </div>
+            <div class="col-lg-6">
+                <div class="nk-gap"></div>
+                <form action="~/php/ajax-contact-form.php" class="nk-form nk-form-ajax">
+                    <div class="row vertical-gap sm-gap">
+                        <div class="col-md-6">
+                            <input type="email" class="form-control required" name="email" placeholder="Email *">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control required" name="name" placeholder="Name *">
+                        </div>
+                    </div>
+                    <div class="nk-gap"></div>
+                    <textarea class="form-control required" name="message" rows="5"
+                              placeholder="Message *"></textarea>
+                    <div class="nk-gap-1"></div>
+                    <button class="nk-btn nk-btn-rounded nk-btn-color-dark-3">
+                        <span>Send</span>
+                        <span class="icon"><i class="ion-paper-airplane"></i></span>
+                    </button>
+                    <div class="nk-form-response-success"></div>
+                    <div class="nk-form-response-error"></div>
+                </form>
+            </div>
         </div>
-        <!-- END: Posts FullWidth -->
-    </div>
 
-    <div class="nk-gap-2"></div>
-</div>
+        <div class="nk-gap-2"></div>
+    </div>
 
 
