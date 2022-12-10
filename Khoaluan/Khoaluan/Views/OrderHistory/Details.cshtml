@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Khoaluan.ModelViews.XemDonHang>
+
+<div id="records_tabless">
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="nk-gap"></div>
+        <table class="nk-table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <th>Product</th>
+                    <th class="text-center">Price</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td href="javascript:void(0)">#@item.Id</td>
+                        <td>@item.Name</td>
+                        <td class="text-center"><strong>@item.Price</strong></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
