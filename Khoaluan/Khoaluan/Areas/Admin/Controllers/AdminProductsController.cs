@@ -42,7 +42,7 @@ namespace Khoaluan.Areas.Admin.Controllers
         // GET: AdminProductsController
         public IActionResult Index()
         {
-            var ls = _unitOfWork.ProductRepository.GetAll().ToList();
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Status == (int)productType.accept || t.Status == (int)productType.release).ToList();
 
             return View(ls);
         }

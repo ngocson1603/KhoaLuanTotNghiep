@@ -131,7 +131,7 @@ namespace Khoaluan.Controllers
         public IActionResult IndexDev()
         {
             var taikhoanID = HttpContext.Session.GetString("AccountId");
-            var ls = _unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)).ToList();
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Status == (int)productType.accept && t.DevId==int.Parse(taikhoanID)).ToList();
             return View(ls);
         }
         // POST: AdminProductsController/Create
@@ -150,7 +150,6 @@ namespace Khoaluan.Controllers
                     product.Image = await Utilities.UploadFile(fThumb, image.ToLower());
                 }
                 if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
-                product.ReleaseDate = DateTime.Now;
                 var taikhoanID = HttpContext.Session.GetString("AccountId");
                 product.Status = type;
                 product.DevId = int.Parse(taikhoanID);
