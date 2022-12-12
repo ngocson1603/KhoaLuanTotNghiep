@@ -52,11 +52,6 @@ namespace Khoaluan.Controllers
         }
 
         // GET: ForumListController/Create
-        public ActionResult Create()
-        {
-            var list = _unitOfWork.DiscussionRepository.GetAll().Where(t => t.ProductID == idpro);
-            return View(list);
-        }
 
         // POST: ForumListController/Create
         [HttpPost]
@@ -77,11 +72,11 @@ namespace Khoaluan.Controllers
                     UserName = int.Parse(taikhoanID),
                 };
                 _unitOfWork.DiscussionRepository.Add(discussion1);
-                _notyfService.Success("Thêm thành công");
+                _notyfService.Success("Add success");
                 return Redirect(url);
             }
-            _notyfService.Success("Đã có lỗi xảy ra");
-            return View(discussion);
+            _notyfService.Warning("An error has occurred");
+            return RedirectToAction("ForumInD");
         }
 
         // GET: ForumListController/Edit/5
@@ -122,10 +117,10 @@ namespace Khoaluan.Controllers
                 };
                 _unitOfWork.DiscussionRepository.Update(id,discussion1);
                 //_unitOfWork.SaveChange();
-                _notyfService.Success("Sửa thành công");
+                _notyfService.Success("Successful fix");
                 return Redirect(url);
             }
-            _notyfService.Success("Đã có lỗi xảy ra");
+            _notyfService.Success("An error has occurred");
             return View(discussion);
         }
 
