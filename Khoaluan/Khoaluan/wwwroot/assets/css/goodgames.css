@@ -6771,6 +6771,12 @@ img.rounded {
     display: block;
     overflow: hidden;
 }
+.nk-gallery-item-box,
+.nk-gallery-item-group1 {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
 .nk-gallery-item-box1,
 .nk-gallery-item-group {
     position: relative;
@@ -6810,6 +6816,38 @@ img.rounded {
     text-decoration: none;
 }
 
+    .nk-gallery-item-box, .nk-gallery-item-box:hover, .nk-gallery-item-box:focus, .nk-gallery-item-box:active,
+    .nk-gallery-item-box a,
+    .nk-gallery-item-box a:hover,
+    .nk-gallery-item-box a:focus,
+    .nk-gallery-item-box a:active,
+    .nk-gallery-item-group1,
+    .nk-gallery-item-group1:hover,
+    .nk-gallery-item-group1:focus,
+    .nk-gallery-item-group1:active,
+    .nk-gallery-item-group1 a,
+    .nk-gallery-item-group1 a:hover,
+    .nk-gallery-item-group1 a:focus,
+    .nk-gallery-item-group1 a:active {
+        text-decoration: none;
+    }
+
+        .nk-gallery-item-box1, .nk-gallery-item-box1:hover, .nk-gallery-item-box1:focus, .nk-gallery-item-box1:active,
+        .nk-gallery-item-box1 a,
+        .nk-gallery-item-box1 a:hover,
+        .nk-gallery-item-box1 a:focus,
+        .nk-gallery-item-box1 a:active,
+        .nk-gallery-item-group1,
+        .nk-gallery-item-group1:hover,
+        .nk-gallery-item-group1:focus,
+        .nk-gallery-item-group1:active,
+        .nk-gallery-item-group1 a,
+        .nk-gallery-item-group1 a:hover,
+        .nk-gallery-item-group1 a:focus,
+        .nk-gallery-item-group1 a:active {
+            text-decoration: none;
+        }
+
 .nk-gallery-item-box img,
 .nk-gallery-item-group img {
     width: 100%;
@@ -6824,6 +6862,21 @@ img.rounded {
             transform: scale(1);
     will-change: transform;
 }
+
+    .nk-gallery-item-box img,
+    .nk-gallery-item-group1 img {
+        width: 100%;
+        height: 470px;
+        -webkit-transition: -webkit-transform .15s ease-in-out;
+        transition: -webkit-transform .15s ease-in-out;
+        -o-transition: transform .15s ease-in-out;
+        transition: transform .15s ease-in-out;
+        transition: transform .15s ease-in-out, -webkit-transform .15s ease-in-out;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        will-change: transform;
+    }
 
     .nk-gallery-item-box1 img,
     .nk-gallery-item-group img {
@@ -6940,6 +6993,28 @@ img.rounded {
     z-index: 1;
 }
 
+    .nk-gallery-item-box .nk-gallery-item-overlay,
+    .nk-gallery-item-group1 .nk-gallery-item-overlay {
+        position: absolute;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        color: #fff;
+        background-color: rgba(221, 22, 59, 0.75);
+        opacity: 0;
+        -webkit-transition: .2s opacity;
+        -o-transition: .2s opacity;
+        transition: .2s opacity;
+        z-index: 1;
+    }
+
     .nk-gallery-item-box1 .nk-gallery-item-overlay,
     .nk-gallery-item-group .nk-gallery-item-overlay {
         position: absolute;
@@ -6981,6 +7056,25 @@ img.rounded {
             transform: scale(0.95);
 }
 
+        .nk-gallery-item-box .nk-gallery-item-overlay > span,
+        .nk-gallery-item-group1 .nk-gallery-item-overlay > span {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto;
+            font-size: 3rem;
+            line-height: 48px;
+            text-align: center;
+            border: 4px solid #fff;
+            border-radius: 28px;
+            opacity: .85;
+            -webkit-transition: .35s transform ease;
+            -o-transition: .35s transform ease;
+            transition: .35s transform ease;
+            -webkit-transform: scale(0.95);
+            -ms-transform: scale(0.95);
+            transform: scale(0.95);
+        }
+
         .nk-gallery-item-box1 .nk-gallery-item-overlay > span,
         .nk-gallery-item-group .nk-gallery-item-overlay > span {
             width: 56px;
@@ -7005,6 +7099,12 @@ img.rounded {
 .nk-gallery-item-group.hover .nk-gallery-item-overlay {
     opacity: 1;
 }
+
+    .nk-gallery-item-box:hover .nk-gallery-item-overlay, .nk-gallery-item-box.hover .nk-gallery-item-overlay,
+    .nk-gallery-item-group1:hover .nk-gallery-item-overlay,
+    .nk-gallery-item-group1.hover .nk-gallery-item-overlay {
+        opacity: 1;
+    }
     .nk-gallery-item-box1:hover .nk-gallery-item-overlay, .nk-gallery-item-box1.hover .nk-gallery-item-overlay,
     .nk-gallery-item-group:hover .nk-gallery-item-overlay,
     .nk-gallery-item-group.hover .nk-gallery-item-overlay {
@@ -7018,6 +7118,14 @@ img.rounded {
         -ms-transform: scale(1);
             transform: scale(1);
 }
+
+        .nk-gallery-item-box:hover .nk-gallery-item-overlay > span, .nk-gallery-item-box.hover .nk-gallery-item-overlay > span,
+        .nk-gallery-item-group1:hover .nk-gallery-item-overlay > span,
+        .nk-gallery-item-group1.hover .nk-gallery-item-overlay > span {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
         .nk-gallery-item-box1:hover .nk-gallery-item-overlay > span, .nk-gallery-item-box1.hover .nk-gallery-item-overlay > span,
         .nk-gallery-item-group:hover .nk-gallery-item-overlay > span,
         .nk-gallery-item-group.hover .nk-gallery-item-overlay > span {
@@ -7060,6 +7168,40 @@ img.rounded {
     font-weight: 600;
 }
 
+/*------*/
+    .nk-gallery-item-group1 .nk-gallery-item-overlay {
+        padding-bottom: 55px;
+        background-color: rgba(23, 30, 34, 0.65);
+    }
+
+    .nk-gallery-item-group1 .nk-gallery-item-description {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 20px 19px;
+        overflow: auto;
+        color: #fff;
+        text-indent: 0;
+        white-space: normal;
+        background-color: rgba(221, 22, 59, 0.75);
+    }
+
+        .nk-gallery-item-group1 .nk-gallery-item-description .nk-gallery-item-description-title {
+            float: left;
+            margin-bottom: 0;
+            line-height: 1.1;
+        }
+
+        .nk-gallery-item-group1 .nk-gallery-item-description .nk-gallery-item-description-info {
+            float: right;
+            line-height: 1.1;
+        }
+
+            .nk-gallery-item-group1 .nk-gallery-item-description .nk-gallery-item-description-info span:last-of-type {
+                margin-left: 8px;
+                font-weight: 600;
+            }
 /*---------------------------
   Element Video
  ----------------------------*/
