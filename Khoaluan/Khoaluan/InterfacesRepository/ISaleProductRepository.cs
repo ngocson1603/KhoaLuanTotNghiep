@@ -6,5 +6,6 @@ namespace Khoaluan.InterfacesRepository
     public interface ISaleProductRepository:IGameStoreRepository<SaleProduct>
     {
         List<int> currentSaleProduct();
+        int getdiscount(int productid);
     }
 }

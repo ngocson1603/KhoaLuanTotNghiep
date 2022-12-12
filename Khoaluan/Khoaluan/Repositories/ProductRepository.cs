@@ -47,6 +47,7 @@ namespace Khoaluan.Repositories
                              Description = productdetail.Key.Description,
                              ReleaseDate = productdetail.Key.ReleaseDate,
                              DevName = productdetail.Key.DevName,
+                             Discount=0,
                              Categories = productdetail.ToList()
                          };
             return result.ToList();

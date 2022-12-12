@@ -20,6 +20,7 @@ namespace Khoaluan.OtpModels
         public List<string> Categories { get; set; }
         public string DevName { get; set; }
         public string CatID { get; set; }
+        public int Discount { get; set; }
     }
     public class ProductDetailModel
     {
