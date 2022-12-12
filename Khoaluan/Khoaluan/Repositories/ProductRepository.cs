@@ -84,5 +84,13 @@ from Developer,Product where Product.DevId = Developer.Id  and Product.Id = @id"
             var result = Context.Database.GetDbConnection().QuerySingle<ActiveGame>(query, parameter);
             return result;
         }
+        public List<ActiveGame> listProdevNotif()
+        {
+            var query = @"select Product.Id as Id,Product.Name as NamePro, UserName, Developer.Name as NameDev, Price, Status 
+from Developer,Product where Product.DevId = Developer.Id order by Product.Id desc ";
+            var parameter = new DynamicParameters();
+            var result = Context.Database.GetDbConnection().Query<ActiveGame>(query, parameter);
+            return result.ToList();
+        }
     }
 }

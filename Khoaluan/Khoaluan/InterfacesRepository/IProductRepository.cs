@@ -11,5 +11,6 @@ namespace Khoaluan.Interfaces
         public List<Product> GetProductByName(string name);
         public List<Product> listProductDev(int id);
         public ActiveGame listProdevActive(int id);
+        public List<ActiveGame> listProdevNotif();
     }
 }

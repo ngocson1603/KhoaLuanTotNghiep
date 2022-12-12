@@ -3998,7 +3998,7 @@ img.rounded {
 .nk-widget-post .nk-post-image img,
 .nk-widget-post-2 .nk-post-image img {
     width: 100%;
-    height: auto;
+    height: 130px;
     -webkit-transition: -webkit-transform .15s ease-in-out;
     transition: -webkit-transform .15s ease-in-out;
     -o-transition: transform .15s ease-in-out;
@@ -8266,7 +8266,7 @@ div.nk-error {
 }
 
 .nk-news-box {
-    height: 425px;
+    height: 325px;
     overflow: hidden;
     background-color: #232930;
     border: 1px solid #293139;
