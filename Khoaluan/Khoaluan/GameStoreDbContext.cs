@@ -28,6 +28,8 @@ namespace Khoaluan
             modelBuilder.ApplyConfiguration(new AdminConfiguration());
             modelBuilder.ApplyConfiguration(new MarketTransactionConfiguration());
             modelBuilder.ApplyConfiguration(new FundConfiguration());
+            modelBuilder.ApplyConfiguration(new SaleConfiguration());
+            modelBuilder.ApplyConfiguration(new SaleProductConfiguration());
         }
     }
 }
