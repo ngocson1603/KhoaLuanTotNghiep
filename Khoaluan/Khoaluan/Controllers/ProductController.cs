@@ -52,7 +52,16 @@ namespace Khoaluan.Controllers
         [Route("/Product/HomePage/{id}.html", Name = ("ProductDetails"))]
         public IActionResult Detail(int id)
         {
+            var discount=_unitOfWork.SaleProductRepository.getdiscount(id);
             var x = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
+            if(discount!=-1)
+            {
+                x.Discount = discount;
+            }
+            else
+            {
+                
+            }
             var relateGame = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
             var popularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals("Rockstar Games")).ToList();
             var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).ToList();
