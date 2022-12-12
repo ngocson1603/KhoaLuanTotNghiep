@@ -22,5 +22,6 @@ namespace Khoaluan.Models
         public List<Item> Items { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
         public List<Refund> Refunds { get; set; }
+        public List<SaleProduct> SaleProducts { get; set; }
     }
 }
