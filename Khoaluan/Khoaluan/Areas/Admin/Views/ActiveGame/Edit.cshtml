@@ -9,11 +9,16 @@
     <link href="~/multiselect/example-styles.css" rel="stylesheet" />
 }
 
-<form asp-controller="AdminProducts" asp-action="Edit" asp-route-id="@Model.product.Id" method="post" enctype="multipart/form-data">
+<form asp-controller="ActiveGame" asp-action="Edit" asp-route-id="@Model.product.Id" method="post" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="@Model.product.Id" />
     <input type="hidden" asp-for="@Model.product.Image" />
+    <input type="hidden" asp-for="@Model.product.DevId" />
     <input type="hidden" asp-for="@Model.product.ReleaseDate" />
+    <input type="hidden" asp-for="@Model.product.Name" />
+    <input type="hidden" asp-for="@Model.product.Price" />
+    <input type="hidden" asp-for="@Model.product.Overview" />
+    <input type="hidden" asp-for="@Model.product.Description" />
     <div class="page-header no-gutters has-tab">
         <div class="d-md-flex m-b-15 align-items-center justify-content-between">
             <div class="m-b-15">
@@ -41,23 +46,19 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="font-weight-semibold" for="productName">Tên sản phẩm</label>
-                        <input type="text" class="form-control" asp-for="@Model.product.Name">
-                    </div>
-                    <div class="form-group">
-                        <label class="font-weight-semibold" for="ShortDesc">Mô tả</label>
-                        <input type="text" class="form-control" asp-for="@Model.product.Description">
+                        <input type="text" class="form-control" asp-for="@Model.product.Name" disabled>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="font-weight-semibold" for="productPrice">Giá bán</label>
-                            <input type="text" class="form-control" asp-for="@Model.product.Price">
+                            <label class="font-weight-semibold" for="productPrice" disabled>Giá bán</label>
+                            <input type="text" class="form-control" asp-for="@Model.product.Price" disabled>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-6">
                             <label class="font-weight-semibold" for="productCategory">Nhà phát triển</label>
-                            <select class="custom-select" asp-for="@Model.product.DevId" style="min-width: 200px;" asp-items="ViewBag.Developer">
+                            <select class="custom-select" asp-for="@Model.product.DevId" style="min-width: 200px;" asp-items="ViewBag.Developer" disabled>
                                 <option value="" disabled selected>Chọn danh mục</option>
                             </select>
 
@@ -83,7 +84,7 @@
                     </div>
                     <div class="form-group">
                         <label class="font-weight-semibold" for="productBrand">Ảnh đại diện</label>
-                        <input id="txtFile" name="fThumb" type="file" class="form-control-file" asp-for="@Model.product.Image" />
+                        <input id="txtFile" name="fThumb" type="file" class="form-control-file" asp-for="@Model.product.Image" disabled />
                         <span asp-validation-for="@Model.product.Image" class="text-danger"></span>
                         <img id="imgView" width="400" height="559" src="~/Images/@Url.Content(Model.product.Image)" alt="@Model.product.Name" />
                     </div>
@@ -96,7 +97,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="font-weight-semibold" for="productSize">Title</label>
-                        <input type="text" class="form-control" asp-for="@Model.product.Overview">
+                        <input type="text" class="form-control" asp-for="@Model.product.Overview" disabled>
                     </div>
                 </div>
             </div>
@@ -121,7 +122,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-body">
-                        <textarea class="summernote" asp-for="@Model.product.Description"></textarea>
+                        <textarea class="summernote" asp-for="@Model.product.Description" disabled></textarea>
                     </div>
                 </div>
             </div>

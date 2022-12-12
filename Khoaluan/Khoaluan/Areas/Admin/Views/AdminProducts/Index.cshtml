@@ -103,13 +103,13 @@
                                 <td>
                                     @if (User.IsInRole("Dev"))
                                     {
-                                        <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Details" asp-route-id="@item.Id">Chi tiết</a>
+                                        <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Details" asp-route-id="@item.Id"><i class="anticon anticon-zoom-in"></i></a>
                                     }
                                     else
                                     {
-                                        <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Details" asp-route-id="@item.Id">Chi tiết</a>
-                                        <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
-                                        <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
+                                        <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Details" asp-route-id="@item.Id"><i class="anticon anticon-zoom-in"></i></a>
+                                        <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Edit" asp-route-id="@item.Id"><i class="anticon anticon-edit"></i></a>
+                                        <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Delete" asp-route-id="@item.Id"><i class="anticon anticon-delete"></i></a>
                                     }
 
                                 </td>

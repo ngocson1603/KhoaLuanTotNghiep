@@ -1,4 +1,5 @@
 ﻿using Khoaluan.Models;
+using Khoaluan.ModelViews;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -212,6 +213,63 @@ namespace Khoaluan.Helpper
                     mess.Body += "<tr><th>Username</th><th>password</th></thead>";
                     mess.Body += "<tbody>";
                     mess.Body += "<tr><td>" + dev.UserName + "</td>" + "<td>" + dev.Passwork + "</td></tr>";
+                    mess.Body += "</tbody></table>";
+                    mess.To.Add(toemail);
+                    client.Send(mess);
+                }
+                else
+                {
+
+                }
+            }
+        }
+        public static void sendemailactivegame(ActiveGame pro)
+        {
+            if (pro.UserName.Length == 0)
+            {
+
+            }
+            else
+            {
+                if (Khoaluan.Helpper.Utilities.IsValidEmail(pro.UserName))
+                {
+                    SmtpClient client = new SmtpClient()
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential()
+                        {
+                            UserName = "sondovipro123@gmail.com",
+                            Password = "caofqthenhkakkgl"
+                        }
+                    };
+                    MailAddress fromemail = new MailAddress("sondovipro123@gmail.com", "Xin chao");
+                    MailAddress toemail = new MailAddress(pro.UserName, "someone");
+                    MailMessage mess = new MailMessage()
+                    {
+                        From = fromemail,
+                        Subject = "tài khoản của bạn",
+                        IsBodyHtml = true,
+                    };
+                    string status;
+                    if(pro.Status == 1)
+                    {
+                        status = "Approved game";
+                    }
+                    else
+                    {
+                        status = "The game is not approved";
+                    }
+                    mess.Body += "<h1>Xin chào:" + pro.NameDev + "</h1>";
+                    mess.Body += "<h3>Thông tin duyệt game<h3>";
+                    mess.Body += "<h3>thông tin game</h3>";
+                    mess.Body += "<table><thead>";
+                    mess.Body += "<tr><th>Name</th><th>Price</th><th>Status</th></thead>";
+                    mess.Body += "<tbody>";
+                    mess.Body += "<tr><td>" + pro.NamePro + "</td>" + "<td>" + pro.Price + "</td>" + "<td>" + status + "</td></tr>";
                     mess.Body += "</tbody></table>";
                     mess.To.Add(toemail);
                     client.Send(mess);

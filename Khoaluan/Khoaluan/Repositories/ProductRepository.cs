@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Khoaluan.Interfaces;
 using Khoaluan.Models;
+using Khoaluan.ModelViews;
 using Khoaluan.OtpModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -72,6 +73,16 @@ namespace Khoaluan.Repositories
             parameter.Add("id", id);
             var result = Context.Database.GetDbConnection().Query<Product>(query, parameter);
             return result.ToList();
+        }
+
+        public ActiveGame listProdevActive(int id)
+        {
+            var query = @"select Product.Id as Id,Product.Name as NamePro, UserName, Developer.Name as NameDev, Price, Status 
+from Developer,Product where Product.DevId = Developer.Id  and Product.Id = @id";
+            var parameter = new DynamicParameters();
+            parameter.Add("id", id);
+            var result = Context.Database.GetDbConnection().QuerySingle<ActiveGame>(query, parameter);
+            return result;
         }
     }
 }
