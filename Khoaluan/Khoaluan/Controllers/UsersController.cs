@@ -232,7 +232,7 @@ namespace Khoaluan.Controllers
 
             if (kq == -1)
             {
-                _notyfService.Warning("Couldn't find your account");
+                _notyfService.Error("Couldn't find your account");
             }
             else if (kq == 2)
             {
