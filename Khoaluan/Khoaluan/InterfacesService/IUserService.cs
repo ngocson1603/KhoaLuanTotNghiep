@@ -9,5 +9,6 @@ namespace Khoaluan.InterfacesService
         int SignIn(LoginViewModel model);
         int SignUp(RegisterViewModel model);
         int ChangePassword(ChangePasswordViewModel model, int accountId);
+        bool SendVerification(int userId);
     }
 }

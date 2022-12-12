@@ -193,6 +193,24 @@ namespace Khoaluan.Controllers
             return View();
         }
 
+        public IActionResult ViewTestVerify()
+        {
+            return View();
+        }
+
+        public IActionResult ViewSendVerifyCode()
+        {
+            return View();
+        }
+
+        public IActionResult SendVerifyCode()
+        {
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            _service.UserService.SendVerification(int.Parse(taikhoanID));
+            _notyfService.Success("A verification code has been sent to your email account");
+            return View("ViewTestVerify");
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [Route("dang-nhap.html", Name = "DangNhap")]
@@ -287,6 +305,7 @@ namespace Khoaluan.Controllers
             _notyfService.Success("Thay đổi mật khẩu không thành công");
             return RedirectToAction("Dashboard", "Users");
         }
+
         [Route("library.html", Name = "Library")]
         public IActionResult Library()
         {

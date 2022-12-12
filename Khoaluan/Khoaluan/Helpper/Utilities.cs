@@ -223,6 +223,31 @@ namespace Khoaluan.Helpper
                 }
             }
         }
+
+        public static void SendEmail(MailMessage message, string email)
+        {
+            SmtpClient client = new SmtpClient()
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential()
+                {
+                    UserName = "sondovipro123@gmail.com",
+                    Password = "caofqthenhkakkgl"
+                }
+            };
+
+            MailAddress fromEmail = new MailAddress("sondovipro123@gmail.com", "Admin Good Games");
+            MailAddress toEmail = new MailAddress(email);
+
+            message.From = fromEmail;
+            message.To.Add(toEmail);
+            client.Send(message);
+        }
+
         public static void sendemailactivegame(ActiveGame pro)
         {
             if (pro.UserName.Length == 0)
@@ -255,7 +280,7 @@ namespace Khoaluan.Helpper
                         IsBodyHtml = true,
                     };
                     string status;
-                    if(pro.Status == 1)
+                    if (pro.Status == 1)
                     {
                         status = "Approved game";
                     }
