@@ -14,6 +14,6 @@ namespace Khoaluan.Configurations
             builder.HasOne(o=>o.Buyer).WithMany(y=>y.Buys).HasForeignKey(t=>t.BuyerID).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(o => o.Seller).WithMany(y => y.Sells).HasForeignKey(t => t.SellerID).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(o => o.Item).WithMany(y => y.MarketTransactions).HasForeignKey(t => t.ItemID).OnDelete(DeleteBehavior.Restrict);
-        }
+        }     
     }
 }

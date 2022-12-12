@@ -4,7 +4,7 @@ namespace Khoaluan.Interfaces
 {
     public interface IUsersRepository:IGameStoreRepository<Users>
     {
-        void updateBalance(int userID, int price, int type);
+        void updateBalance(int userID, decimal price, int type);
         Users FindByEmail(string email);
     }
 }

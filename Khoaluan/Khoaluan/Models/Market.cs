@@ -7,8 +7,7 @@ namespace Khoaluan.Models
     {
         public int UserID { get;set; }
         public int ItemID { get; set; }
-        public double Price { get; set; }
-        public int PricePerItem { get; set; }   
+        public decimal PricePerItem { get; set; }   
         public DateTime DayCreate { get; set; }
         public int Status { get; set; }
         public int Quantity { get; set; }
