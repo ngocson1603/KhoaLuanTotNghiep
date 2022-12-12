@@ -130,7 +130,7 @@ namespace Khoaluan.Controllers
                 {
                     if (sellitem.Quantity > inventory.Quantity)
                     {
-                        _notyfService.Warning("số lượng không đủ");
+                        _notyfService.Warning("quantity is not enough");
                         return RedirectToAction(nameof(ListItem));
                     }
 
@@ -147,16 +147,16 @@ namespace Khoaluan.Controllers
                     _unitOfWork.MarketRepository.Create(mk);
                     _service.InventoryService.updateInventory(int.Parse(taikhoanID), Id, (int)marketType.sell, sellitem.Quantity);                   
                     _unitOfWork.SaveChange();
-                    _notyfService.Success("thành công");
+                    _notyfService.Success("successful");
                     return RedirectToRoute("ListItem");
                 }
                 catch (Exception ex)
                 {
-                    _notyfService.Success("khong thành công");
+                    _notyfService.Success("unsuccessful");
                     return RedirectToRoute("ListItem");
                 }
             }
-            _notyfService.Success("khong thành công");
+            _notyfService.Success("unsuccessful");
             return RedirectToRoute("ListItem");
         }
 
@@ -173,7 +173,7 @@ namespace Khoaluan.Controllers
                 {
                     if (sellitem.Count > market.Quantity)
                     {
-                        _notyfService.Warning("số lượng nhiều hơn số lượng đã có");
+                        _notyfService.Warning("quantity is more than the amount already available");
                         return RedirectToAction(nameof(ListItem));
                     }
                     if (sellitem.PricePerItem < user.Balance)
@@ -224,17 +224,17 @@ namespace Khoaluan.Controllers
                     }
                     else
                     {
-                        _notyfService.Warning("Vui lòng nhạp thêm tiền");
+                        _notyfService.Warning("Please add for fund");
                         return RedirectToAction("Dashboard", "Users");
                     }
                 }
                 catch (Exception ex)
                 {
-                    _notyfService.Success("khong thành công");
+                    _notyfService.Success("unsuccessful");
                     return RedirectToRoute("ListItem");
                 }
             }
-            _notyfService.Success("mua thành công");
+            _notyfService.Success("successful");
             return RedirectToRoute("ListItem");
         }
 
