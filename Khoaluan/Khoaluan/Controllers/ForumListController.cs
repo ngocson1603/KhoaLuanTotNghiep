@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Khoaluan.Extension;
 using System.Text.RegularExpressions;
+using PagedList.Core;
 
 namespace Khoaluan.Controllers
 {
@@ -154,7 +155,7 @@ namespace Khoaluan.Controllers
             try
             {
                 _unitOfWork.DiscussionRepository.Remove(id);
-                _notyfService.Success("Xóa quyền truy cập thành công");
+                _notyfService.Success("Delete discuss successfully");
                 return Redirect(url);
             }
             catch
@@ -165,15 +166,28 @@ namespace Khoaluan.Controllers
         }
         public static int idpro;
         [Route("/forum-topics/{id}.html", Name = ("ForumList"))]
-        public IActionResult ForumList(int id)
+        public IActionResult ForumList(int id,int? page)
         {
             idpro = id;
+            ViewBag.idforum = id;
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 10;
             var list = _unitOfWork.DiscussionRepository.GetAll().Where(t => t.ProductID == id);
-            return View(list);
+            if (list.Count() <= 10)
+                ViewBag.maxPage = 1;
+            else
+            {
+                double dMaxPage = Convert.ToDouble(list.Count());
+                ViewBag.maxPage = Math.Ceiling(dMaxPage / 10);
+            }
+            var pl = list.AsQueryable().ToPagedList(pageNumber, pageSize);
+            var plr = pl.ToList();
+            ViewBag.CurrentPage = pageNumber;
+            return View(plr);
         }
         public static string idpost;
         [Route("forum-single-topic/{id}.html", Name = ("DetailForum"))]
-        public IActionResult DetailForum(string id)
+        public IActionResult DetailForum(string id, int? page)
         {
             idpost = id;
             Discussion model = _unitOfWork.DiscussionRepository.GetById(id);
@@ -232,10 +246,22 @@ namespace Khoaluan.Controllers
             }
         }
         [Route("Forum.html", Name = ("Forum"))]
-        public IActionResult ForumInD()
+        public IActionResult ForumInD(int? page)
         {
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 10;
             var ls1 = _unitOfWork.ProductRepository.GetAll().ToList();
-            return View(ls1);
+            if (ls1.Count() <= 10)
+                ViewBag.maxPage = 1;
+            else
+            {
+                double dMaxPage = Convert.ToDouble(ls1.Count());
+                ViewBag.maxPage = Math.Ceiling(dMaxPage / 10);
+            }
+            var pl = ls1.AsQueryable().ToPagedList(pageNumber, pageSize);
+            var plr = pl.ToList();
+            ViewBag.CurrentPage = pageNumber;
+            return View(plr);
         }
     }
 }

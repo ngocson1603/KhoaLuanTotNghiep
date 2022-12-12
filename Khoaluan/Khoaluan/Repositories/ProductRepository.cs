@@ -92,5 +92,13 @@ from Developer,Product where Product.DevId = Developer.Id order by Product.Id de
             var result = Context.Database.GetDbConnection().Query<ActiveGame>(query, parameter);
             return result.ToList();
         }
+
+        public List<Product> listProductItem()
+        {
+            var query = @"select Product.* from Product, Item where Product.Id = Item.ProductId";
+            var parameter = new DynamicParameters();
+            var result = Context.Database.GetDbConnection().Query<Product>(query, parameter);
+            return result.ToList();
+        }
     }
 }

@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "ForumInD";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int PageCurrent = ViewBag.CurrentPage;
+    int PageNext = PageCurrent + 1;
 }
 <div class="nk-main">
 
@@ -30,7 +32,8 @@
 
         <!-- START: Forums List -->
         <ul class="nk-forum">
-            @foreach(var item in Model){
+            @foreach (var item in Model)
+            {
                 string url = $"/forum-topics/{item.Id}.html";
                 <li>
                     <div class="nk-forum-icon" href="@url">
@@ -59,8 +62,51 @@
                     </div>
                 </li>
             }
-            
+
         </ul>
+        <div class="nk-gap-2"></div>
+        <div class="nk-pagination nk-pagination-center">
+
+            @if (PageCurrent > 1)
+            {
+                string url = $"/Forum.html";
+                <a href="@url?page=@(PageCurrent - 1)" class="nk-pagination-prev">
+                    <span class="ion-ios-arrow-back"></span>
+                </a>
+            }
+            else
+            {
+                string url1 = $"/Forum.html";
+                <a href="@url1" class="nk-pagination-prev">
+                    <span class="ion-ios-arrow-back"></span>
+                </a>
+            }
+
+            @{
+                string url2 = $"/Forum.html";
+                @if (@PageCurrent < ViewBag.maxPage)
+                {
+
+                    <nav>
+                        <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                        <a href="@url2?page=@PageNext">@PageNext</a>
+                    </nav>
+                    <a class="nk-pagination-next" href="@url2?page=@PageNext">
+                        <span class="ion-ios-arrow-forward"></span>
+                    </a>
+                }
+                else
+                {
+                    <nav>
+                        <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                        <a hidden href="@url2?page=@PageNext">@PageNext</a>
+                    </nav>
+                    <a class="nk-pagination-next">
+                        <span disabled class="ion-ios-arrow-forward"></span>
+                    </a>
+                }
+            }
+        </div>
         <!-- END: Forums List -->
 
     </div>
