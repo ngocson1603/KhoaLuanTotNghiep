@@ -112,7 +112,7 @@ namespace DuAnGame.Controllers
                     mess.Body += "<table><thead>";
                     mess.Body += "<tr><th>Mã sản phẩm</th><th>Tên sản phẩm</th><th>Số lượng</th><th>Đơn giá</th></thead>";
                     mess.Body += "<tbody>";
-                    int countprice = 0;
+                    decimal countprice = 0;
                     foreach (var item in cart)
                     {
                         mess.Body += "<tr><td>" + item.product.Id.ToString() + "</td>" + "<td>" + item.product.Name + "</td>" + "<td>" + 1 + "</td>" + "<td>" + item.product.Price.ToString() + "Đ</td></tr>";

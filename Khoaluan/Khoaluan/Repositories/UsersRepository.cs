@@ -35,7 +35,7 @@ namespace Khoaluan.Repositories
             }
         }
 
-        public void updateBalance(int userID,int price,int type)
+        public void updateBalance(int userID,decimal price,int type)
         {
             Users user=this.GetById(userID);
             if(type==(int)marketType.buy)

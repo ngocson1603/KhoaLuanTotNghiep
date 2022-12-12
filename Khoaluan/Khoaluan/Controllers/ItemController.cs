@@ -137,8 +137,7 @@ namespace Khoaluan.Controllers
                     Market mk = new Market()
                     {
                         UserID = int.Parse(taikhoanID),
-                        ItemID = Id,
-                        Price = sellitem.PricePerItem,
+                        ItemID = Id,                       
                         DayCreate = DateTime.Now,
                         Status = (int)marketType.sell,
                         PricePerItem = sellitem.PricePerItem,
