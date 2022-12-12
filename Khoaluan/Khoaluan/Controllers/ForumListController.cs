@@ -245,7 +245,7 @@ namespace Khoaluan.Controllers
         {
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 10;
-            var ls1 = _unitOfWork.ProductRepository.GetAll().ToList();
+            var ls1 = _unitOfWork.ProductRepository.listProforum().ToList();
             if (ls1.Count() <= 10)
                 ViewBag.maxPage = 1;
             else
