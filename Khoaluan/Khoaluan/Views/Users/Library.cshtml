@@ -22,22 +22,19 @@
                         foreach (var item in DanhSachDonHang)
                         {
                             string url = $"/Product/HomePage/{item.Id}.html";
-                            <div class="col-md-4">
-                                <div class="nk-gallery-item-group">
-                                    <a href="@url" class="nk-gallery-item">
-                                        <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
-                                        <img src="~/Images/@Url.Content(item.Image)" alt="">
-                                    </a>
-                                    <div class="nk-gallery-item-description">
-                                        <h4 class="nk-gallery-item-description-title h5">@item.Name</h4>
-                                        <div class="nk-gallery-item-description-info">
-                                            <span class="far fa-image"></span>
-                                            <span>58</span>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="col-md-4">
+                        <div class="nk-gallery-item-group1" style="width:340px">
+                            <a href="@url" class="nk-gallery-item">
+                                <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
+                                <img src="~/Images/@Url.Content(item.Image)" alt="">
+                            </a>
+                            <div class="nk-gallery-item-description">
+                                <h4 class="nk-gallery-item-description-title h5">@item.Name</h4>
                             </div>
-                            <button class="removecart nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" type="submit" data-mahh="@item.Id">Refund</button>
+                        </div>
+                        <button class="removecart nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" type="submit" data-mahh="@item.Id">Refund</button>
+
+                    </div>
 
                         }
 

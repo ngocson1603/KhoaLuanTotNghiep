@@ -168,8 +168,8 @@ namespace Khoaluan.Controllers
                     Models.Refund refundrequest = _service.RefundService.refund(userid, productID);
                     _unitOfWork.RefundRepository.Create(refundrequest);
                     _unitOfWork.SaveChange();
-                    _notyfService.Success("thành công");
-                    return RedirectToRoute("Library");
+                    _notyfService.Success("Successfully");
+                    return RedirectToAction(nameof(Library));
                 }
                 catch (Exception ex)
                 {
