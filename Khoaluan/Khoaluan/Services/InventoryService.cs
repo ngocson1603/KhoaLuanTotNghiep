@@ -15,10 +15,33 @@ namespace Khoaluan.Services
             _inventoryRepository = inventoryRepository;
         }
 
-        public Inventory updateInventory(int userID, int ItemID)
+        public Inventory updateInventory(int userID, int ItemID, int marketype, int quantity)
         {
-            var inventory = _inventoryRepository.GetAll().Where(t => (t.UserID == userID) && (t.ItemID == ItemID)).Single();
-            return inventory;
+            try
+            {
+                var inventory = _inventoryRepository.GetAll().Where(t => (t.UserID == userID) && (t.ItemID == ItemID)).Single();
+
+                if (marketype == (int)marketType.buy)
+                {
+                    inventory.Quantity = inventory.Quantity + quantity;
+                }
+                else if (marketype == (int)marketType.sell)
+                {
+                    if (quantity == inventory.Quantity)
+                    {
+                        _inventoryRepository.Delete(inventory);
+                    }
+                    else if (quantity < inventory.Quantity)
+                    {
+                        inventory.Quantity = inventory.Quantity - quantity;
+                    }
+                }
+                return inventory;
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
         }
     }
 }

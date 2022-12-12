@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Khoaluan.ModelViews.ItemModelView>
+@{
+    // int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách Item";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            @*<span class="breadcrumb-item active">Danh sách sản phẩm : trang @CurrentPage</span>*@
+        </nav>
+    </div>
+
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-affix m-v-10">
+                            <i class="prefix-icon anticon anticon-search opacity-04"></i>
+                            <input id="keyworditem" name="keyworditem" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên item</th>
+                        <th>Image</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Min</th>
+                        <th>Max</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="records_tables">
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @item.Id
+                                </td>
+                                <td>@item.Name</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img class="img-fluid rounded" src="~/Images/@Url.Content(item.Image)" style="max-width: 60px" alt="">
+                                    </div>
+                                </td>
+                                <td>@item.ProductId</td>
+                                <td>@item.MinPrice.ToString("#,##0") VNĐ</td>
+                                <td>@item.MaxPrice.ToString("#,##0") VNĐ</td>
+                                <td>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Details" asp-route-id="@item.Id"><i class="anticon anticon-zoom-in"></i></a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Edit" asp-route-id="@item.Id"><i class="anticon anticon-edit"></i></a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="DevItem" asp-action="Delete" asp-route-id="@item.Id"><i class="anticon anticon-delete"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+
+                </tbody>
+            </table>
+            <div aria-label="Page navigation example">
+                @*<ul class="pagination">
+                        <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminProducts" asp-route-CatID="@ViewBag.CurrentCateID" asp-action="Index" />
+                    </ul>*@
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles{
+    <link href="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+}
+@section Scripts{
+    <script src="~/Adminassets/js/pages/e-commerce-order-list.js"></script>
+    <script src="~/Adminassets/vendors/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.js"></script>
+}
+
+

@@ -1,0 +1,316 @@
+﻿@using PagedList.Core.Mvc
+@model Khoaluan.OtpModels.AdminProduct
+@{
+    ViewData["Title"] = "ListItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int PageCurrent = ViewBag.CurrentPage;
+    int PageNext = PageCurrent + 1;
+    Khoaluan.ModelViews.SellitemModelView itemsell = new Khoaluan.ModelViews.SellitemModelView();
+}
+
+<div class="nk-main">
+
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a href="index.html">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a href="#">Blog</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>Blog Grid</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
+
+
+
+
+    <div class="container">
+        <div class="row vertical-gap">
+            <div class="col-lg-8">
+
+                <!-- START: Posts Grid -->
+                <div class="nk-blog-grid">
+                    <div class="row">
+                        @if (Model.itembySell != null && Model.itembySell.Count() > 0)
+                        {
+                            foreach (var item in Model.itembySell)
+                            {
+                                <div class="col-md-6">
+                                    <!-- START: Post -->
+                                    <div class="nk-blog-post">
+                                        <a asp-controller="Item" asp-action="Details" asp-route-id="@item.Id" class="nk-post-img">
+                                            <img src="~/Images/@Url.Content(item.Image)" alt="">
+                                        </a>
+                                        <div class="nk-gap"></div>
+                                        <h2 class="nk-post-title h4"><a asp-area="" asp-controller="Item" asp-action="Details" asp-route-id="@item.Id">@item.NameItem</a></h2>
+                                        <div class="nk-post-by">
+                                            <img src="~/assets/images/avatar-1.jpg" alt="" class="rounded-circle" width="35"> by <a href="#">@item.HoTen</a> @item.DayCreate
+                                        </div>
+                                        <div class="nk-gap"></div>
+                                    </div>
+                                    <!-- END: Post -->
+                                </div>
+                            }
+                        }
+
+
+
+                    </div>
+
+                    <!-- START: Pagination -->
+                    <div class="nk-pagination nk-pagination-center">
+
+                        @if (PageCurrent > 1)
+                        {
+                            string url = $"/ListItem.html";
+                            <a href="@url?page=@(PageCurrent - 1)" class="nk-pagination-prev">
+                                <span class="ion-ios-arrow-back"></span>
+                            </a>
+                        }
+                        else
+                        {
+                            string url1 = $"/ListItem.html";
+                            <a href="@url1" class="nk-pagination-prev">
+                                <span class="ion-ios-arrow-back"></span>
+                            </a>
+                        }
+
+                        @{
+                            string url2 = $"/ListItem.html";
+                            @if (@PageCurrent < ViewBag.maxPage)
+                            {
+
+                                <nav>
+                                    <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                                    <a href="@url2?page=@PageNext">@PageNext</a>
+                                </nav>
+                                <a class="nk-pagination-next" href="@url2?page=@PageNext">
+                                    <span class="ion-ios-arrow-forward"></span>
+                                </a>
+                            }
+                            else
+                            {
+                                <nav>
+                                    <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                                    <a hidden href="@url2?page=@PageNext">@PageNext</a>
+                                </nav>
+                                <a class="nk-pagination-next">
+                                    <span disabled class="ion-ios-arrow-forward"></span>
+                                </a>
+                            }
+                        }
+                    </div>
+                    <!-- END: Pagination -->
+                </div>
+                <!-- END: Posts Grid -->
+
+            </div>
+            <div class="col-lg-4">
+
+                <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
+                    <div class="nk-widget">
+                        <div class="nk-widget-content">
+                            <form action="#" class="nk-form nk-form-style-1" novalidate="novalidate">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Type something...">
+                                    <button class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+                    {
+                        <div class="nk-widget nk-widget-highlighted">
+                            <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalItem">New Item</a>
+                            <div class="nk-modal modal fade" id="modalItem" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span class="ion-android-close"></span>
+                                            </button>
+
+                                            <h4 class="mb-0"><span class="text-main-1">Ban</span> Item</h4>
+
+                                            <div class="nk-gap-1"></div>
+                                            @if (Model.itembyID != null && Model.itembyID.Count() > 0)
+                                            {
+                                                foreach (var lst in Model.itembyID)
+                                                {
+                                                    int Id = lst.Id;
+                                                    <div class="col-md-6">
+                                                        <!-- START: Post -->
+                                                        <div class="nk-blog-post">
+                                                            <a href="blog-article.html" class="nk-post-img">
+                                                                <img src="~/Images/@Url.Content(lst.Image)" alt="">
+                                                            </a>
+                                                            <h2 class="nk-post-title h4"><a href="blog-article.html">@lst.NameItem</a></h2>
+                                                            <a href="#" class="sell-item nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalNumber" data-mahh="@Id">SELL</a>
+                                                            @await Html.PartialAsync("~/Views/Item/ListItemUserPartialView.cshtml", itemsell)
+                                                        </div>
+
+                                                        <!-- END: Post -->
+                                                    </div>
+
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">Latest</span> Video</span></h4>
+                        <div class="nk-widget-content">
+                            <div class="nk-plain-video" data-video="https://www.youtube.com/watch?v=vXy8UBazlO8"></div>
+                        </div>
+                    </div>
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">Game</span> Menu</span></h4>
+                        <div class="nk-widget-content">
+                            <p>
+                                <ul class="nk-widget-categories">
+                                    @if (Model.productdev != null && Model.productdev.Count() > 0)
+                                    {
+                                        foreach (var item in Model.productdev.Take(5))
+                                        {
+                                            string url = $"/ListItem/{item.Name}.html";
+                                            <li><a href="@url">@item.Name</a></li>
+                                        }
+                                        <span id="dots"></span>
+                                        <div style="border-top: 1px solid #293139;"></div>
+                                        <span id="more">
+                                            @foreach (var item in Model.productdev.Skip(5))
+                                            {
+                                                string url = $"/ListItem/{item.Name}.html";
+                                            <li><a href="@url">@item.Name</a></li>
+
+                                        }
+                                            </span>
+                                        }
+
+                                </ul>
+                            </p>
+                            <div style="margin-top: 1.5rem"></div>
+                            <button onclick="myFunction()" id="myBtn">Read more</button>
+                        </div>
+                    </div>
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">Most</span> Popular</span></h4>
+                        <div class="nk-widget-content">
+
+                            <div class="nk-widget-post">
+                                <a href="store-product.html" class="nk-post-image">
+                                    <img src="~/assets/images/product-1-xs.jpg" alt="So saying he unbuckled">
+                                </a>
+                                <h3 class="nk-post-title"><a href="store-product.html">So saying he unbuckled</a></h3>
+                                <div class="nk-product-rating" data-rating="4"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i></div>
+                                <div class="nk-product-price">€ 23.00</div>
+                            </div>
+
+                            <div class="nk-widget-post">
+                                <a href="store-product.html" class="nk-post-image">
+                                    <img src="~/assets/images/product-2-xs.jpg" alt="However, I have reason">
+                                </a>
+                                <h3 class="nk-post-title"><a href="store-product.html">However, I have reason</a></h3>
+                                <div class="nk-product-rating" data-rating="2.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i> <i class="far fa-star"></i> <i class="far fa-star"></i></div>
+                                <div class="nk-product-price">€ 32.00</div>
+                            </div>
+
+                            <div class="nk-widget-post">
+                                <a href="store-product.html" class="nk-post-image">
+                                    <img src="~/assets/images/product-3-xs.jpg" alt="It was some time before">
+                                </a>
+                                <h3 class="nk-post-title"><a href="store-product.html">It was some time before</a></h3>
+                                <div class="nk-product-rating" data-rating="5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                <div class="nk-product-price">€ 14.00</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </aside>
+                <!-- END: Sidebar -->
+            </div>
+        </div>
+    </div>
+
+    <div class="nk-gap-2"></div>
+
+
+</div>
+
+
+
+
+<!-- START: Page Background -->
+
+<img class="nk-page-background-top" src="~/assets/images/bg-top-2.png" alt="">
+<img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
+
+<!-- END: Page Background -->
+@section Styles{
+    <style>
+        #more {
+            display: none;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+
+        .divreadmore {
+            margin-top: 5px;
+        }
+    </style>
+}
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $(".sell-item").click(function () {
+                    var itemid = $(this).attr("data-mahh");
+                    $.ajax({
+                        url: '/api/item/getid',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            Id: itemid,
+                        },
+                    });
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        function myFunction() {
+            var dots = document.getElementById("dots");
+            var moreText = document.getElementById("more");
+            var btnText = document.getElementById("myBtn");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Read more";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Read less";
+                moreText.style.display = "inline";
+            }
+        }
+    </script>
+}

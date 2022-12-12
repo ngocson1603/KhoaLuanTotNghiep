@@ -8,5 +8,6 @@ namespace Khoaluan.Interfaces
     {
         public List<Productdetail> getallProductwithCategory();
         public List<Product> GetProductByName(string name);
+        public List<Product> listProductDev(int id);
     }
 }

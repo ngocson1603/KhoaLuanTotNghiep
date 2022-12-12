@@ -1,42 +1,46 @@
 ﻿using Dapper;
 using Khoaluan.Interfaces;
 using Khoaluan.Models;
+using Khoaluan.OtpModels;
 using Microsoft.EntityFrameworkCore;
+using PayPalCheckoutSdk.Payments;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Principal;
 
 namespace Khoaluan.Repositories
 {
-    public class RefundRepository:GameStoreRepository<Refund>,IRefundRepository
+    public class RefundRepository:GameStoreRepository<Models.Refund>,IRefundRepository
     {
         private readonly IUsersRepository _usersRepository;
         public RefundRepository(GameStoreDbContext context,IUsersRepository usersRepository):base(context)
         {
             _usersRepository = usersRepository;
         }
-
-        public void refund(int userID, int productID, int OrderID)
+        public OtpModels.RefundRequest refundRequest(int UserID,int productID)
         {
-            var query = @"select price from [order],orderdetail
-                        where [order].id=orderdetail.id
-                        and [order].id=@orderid and productid=@productid";
+            var query = @"select top 1.[o].id as OrderID,UserID,ProductID,Price,DatePurchase from [Order] o,OrderDetail od
+                        where o.Id=od.Id and ProductID=@productid AND UserID=@userid
+                        order by DatePurchase desc";
             var parameter = new DynamicParameters();
-            parameter.Add("orderid", OrderID);
-            parameter.Add("productid", productID);
-            var price = Context.Database.GetDbConnection().QuerySingle<int>(query, parameter);
-            var user = _usersRepository.GetById(userID);
-            user.Balance = user.Balance + price;
-            _usersRepository.Update(user);
+            parameter.Add("productid",productID);
+            parameter.Add("userid", UserID);
+            var request = Context.Database.GetDbConnection().QuerySingle<OtpModels.RefundRequest>(query, parameter);
+            return request;
         }
-
-        public int refundID(int userID, int productID)
+        public List<gameRefund> listgameRefund(int userid)
         {
-            var query = @"select top 1.[Order].Id from [Order], OrderDetail 
-                        where [Order].Id = OrderDetail.Id and UserID = @userID and ProductID = @productID
-                        order by DatePurchase Desc";
+            var query = @"select ProductID,Name,Image from 
+                        Product p,(
+                        select ProductID,UserID,MAX(DatePurchase) as latestDate from 
+                        [Order] o,OrderDetail od
+                        where o.Id=od.Id and UserID=@userid
+                        group by ProductID,UserID)as tmp
+                        where p.Id=tmp.ProductID and DATEDIFF(day,tmp.latestDate,GETDATE())<=7";
             var parameter = new DynamicParameters();
-            parameter.Add("userID", userID);
-            parameter.Add("productID", productID);
-            int id = Context.Database.GetDbConnection().QuerySingle<int>(query, parameter);
-            return id;
+            parameter.Add("userid", userid);
+            var result=Context.Database.GetDbConnection().Query<gameRefund>(query, parameter);
+            return result.ToList();
         }
     }
 }

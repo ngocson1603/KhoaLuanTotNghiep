@@ -12,8 +12,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Remove="Areas\Admin\Views\Search\ListItemSearchPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="Areas\Admin\Views\AdminProducts\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Dev\LoginDev.cshtml" />
     <None Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Search\ListItemSearchPartial.cshtml" />
     <None Include="Areas\Admin\Views\Search\ListProductsSearchPartial.cshtml" />
     <None Include="Areas\Admin\Views\Shared\Error.cshtml" />
     <None Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
@@ -816,6 +825,8 @@
     <None Include="wwwroot\assets\vendor\sticky-kit\dist\sticky-kit.min.js" />
     <None Include="wwwroot\assets\vendor\summernote\dist\summernote-bs4.js.map" />
     <None Include="wwwroot\assets\vendor\summernote\dist\summernote-bs4.min.js" />
+    <None Include="wwwroot\multiselect\jquery.multi-select.js" />
+    <None Include="wwwroot\multiselect\jquery.multi-select.min.js" />
     <None Include="wwwroot\php\ajax-contact-form.php" />
     <None Include="wwwroot\php\instagram\config.php" />
     <None Include="wwwroot\php\instagram\instagram.php" />
@@ -841,7 +852,8 @@
     <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.18.0" />
     <PackageReference Include="PagedList.Core.Mvc" Version="3.0.0" />
-    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="5.15.2" />
+    <PackageReference Include="PayPalCheckoutSdk" Version="1.0.4" />
+    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="5.17.1" />
   </ItemGroup>
 
   <ItemGroup>

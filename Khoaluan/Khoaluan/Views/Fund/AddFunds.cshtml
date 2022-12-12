@@ -1,0 +1,84 @@
+﻿@model List<Khoaluan.Models.Fund>;
+@{
+    ViewData["Title"] = "Add Funds";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<img class="nk-page-background-top" src="~/assets/images/bg-top-2.png" alt="">
+
+<h3 class="nk-decorated-h-3">
+    <span>
+        Add
+        <span class="text-main-1">
+            Funds
+        </span>
+    </span>
+</h3>
+
+@if (ViewBag.Token != "null")
+{
+    <a href="#" id="rollback" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-danger">
+        <span class="fa fa-repeat"></span>
+        Continue Transaction
+    </a>
+}
+<div class="nk-gap-1"></div>
+<div class="row vertical-gap">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4">
+            <div class="nk-feature-2">
+                <div class="nk-feature-icon">
+                    <span class="fa fa-usd"></span>
+                </div>
+                <div class="nk-feature-cont text-center">
+                    <h3 class="nk-feature-title">Add <span class="text-main-1">$@item.Price</span></h3>
+                    <div class="nk-gap-1"></div>
+                    <a asp-controller="Fund" asp-action="CheckOut" asp-route-id="@item.Id" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-success">
+                        Add Funds
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#rollback").click(function () {
+                $.ajax({
+                    success: function (res) {
+                        Swal.fire({
+                            title: "<h5 style='color:white'>Continue Incomplete Transaction</h5>",
+                            icon: 'question',
+                            iconColor: '#dd163b',
+                            allowOutsideClick: false,
+                            showCloseButton: true,
+                            showDenyButton: true,
+                            confirmButtonColor: '#3085d6',
+                            denyButtonColor: '#3A833A',
+                            confirmButtonText: 'Continue Transaction',
+                            denyButtonText: 'New Transaction',
+                            background: '#232930'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "https://www.sandbox.paypal.com/checkoutnow?token=@ViewBag.Token";
+                            }
+                            else if (result.isDenied) {
+                                $.ajax({
+                                    url: "/Fund/NewTransaction",
+                                    success: function (res) {
+                                        window.location.href = "/add-funds.html";
+                                    }
+                                })
+                            }
+                        })
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,15 +26,56 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 return PartialView("ListProductsSearchPartial", ls1);
             }
-            var ls = _unitOfWork.ProductRepository.GetAll().Where(t=>t.Name.Contains(keyword)).ToList(); ;
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t=>t.Name.ToLower().Contains(keyword.Trim().ToLower())).ToList(); ;
             
-            if (ls == null)
+            if (ls == null || ls.Count == 0)
             {
                 return PartialView("ListProductsSearchPartial", null);
             }
             else
             {
                 return PartialView("ListProductsSearchPartial", ls);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult FindProductDev(string keyword)
+        {
+            var taikhoanID = HttpContext.Session.GetString("AccountId");
+            var ls1 = _unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)).ToList(); ;
+            if (string.IsNullOrEmpty(keyword) || keyword.Length < 1)
+            {
+                return PartialView("ListProductsSearchPartial", ls1);
+            }
+            var ls = _unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)).Where(t => t.Name.ToLower().Contains(keyword.Trim().ToLower())).ToList(); ;
+
+            if (ls == null || ls.Count == 0)
+            {
+                return PartialView("ListProductsSearchPartial", null);
+            }
+            else
+            {
+                return PartialView("ListProductsSearchPartial", ls);
+            }
+        }
+        [HttpPost]
+        public IActionResult FindItem(string keyword)
+        {
+            var taikhoanID = HttpContext.Session.GetString("AccountId");
+            var ls1 = _unitOfWork.ItemRepository.getItem(int.Parse(taikhoanID));
+            if (string.IsNullOrEmpty(keyword) || keyword.Length < 1)
+            {
+                return PartialView("ListItemSearchPartial", ls1);
+            }
+            var ls = _unitOfWork.ItemRepository.getItem(int.Parse(taikhoanID)).Where(t => t.Name.ToLower().Contains(keyword.Trim().ToLower())).ToList();
+
+            if (ls == null || ls.Count == 0)
+            {
+                return PartialView("ListItemSearchPartial", null);
+            }
+            else
+            {
+                return PartialView("ListItemSearchPartial", ls);
             }
         }
         public IActionResult Index()

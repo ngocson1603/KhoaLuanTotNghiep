@@ -39,7 +39,7 @@ namespace Khoaluan
                 {
                     p.Cookie.Name = "UserLoginCookie";
                     p.ExpireTimeSpan = TimeSpan.FromDays(1);
-                    //p.LoginPath = "/dang-nhap.html";
+                    p.LoginPath = "/dang-nhap.html";
                     //p.LogoutPath = "/dang-xuat/html";
                     p.AccessDeniedPath = "/not-found.html";
                 });

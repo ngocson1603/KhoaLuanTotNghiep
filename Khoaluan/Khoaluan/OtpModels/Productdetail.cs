@@ -1,4 +1,5 @@
-﻿using Khoaluan.Models;
+﻿using Khoaluan.Areas.Admin.Models;
+using Khoaluan.Models;
 using Khoaluan.ModelViews;
 using System;
 using System.Collections.Generic;
@@ -63,5 +64,20 @@ namespace Khoaluan.OtpModels
     {
         public List<Productdetail> productwithCate { get; set; }
         public List<Productdetail> PopularGame1 { get; set; }
+    }
+    public class AdminProduct
+    {
+        public Developer dev { get; set; }
+        public Product product { get; set; }
+        public List<Product> productdev { get; set; }
+        public List<Item> item { get; set; }
+        public List<SellitemModelView> itembyID { get; set; }
+        public List<SellitemModelView> itembySell { get; set; }
+        public SellitemModelView itembyIDDetails { get; set; }
+    }
+    public class ProCate
+    {
+        public MultiDropDownListViewModel muti { get; set; }
+        public Product product { get; set; }
     }
 }

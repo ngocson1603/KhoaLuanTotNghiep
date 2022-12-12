@@ -1,6 +1,37 @@
 ﻿<footer class="nk-footer">
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
 
-    <div class="container">
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "111778978440126");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v15.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
+    <!--<div class="container">
         <div class="nk-gap-3"></div>
         <div class="row vertical-gap">
             <div class="col-md-6">
@@ -139,9 +170,9 @@
             </div>
         </div>
         <hr>
-    </div>
+    </div>-->
     <!-- End Contact Container -->
-    <div class="nk-copyright">
+    <!--<div class="nk-copyright">
         <div class="container">
             <div class="nk-copyright-left">
                 <a target="_blank" href="#">Cypy right || 2022 by Du An Game</a>
@@ -166,5 +197,5 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div>-->
 </footer>

@@ -129,7 +129,7 @@
                                             {
                                                 if (DanhSachDonHang.Any(t => t.UserID == int.Parse(ViewBag.GetId) && t.Id == productID))
                                                 {
-                                                    <div class="add-to-cart">
+                                                    <div>
                                                         <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Library</button>
                                                         <input hidden asp-for="@productID" />
                                                     </div>
@@ -139,7 +139,7 @@
 
                                                     if (carts.Any(t => t.product.Id == productID))
                                                     {
-                                                        <div class="add-to-cart">
+                                                        <div>
                                                             <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
                                                             <input hidden asp-for="@productID" />
                                                         </div>
@@ -165,7 +165,7 @@
 
                                                 if (carts.Any(t => t.product.Id == productID))
                                                 {
-                                                    <div class="add-to-cart">
+                                                    <div>
                                                         <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
                                                         <input hidden asp-for="@productID" />
                                                     </div>
@@ -193,7 +193,7 @@
 
                                                 if (carts.Any(t => t.product.Id == productID))
                                                 {
-                                                    <div class="add-to-cart">
+                                                    <div>
                                                         <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
                                                         <input hidden asp-for="@productID" />
                                                     </div>

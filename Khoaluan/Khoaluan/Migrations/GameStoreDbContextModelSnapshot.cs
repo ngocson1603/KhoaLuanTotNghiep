@@ -77,6 +77,27 @@ namespace Khoaluan.Migrations
                     b.ToTable("Developer");
                 });
 
+            modelBuilder.Entity("Khoaluan.Models.Fund", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Tax")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Fund");
+                });
+
             modelBuilder.Entity("Khoaluan.Models.Inventory", b =>
                 {
                     b.Property<int>("UserID")
@@ -156,6 +177,9 @@ namespace Khoaluan.Migrations
                         .HasColumnType("float");
 
                     b.Property<int>("PricePerItem")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")

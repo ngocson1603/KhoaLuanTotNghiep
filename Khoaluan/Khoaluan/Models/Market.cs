@@ -11,6 +11,7 @@ namespace Khoaluan.Models
         public int PricePerItem { get; set; }   
         public DateTime DayCreate { get; set; }
         public int Status { get; set; }
+        public int Quantity { get; set; }
         public Users User { get; set; }
         public Item Item { get; set; }
         public List<MarketTransaction> MarketTransactions { get; set; }
