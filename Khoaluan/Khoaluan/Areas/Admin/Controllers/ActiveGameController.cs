@@ -97,7 +97,7 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 if (model.SelectedIds == null)
                 {
-                    _notyfService.Warning("Vui lòng chọn danh mục");
+                    _notyfService.Warning("Please select a category");
                     return RedirectToAction(nameof(Index));
                 }
                 product.Name = Utilities.ToTitleCase(product.Name);
@@ -114,7 +114,9 @@ namespace Khoaluan.Areas.Admin.Controllers
                 _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
                 _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
                 _unitOfWork.SaveChange();
-                _notyfService.Success("Cập nhật thành công");
+                var pro = _unitOfWork.ProductRepository.listProdevActive(id);
+                Utilities.sendemailactivegame(pro);
+                _notyfService.Success("Update successful");
                 List<string> cate = new List<string>();
                 var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
                 if (product1 != null)

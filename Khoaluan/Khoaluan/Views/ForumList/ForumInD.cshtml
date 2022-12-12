@@ -1,7 +1,9 @@
-﻿@model IEnumerable<Khoaluan.Models.Product>
+﻿@model IEnumerable<Khoaluan.ModelViews.ActiveGame>
 @{
     ViewData["Title"] = "ForumInD";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int PageCurrent = ViewBag.CurrentPage;
+    int PageNext = PageCurrent + 1;
 }
 <div class="nk-main">
 
@@ -30,7 +32,8 @@
 
         <!-- START: Forums List -->
         <ul class="nk-forum">
-            @foreach(var item in Model){
+            @foreach (var item in Model)
+            {
                 string url = $"/forum-topics/{item.Id}.html";
                 <li>
                     <div class="nk-forum-icon" href="@url">
@@ -38,7 +41,7 @@
                         @*<span class="ion-ios-game-controller-b"></span>*@
                     </div>
                     <div class="nk-forum-title">
-                        <h3><a href="@url">@item.Name</a></h3>
+                        <h3><a href="@url">@item.NamePro</a></h3>
                         <div class="nk-forum-title-sub">Be seed is air female greater was multiply saying great</div>
                     </div>
                     <div class="nk-forum-count">
@@ -51,7 +54,7 @@
                     </div>
                     <div class="nk-forum-activity">
                         <div class="nk-forum-activity-title" title="GodLike the only game that I want to play!">
-                            <a href="forum-single-topic.html">GodLike the only game that I want to play!</a>
+                            <a href="forum-single-topic.html">@item.NameDev</a>
                         </div>
                         <div class="nk-forum-activity-date">
                             @item.ReleaseDate
@@ -59,8 +62,51 @@
                     </div>
                 </li>
             }
-            
+
         </ul>
+        <div class="nk-gap-2"></div>
+        <div class="nk-pagination nk-pagination-center">
+
+            @if (PageCurrent > 1)
+            {
+                string url = $"/Forum.html";
+                <a href="@url?page=@(PageCurrent - 1)" class="nk-pagination-prev">
+                    <span class="ion-ios-arrow-back"></span>
+                </a>
+            }
+            else
+            {
+                string url1 = $"/Forum.html";
+                <a href="@url1" class="nk-pagination-prev">
+                    <span class="ion-ios-arrow-back"></span>
+                </a>
+            }
+
+            @{
+                string url2 = $"/Forum.html";
+                @if (@PageCurrent < ViewBag.maxPage)
+                {
+
+                    <nav>
+                        <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                        <a href="@url2?page=@PageNext">@PageNext</a>
+                    </nav>
+                    <a class="nk-pagination-next" href="@url2?page=@PageNext">
+                        <span class="ion-ios-arrow-forward"></span>
+                    </a>
+                }
+                else
+                {
+                    <nav>
+                        <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                        <a hidden href="@url2?page=@PageNext">@PageNext</a>
+                    </nav>
+                    <a class="nk-pagination-next">
+                        <span disabled class="ion-ios-arrow-forward"></span>
+                    </a>
+                }
+            }
+        </div>
         <!-- END: Forums List -->
 
     </div>

@@ -42,7 +42,7 @@ namespace Khoaluan.Areas.Admin.Controllers
         // GET: AdminProductsController
         public IActionResult Index()
         {
-            var ls = _unitOfWork.ProductRepository.GetAll().ToList();
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Status == (int)productType.accept || t.Status == (int)productType.release).ToList();
 
             return View(ls);
         }
@@ -185,7 +185,7 @@ namespace Khoaluan.Areas.Admin.Controllers
                 //var result = lst.Except(lst2).ToList();
                 if (model.SelectedIds == null)
                 {
-                    _notyfService.Warning("Vui lòng chọn danh mục");
+                    _notyfService.Warning("Please select a category");
                     return RedirectToAction(nameof(Index));
                 }
                 product.Name = Utilities.ToTitleCase(product.Name);
@@ -204,7 +204,7 @@ namespace Khoaluan.Areas.Admin.Controllers
                 _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
                 _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
                 _unitOfWork.SaveChange();
-                _notyfService.Success("Cập nhật thành công");
+                _notyfService.Success("Update successful");
                 List<string> cate = new List<string>();
                 var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
                 if (product1 != null)
@@ -229,7 +229,7 @@ namespace Khoaluan.Areas.Admin.Controllers
             var product = _unitOfWork.ProductRepository.GetById(id);
             _unitOfWork.ProductRepository.Delete(product);
             _unitOfWork.SaveChange();
-            _notyfService.Success("Xóa thành công");
+            _notyfService.Success("Delete successful");
             return RedirectToAction(nameof(Index));
         }
 

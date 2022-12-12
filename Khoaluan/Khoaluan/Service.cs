@@ -13,6 +13,7 @@ namespace Khoaluan
         public IRefundService RefundService { get; }
         public IUserService UserService { get; }
         public IMarketTransactionService MarketTransactionService { get; }
+        public ISaleService SaleService { get; }
         public Service(IDiscussionService discussionService, 
             IInventoryService inventoryService, 
             ILibraryService libraryService, 
@@ -21,7 +22,8 @@ namespace Khoaluan
             IProductService productService, 
             IRefundService refundService, 
             IUserService userService,
-            IMarketTransactionService marketTransactionService
+            IMarketTransactionService marketTransactionService,
+            ISaleService saleService
             )
         {
             DiscussionService = discussionService;
@@ -33,6 +35,7 @@ namespace Khoaluan
             RefundService = refundService;
             UserService = userService;
             MarketTransactionService = marketTransactionService;
+            SaleService = saleService;
         }
     }
 }

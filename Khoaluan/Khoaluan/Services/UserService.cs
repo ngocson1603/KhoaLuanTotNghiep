@@ -6,6 +6,7 @@ using Khoaluan.InterfacesService;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
 using System;
+using System.Net.Mail;
 
 namespace Khoaluan.Services
 {
@@ -124,6 +125,27 @@ namespace Khoaluan.Services
             {
                 return 0;
             }
+        }
+
+        public bool SendVerification(int userId)
+        {
+            Users user = _usersRepository.GetById(userId);
+
+            if (user == null)
+                return false;
+
+            MailMessage message = new MailMessage()
+            {
+                Subject = "Account Verification",
+                IsBodyHtml = true
+            };
+
+            message.Body += "<h1>Welcome " + user.HoTen + "</h1>";
+            message.Body += "<p>Your verification code is <strong>" + user.Salt + "</strong></p>";
+
+            Utilities.SendEmail(message, user.Gmail);
+
+            return true;
         }
     }
 }

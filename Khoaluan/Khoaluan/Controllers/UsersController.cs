@@ -168,8 +168,8 @@ namespace Khoaluan.Controllers
                     Models.Refund refundrequest = _service.RefundService.refund(userid, productID);
                     _unitOfWork.RefundRepository.Create(refundrequest);
                     _unitOfWork.SaveChange();
-                    _notyfService.Success("thành công");
-                    return RedirectToRoute("Library");
+                    _notyfService.Success("Successfully");
+                    return RedirectToAction(nameof(Library));
                 }
                 catch (Exception ex)
                 {
@@ -193,6 +193,24 @@ namespace Khoaluan.Controllers
             return View();
         }
 
+        public IActionResult ViewTestVerify()
+        {
+            return View();
+        }
+
+        public IActionResult ViewSendVerifyCode()
+        {
+            return View();
+        }
+
+        public IActionResult SendVerifyCode()
+        {
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            _service.UserService.SendVerification(int.Parse(taikhoanID));
+            _notyfService.Success("A verification code has been sent to your email account");
+            return View("ViewTestVerify");
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [Route("dang-nhap.html", Name = "DangNhap")]
@@ -214,7 +232,7 @@ namespace Khoaluan.Controllers
 
             if (kq == -1)
             {
-                _notyfService.Warning("Couldn't find your account");
+                _notyfService.Error("Couldn't find your account");
             }
             else if (kq == 2)
             {
@@ -287,6 +305,7 @@ namespace Khoaluan.Controllers
             _notyfService.Success("Thay đổi mật khẩu không thành công");
             return RedirectToAction("Dashboard", "Users");
         }
+
         [Route("library.html", Name = "Library")]
         public IActionResult Library()
         {

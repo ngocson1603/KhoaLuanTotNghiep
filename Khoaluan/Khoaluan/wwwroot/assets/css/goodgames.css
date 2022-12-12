@@ -3998,7 +3998,7 @@ img.rounded {
 .nk-widget-post .nk-post-image img,
 .nk-widget-post-2 .nk-post-image img {
     width: 100%;
-    height: auto;
+    height: 130px;
     -webkit-transition: -webkit-transform .15s ease-in-out;
     transition: -webkit-transform .15s ease-in-out;
     -o-transition: transform .15s ease-in-out;
@@ -6771,6 +6771,18 @@ img.rounded {
     display: block;
     overflow: hidden;
 }
+.nk-gallery-item-box,
+.nk-gallery-item-group1 {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+.nk-gallery-item-box1,
+.nk-gallery-item-group {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
 
 .nk-gallery-item-box, .nk-gallery-item-box:hover, .nk-gallery-item-box:focus, .nk-gallery-item-box:active,
 .nk-gallery-item-box a,
@@ -6788,10 +6800,58 @@ img.rounded {
     text-decoration: none;
 }
 
+.nk-gallery-item-box1, .nk-gallery-item-box1:hover, .nk-gallery-item-box1:focus, .nk-gallery-item-box1:active,
+.nk-gallery-item-box1 a,
+.nk-gallery-item-box1 a:hover,
+.nk-gallery-item-box1 a:focus,
+.nk-gallery-item-box1 a:active,
+.nk-gallery-item-group,
+.nk-gallery-item-group:hover,
+.nk-gallery-item-group:focus,
+.nk-gallery-item-group:active,
+.nk-gallery-item-group a,
+.nk-gallery-item-group a:hover,
+.nk-gallery-item-group a:focus,
+.nk-gallery-item-group a:active {
+    text-decoration: none;
+}
+
+    .nk-gallery-item-box, .nk-gallery-item-box:hover, .nk-gallery-item-box:focus, .nk-gallery-item-box:active,
+    .nk-gallery-item-box a,
+    .nk-gallery-item-box a:hover,
+    .nk-gallery-item-box a:focus,
+    .nk-gallery-item-box a:active,
+    .nk-gallery-item-group1,
+    .nk-gallery-item-group1:hover,
+    .nk-gallery-item-group1:focus,
+    .nk-gallery-item-group1:active,
+    .nk-gallery-item-group1 a,
+    .nk-gallery-item-group1 a:hover,
+    .nk-gallery-item-group1 a:focus,
+    .nk-gallery-item-group1 a:active {
+        text-decoration: none;
+    }
+
+        .nk-gallery-item-box1, .nk-gallery-item-box1:hover, .nk-gallery-item-box1:focus, .nk-gallery-item-box1:active,
+        .nk-gallery-item-box1 a,
+        .nk-gallery-item-box1 a:hover,
+        .nk-gallery-item-box1 a:focus,
+        .nk-gallery-item-box1 a:active,
+        .nk-gallery-item-group1,
+        .nk-gallery-item-group1:hover,
+        .nk-gallery-item-group1:focus,
+        .nk-gallery-item-group1:active,
+        .nk-gallery-item-group1 a,
+        .nk-gallery-item-group1 a:hover,
+        .nk-gallery-item-group1 a:focus,
+        .nk-gallery-item-group1 a:active {
+            text-decoration: none;
+        }
+
 .nk-gallery-item-box img,
 .nk-gallery-item-group img {
     width: 100%;
-    height: auto;
+    height: 470px;
     -webkit-transition: -webkit-transform .15s ease-in-out;
     transition: -webkit-transform .15s ease-in-out;
     -o-transition: transform .15s ease-in-out;
@@ -6803,10 +6863,45 @@ img.rounded {
     will-change: transform;
 }
 
+    .nk-gallery-item-box img,
+    .nk-gallery-item-group1 img {
+        width: 100%;
+        height: 470px;
+        -webkit-transition: -webkit-transform .15s ease-in-out;
+        transition: -webkit-transform .15s ease-in-out;
+        -o-transition: transform .15s ease-in-out;
+        transition: transform .15s ease-in-out;
+        transition: transform .15s ease-in-out, -webkit-transform .15s ease-in-out;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        will-change: transform;
+    }
+
+    .nk-gallery-item-box1 img,
+    .nk-gallery-item-group img {
+        width: 200px;
+        height: 222px;
+        -webkit-transition: -webkit-transform .15s ease-in-out;
+        transition: -webkit-transform .15s ease-in-out;
+        -o-transition: transform .15s ease-in-out;
+        transition: transform .15s ease-in-out;
+        transition: transform .15s ease-in-out, -webkit-transform .15s ease-in-out;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        will-change: transform;
+    }
+
 .nk-gallery-item-box .nk-gallery-item,
 .nk-gallery-item-group .nk-gallery-item {
     display: block;
 }
+
+    .nk-gallery-item-box1 .nk-gallery-item,
+    .nk-gallery-item-group .nk-gallery-item {
+        display: block;
+    }
 
 .nk-gallery-item-box .nk-gallery-item:hover img,
 .nk-gallery-item-group .nk-gallery-item:hover img {
@@ -6815,6 +6910,13 @@ img.rounded {
             transform: scale(1.05);
 }
 
+        .nk-gallery-item-box1 .nk-gallery-item:hover img,
+        .nk-gallery-item-group .nk-gallery-item:hover img {
+            -webkit-transform: scale(1.05);
+            -ms-transform: scale(1.05);
+            transform: scale(1.05);
+        }
+
 .nk-gallery-item-box .nk-gallery-item-description,
 .nk-gallery-item-group .nk-gallery-item-description {
     position: absolute;
@@ -6822,6 +6924,14 @@ img.rounded {
     text-indent: 100%;
     white-space: nowrap;
 }
+
+    .nk-gallery-item-box1 .nk-gallery-item-description,
+    .nk-gallery-item-group .nk-gallery-item-description {
+        position: absolute;
+        overflow: hidden;
+        text-indent: 100%;
+        white-space: nowrap;
+    }
 
 .nk-gallery-item-box .nk-gallery-item-link,
 .nk-gallery-item-group .nk-gallery-item-link {
@@ -6833,6 +6943,16 @@ img.rounded {
     z-index: 1;
 }
 
+    .nk-gallery-item-box1 .nk-gallery-item-link,
+    .nk-gallery-item-group .nk-gallery-item-link {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+    }
+
 .nk-gallery-item-box .nk-gallery-item-label,
 .nk-gallery-item-group .nk-gallery-item-label {
     position: absolute;
@@ -6841,6 +6961,15 @@ img.rounded {
     background-color: #171e22;
     z-index: 2;
 }
+
+    .nk-gallery-item-box1 .nk-gallery-item-label,
+    .nk-gallery-item-group .nk-gallery-item-label {
+        position: absolute;
+        bottom: 30px;
+        padding: 17px 30px;
+        background-color: #171e22;
+        z-index: 2;
+    }
 
 .nk-gallery-item-box .nk-gallery-item-overlay,
 .nk-gallery-item-group .nk-gallery-item-overlay {
@@ -6864,6 +6993,50 @@ img.rounded {
     z-index: 1;
 }
 
+    .nk-gallery-item-box .nk-gallery-item-overlay,
+    .nk-gallery-item-group1 .nk-gallery-item-overlay {
+        position: absolute;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        color: #fff;
+        background-color: rgba(221, 22, 59, 0.75);
+        opacity: 0;
+        -webkit-transition: .2s opacity;
+        -o-transition: .2s opacity;
+        transition: .2s opacity;
+        z-index: 1;
+    }
+
+    .nk-gallery-item-box1 .nk-gallery-item-overlay,
+    .nk-gallery-item-group .nk-gallery-item-overlay {
+        position: absolute;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        color: #fff;
+        background-color: rgba(221, 22, 59, 0.75);
+        opacity: 0;
+        -webkit-transition: .2s opacity;
+        -o-transition: .2s opacity;
+        transition: .2s opacity;
+        z-index: 1;
+    }
+
 .nk-gallery-item-box .nk-gallery-item-overlay > span,
 .nk-gallery-item-group .nk-gallery-item-overlay > span {
     width: 56px;
@@ -6883,11 +7056,60 @@ img.rounded {
             transform: scale(0.95);
 }
 
+        .nk-gallery-item-box .nk-gallery-item-overlay > span,
+        .nk-gallery-item-group1 .nk-gallery-item-overlay > span {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto;
+            font-size: 3rem;
+            line-height: 48px;
+            text-align: center;
+            border: 4px solid #fff;
+            border-radius: 28px;
+            opacity: .85;
+            -webkit-transition: .35s transform ease;
+            -o-transition: .35s transform ease;
+            transition: .35s transform ease;
+            -webkit-transform: scale(0.95);
+            -ms-transform: scale(0.95);
+            transform: scale(0.95);
+        }
+
+        .nk-gallery-item-box1 .nk-gallery-item-overlay > span,
+        .nk-gallery-item-group .nk-gallery-item-overlay > span {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto;
+            font-size: 3rem;
+            line-height: 48px;
+            text-align: center;
+            border: 4px solid #fff;
+            border-radius: 28px;
+            opacity: .85;
+            -webkit-transition: .35s transform ease;
+            -o-transition: .35s transform ease;
+            transition: .35s transform ease;
+            -webkit-transform: scale(0.95);
+            -ms-transform: scale(0.95);
+            transform: scale(0.95);
+        }
+
 .nk-gallery-item-box:hover .nk-gallery-item-overlay, .nk-gallery-item-box.hover .nk-gallery-item-overlay,
 .nk-gallery-item-group:hover .nk-gallery-item-overlay,
 .nk-gallery-item-group.hover .nk-gallery-item-overlay {
     opacity: 1;
 }
+
+    .nk-gallery-item-box:hover .nk-gallery-item-overlay, .nk-gallery-item-box.hover .nk-gallery-item-overlay,
+    .nk-gallery-item-group1:hover .nk-gallery-item-overlay,
+    .nk-gallery-item-group1.hover .nk-gallery-item-overlay {
+        opacity: 1;
+    }
+    .nk-gallery-item-box1:hover .nk-gallery-item-overlay, .nk-gallery-item-box1.hover .nk-gallery-item-overlay,
+    .nk-gallery-item-group:hover .nk-gallery-item-overlay,
+    .nk-gallery-item-group.hover .nk-gallery-item-overlay {
+        opacity: 1;
+    }
 
 .nk-gallery-item-box:hover .nk-gallery-item-overlay > span, .nk-gallery-item-box.hover .nk-gallery-item-overlay > span,
 .nk-gallery-item-group:hover .nk-gallery-item-overlay > span,
@@ -6897,6 +7119,20 @@ img.rounded {
             transform: scale(1);
 }
 
+        .nk-gallery-item-box:hover .nk-gallery-item-overlay > span, .nk-gallery-item-box.hover .nk-gallery-item-overlay > span,
+        .nk-gallery-item-group1:hover .nk-gallery-item-overlay > span,
+        .nk-gallery-item-group1.hover .nk-gallery-item-overlay > span {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
+        .nk-gallery-item-box1:hover .nk-gallery-item-overlay > span, .nk-gallery-item-box1.hover .nk-gallery-item-overlay > span,
+        .nk-gallery-item-group:hover .nk-gallery-item-overlay > span,
+        .nk-gallery-item-group.hover .nk-gallery-item-overlay > span {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
 /* Gallery Group */
 .nk-gallery-item-group .nk-gallery-item-overlay {
     padding-bottom: 55px;
@@ -6932,6 +7168,40 @@ img.rounded {
     font-weight: 600;
 }
 
+/*------*/
+    .nk-gallery-item-group1 .nk-gallery-item-overlay {
+        padding-bottom: 55px;
+        background-color: rgba(23, 30, 34, 0.65);
+    }
+
+    .nk-gallery-item-group1 .nk-gallery-item-description {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 20px 19px;
+        overflow: auto;
+        color: #fff;
+        text-indent: 0;
+        white-space: normal;
+        background-color: rgba(221, 22, 59, 0.75);
+    }
+
+        .nk-gallery-item-group1 .nk-gallery-item-description .nk-gallery-item-description-title {
+            float: left;
+            margin-bottom: 0;
+            line-height: 1.1;
+        }
+
+        .nk-gallery-item-group1 .nk-gallery-item-description .nk-gallery-item-description-info {
+            float: right;
+            line-height: 1.1;
+        }
+
+            .nk-gallery-item-group1 .nk-gallery-item-description .nk-gallery-item-description-info span:last-of-type {
+                margin-left: 8px;
+                font-weight: 600;
+            }
 /*---------------------------
   Element Video
  ----------------------------*/
@@ -8138,7 +8408,7 @@ div.nk-error {
 }
 
 .nk-news-box {
-    height: 425px;
+    height: 325px;
     overflow: hidden;
     background-color: #232930;
     border: 1px solid #293139;
