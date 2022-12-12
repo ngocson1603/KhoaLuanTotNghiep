@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "ForumList";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int PageCurrent = ViewBag.CurrentPage;
+    int PageNext = PageCurrent + 1;
     Khoaluan.ModelViews.DiscussionViewModel discussion = new Khoaluan.ModelViews.DiscussionViewModel();
 }
 
@@ -77,10 +79,10 @@
                         </div>
                         <div class="nk-forum-activity">
                             <div class="nk-forum-activity-title" title="Hitman">
-                                <a href="#">Hitman</a>
+                                <a href="#">@item.Name</a>
                             </div>
                             <div class="nk-forum-activity-date">
-                                September 11, 2018
+                                @item.CreateDate
                             </div>
                         </div>
                     </li>
@@ -95,20 +97,45 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="nk-pagination nk-pagination-left">
-                    <a href="#" class="nk-pagination-prev">
-                        <span class="ion-ios-arrow-back"></span>
-                    </a>
-                    <nav>
-                        <a class="nk-pagination-current" href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <span>...</span>
-                        <a href="#">14</a>
-                    </nav>
-                    <a href="#" class="nk-pagination-next">
-                        <span class="ion-ios-arrow-forward"></span>
-                    </a>
+                    @if (PageCurrent > 1)
+                    {
+                        string url = $"/forum-topics/{ViewBag.idforum}.html";
+                        <a href="@url?page=@(PageCurrent - 1)" class="nk-pagination-prev">
+                            <span class="ion-ios-arrow-back"></span>
+                        </a>
+                    }
+                    else
+                    {
+                        string url1 = $"/forum-topics/{ViewBag.idforum}.html";
+                        <a href="@url1" class="nk-pagination-prev">
+                            <span class="ion-ios-arrow-back"></span>
+                        </a>
+                    }
+
+                    @{
+                        string url2 = $"/forum-topics/{ViewBag.idforum}.html";
+                        @if (@PageCurrent < ViewBag.maxPage)
+                        {
+
+                            <nav>
+                                <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                                <a href="@url2?page=@PageNext">@PageNext</a>
+                            </nav>
+                            <a class="nk-pagination-next" href="@url2?page=@PageNext">
+                                <span class="ion-ios-arrow-forward"></span>
+                            </a>
+                        }
+                        else
+                        {
+                            <nav>
+                                <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                                <a hidden href="@url2?page=@PageNext">@PageNext</a>
+                            </nav>
+                            <a class="nk-pagination-next">
+                                <span disabled class="ion-ios-arrow-forward"></span>
+                            </a>
+                        }
+                    }
                 </div>
             </div>
         </div>

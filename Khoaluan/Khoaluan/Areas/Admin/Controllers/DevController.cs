@@ -66,21 +66,21 @@ namespace Khoaluan.Controllers
                 {
                     if (User.IsInRole("User"))
                     {
-                        _notyfService.Warning("Vui lòng đăng xuất ở User");
+                        _notyfService.Warning("Please log out at User");
                         return RedirectToAction("Dashboard", "Users");
                     }
                     var kh = _unitOfWork.DeveloperRepository.getDev(model.UserName);
 
                     if (kh == null)
                     {
-                        ViewBag.Eror = "Thông tin đăng nhập chưa chính xác";
+                        ViewBag.Eror = "Login information is incorrect";
                         return View(model);
                     }
                     string pass = (model.Password.Trim());
                     // + kh.Salt.Trim()
                     if (kh.Passwork.Trim() != pass)
                     {
-                        ViewBag.Eror = "Thông tin đăng nhập chưa chính xác";
+                        ViewBag.Eror = "Login information is incorrect";
                         return View(model);
                     }
                     //đăng nhập thành công
@@ -131,7 +131,7 @@ namespace Khoaluan.Controllers
         public IActionResult IndexDev()
         {
             var taikhoanID = HttpContext.Session.GetString("AccountId");
-            var ls = _unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)).ToList();
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Status == (int)productType.accept && t.DevId==int.Parse(taikhoanID)).ToList();
             return View(ls);
         }
         // POST: AdminProductsController/Create
@@ -150,13 +150,12 @@ namespace Khoaluan.Controllers
                     product.Image = await Utilities.UploadFile(fThumb, image.ToLower());
                 }
                 if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
-                product.ReleaseDate = DateTime.Now;
                 var taikhoanID = HttpContext.Session.GetString("AccountId");
                 product.Status = type;
                 product.DevId = int.Parse(taikhoanID);
                 _unitOfWork.ProductRepository.Create(product);
                 _unitOfWork.SaveChange();
-                _notyfService.Success("Thêm mới thành công");
+                _notyfService.Success("Successfully added new");
                 return RedirectToAction(nameof(IndexDev));
             }
             //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
@@ -231,7 +230,7 @@ namespace Khoaluan.Controllers
             {
                 if (model.SelectedIds == null)
                 {
-                    _notyfService.Warning("Vui lòng chọn danh mục");
+                    _notyfService.Warning("Please select a category");
                     return RedirectToAction(nameof(IndexDev));
                 }
                 product.Name = Utilities.ToTitleCase(product.Name);
@@ -249,7 +248,7 @@ namespace Khoaluan.Controllers
                 _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
                 _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
                 _unitOfWork.SaveChange();
-                _notyfService.Success("Cập nhật thành công");
+                _notyfService.Success("Update successful");
                 List<string> cate = new List<string>();
                 var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
                 if (product1 != null)
@@ -307,17 +306,17 @@ namespace Khoaluan.Controllers
                         taikhoan.Passwork = passnew;
                         _unitOfWork.DeveloperRepository.Update(taikhoan);
                         _unitOfWork.SaveChange();
-                        _notyfService.Success("Đổi mật khẩu thành công");
+                        _notyfService.Success("Change password successfully");
                         return RedirectToAction("InfoDev", "Dev", new { Area = "Admin" });
                     }
                 }
             }
             catch
             {
-                _notyfService.Success("Thay đổi mật khẩu không thành công");
+                _notyfService.Success("Password change failed");
                 return RedirectToAction("Info", "Admin", new { Area = "Admin" });
             }
-            _notyfService.Success("Thay đổi mật khẩu không thành công");
+            _notyfService.Success("Password change failed");
             return RedirectToAction("Info", "Admin", new { Area = "Admin" });
         }
         public IActionResult LogoutDev()

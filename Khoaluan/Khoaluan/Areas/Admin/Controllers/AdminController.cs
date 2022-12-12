@@ -55,7 +55,7 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 _unitOfWork.DeveloperRepository.Update(developer);
                 _unitOfWork.SaveChange();
-                _notyfService.Success("Cập nhật thành công");
+                _notyfService.Success("Update successful");
                 return RedirectToAction(nameof(Index));
             }
             return View(developer);
@@ -65,7 +65,7 @@ namespace Khoaluan.Areas.Admin.Controllers
             var product = _unitOfWork.DeveloperRepository.GetById(id);
             _unitOfWork.DeveloperRepository.Delete(product);
             _unitOfWork.SaveChange();
-            _notyfService.Success("Xóa thành công");
+            _notyfService.Success("Delete successful");
             return RedirectToAction(nameof(Index));
         }
         public ActionResult Index()
@@ -110,7 +110,7 @@ namespace Khoaluan.Areas.Admin.Controllers
                 _unitOfWork.DeveloperRepository.Create(developer);
                 _unitOfWork.SaveChange();
                 Utilities.sendemaildev(developer.UserName, developer);
-                _notyfService.Success("Thêm mới thành công");
+                _notyfService.Success("Successfully added new");
                 return RedirectToAction(nameof(Index));
             }
             return View(developer);
@@ -161,23 +161,21 @@ namespace Khoaluan.Areas.Admin.Controllers
                 {
                     if (User.IsInRole("User"))
                     {
-                        //await HttpContext.SignOutAsync();
-                        //HttpContext.Session.Remove("CustomerId");
-                        _notyfService.Warning("Vui lòng đăng xuất ở User");
+                        _notyfService.Warning("Please log out at User");
                         return RedirectToAction("Dashboard", "Users");
                     }
                     var kh = _unitOfWork.AdminRepository.GetAll().SingleOrDefault(x => x.TaiKhoan.Trim() == model.Gmail);
 
                     if (kh == null)
                     {
-                        ViewBag.Eror = "Thông tin đăng nhập chưa chính xác";
+                        ViewBag.Eror = "Login information is incorrect";
                         return View(model);
                     }
                     string pass = (model.Password.Trim());
                     // + kh.Salt.Trim()
                     if (kh.Password.Trim() != pass)
                     {
-                        ViewBag.Eror = "Thông tin đăng nhập chưa chính xác";
+                        ViewBag.Eror = "Login information is incorrect";
                         return View(model);
                     }
                     //đăng nhập thành công
@@ -237,17 +235,17 @@ namespace Khoaluan.Areas.Admin.Controllers
                         taikhoan.Password = passnew;
                         _unitOfWork.AdminRepository.Update(taikhoan);
                         _unitOfWork.SaveChange();
-                        _notyfService.Success("Đổi mật khẩu thành công");
+                        _notyfService.Success("Change password successfully");
                         return RedirectToAction("Info", "Admin", new { Area = "Admin" });
                     }
                 }
             }
             catch
             {
-                _notyfService.Success("Thay đổi mật khẩu không thành công");
+                _notyfService.Warning("Password change failed");
                 return RedirectToAction("Info", "Admin", new { Area = "Admin" });
             }
-            _notyfService.Success("Thay đổi mật khẩu không thành công");
+            _notyfService.Warning("Password change failed");
             return RedirectToAction("Info", "Admin", new { Area = "Admin" });
         }
         [Route("logout.html", Name = "Logout")]

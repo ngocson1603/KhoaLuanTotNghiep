@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Khoaluan.Extension;
 using System.Text.RegularExpressions;
+using PagedList.Core;
 
 namespace Khoaluan.Controllers
 {
@@ -51,11 +52,6 @@ namespace Khoaluan.Controllers
         }
 
         // GET: ForumListController/Create
-        public ActionResult Create()
-        {
-            var list = _unitOfWork.DiscussionRepository.GetAll().Where(t => t.ProductID == idpro);
-            return View(list);
-        }
 
         // POST: ForumListController/Create
         [HttpPost]
@@ -76,11 +72,11 @@ namespace Khoaluan.Controllers
                     UserName = int.Parse(taikhoanID),
                 };
                 _unitOfWork.DiscussionRepository.Add(discussion1);
-                _notyfService.Success("Thêm thành công");
+                _notyfService.Success("Add success");
                 return Redirect(url);
             }
-            _notyfService.Success("Đã có lỗi xảy ra");
-            return View(discussion);
+            _notyfService.Warning("An error has occurred");
+            return RedirectToAction("ForumInD");
         }
 
         // GET: ForumListController/Edit/5
@@ -121,10 +117,10 @@ namespace Khoaluan.Controllers
                 };
                 _unitOfWork.DiscussionRepository.Update(id,discussion1);
                 //_unitOfWork.SaveChange();
-                _notyfService.Success("Sửa thành công");
+                _notyfService.Success("Successful fix");
                 return Redirect(url);
             }
-            _notyfService.Success("Đã có lỗi xảy ra");
+            _notyfService.Success("An error has occurred");
             return View(discussion);
         }
 
@@ -154,7 +150,7 @@ namespace Khoaluan.Controllers
             try
             {
                 _unitOfWork.DiscussionRepository.Remove(id);
-                _notyfService.Success("Xóa quyền truy cập thành công");
+                _notyfService.Success("Delete discuss successfully");
                 return Redirect(url);
             }
             catch
@@ -165,15 +161,28 @@ namespace Khoaluan.Controllers
         }
         public static int idpro;
         [Route("/forum-topics/{id}.html", Name = ("ForumList"))]
-        public IActionResult ForumList(int id)
+        public IActionResult ForumList(int id,int? page)
         {
             idpro = id;
+            ViewBag.idforum = id;
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 10;
             var list = _unitOfWork.DiscussionRepository.GetAll().Where(t => t.ProductID == id);
-            return View(list);
+            if (list.Count() <= 10)
+                ViewBag.maxPage = 1;
+            else
+            {
+                double dMaxPage = Convert.ToDouble(list.Count());
+                ViewBag.maxPage = Math.Ceiling(dMaxPage / 10);
+            }
+            var pl = list.AsQueryable().ToPagedList(pageNumber, pageSize);
+            var plr = pl.ToList();
+            ViewBag.CurrentPage = pageNumber;
+            return View(plr);
         }
         public static string idpost;
         [Route("forum-single-topic/{id}.html", Name = ("DetailForum"))]
-        public IActionResult DetailForum(string id)
+        public IActionResult DetailForum(string id, int? page)
         {
             idpost = id;
             Discussion model = _unitOfWork.DiscussionRepository.GetById(id);
@@ -232,10 +241,22 @@ namespace Khoaluan.Controllers
             }
         }
         [Route("Forum.html", Name = ("Forum"))]
-        public IActionResult ForumInD()
+        public IActionResult ForumInD(int? page)
         {
-            var ls1 = _unitOfWork.ProductRepository.GetAll().ToList();
-            return View(ls1);
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 10;
+            var ls1 = _unitOfWork.ProductRepository.listProforum().ToList();
+            if (ls1.Count() <= 10)
+                ViewBag.maxPage = 1;
+            else
+            {
+                double dMaxPage = Convert.ToDouble(ls1.Count());
+                ViewBag.maxPage = Math.Ceiling(dMaxPage / 10);
+            }
+            var pl = ls1.AsQueryable().ToPagedList(pageNumber, pageSize);
+            var plr = pl.ToList();
+            ViewBag.CurrentPage = pageNumber;
+            return View(plr);
         }
     }
 }

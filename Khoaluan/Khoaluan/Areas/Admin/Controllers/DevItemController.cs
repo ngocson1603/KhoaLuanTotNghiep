@@ -51,7 +51,7 @@ namespace Khoaluan.Areas.Admin.Controllers
                 item.ProductId = int.Parse(idproduct);
                 _unitOfWork.ItemRepository.Create(item);
                 _unitOfWork.SaveChange();
-                _notyfService.Success("Thêm mới thành công");
+                _notyfService.Success("Successfully added new");
                 return RedirectToAction(nameof(Index));
             }
             return View(item);
@@ -138,7 +138,7 @@ namespace Khoaluan.Areas.Admin.Controllers
 
                 _unitOfWork.ItemRepository.Update(item);
                 _unitOfWork.SaveChange();
-                _notyfService.Success("Cập nhật thành công");
+                _notyfService.Success("Update successful");
                 return RedirectToAction(nameof(Index));
             }
             var taikhoanID = HttpContext.Session.GetString("AccountId");
@@ -151,7 +151,7 @@ namespace Khoaluan.Areas.Admin.Controllers
             var product = _unitOfWork.ItemRepository.GetById(id);
             _unitOfWork.ItemRepository.Delete(product);
             _unitOfWork.SaveChange();
-            _notyfService.Success("Xóa thành công");
+            _notyfService.Success("Delete successful");
             return RedirectToAction(nameof(Index));
         }
 

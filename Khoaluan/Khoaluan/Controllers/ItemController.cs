@@ -37,7 +37,7 @@ namespace Khoaluan.Controllers
             var taikhoanID = HttpContext.Session.GetString("CustomerId");
             var ls = _unitOfWork.ItemRepository.getItemSell();
             var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID));
-            var product = _unitOfWork.ProductRepository.GetAll().OrderBy(i => i.Id).ToList();
+            var product = _unitOfWork.ProductRepository.listProductItem().OrderBy(i => i.Id).ToList();
             if (ls.Count() <= 10)
                 ViewBag.maxPage = 1;
             else
@@ -68,7 +68,7 @@ namespace Khoaluan.Controllers
                 var taikhoanID = HttpContext.Session.GetString("CustomerId");
                 var ls = _unitOfWork.ItemRepository.getItemSell().Where(t=>t.NameGame.Equals(id)).ToList();
                 var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID));
-                var product = _unitOfWork.ProductRepository.GetAll().OrderBy(i => i.Id).ToList();
+                var product = _unitOfWork.ProductRepository.listProductItem().OrderBy(i => i.Id).ToList();
                 if (ls.Count() <= 10)
                     ViewBag.maxPage = 1;
                 else

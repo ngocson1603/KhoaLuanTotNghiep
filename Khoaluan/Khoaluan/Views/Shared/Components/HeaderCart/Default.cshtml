@@ -2,25 +2,30 @@
 @if (Model != null && Model.Count() > 0)
 {
     <div class="nk-cart-dropdown">
-        @foreach (var item in Model.Take(5))
-        {
+        <div class="nk-news-box">
+            <div class="nano">
+                <div class="nano-content">
+                    @foreach (var item in Model)
+                    {
 
-            string url = $"/Product/HomePage/{item.product.Id}.html";
-            <div class="nk-widget-post">
-                <a href="@url" class="nk-post-image">
-                    <img src="~/Images/@Url.Content(item.product.Image)" alt="@item.product.Name">
-                </a>
-                <h3 class="nk-post-title">
-                    <a href="#" class="nk-cart-remove-item">
-                        <span class="ion-android-close"></span>
-                    </a>
-                    <a href="@url">@item.product.Name</a>
-                </h3>
-                <div class="nk-gap-1"></div>
-                <div class="nk-product-price">€ @item.product.Price</div>
+                        string url = $"/Product/HomePage/{item.product.Id}.html";
+                        <div class="nk-widget-post">
+                            <a href="@url" class="nk-post-image">
+                                <img src="~/Images/@Url.Content(item.product.Image)" alt="@item.product.Name">
+                            </a>
+                            <h3 class="nk-post-title">
+                                <a href="#" class="nk-cart-remove-item">
+                                    <span class="ion-android-close"></span>
+                                </a>
+                                <a href="@url">@item.product.Name</a>
+                            </h3>
+                            <div class="nk-gap-1"></div>
+                            <div class="nk-product-price">€ @item.product.Price</div>
+                        </div>
+                    }
+                </div>
             </div>
-        }
-
+        </div>
         <div class="nk-gap-2"></div>
         <div class="group-btn_wrap d-grid gap-2">
             <a href="/cart.html" class="btn btn-secondary btn-primary-hover">View Cart</a>
