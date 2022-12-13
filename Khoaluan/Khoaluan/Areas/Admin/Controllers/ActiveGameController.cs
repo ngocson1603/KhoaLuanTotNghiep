@@ -54,31 +54,9 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 ViewData["Category"] = "";
             }
-
-            var data = new List<SelectListItem>();
-            foreach (var item in _unitOfWork.CategoryRepository.GetAll())
-            {
-                data.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Name });
-            }
-
-            foreach (var item_1 in cate)
-            {
-                foreach (var item_2 in data)
-                {
-                    if (item_2.Text.Equals(item_1))
-                    {
-                        item_2.Selected = true;
-                    }
-                }
-            }
-
-            MultiDropDownListViewModel model = new();
-            model.ItemList = data;
-
             ProCate pwc = new ProCate()
             {
                 product = product,
-                muti = model
             };
 
             ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
@@ -87,7 +65,7 @@ namespace Khoaluan.Areas.Admin.Controllers
         // POST: AdminProductsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status")] Product product, PostSelectedViewModel model, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (id != product.Id)
             {
@@ -97,11 +75,6 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 try
                 {
-                    if (model.SelectedIds == null)
-                    {
-                        _notyfService.Warning("Please select a category");
-                        return RedirectToAction(nameof(Index));
-                    }
                     if (product.Status == 0)
                     {
                         _notyfService.Warning("Please select a status");
@@ -116,10 +89,7 @@ namespace Khoaluan.Areas.Admin.Controllers
                     }
                     if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
                     product.ReleaseDate = DateTime.Now;
-                    var catepro = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
                     _unitOfWork.ProductRepository.Update(product);
-                    _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
-                    _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
                     _unitOfWork.SaveChange();
                     var pro = _unitOfWork.ProductRepository.listProdevActive(id);
                     Utilities.sendemailactivegame(pro);

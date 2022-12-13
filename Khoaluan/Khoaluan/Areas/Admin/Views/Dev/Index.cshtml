@@ -2,7 +2,7 @@
 
 @{
     // int CurrentPage = ViewBag.CurrentPage;
-    ViewData["Title"] = "Danh sách sản phẩm";
+    ViewData["Title"] = "Danh sách sản phẩm chờ duyết";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 <div class="page-header">
@@ -77,7 +77,7 @@
                                     else if (item.Status == 1)
                                     {
                                         <div class="d-flex align-items-center">
-                                            <div class="badge badge-red badge-dot m-r-10"></div>
+                                            <div class="badge badge-dot badge-dot m-r-10"></div>
                                             <div>accept</div>
                                         </div>
                                     }
@@ -97,9 +97,9 @@
                                     }
 
                                 <td>
-
-                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="ActiveGame" asp-action="Edit" asp-route-id="@item.Id">Duyệt Game</a>
-
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Dev" asp-action="Detailss" asp-route-id="@item.Id"><i class="anticon anticon-zoom-in"></i></a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="Dev" asp-action="Edits" asp-route-id="@item.Id"><i class="anticon anticon-edit"></i></a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="Dev" asp-action="Deletes" asp-route-id="@item.Id"><i class="anticon anticon-delete"></i></a>
                                 </td>
                             </tr>
                         }
@@ -120,35 +120,52 @@
     <link href="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
 }
 @section Scripts{
-    <script>
-        $(document).ready(function () {
-            jQuery("#txtCatID").change(function () {
-                var catID = jQuery(this).children(":selected").attr("value");
-                catID = parseFloat(catID);
-                $('#txtCatID option')
-                    .removeAttr('selected');
-                $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
-                $.ajax({
-                    url: '/Admin/AdminProducts/Filtter',
-                    datatype: "json",
-                    type: "GET",
-                    data: {
-                        CatID: catID
-                    },
-                    async: true,
-                    success: function (results) {
-                        if (results.status == "success") {
-                            window.location.href = results.redirectUrl;
+    @*<script>
+            $(document).ready(function () {
+                jQuery("#txtCatID").change(function () {
+                    var catID = jQuery(this).children(":selected").attr("value");
+                    catID = parseFloat(catID);
+                    $('#txtCatID option')
+                        .removeAttr('selected');
+                    $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
+                    $.ajax({
+                        url: '/Admin/AdminProducts/Filtter',
+                        datatype: "json",
+                        type: "GET",
+                        data: {
+                            CatID: catID
+                        },
+                        async: true,
+                        success: function (results) {
+                            if (results.status == "success") {
+                                window.location.href = results.redirectUrl;
+                            }
+                        },
+                        error: function (xhr) {
+                            alert('error');
                         }
-                    },
-                    error: function (xhr) {
-                        alert('error');
-                    }
+                    });
+                });
+
+                $("#keyword").keyup(function () {
+                    var strkeyword = $('#keyword').val();
+                    $.ajax({
+                        url: '/Admin/Search/FindProduct/',
+                        datatype: "json",
+                        type: "POST",
+                        data: { keyword: strkeyword },
+                        async: true,
+                        success: function (results) {
+                            $("#records_table").html("");
+                            $("#records_table").html(results);
+                        },
+                        error: function (xhr) {
+                            alert('error');
+                        }
+                    });
                 });
             });
-        });
-    </script>
-
+        </script>*@
     <script src="~/Adminassets/js/pages/e-commerce-order-list.js"></script>
     <script src="~/Adminassets/vendors/datatables/jquery.dataTables.min.js"></script>
     <script src="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.js"></script>

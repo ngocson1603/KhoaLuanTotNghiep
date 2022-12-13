@@ -111,11 +111,19 @@
             else if (User.IsInRole("Dev"))
             {
                 <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Dev" asp-action="Index">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-file"></i>
+                        </span>
+                        <span class="title">Game chờ duyệt</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a asp-area="Admin" asp-controller="Dev" asp-action="IndexDev">
                         <span class="icon-holder">
                             <i class="anticon anticon-file"></i>
                         </span>
-                        <span class="title">Quản lý sản phẩm</span>
+                        <span class="title">Game đã duyệt</span>
                     </a>
                 </li>
                 <li class="nav-item">
