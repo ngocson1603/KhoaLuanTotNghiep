@@ -55,7 +55,17 @@ namespace DuAnGame.Controllers
                 }
                 else
                 {
+                    var discount = _unitOfWork.SaleProductRepository.getdiscount(productID);
+                    
                     Product hh = _unitOfWork.ProductRepository.GetById(productID);
+                    if(discount > 0)
+                    {
+                        hh.Price = hh.Price - (hh.Price * discount / 100);
+                    }
+                    else
+                    {
+
+                    }
                     item = new Cart
                     {
                         product = hh

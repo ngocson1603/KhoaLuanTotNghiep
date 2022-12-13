@@ -61,10 +61,7 @@
                                         <i class="anticon anticon-ellipsis"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <button class="dropdown-item" type="button">
-                                            <i class="anticon anticon-eye"></i>
-                                            <span class="m-l-10">View</span>
-                                        </button>
+                                        <a class="dropdown-item btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Sale" asp-action="Edit" asp-route-id="@item.Id"><i class="anticon anticon-eye"><span class="m-l-10">View</span></i></a>
                                         <button class="dropdown-item" type="button">
                                             <i class="anticon anticon-edit"></i>
                                             <span class="m-l-10">Edit</span>

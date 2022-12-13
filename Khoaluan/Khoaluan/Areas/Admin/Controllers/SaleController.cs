@@ -20,12 +20,13 @@ namespace Khoaluan.Areas.Admin.Controllers
             _notyfService = notyfService;
         }
         // GET: SaleController
+
+        [Route("/sale.html", Name = "Index")]
         public ActionResult Index()
         {
             var sale = _unitOfWork.SaleRepository.GetAll();
             return View(sale);
         }
-
         // GET: SaleController/Details/5
         public ActionResult Details(int id)
         {
@@ -64,7 +65,39 @@ namespace Khoaluan.Areas.Admin.Controllers
         // GET: SaleController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var ls = _unitOfWork.ProductRepository.GetAll().ToList();
+            ViewBag.SaleId = id.ToString();
+            return View(ls);
+        }
+
+        [HttpPost]
+        [Route("/Sale/AjaxMethod", Name = "AjaxMethod")]
+        public JsonResult AjaxMethod(string saleId, string productId, string discount)
+        {
+            if (_unitOfWork.SaleRepository.GetById(int.Parse(saleId)) == null)
+                return null;
+            try
+            {
+                _unitOfWork.SaleProductRepository.Create(new SaleProduct()
+                {
+                    SaleID = int.Parse(saleId),
+                    ProductID = int.Parse(productId),
+                    Discount = int.Parse(discount)
+                });
+                _unitOfWork.SaveChange();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Json(1);
+        }
+
+        [HttpPost]
+        public void SaveSaleProduct(string saleId, string productId, string discount)
+        {
+            
         }
 
         // POST: SaleController/Edit/5

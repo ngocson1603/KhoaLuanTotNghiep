@@ -17,7 +17,7 @@ namespace Khoaluan.Repositories
         {
             _usersRepository = usersRepository;
         }
-        public OtpModels.RefundRequest refundRequest(int UserID,int productID)
+        public OtpModels.RefundRequest refundRequest(int productID, int UserID)
         {
             var query = @"select top 1.[o].id as OrderID,UserID,ProductID,Price,DatePurchase from [Order] o,OrderDetail od
                         where o.Id=od.Id and ProductID=@productid AND UserID=@userid
