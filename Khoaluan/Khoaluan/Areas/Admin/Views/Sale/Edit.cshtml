@@ -1,0 +1,185 @@
+﻿@model IEnumerable<Khoaluan.Models.Product>
+
+@{
+    // int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    string saleId = ViewBag.SaleId;
+}
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            @*<span class="breadcrumb-item active">Danh sách sản phẩm : trang @CurrentPage</span>*@
+        </nav>
+    </div>
+
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <input type="button" onclick='alertChecked()' value="Save" />
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Discount</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="records_table">
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @item.Id
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img class="img-fluid rounded" src="~/Images/@Url.Content(item.Image)" style="max-width: 60px" alt="">
+                                        <h6 class="m-b-0 m-l-10">@item.Name</h6>
+                                    </div>
+                                </td>
+                                <td><input type="number" id="@item.Id" onchange="handleChange(this);" /></td>
+                                <td>
+                                    @if (item.Status == 0)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div>pending</div>
+                                        </div>
+                                    }
+                                    else if (item.Status == 1)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-red badge-dot m-r-10"></div>
+                                            <div>accept</div>
+                                        </div>
+                                    }
+                                    else if (item.Status == 2)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-green badge-dot m-r-10"></div>
+                                            <div>decline</div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-geekblue badge-dot m-r-10"></div>
+                                            <div>release</div>
+                                        </div>
+                                    }
+
+                                <td>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="ActiveGame" asp-action="Edit" asp-route-id="@item.Id">Duyệt Game</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+
+                </tbody>
+            </table>
+            <div aria-label="Page navigation example">
+                @*<ul class="pagination">
+                        <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminProducts" asp-route-CatID="@ViewBag.CurrentCateID" asp-action="Index" />
+                    </ul>*@
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles{
+    <link href="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+}
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            jQuery("#txtCatID").change(function () {
+                var catID = jQuery(this).children(":selected").attr("value");
+                catID = parseFloat(catID);
+                $('#txtCatID option')
+                    .removeAttr('selected');
+                $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
+                $.ajax({
+                    url: '/Admin/AdminProducts/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        CatID: catID
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function handleChange(input) {
+            if (input.value < 1) input.value = 1;
+            if (input.value > 100) input.value = 99;
+        }
+
+        function alertChecked() {
+            $.ajax({
+                success: function (res) {
+                    Swal.fire({
+                        title: "<h5>Save Discount For Product(s)</h5>",
+                        icon: 'question',
+                        allowOutsideClick: false,
+                        showCloseButton: true,
+                        showDenyButton: true,
+                        confirmButtonColor: '#3085d6',
+                        denyButtonColor: '#3A833A',
+                        confirmButtonText: 'Continue Transaction',
+                        denyButtonText: 'New Transaction'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var inputs = document.getElementsByTagName('input');
+                            for (index = 0; index < inputs.length; ++index) {
+                                if (inputs[index].type == 'number' && inputs[index].value.length > 0) {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "/Sale/AjaxMethod",
+                                        data: {
+                                            "saleId": @saleId,
+                                            "productId": inputs[index].id,
+                                            "discount": inputs[index].value,
+                                        },
+                                        type: 'POST',
+                                        success: function () {
+                                            console.log("ok");
+                                        }
+                                    });
+                                }
+                            }
+
+                            // window.location.href = "/sale.html";
+                        }
+                        else if (result.isDenied) {
+
+                        }
+                    })
+                }
+            });
+        }
+    </script>
+
+    <script src="~/Adminassets/js/pages/e-commerce-order-list.js"></script>
+    <script src="~/Adminassets/vendors/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.js"></script>
+}

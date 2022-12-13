@@ -19,7 +19,8 @@ namespace Khoaluan.Repositories
             var query = @"select top 1.Discount
                         from Sale s,SaleProduct sp
                         where s.Id=sp.SaleID and ProductID=@id and GETDATE() between CAST(StartDate as date) 
-                        and  CAST(EndDate as date)";
+                        and  CAST(EndDate as date)
+                        order by sp.Id desc";
             var parameter = new DynamicParameters();
             parameter.Add("id", productid);          
             try
