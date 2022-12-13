@@ -175,48 +175,48 @@ namespace Khoaluan.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                //var searchProCate = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
-                //List<int> lst = model.SelectedIds.ToList();
-                //List<int> lst2 = new List<int>();
-                //foreach(var item in searchProCate.Select(t => t.CategoryId))
-                //{
-                //    lst2.Add(item);
-                //}
-                //var result = lst.Except(lst2).ToList();
-                if (model.SelectedIds == null)
+                try
                 {
-                    _notyfService.Warning("Please select a category");
+                    if (model.SelectedIds == null)
+                    {
+                        _notyfService.Warning("Please select a category");
+                        return RedirectToAction(nameof(Index));
+                    }
+                    product.Name = Utilities.ToTitleCase(product.Name);
+                    if (fThumb != null)
+                    {
+
+
+                        string extension = Path.GetExtension(fThumb.FileName);
+                        string images = Utilities.SEOUrl(product.Name) + extension;
+                        product.Image = await Utilities.UploadFile(fThumb, images.ToLower());
+                    }
+                    if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
+                    product.ReleaseDate = DateTime.Now;
+                    var catepro = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
+                    _unitOfWork.ProductRepository.Update(product);
+                    _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
+                    _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Success("Update successful");
+                    List<string> cate = new List<string>();
+                    var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
+                    if (product1 != null)
+                    {
+                        cate.AddRange(product1.Categories);
+                        ViewData["Category"] = cate;
+                    }
+                    else
+                    {
+                        ViewData["Category"] = "";
+                    }
                     return RedirectToAction(nameof(Index));
                 }
-                product.Name = Utilities.ToTitleCase(product.Name);
-                if (fThumb != null)
+                catch (Exception)
                 {
-
-
-                    string extension = Path.GetExtension(fThumb.FileName);
-                    string images = Utilities.SEOUrl(product.Name) + extension;
-                    product.Image = await Utilities.UploadFile(fThumb, images.ToLower());
+                    _notyfService.Error("Update fail");
+                    return RedirectToAction(nameof(Index));
                 }
-                if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
-                product.ReleaseDate = DateTime.Now;
-                var catepro = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
-                _unitOfWork.ProductRepository.Update(product);
-                _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
-                _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
-                _unitOfWork.SaveChange();
-                _notyfService.Success("Update successful");
-                List<string> cate = new List<string>();
-                var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
-                if (product1 != null)
-                {
-                    cate.AddRange(product1.Categories);
-                    ViewData["Category"] = cate;
-                }
-                else
-                {
-                    ViewData["Category"] = "";
-                }
-                return RedirectToAction(nameof(Index));
             }
             ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
             return View(product);
@@ -226,11 +226,20 @@ namespace Khoaluan.Areas.Admin.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            var product = _unitOfWork.ProductRepository.GetById(id);
-            _unitOfWork.ProductRepository.Delete(product);
-            _unitOfWork.SaveChange();
-            _notyfService.Success("Delete successful");
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var product = _unitOfWork.ProductRepository.GetById(id);
+                _unitOfWork.ProductRepository.Delete(product);
+                _unitOfWork.SaveChange();
+                _notyfService.Success("Delete successful");
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                _notyfService.Error("Delete error");
+                return RedirectToAction(nameof(Index));
+            }
+            
         }
 
         // POST: AdminProductsController/Delete/5

@@ -39,20 +39,28 @@ namespace Khoaluan.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                item.Name = Utilities.ToTitleCase(item.Name);
-                if (fThumb != null)
+                try
                 {
-                    string extension = Path.GetExtension(fThumb.FileName);
-                    string image = Utilities.SEOUrl(item.Name) + extension;
-                    item.Image = await Utilities.UploadFile(fThumb, image.ToLower());
+                    item.Name = Utilities.ToTitleCase(item.Name);
+                    if (fThumb != null)
+                    {
+                        string extension = Path.GetExtension(fThumb.FileName);
+                        string image = Utilities.SEOUrl(item.Name) + extension;
+                        item.Image = await Utilities.UploadFile(fThumb, image.ToLower());
+                    }
+                    if (string.IsNullOrEmpty(item.Image)) item.Image = "default.jpg";
+                    var idproduct = HttpContext.Session.GetString("ProductID");
+                    item.ProductId = int.Parse(idproduct);
+                    _unitOfWork.ItemRepository.Create(item);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Success("Successfully added new");
+                    return RedirectToAction(nameof(Index));
                 }
-                if (string.IsNullOrEmpty(item.Image)) item.Image = "default.jpg";
-                var idproduct = HttpContext.Session.GetString("ProductID");
-                item.ProductId = int.Parse(idproduct);
-                _unitOfWork.ItemRepository.Create(item);
-                _unitOfWork.SaveChange();
-                _notyfService.Success("Successfully added new");
-                return RedirectToAction(nameof(Index));
+                catch (Exception)
+                {
+                    _notyfService.Error("Error");
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(item);
         }
@@ -125,21 +133,29 @@ namespace Khoaluan.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                item.Name = Utilities.ToTitleCase(item.Name);
-                if (fThumb != null)
+                try
                 {
+                    item.Name = Utilities.ToTitleCase(item.Name);
+                    if (fThumb != null)
+                    {
 
 
-                    string extension = Path.GetExtension(fThumb.FileName);
-                    string images = Utilities.SEOUrl(item.Name) + extension;
-                    item.Image = await Utilities.UploadFile(fThumb, images.ToLower());
+                        string extension = Path.GetExtension(fThumb.FileName);
+                        string images = Utilities.SEOUrl(item.Name) + extension;
+                        item.Image = await Utilities.UploadFile(fThumb, images.ToLower());
+                    }
+                    if (string.IsNullOrEmpty(item.Image)) item.Image = "default.jpg";
+
+                    _unitOfWork.ItemRepository.Update(item);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Success("Update successful");
+                    return RedirectToAction(nameof(Index));
                 }
-                if (string.IsNullOrEmpty(item.Image)) item.Image = "default.jpg";
-
-                _unitOfWork.ItemRepository.Update(item);
-                _unitOfWork.SaveChange();
-                _notyfService.Success("Update successful");
-                return RedirectToAction(nameof(Index));
+                catch (Exception)
+                {
+                    _notyfService.Error("Error");
+                    return RedirectToAction(nameof(Index));
+                }
             }
             var taikhoanID = HttpContext.Session.GetString("AccountId");
             ViewData["Item"] = new SelectList(_unitOfWork.ProductRepository.listProductDev(int.Parse(taikhoanID)), "Id", "Name", item.ProductId);
@@ -148,11 +164,19 @@ namespace Khoaluan.Areas.Admin.Controllers
         // GET: DevItemController/Delete/5
         public ActionResult Delete(int id)
         {
-            var product = _unitOfWork.ItemRepository.GetById(id);
-            _unitOfWork.ItemRepository.Delete(product);
-            _unitOfWork.SaveChange();
-            _notyfService.Success("Delete successful");
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var product = _unitOfWork.ItemRepository.GetById(id);
+                _unitOfWork.ItemRepository.Delete(product);
+                _unitOfWork.SaveChange();
+                _notyfService.Success("Delete successful");
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                _notyfService.Error("Error");
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // POST: DevItemController/Delete/5

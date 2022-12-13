@@ -53,20 +53,38 @@ namespace Khoaluan.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                _unitOfWork.DeveloperRepository.Update(developer);
-                _unitOfWork.SaveChange();
-                _notyfService.Success("Update successful");
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _unitOfWork.DeveloperRepository.Update(developer);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Success("Update successful");
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception)
+                {
+
+                    _notyfService.Error("Error");
+                    return RedirectToAction(nameof(Index));
+                }
+                
             }
             return View(developer);
         }
         public ActionResult Delete(int id)
         {
-            var product = _unitOfWork.DeveloperRepository.GetById(id);
-            _unitOfWork.DeveloperRepository.Delete(product);
-            _unitOfWork.SaveChange();
-            _notyfService.Success("Delete successful");
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var product = _unitOfWork.DeveloperRepository.GetById(id);
+                _unitOfWork.DeveloperRepository.Delete(product);
+                _unitOfWork.SaveChange();
+                _notyfService.Success("Delete successful");
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                _notyfService.Error("Error");
+                return RedirectToAction(nameof(Index));
+            }
         }
         public ActionResult Index()
         {
@@ -107,11 +125,20 @@ namespace Khoaluan.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.DeveloperRepository.Create(developer);
-                _unitOfWork.SaveChange();
-                Utilities.sendemaildev(developer.UserName, developer);
-                _notyfService.Success("Successfully added new");
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _unitOfWork.DeveloperRepository.Create(developer);
+                    _unitOfWork.SaveChange();
+                    Utilities.sendemaildev(developer.UserName, developer);
+                    _notyfService.Success("Successfully added new");
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception)
+                {
+                    _notyfService.Error("Error");
+                    return RedirectToAction(nameof(Index));
+                }
+                
             }
             return View(developer);
         }
