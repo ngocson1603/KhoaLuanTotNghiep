@@ -90,7 +90,25 @@
                         </li>
                     </ul>
                 </li>
-
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-table"></i>
+                        </span>
+                        <span class="title">Sale</span>
+                        <span class="arrow">
+                            <i class="arrow-icon"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a asp-area="Admin" asp-controller="Sale" asp-action="Index">Sale</a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="SaleProduct" asp-action="Index">Sale Product</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="dropdown-toggle" asp-action="Index" asp-controller="AdminTinDangs" asp-area="Admin">
                         <span class="icon-holder">

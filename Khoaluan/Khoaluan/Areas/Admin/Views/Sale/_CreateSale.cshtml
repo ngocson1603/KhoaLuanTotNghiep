@@ -1,0 +1,41 @@
+﻿@model Khoaluan.Models.Sale
+
+<div class="modal fade" id="create-new-project">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New Sale</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <form asp-controller="Sale" asp-action="Create" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="new-project-name">Name</label>
+                        <input type="text" class="form-control" id="new-project-name" asp-for="@Model.Name" placeholder="Please input project name">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-project-desc">StartDate</label>
+                        <input type="date" class="arrival_dates form-control" asp-for="@Model.StartDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-project-desc">EndDate</label>
+                        <input type="date" class="arrival_dates form-control" asp-for="@Model.EndDate">
+                    </div>
+
+                    <div class="modal-footer">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.arrival_dates').attr('min', new Date().toISOString().split('T')[0])
+    });
+</script>
