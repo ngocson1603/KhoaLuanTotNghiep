@@ -1,4 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Khoaluan.Helpper;
+using Khoaluan.ModelViews;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Khoaluan.Controllers
@@ -16,6 +18,14 @@ namespace Khoaluan.Controllers
         public IActionResult ContactView()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult Email(Contact contact)
+        {
+            //Utilities.sendemailcontact(contact);
+            //Utilities.sendemailuser(contact);
+            _notyfService.Success("Thank you for responding");
+            return RedirectToAction(nameof(ContactView));
         }
     }
 }

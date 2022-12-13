@@ -1,4 +1,4 @@
-﻿
+﻿@model Khoaluan.ModelViews.Contact
 @{
     ViewData["Title"] = "ContactView";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -42,17 +42,17 @@
             </div>
             <div class="col-lg-6">
                 <div class="nk-gap"></div>
-                <form action="~/php/ajax-contact-form.php" class="nk-form nk-form-ajax">
+                <form asp-controller="Contact" asp-action="Email" method="post" enctype="multipart/form-data" class="nk-form nk-form-ajax">
                     <div class="row vertical-gap sm-gap">
                         <div class="col-md-6">
-                            <input type="email" class="form-control required" name="email" placeholder="Email *">
+                            <input type="email" asp-for="Email" class="form-control required" name="email" placeholder="Email *">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control required" name="name" placeholder="Name *">
+                            <input type="text" asp-for="Name" class="form-control required" name="name" placeholder="Name *">
                         </div>
                     </div>
                     <div class="nk-gap"></div>
-                    <textarea class="form-control required" name="message" rows="5"
+                    <textarea class="form-control required" asp-for="Message" name="message" rows="5"
                               placeholder="Message *"></textarea>
                     <div class="nk-gap-1"></div>
                     <button class="nk-btn nk-btn-rounded nk-btn-color-dark-3">
@@ -68,4 +68,4 @@
         <div class="nk-gap-2"></div>
     </div>
 
-
+</div>

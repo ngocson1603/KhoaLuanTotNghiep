@@ -19,7 +19,7 @@ namespace Khoaluan.ModelViews
         [MaxLength(150)]
         [Required(ErrorMessage = "Vui lòng nhập Email")]
         [DataType(DataType.EmailAddress)]
-        [Remote(action: "ValidateEmail", controller: "Accounts")]
+        [Remote(action: "ValidateEmail", controller: "Users")]
         public string Email { get; set; }
 
         [Display(Name = "Mật khẩu")]
