@@ -86,6 +86,7 @@ namespace Khoaluan.Controllers
                     //    .ToList();
                     //ViewBag.DonHang = lsDonHang;
                     ViewBag.NumberOfGames = _unitOfWork.LibraryRepository.getLibrary(khachhang.Id).Count();
+                    ViewBag.NumberOfGamesRf = _unitOfWork.RefundRepository.listgameRefund(int.Parse(taikhoanID)).Count();
                     return View(khachhang);
                 }
             }
@@ -322,6 +323,16 @@ namespace Khoaluan.Controllers
             }
             return RedirectToAction("Login");
         }
-
+        [Route("refund.html", Name = "Refund")]
+        public IActionResult Refund()
+        {
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            if (taikhoanID != null)
+            {
+                var proLib = _unitOfWork.RefundRepository.listgameRefund(int.Parse(taikhoanID));
+                return View(proLib);
+            }
+            return RedirectToAction("Login");
+        }
     }
 }
