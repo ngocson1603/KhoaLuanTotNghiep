@@ -103,6 +103,25 @@ namespace Khoaluan.Areas.Admin.Controllers
                 return PartialView("ListSaleProductsSearchPartial", ls);
             }
         }
+        [HttpPost]
+        public IActionResult FindDotSale(string keyword)
+        {
+            var ls1 = _unitOfWork.SaleRepository.GetAll();
+            if (string.IsNullOrEmpty(keyword) || keyword.Length < 1)
+            {
+                return PartialView("ListDotSaleProductsSearchPartial", ls1);
+            }
+            var ls = _unitOfWork.SaleRepository.GetAll().Where(t => t.Name.ToLower().Contains(keyword.Trim().ToLower())).ToList(); ;
+
+            if (ls == null || ls.Count == 0)
+            {
+                return PartialView("ListDotSaleProductsSearchPartial", null);
+            }
+            else
+            {
+                return PartialView("ListDotSaleProductsSearchPartial", ls);
+            }
+        }
 
     }
 }

@@ -10,13 +10,14 @@
                 <div class="avatar avatar-cyan avatar-icon avatar-square">
                     <i class="anticon anticon-star"></i>
                 </div>
-                <div class="media-body m-l-15">
-                    <div class="col-md-6">
-                        <div class="input-affix m-v-10">
-                            <i class="prefix-icon anticon anticon-search opacity-04"></i>
-                            <input id="keywordsale" name="keywordsale" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
-                        </div>
+                <div class="d-flex align-items-center col-md-3 m-b-10">
+                    <div class="input-affix m-r-10">
+                        <i class="prefix-icon anticon anticon-search"></i>
+                        <input id="keywordsale" name="keywordsale" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
                     </div>
+                    <button class="btn btn-icon btn-default" onclick="changeHref()">
+                        <i class="anticon anticon-reload"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -55,22 +56,20 @@
 @section Scripts{
 
     <script>
-        $(document).ready(function () {
-            $("#keywordsale").keyup(function () {
-                var strkeyword = $('#keywordsale').val();
-                $.ajax({
-                    url: '/Admin/Search/FindProductSale/',
-                    datatype: "json",
-                    type: "POST",
-                    data: { keyword: strkeyword },
-                    async: true,
-                    success: function (results) {
-                        $("#records_tablesale").html("");
-                        $("#records_tablesale").html(results);
-                    },
-                });
+        function changeHref() {
+            var strkeyword = $('#keywordsale').val();
+            $.ajax({
+                url: '/Admin/Search/FindProductSale/',
+                datatype: "json",
+                type: "POST",
+                data: { keyword: strkeyword },
+                async: true,
+                success: function (results) {
+                    $("#records_tablesale").html("");
+                    $("#records_tablesale").html(results);
+                },
             });
-        });
+        }
     </script>
 
     <script src="~/Adminassets/js/pages/profile.js"></script>
