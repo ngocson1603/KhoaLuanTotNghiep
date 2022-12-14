@@ -70,6 +70,37 @@ namespace Khoaluan.Areas.Admin.Controllers
             return View(ls);
         }
 
+        public ActionResult ViewProductSale(int id)
+        {
+            try
+            {
+                HttpContext.Session.SetInt32("SaleId", id);
+                var ls = _unitOfWork.SaleProductRepository.ProductIsSale(id).ToList();
+                return View(ls);
+            }
+            catch (Exception)
+            {
+                _notyfService.Error("Error");
+                return RedirectToAction(nameof(Index));
+            }
+            
+        }
+
+        public ActionResult ViewProductSaleInDate()
+        {
+            try
+            {
+                var ls = _unitOfWork.SaleProductRepository.ProductIsSaleInDate().ToList();
+                return View(ls);
+            }
+            catch (Exception)
+            {
+                _notyfService.Error("Error");
+                return RedirectToAction(nameof(Index));
+            }
+
+        }
+
         [HttpPost]
         [Route("/Sale/AjaxMethod", Name = "AjaxMethod")]
         public JsonResult AjaxMethod(string saleId, string productId, string discount)

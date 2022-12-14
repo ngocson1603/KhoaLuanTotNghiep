@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Khoaluan.ModelViews.SaleModelView>
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm đang sale";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+        </nav>
+    </div>
+
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>Sale Name</th>
+                        <th>Tên sản phẩm</th>
+                    </tr>
+                </thead>
+                <tbody id="records_table">
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @item.SaleName
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img class="img-fluid rounded" src="~/Images/@Url.Content(item.Image)" style="max-width: 60px" alt="">
+                                        <h6 class="m-b-0 m-l-10">@item.ProductName</h6>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        }
+                    }
+
+
+                </tbody>
+            </table>
+            <div aria-label="Page navigation example">
+                @*<ul class="pagination">
+                        <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminProducts" asp-route-CatID="@ViewBag.CurrentCateID" asp-action="Index" />
+                    </ul>*@
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles{
+    <link href="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+}
+@section Scripts{
+    <script src="~/Adminassets/js/pages/e-commerce-order-list.js"></script>
+    <script src="~/Adminassets/vendors/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Adminassets/vendors/datatables/dataTables.bootstrap.min.js"></script>
+}

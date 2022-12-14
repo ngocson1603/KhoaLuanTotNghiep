@@ -15,6 +15,7 @@
     <Content Remove="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Remove="Areas\Admin\Views\Dev\Index.cshtml" />
     <Content Remove="Areas\Admin\Views\Search\ListItemSearchPartial.cshtml" />
+    <Content Remove="Areas\Admin\Views\Search\ListSaleProductsSearchPartial.cshtml" />
     <Content Remove="Areas\Admin\Views\Shared\Components\HeaderNotif\Default.cshtml" />
   </ItemGroup>
 
@@ -26,6 +27,7 @@
     <None Include="Areas\Admin\Views\Dev\LoginDev.cshtml" />
     <None Include="Areas\Admin\Views\Home\Index.cshtml" />
     <None Include="Areas\Admin\Views\Search\ListItemSearchPartial.cshtml" />
+    <None Include="Areas\Admin\Views\Search\ListSaleProductsSearchPartial.cshtml" />
     <None Include="Areas\Admin\Views\Search\ListProductsSearchPartial.cshtml" />
     <None Include="Areas\Admin\Views\Shared\Components\HeaderNotif\Default.cshtml" />
     <None Include="Areas\Admin\Views\Shared\Error.cshtml" />

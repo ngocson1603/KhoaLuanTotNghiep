@@ -82,5 +82,27 @@ namespace Khoaluan.Areas.Admin.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult FindProductSale(string keyword)
+        {
+            var saleid = HttpContext.Session.GetInt32("SaleId");
+            var ls1 = _unitOfWork.SaleProductRepository.ProductIsSale((int)saleid).ToList();
+            if (string.IsNullOrEmpty(keyword) || keyword.Length < 1)
+            {
+                return PartialView("ListSaleProductsSearchPartial", ls1);
+            }
+            var ls = _unitOfWork.SaleProductRepository.ProductIsSale((int)saleid).Where(t => t.ProductName.ToLower().Contains(keyword.Trim().ToLower())).ToList(); ;
+
+            if (ls == null || ls.Count == 0)
+            {
+                return PartialView("ListSaleProductsSearchPartial", null);
+            }
+            else
+            {
+                return PartialView("ListSaleProductsSearchPartial", ls);
+            }
+        }
+
     }
 }

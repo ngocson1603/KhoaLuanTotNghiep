@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Khoaluan.ModelViews.SaleModelView>
+@{
+    ViewData["Title"] = "Danh sách sale";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-header no-gutters">
+    <div class="row align-items-md-center">
+        <div class="col-md-6">
+            <div class="media m-v-10">
+                <div class="avatar avatar-cyan avatar-icon avatar-square">
+                    <i class="anticon anticon-star"></i>
+                </div>
+                <div class="media-body m-l-15">
+                    <div class="col-md-6">
+                        <div class="input-affix m-v-10">
+                            <i class="prefix-icon anticon anticon-search opacity-04"></i>
+                            <input id="keywordsale" name="keywordsale" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-11 mx-auto">
+        <!-- Card View -->
+        <div id="records_tablesale">
+            <div class="row" id="card-view">
+                @if (Model != null || Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="m-t-20 text-center">
+                                        <div class="avatar avatar-image" style="height: 100px; width: 100px;">
+                                            <img src="~/Images/@Url.Content(item.Image)" alt="">
+                                        </div>
+                                        <h4 class="m-t-30">@item.ProductName</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#keywordsale").keyup(function () {
+                var strkeyword = $('#keywordsale').val();
+                $.ajax({
+                    url: '/Admin/Search/FindProductSale/',
+                    datatype: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $("#records_tablesale").html("");
+                        $("#records_tablesale").html(results);
+                    },
+                });
+            });
+        });
+    </script>
+
+    <script src="~/Adminassets/js/pages/profile.js"></script>
+}
