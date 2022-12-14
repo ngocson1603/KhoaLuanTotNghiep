@@ -43,25 +43,31 @@
                 <!-- START: Posts Grid -->
                 <div class="nk-blog-grid">
                     <div class="row">
-                        @if (Model.itembySell != null && Model.itembySell.Count() > 0)
+                        @if (Model.itembyID != null && Model.itembyID.Count() > 0)
                         {
-                            foreach (var item in Model.itembySell)
+                            foreach (var lst in Model.itembyID)
                             {
+                                int Id = lst.Id;
                                 <div class="col-md-6">
                                     <!-- START: Post -->
                                     <div class="nk-blog-post">
-                                        <a asp-controller="Item" asp-action="Details" asp-route-id="@item.Id" class="nk-post-img">
-                                            <img src="~/Images/@Url.Content(item.Image)" alt="">
+                                        <a href="#" class="nk-post-img">
+                                            <img src="~/Images/@Url.Content(lst.Image)" alt="">
                                         </a>
                                         <div class="nk-gap"></div>
-                                        <h2 class="nk-post-title h4"><a asp-area="" asp-controller="Item" asp-action="Details" asp-route-id="@item.Id">@item.NameItem</a></h2>
-                                        <div class="nk-post-by">
-                                            <img src="~/assets/images/avatar-1.jpg" alt="" class="rounded-circle" width="35"> by <a href="#">@item.HoTen</a> @item.DayCreate
+                                        <div class="nk-product-price">
+                                            <div>@lst.NameItem</div>
+                                            <div class="nk-gap"></div>
+                                            <div>MaxPrice: @lst.MaxPrice     MinPrice: @lst.MinPrice</div>
                                         </div>
-                                        <div class="nk-gap"></div>
+                                        <div class="nk-gap-2"></div>
+                                        <a href="#" class="sell-item nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalNumber" data-mahh="@Id">SELL</a>
+                                        @await Html.PartialAsync("~/Views/Item/ListItemUserPartialView.cshtml", itemsell)
                                     </div>
+
                                     <!-- END: Post -->
                                 </div>
+
                             }
                         }
 
@@ -74,21 +80,21 @@
 
                         @if (PageCurrent > 1)
                         {
-                            string url = $"/ListItem.html";
+                            string url = $"/my-Item.html";
                             <a href="@url?page=@(PageCurrent - 1)" class="nk-pagination-prev">
                                 <span class="ion-ios-arrow-back"></span>
                             </a>
                         }
                         else
                         {
-                            string url1 = $"/ListItem.html";
+                            string url1 = $"/my-Item.html";
                             <a href="@url1" class="nk-pagination-prev">
                                 <span class="ion-ios-arrow-back"></span>
                             </a>
                         }
 
                         @{
-                            string url2 = $"/ListItem.html";
+                            string url2 = $"/my-Item.html";
                             @if (@PageCurrent < ViewBag.maxPage)
                             {
 
