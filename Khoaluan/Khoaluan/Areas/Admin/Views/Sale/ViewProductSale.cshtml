@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Danh sách sale";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
 }
 <div class="page-header no-gutters">
     <div class="row align-items-md-center">
@@ -40,6 +41,10 @@
                                             <img src="~/Images/@Url.Content(item.Image)" alt="">
                                         </div>
                                         <h4 class="m-t-30">@item.ProductName</h4>
+                                    </div>
+                                    <div class="text-center m-t-15">
+                                        <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Sale" asp-action="Edits" asp-route-id="@item.Id"><i class="anticon anticon-edit"></i></a>
+                                        <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Sale" asp-action="DeleteSeleProduct" asp-route-id="@item.Id"><i class="anticon anticon-delete"></i></a>
                                     </div>
                                 </div>
                             </div>

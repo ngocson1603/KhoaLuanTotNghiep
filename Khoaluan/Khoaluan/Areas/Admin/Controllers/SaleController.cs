@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Khoaluan.Models;
+using Khoaluan.ModelViews;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -33,6 +34,54 @@ namespace Khoaluan.Areas.Admin.Controllers
             return View();
         }
 
+        public ActionResult Edits(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var saleid = HttpContext.Session.GetInt32("SaleId");
+            var product = _unitOfWork.SaleProductRepository.ProductIsSale((int)saleid).Where(t=>t.Id == id).FirstOrDefault();
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
+
+        // POST: AdminProductsController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edits(int id, SaleModelView saleModelView)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    SaleProduct sale = new SaleProduct()
+                    {
+                        Id = id,
+                        SaleID = saleModelView.SaleId,
+                        ProductID = saleModelView.ProductId,
+                        Discount = saleModelView.Discount
+                    };
+                    _unitOfWork.SaleProductRepository.Update(sale);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Success("Update successful");
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception)
+                {
+
+                    _notyfService.Error("Error");
+                    return RedirectToAction(nameof(Index));
+                }
+
+            }
+            return View(saleModelView);
+        }
+
         // POST: SaleController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -61,7 +110,22 @@ namespace Khoaluan.Areas.Admin.Controllers
             _notyfService.Success("Error");
             return RedirectToAction(nameof(Index));
         }
-
+        public ActionResult DeleteSeleProduct(int id)
+        {
+            try
+            {
+                var product = _unitOfWork.SaleProductRepository.GetById(id);
+                _unitOfWork.SaleProductRepository.Delete(product);
+                _unitOfWork.SaveChange();
+                _notyfService.Success("Delete successful");
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                _notyfService.Error("Error");
+                return RedirectToAction(nameof(Index));
+            }
+        }
         // GET: SaleController/Edit/5
         public ActionResult Edit(int id)
         {
