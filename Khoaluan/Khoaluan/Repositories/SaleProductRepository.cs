@@ -46,9 +46,9 @@ namespace Khoaluan.Repositories
 
         public List<SaleModelView> ProductIsSale(int id)
         {
-            var query = @"select Sale.Id as SaleId,Product.Name as ProductName,Product.Image as Image from Sale,SaleProduct,Product where 
+            var query = @"select Sale.Id as SaleId,Product.Name as ProductName,Product.Id as ProductId,Product.Image as Image,MAX(SaleProduct.Id) as Id,Discount from Sale,SaleProduct,Product where 
             Sale.Id=SaleProduct.SaleID and Product.Id=SaleProduct.ProductID and SaleId = @id
-            group by Sale.Id,Product.Name,Product.Image ";
+            group by Sale.Id,Product.Name,Product.Image,Product.Id,Discount";
             var parameter = new DynamicParameters();
             parameter.Add("id", id);
             var result = Context.Database.GetDbConnection().Query<SaleModelView>(query, parameter);

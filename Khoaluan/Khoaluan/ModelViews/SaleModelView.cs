@@ -9,8 +9,10 @@ namespace Khoaluan.ModelViews
     {
         public int SaleId { get; set; }
         public string ProductName { get; set; }
+        public int ProductId { get; set; }
         public string Image { get; set; }
         public string SaleName { get; set; }
         public int Id { get; set; }
+        public int Discount { get; set; }
     }
 }
