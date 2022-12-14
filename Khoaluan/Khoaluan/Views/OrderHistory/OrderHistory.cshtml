@@ -106,6 +106,7 @@
                                             <th>Id</th>
                                             <th>DatePurchase</th>
                                             <th class="text-center">TotalPrice</th>
+                                            <th>Status</th>
                                         </tr>
                                         @foreach (var item in Model.market)
                                         {
@@ -113,6 +114,16 @@
                                                 <td href="javascript:void(0)">#@item.Id</td>
                                                 <td>@item.DayCreate</td>
                                                 <td class="text-center"><strong>@item.PricePerItem</strong></td>
+                                                <td>
+                                                    @if (item.Status == 3)
+                                                    {
+                                                        <div>soldout</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div>selling</div>
+                                                    }
+                                                </td>
                                             </tr>
                                         }
                                     </tbody>
@@ -155,12 +166,12 @@
                                         </tr>
                                         @foreach (var item in Model.marketbuy)
                                         {
-                                    <tr>
-                                        <td href="javascript:void(0)">#@item.Id</td>
-                                        <td>@item.DateTransaction</td>
-                                        <td>@item.Quantity</td>
-                                        <td class="text-center"><strong>@item.TotalPrice</strong></td>
-                                    </tr>
+                                            <tr>
+                                                <td href="javascript:void(0)">#@item.Id</td>
+                                                <td>@item.DateTransaction</td>
+                                                <td>@item.Quantity</td>
+                                                <td class="text-center"><strong>@item.TotalPrice</strong></td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -186,24 +197,24 @@
 
 @section Scripts{
     <script>
-    $(document).ready(function () {
-        $(".xemdonhang").click(function () {
-            var madonhang = $(this).attr("data-madonhang")
-            $.ajax({
-                url: '/OrderHistory/Details',
-                datatype: "json",
-                type: "POST",
-                data: { id: madonhang },
-                async: true,
-                success: function (results) {
-                    $("#records_tabless").html("");
-                    $("#records_tabless").html(results);
-                },
-                error: function (xhr) {
-                    alert('error');
-                }
+        $(document).ready(function () {
+            $(".xemdonhang").click(function () {
+                var madonhang = $(this).attr("data-madonhang")
+                $.ajax({
+                    url: '/OrderHistory/Details',
+                    datatype: "json",
+                    type: "POST",
+                    data: { id: madonhang },
+                    async: true,
+                    success: function (results) {
+                        $("#records_tabless").html("");
+                        $("#records_tabless").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
             });
         });
-    });
     </script>
 }
