@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Khoaluan.OtpModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,11 +32,37 @@ namespace Khoaluan.Controllers
                     .Where(x => x.UserID == int.Parse(taikhoanID))
                     .OrderByDescending(x => x.DatePurchase)
                     .ToList();
+                var lsMarket = _unitOfWork.MarketRepository.GetAll()
+                    .Where(x => x.UserID == int.Parse(taikhoanID))
+                    .OrderByDescending(x => x.DayCreate)
+                    .ToList();
+                var lsMarketbuy = _unitOfWork.MarketTransactionRepository.GetAll()
+                    .Where(t => t.BuyerID == int.Parse(taikhoanID))
+                    .OrderByDescending(x => x.DateTransaction).ToList();
+                MarketOrder dtp = new MarketOrder()
+                {
+                    market = lsMarket,
+                    order = lsDonHang,
+                    marketbuy = lsMarketbuy,
+                };
+                return View(dtp);
+            }
+            return RedirectToAction("Homepage", "Product");
+        }
+        [Route("history-market.html", Name = "MarketItem")]
+        public IActionResult MarketItem()
+        {
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            if (taikhoanID != null)
+            {
+                var lsDonHang = _unitOfWork.MarketRepository.GetAll()
+                    .Where(x => x.UserID == int.Parse(taikhoanID))
+                    .OrderByDescending(x => x.DayCreate)
+                    .ToList();
                 return View(lsDonHang);
             }
             return RedirectToAction("Homepage", "Product");
         }
-
         [HttpPost]
         public IActionResult Details(int? id)
         {
