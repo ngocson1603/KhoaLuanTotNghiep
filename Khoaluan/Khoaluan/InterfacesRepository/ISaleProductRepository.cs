@@ -1,4 +1,5 @@
 ﻿using Khoaluan.Models;
+using Khoaluan.ModelViews;
 using System.Collections.Generic;
 
 namespace Khoaluan.InterfacesRepository
@@ -7,5 +8,7 @@ namespace Khoaluan.InterfacesRepository
     {
         List<int> currentSaleProduct();
         int getdiscount(int productid);
+        List<SaleModelView> ProductIsSale(int id);
+        List<SaleModelView> ProductIsSaleInDate();
     }
 }
