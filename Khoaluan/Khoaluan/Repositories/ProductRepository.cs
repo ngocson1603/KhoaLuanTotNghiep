@@ -89,22 +89,28 @@ from Developer,Product where Product.DevId = Developer.Id  and Product.Id = @id"
         {
             var query = @"select Product.Id as Id,Product.Name as NamePro, UserName, Developer.Name as NameDev, Price, Status 
 from Developer,Product where Product.DevId = Developer.Id order by Product.Id desc ";
-            var parameter = new DynamicParameters();
-            var result = Context.Database.GetDbConnection().Query<ActiveGame>(query, parameter);
+            var result = Context.Database.GetDbConnection().Query<ActiveGame>(query);
             return result.ToList();
         }
         public List<ActiveGame> listProforum()
         {
             var query = @"select Product.Id as Id,Product.Name as NamePro,Image, UserName, Developer.Name as NameDev, Price, Status, ReleaseDate 
 from Developer,Product where Product.DevId = Developer.Id";
-            var parameter = new DynamicParameters();
-            var result = Context.Database.GetDbConnection().Query<ActiveGame>(query, parameter);
+            var result = Context.Database.GetDbConnection().Query<ActiveGame>(query);
             return result.ToList();
         }
         public List<Product> listProductItem()
         {
             var query = @"select Product.* from Product, Item where Product.Id = Item.ProductId";
+            var result = Context.Database.GetDbConnection().Query<Product>(query);
+            return result.ToList();
+        }
+        public List<Product> listProductItem(int id)
+        {
+            var query = @"select Product.* from Product, Item,Inventory,Library where Product.Id = Item.ProductId and Inventory.ItemID = Item.Id and Library.ProductId = Product.Id and Inventory.UserID =@id
+group by Product.Id,Product.Name,Product.Overview,Product.Description,Product.ReleaseDate,Product.Price,Product.Image,Product.DevId,Product.Status";
             var parameter = new DynamicParameters();
+            parameter.Add("id", id);
             var result = Context.Database.GetDbConnection().Query<Product>(query, parameter);
             return result.ToList();
         }
