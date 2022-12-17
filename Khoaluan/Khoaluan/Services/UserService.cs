@@ -127,7 +127,7 @@ namespace Khoaluan.Services
             }
         }
 
-        public bool SendVerification(int userId)
+        public bool SendVerification(int userId, string verifyCode)
         {
             Users user = _usersRepository.GetById(userId);
 
@@ -140,8 +140,8 @@ namespace Khoaluan.Services
                 IsBodyHtml = true
             };
 
-            message.Body += "<h1>Welcome " + user.HoTen + "</h1>";
-            message.Body += "<p>Your verification code is <strong>" + user.Salt + "</strong></p>";
+            message.Body += "<h1>Hello " + user.HoTen + "</h1>";
+            message.Body += "<p>Your verification code is <strong>" + verifyCode + "</strong></p>";
 
             Utilities.SendEmail(message, user.Gmail);
 

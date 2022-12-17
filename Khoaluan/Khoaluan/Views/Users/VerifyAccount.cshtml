@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "VerifyAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="nk-feature-2">
+            <div class="nk-feature-icon">
+                <span class="fa fa-key"></span>
+            </div>
+            <div class="nk-feature-cont text-center">
+                <h3 class="nk-feature-title">Verify <span class="text-main-1">Account</span></h3>
+                <div class="nk-gap-1"></div>
+                <form method="post" action="@Url.Action("VerifyAccount", "Users")" class="nk-form text-white">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="text" value="" name="verifyCode" class="required form-control" placeholder="Verification code">
+                            <div class="nk-gap"></div>
+                        </div>
+                    </div>
+                    <div class="nk-gap-1"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="submit" value="Save change" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block" />
+                        </div>
+                    </div>
+                </form>
+                <div class="nk-gap"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+

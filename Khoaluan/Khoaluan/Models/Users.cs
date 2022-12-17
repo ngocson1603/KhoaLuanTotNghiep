@@ -14,6 +14,7 @@ namespace Khoaluan.Models
         public string HoTen { get; set; }
         public string Salt { get; set; }
         public decimal Balance { get; set; }
+        public bool IsActive { get; set; }
         public List<Library> Libraries { get; set; }
         public List<Inventory> Inventories { get; set; }
         public List<Order> Orders { get; set; }
