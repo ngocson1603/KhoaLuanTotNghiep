@@ -165,7 +165,7 @@ namespace DuAnGame.Controllers
                     //int madh = _unitOfWork.OrderRepository.orderID(int.Parse(taikhoanID));
                     //sendemail(maKH.Gmail, cart, madh);
                     HttpContext.Session.Remove("_GioHang");
-                    return Redirect("/ProductCart/CheckoutSuccess");
+                    return RedirectToAction("HomePage", "Product");
                 }
                 catch (Exception ex)
                 {
