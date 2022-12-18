@@ -132,26 +132,28 @@ namespace Khoaluan.Controllers
             else
             {
                 _unitOfWork.SaveChange();
-
                 // Lưu Session KH
                 var user = _unitOfWork.UserRepository.FindByEmail(taikhoan.Email);
-                HttpContext.Session.SetString("CustomerId", user.Id.ToString());
-                HttpContext.Session.SetString("Role", "User");
+                SendVerifyEmail(user.Id);
+                return View("VerifyAccount");
 
-                // Identity
-                var claims = new List<Claim>
-                        {
-                            new Claim(ClaimTypes.Name, user.HoTen),
-                            new Claim("CustomerId", user.Id.ToString()),
-                            new Claim(ClaimTypes.Role, "User")
-                        };
+                //HttpContext.Session.SetString("CustomerId", user.Id.ToString());
+                //HttpContext.Session.SetString("Role", "User");
 
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
-                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                await HttpContext.SignInAsync(claimsPrincipal);
-                _notyfService.Success("Registration successful");
+                //// Identity
+                //var claims = new List<Claim>
+                //        {
+                //            new Claim(ClaimTypes.Name, user.HoTen),
+                //            new Claim("CustomerId", user.Id.ToString()),
+                //            new Claim(ClaimTypes.Role, "User")
+                //        };
 
-                return RedirectToAction("Dashboard");
+                //ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
+                //ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                //await HttpContext.SignInAsync(claimsPrincipal);
+                //_notyfService.Success("Registration successful");
+
+                //return RedirectToAction("Dashboard");
             }
 
             return RedirectToAction("Index", "Home");
@@ -194,22 +196,64 @@ namespace Khoaluan.Controllers
             return View();
         }
 
-        public IActionResult ViewTestVerify()
+
+        public void SendVerifyEmail(int userId)
+        {
+            string verifyCode = Utilities.GetRandomKey(8);
+            HttpContext.Session.SetString("SS_VerifyCode", verifyCode);
+            HttpContext.Session.SetString("CustomerId", userId.ToString());
+
+            if (_service.UserService.SendVerification(userId, verifyCode))
+                _notyfService.Success("A verification code has been sent to your email account");
+            else
+                _notyfService.Error("Failed to send the verification code");
+
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult VerifyAccount()
         {
             return View();
         }
 
-        public IActionResult ViewSendVerifyCode()
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> VerifyAccountAsync(string verifyCode)
         {
-            return View();
-        }
+            string SS_verifyCode = HttpContext.Session.GetString("SS_VerifyCode");
+            if (string.IsNullOrEmpty(SS_verifyCode))
+            {
+                _notyfService.Error("Couldn't find the verification code");
+                return RedirectToAction("Index", "Home");
+            }
 
-        public IActionResult SendVerifyCode()
-        {
-            var taikhoanID = HttpContext.Session.GetString("CustomerId");
-            _service.UserService.SendVerification(int.Parse(taikhoanID));
-            _notyfService.Success("A verification code has been sent to your email account");
-            return View("ViewTestVerify");
+            if (!SS_verifyCode.Equals(verifyCode))
+            {
+                _notyfService.Error("Verification code does not match");
+                return View("VerifyAccount");
+            }
+
+            HttpContext.Session.Remove("SS_VerifyCode");
+            HttpContext.Session.SetString("Role", "User");
+            var user = _unitOfWork.UserRepository.GetById(int.Parse(HttpContext.Session.GetString("CustomerId")));
+            user.IsActive = true;
+            _unitOfWork.UserRepository.Update(user);
+            _unitOfWork.SaveChange();
+
+            // Identity
+            var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, user.HoTen),
+                        new Claim("CustomerId", user.Id.ToString()),
+                        new Claim(ClaimTypes.Role, "User")
+                    };
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
+            ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+            await HttpContext.SignInAsync(claimsPrincipal);
+
+            return RedirectToAction("Dashboard");
         }
 
         [HttpPost]
@@ -243,6 +287,12 @@ namespace Khoaluan.Controllers
             {
                 // Lưu Session KH
                 var user = _unitOfWork.UserRepository.FindByEmail(customer.Gmail);
+                if (!user.IsActive)
+                {
+                    SendVerifyEmail(user.Id);
+                    return View("VerifyAccount");
+                }
+
                 HttpContext.Session.SetString("CustomerId", user.Id.ToString());
                 HttpContext.Session.SetString("Role", "User");
 

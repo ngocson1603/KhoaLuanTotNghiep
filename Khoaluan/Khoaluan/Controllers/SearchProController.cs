@@ -33,8 +33,19 @@ namespace Khoaluan.Controllers
                 return gh;
             }
         }
+        public string NameItem
+        {
+            get
+            {
+                var gh = HttpContext.Session.GetString("NameItem");
+                if (gh == null)
+                {
+                    gh = "";
+                }
+                return gh;
+            }
+        }
 
-        
 
         [HttpGet]
         public IActionResult FindProductsByName()
@@ -87,6 +98,41 @@ namespace Khoaluan.Controllers
             var plr = pl.ToList();
             ViewBag.CurrentPage = pageNumber;
             return View(plr);
+        }
+
+        [Route("/my-Item/name={name}.html", Name = ("ItemsByName"))]
+        public IActionResult ItemsByName(string name, int? page)
+        {
+            ViewBag.nameSearchItem = name.Trim();
+            HttpContext.Session.SetString("NameItem", name);
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 10;
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID));
+            var product = _unitOfWork.ProductRepository.listProductItem(int.Parse(taikhoanID)).OrderBy(i => i.Id).ToList();
+            if (name == "all")
+            {
+            }
+            else
+            {
+                item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID)).Where(t=>t.NameItem.ToLower().Trim().Equals(name.ToLower().Trim())).ToList();
+            }
+            if (item.Count() <= 10)
+                ViewBag.maxPage = 1;
+            else
+            {
+                double dMaxPage = Convert.ToDouble(item.Count());
+                ViewBag.maxPage = Math.Ceiling(dMaxPage / 10);
+            }
+            var pl = item.AsQueryable().ToPagedList(pageNumber, pageSize);
+            var plr = pl.ToList();
+            AdminProduct ad = new AdminProduct()
+            {
+                itembyID = plr,
+                productdev = product
+            };
+            ViewBag.CurrentPage = pageNumber;
+            return View(ad);
         }
     }
 }
