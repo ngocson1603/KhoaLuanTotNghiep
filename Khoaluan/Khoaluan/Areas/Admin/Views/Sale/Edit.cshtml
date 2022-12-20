@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Khoaluan.Models.Product>
+﻿@model IEnumerable<Khoaluan.ModelViews.SaleModelView>
 
 @{
     // int CurrentPage = ViewBag.CurrentPage;
@@ -38,15 +38,15 @@
                             <tr>
 
                                 <td>
-                                    @item.Id
+                                    @item.ProductId
                                 </td>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <img class="img-fluid rounded" src="~/Images/@Url.Content(item.Image)" style="max-width: 60px" alt="">
-                                        <h6 class="m-b-0 m-l-10">@item.Name</h6>
+                                        <h6 class="m-b-0 m-l-10">@item.ProductName</h6>
                                     </div>
                                 </td>
-                                <td><input type="number" id="@item.Id" onchange="handleChange(this);" /></td>
+                                <td><input type="number" id="@item.ProductId" onchange="handleChange(this);" /></td>
                                 <td>
                                     @if (item.Status == 0)
                                     {
@@ -78,7 +78,7 @@
                                     }
 
                                 <td>
-                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="ActiveGame" asp-action="Edit" asp-route-id="@item.Id">Duyệt Game</a>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="ActiveGame" asp-action="Edit" asp-route-id="@item.ProductId">Duyệt Game</a>
                                 </td>
                             </tr>
                         }

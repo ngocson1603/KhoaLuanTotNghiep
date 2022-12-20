@@ -62,8 +62,17 @@ namespace Khoaluan.Repositories
                         where s.Id=sp.SaleID and sp.ProductID = Product.Id and GETDATE() between 
                         CAST(StartDate as date) and  CAST(EndDate as date)
 						group by s.Name,Product.Name,Product.Image";
-            var parameter = new DynamicParameters();
-            var result = Context.Database.GetDbConnection().Query<SaleModelView>(query, parameter);
+            var result = Context.Database.GetDbConnection().Query<SaleModelView>(query);
+            return result.ToList();
+        }
+
+        public List<SaleModelView> ProductNotSale()
+        {
+            var query = @"select Product.Id as ProductId,Product.Name as ProductName, Discount, Status,Image,Price from Product
+                        left join SaleProduct on Product.Id = SaleProduct.ProductID
+                        FULL OUTER JOIN Sale
+                        ON SaleProduct.SaleID = Sale.Id";
+            var result = Context.Database.GetDbConnection().Query<SaleModelView>(query);
             return result.ToList();
         }
     }
