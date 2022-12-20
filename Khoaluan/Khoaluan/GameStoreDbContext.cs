@@ -38,6 +38,7 @@ namespace Khoaluan
             modelBuilder.Entity<Product>().Property(e => e.Price).HasPrecision(18, 2);
             modelBuilder.Entity<Users>().Property(e => e.Balance).HasPrecision(18, 2);
             modelBuilder.Entity<Order>().Property(e => e.TotalPrice).HasPrecision(18, 2);
+            modelBuilder.Entity<Refund>().Property(e => e.Price).HasPrecision(18, 2);
         }
     }
 }
