@@ -10,5 +10,6 @@ namespace Khoaluan.InterfacesRepository
         int getdiscount(int productid);
         List<SaleModelView> ProductIsSale(int id);
         List<SaleModelView> ProductIsSaleInDate();
+        List<SaleModelView> ProductNotSale();
     }
 }

@@ -14,5 +14,7 @@ namespace Khoaluan.ModelViews
         public string SaleName { get; set; }
         public int Id { get; set; }
         public int Discount { get; set; }
+        public int Status { get; set; }
+        public int Price { get; set; }
     }
 }
