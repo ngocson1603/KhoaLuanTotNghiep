@@ -5,6 +5,7 @@ using Khoaluan.InterfacesService;
 using Khoaluan.Models;
 using Khoaluan.OtpModels;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 namespace Khoaluan.Services
@@ -36,7 +37,8 @@ namespace Khoaluan.Services
                 ProductID=productID,
                 Price=request.Price,
                 Status=(int)RefundType.pending,
-                DatePurchase=request.DatePurchase
+                DatePurchase=request.DatePurchase,
+                DateCreate=DateTime.Now
             };
             return rf;
         }
