@@ -114,5 +114,11 @@ group by Product.Id,Product.Name,Product.Overview,Product.Description,Product.Re
             var result = Context.Database.GetDbConnection().Query<Product>(query, parameter);
             return result.ToList();
         }
+        public List<Product> listProductRelease()
+        {
+            var query = @"select * from Product where CAST(releasedate as date)=CAST(getdate() as date) and Status=1";
+            var data = Context.Database.GetDbConnection().Query<Product>(query);
+            return data.ToList();
+        }
     }
 }

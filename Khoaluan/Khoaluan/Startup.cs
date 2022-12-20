@@ -1,4 +1,6 @@
 using AspNetCoreHero.ToastNotification;
+using Hangfire;
+using Khoaluan.InterfacesService;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +30,11 @@ namespace Khoaluan
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHangfire(config =>
+            {
+                config.UseSqlServerStorage(Configuration.GetConnectionString("conString"));
+            });
+            services.AddHangfireServer();
             services.AddScoped<IMongoContext, MongoContext>();
             services.AddDbContext<GameStoreDbContext>(option =>
             {
@@ -91,10 +98,11 @@ namespace Khoaluan
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-
+            app.UseHangfireDashboard();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            RecurringJob.AddOrUpdate<IRefundService>("refund-user", i => i.refundtoallUser(), Cron.Daily);
+            RecurringJob.AddOrUpdate<IProductService>("release-product", i => i.ReleaseProduct(), "* */1 * * *");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -19,7 +19,7 @@ namespace Khoaluan.Services
             _usersRepository = usersRepository;
         }
 
-        public Users updateBalance(int userID, int price, int type)
+        public Users updateBalance(int userID, decimal price, int type)
         {
             Users user = _usersRepository.GetById(userID);
             if (type == (int)marketType.buy)

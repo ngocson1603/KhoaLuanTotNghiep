@@ -42,5 +42,11 @@ namespace Khoaluan.Repositories
             var result=Context.Database.GetDbConnection().Query<gameRefund>(query, parameter);
             return result.ToList();
         }
+        public List<RefundUser> GetRefundUsers()
+        {
+            var query = @"select Id,UserID,Price from Refund where DATEDIFF(day,datepurchase,getdate())=7 and Status=0";
+            var result=Context.Database.GetDbConnection().Query<RefundUser>(query);
+            return result.ToList();
+        }
     }
 }

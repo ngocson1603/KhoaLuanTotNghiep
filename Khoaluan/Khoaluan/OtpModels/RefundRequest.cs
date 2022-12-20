@@ -11,4 +11,10 @@ namespace Khoaluan.OtpModels
         public int Price { get; set; }
         public DateTime DatePurchase { get; set; }
     }
+    public class RefundUser
+    {
+        public int Id { get; set; }
+        public int UserID { get; set; } 
+        public decimal Price { get; set; }
+    }
 }
