@@ -15,5 +15,6 @@ namespace Khoaluan.Interfaces
         List<Product> listProductItem();
         List<ActiveGame> listProforum();
         List<Product> listProductItem(int id);
+        List<Product> listProductRelease();
     }
 }

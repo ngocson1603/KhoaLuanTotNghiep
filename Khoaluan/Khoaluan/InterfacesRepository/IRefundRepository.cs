@@ -8,5 +8,6 @@ namespace Khoaluan.Interfaces
     {
         OtpModels.RefundRequest refundRequest(int UserID, int productID);
         List<gameRefund> listgameRefund(int userid);
+        List<RefundUser> GetRefundUsers();
     }
 }
