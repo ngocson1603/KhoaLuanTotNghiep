@@ -17,7 +17,7 @@ namespace Khoaluan.Repositories
         {
             _usersRepository = usersRepository;
         }
-        public OtpModels.RefundRequest refundRequest(int UserID,int productID)
+        public OtpModels.RefundRequest refundRequest(int productID, int UserID)
         {
             var query = @"select top 1.[o].id as OrderID,UserID,ProductID,Price,DatePurchase from [Order] o,OrderDetail od
                         where o.Id=od.Id and ProductID=@productid AND UserID=@userid
@@ -40,6 +40,12 @@ namespace Khoaluan.Repositories
             var parameter = new DynamicParameters();
             parameter.Add("userid", userid);
             var result=Context.Database.GetDbConnection().Query<gameRefund>(query, parameter);
+            return result.ToList();
+        }
+        public List<RefundUser> GetRefundUsers()
+        {
+            var query = @"select Id,UserID,Price from Refund where DATEDIFF(day,datepurchase,getdate())=7 and Status=0";
+            var result=Context.Database.GetDbConnection().Query<RefundUser>(query);
             return result.ToList();
         }
     }

@@ -17,5 +17,7 @@ namespace Khoaluan.ModelViews
         public string HoTen { get; set; }
         public string NameGame { get; set; }
         public int Count { get; set; }
+        public int MinPrice { get; set; }
+        public int MaxPrice { get; set; }
     }
 }

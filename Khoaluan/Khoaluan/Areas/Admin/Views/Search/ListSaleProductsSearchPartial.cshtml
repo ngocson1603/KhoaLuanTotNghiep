@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Khoaluan.ModelViews.SaleModelView>
+
+<div class="row" id="card-view">
+    @if (Model != null || Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="m-t-20 text-center">
+                    <div class="avatar avatar-image" style="height: 100px; width: 100px;">
+                        <img src="~/Images/@Url.Content(item.Image)" alt="">
+                    </div>
+                    <h4 class="m-t-30">@item.ProductName</h4>
+                </div>
+                <div class="text-center m-t-15">
+                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Sale" asp-action="Edits" asp-route-id="@item.Id"><i class="anticon anticon-edit"></i></a>
+                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Sale" asp-action="DeleteSeleProduct" asp-route-id="@item.Id"><i class="anticon anticon-delete"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+        }
+
+    }
+
+</div>

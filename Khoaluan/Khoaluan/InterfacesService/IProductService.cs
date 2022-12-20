@@ -6,5 +6,6 @@ namespace Khoaluan.InterfacesService
 {
     public interface IProductService
     {
+        void ReleaseProduct();
     }
 }

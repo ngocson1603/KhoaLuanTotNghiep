@@ -6,6 +6,9 @@
     TempData.Keep("idpro");
     List<Cart> carts = ViewBag.GioHang;
     List<LibraryDetail> DanhSachDonHang = ViewBag.DonHang;
+    string gia = "free";
+    string icon = "$";
+    decimal discount = Model.productDetail.Price - (Model.productDetail.Price * Model.productDetail.Discount / 100);
 }
 <div class="nk-main">
     <!-- START: Breadcrumbs -->
@@ -47,13 +50,13 @@
                         <div class="col-md-6">
                             <!-- START: Product Photos -->
                             <div class="nk-popup-gallery">
-                                    <div class="nk-gallery-item-box">
-                                        <a href="~/assets/images/product-6.jpg" class="nk-gallery-item" data-size="1200x554">
-                                            <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
-                                            <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
-                                        </a>
-                                    </div>
+                                <div class="nk-gallery-item-box">
+                                    <a href="~/assets/images/product-6.jpg" class="nk-gallery-item" data-size="1200x554">
+                                        <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
+                                        <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
+                                    </a>
                                 </div>
+                            </div>
                             <!-- END: Product Photos -->
                         </div>
                         <div class="col-md-6">
@@ -74,7 +77,24 @@
                             <!-- START: Add to Cart -->
                             <div class="nk-gap-2"></div>
                             <form action="#" class="nk-product-addtocart">
-                                <div class="nk-product-price">€ @Model.productDetail.Price</div>
+                                <div class="nk-product-price">
+                                    <div class="Price-Buy">
+                                        @if (Model.productDetail.Price == 0)
+                                        {
+                                            @gia;
+                                        }
+                                        else
+                                        {
+                                        <p>
+                                            @icon @discount
+                                            @if (Model.productDetail.Discount > 0)
+                                            {
+                                            <h6>@Model.productDetail.Price<span class="badge bg-danger">-@Model.productDetail.Discount%</span></h6>
+                                            }
+                                        </p>
+                                        }
+                                    </div>
+                                </div>
                                 <div class="nk-gap-1"></div>
                                 <div class="input-group">
                                     <input type="number" id="txtsoLuong" name="txtsoLuong" class="form-control" value="1" min="1" max="21">
@@ -102,7 +122,7 @@
                                                 if (DanhSachDonHang.Any(t => t.UserID == int.Parse(ViewBag.GetId) && t.Id == productID))
                                                 {
                                                     <div>
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Library</button>
+                                                        <a class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/library.html">In Library</a>
                                                         <input hidden asp-for="@productID" />
                                                     </div>
                                                 }
@@ -112,7 +132,7 @@
                                                     if (carts.Any(t => t.product.Id == productID))
                                                     {
                                                         <div>
-                                                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
+                                                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</button>
                                                             <input hidden asp-for="@productID" />
                                                         </div>
                                                     }
@@ -138,7 +158,7 @@
                                                 if (carts.Any(t => t.product.Id == productID))
                                                 {
                                                     <div>
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
+                                                        <a class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</a>
                                                         <input hidden asp-for="@productID" />
                                                     </div>
                                                 }
@@ -166,7 +186,7 @@
                                                 if (carts.Any(t => t.product.Id == productID))
                                                 {
                                                     <div>
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">In Cart</button>
+                                                        <a class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</a>
                                                         <input hidden asp-for="@productID" />
                                                     </div>
                                                 }
@@ -207,24 +227,24 @@
                             <!-- END: Add to Cart -->
                             <!-- START: Meta -->
                             <div class="nk-product-meta">
-                                    <div>
-                                        <strong>Developer</strong>:
-                                        @{
-                                            string name = @Model.productDetail.DevName;
-                                            string url1 = $"/Product/HomePage/Dev/{name}.html";
-                                            <a href="@url1">@Model.productDetail.DevName</a>
-                                        }
+                                <div>
+                                    <strong>Developer</strong>:
+                                    @{
+                                        string name = @Model.productDetail.DevName;
+                                        string url1 = $"/Product/HomePage/Dev/{name}.html";
+                                        <a href="@url1">@Model.productDetail.DevName</a>
+                                    }
 
-                                    </div>
-                                    <div>
-                                        <strong>Categories</strong>:
-                                        @foreach (var item in Model.productDetail.Categories)
-                                        {
-                                            string url = $"/Product/HomePage/Cate/{item}.html";
-                                            <a href="@url">@item,</a>
-                                        }
-                                    </div>
                                 </div>
+                                <div>
+                                    <strong>Categories</strong>:
+                                    @foreach (var item in Model.productDetail.Categories)
+                                    {
+                                        string url = $"/Product/HomePage/Cate/{item}.html";
+                                        <a href="@url">@item,</a>
+                                    }
+                                </div>
+                            </div>
 
                             <!-- END: Meta -->
                         </div>
@@ -259,40 +279,40 @@
 
                             <!-- START: Tab Description -->
                             <div role="tabpanel" class="tab-pane fade show active" id="tab-description">
-                                    <div class="nk-gap"></div>
-                                    <strong class="text-white">Release Date: @Model.productDetail.ReleaseDate</strong>
-                                    <div class="nk-gap"></div>
-                                    <p>@Html.Raw(Model.productDetail.Description)</p>
+                                <div class="nk-gap"></div>
+                                <strong class="text-white">Release Date: @Model.productDetail.ReleaseDate</strong>
+                                <div class="nk-gap"></div>
+                                <p>@Html.Raw(Model.productDetail.Description)</p>
 
-                                    <div class="nk-product-info-row row vertical-gap">
-                                        <div class="col-md-5">
-                                            <div class="nk-product-pegi">
+                                <div class="nk-product-info-row row vertical-gap">
+                                    <div class="col-md-5">
+                                        <div class="nk-product-pegi">
+                                            <div class="nk-gap"></div>
+                                            <img src="~/assets/images/pegi-icon.jpg" alt="">
+                                            <div class="nk-product-pegi-cont">
+                                                <strong class="text-white">Pegi Rating:</strong>
                                                 <div class="nk-gap"></div>
-                                                <img src="~/assets/images/pegi-icon.jpg" alt="">
-                                                <div class="nk-product-pegi-cont">
-                                                    <strong class="text-white">Pegi Rating:</strong>
-                                                    <div class="nk-gap"></div>
-                                                    Suitable for people aged 12 and over.
-                                                </div>
-                                                <div class="nk-gap"></div>
+                                                Suitable for people aged 12 and over.
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="nk-gap"></div>
-                                            <strong class="text-white">Genre:</strong>
-                                            <div class="nk-gap"></div>
-                                            TBD
-                                            <div class="nk-gap"></div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="nk-gap"></div>
-                                            <strong class="text-white">Customer Rating:</strong>
-                                            <div class="nk-gap"></div>
-                                            <div class="nk-product-rating" data-rating="4.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i></div>
                                             <div class="nk-gap"></div>
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <div class="nk-gap"></div>
+                                        <strong class="text-white">Genre:</strong>
+                                        <div class="nk-gap"></div>
+                                        TBD
+                                        <div class="nk-gap"></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="nk-gap"></div>
+                                        <strong class="text-white">Customer Rating:</strong>
+                                        <div class="nk-gap"></div>
+                                        <div class="nk-product-rating" data-rating="4.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i></div>
+                                        <div class="nk-gap"></div>
+                                    </div>
                                 </div>
+                            </div>
                             <!-- END: Tab Description -->
                             <!-- START: Tab Reviews -->
                             <div role="tabpanel" class="tab-pane fade" id="tab-reviews">
@@ -400,31 +420,31 @@
                 <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Related</span> Products</span></h3>
                 <div class="nk-gap"></div>
                 <div class="row vertical-gap">
-                        @foreach (var p in Model.relateGame)
-                        {
-                            string url = $"/Product/HomePage/{p.Id}.html";
-                            <div class="col-md-6">
-                                <div class="nk-product-cat">
-                                    <a class="nk-product-image" href="@url">
-                                        <img src="~/Images/@p.Image" alt=@p.Name>
-                                    </a>
-                                    <div class="nk-product-cont">
-                                        <h3 class="nk-product-title h5"><a href="@url">@p.Name</a></h3>
-                                        <div class="nk-gap-1"></div>
-                                        <div class="nk-product-rating">
-                                            @for (int i = 1; i <= p.Id / 10; i++)
-                                            {
-                                                <i class="fa fa-star"></i>
-                                            }
+                    @foreach (var p in Model.relateGame)
+                    {
+                        string url = $"/Product/HomePage/{p.Id}.html";
+                        <div class="col-md-6">
+                            <div class="nk-product-cat">
+                                <a class="nk-product-image" href="@url">
+                                    <img src="~/Images/@p.Image" alt=@p.Name>
+                                </a>
+                                <div class="nk-product-cont">
+                                    <h3 class="nk-product-title h5"><a href="@url">@p.Name</a></h3>
+                                    <div class="nk-gap-1"></div>
+                                    <div class="nk-product-rating">
+                                        @for (int i = 1; i <= p.Id / 10; i++)
+                                        {
+                                            <i class="fa fa-star"></i>
+                                        }
 
-                                        </div>
-                                        <div class="nk-gap-1"></div>
-                                        <div class="nk-product-price">€ @p.Price</div>
                                     </div>
+                                    <div class="nk-gap-1"></div>
+                                    <div class="nk-product-price">€ @p.Price</div>
                                 </div>
                             </div>
-                        }
-                    </div>
+                        </div>
+                    }
+                </div>
                 <!-- END: Related Products -->
             </div>
             <div class="col-lg-4">
@@ -456,12 +476,12 @@
                                         <span id="more">
                                             @foreach (var item in Model.cate.Skip(5))
                                             {
-                                            string url = $"/Product/HomePage/Cate/{item.Name}.html";
-                                        <li><a href="@url">@item.Name</a></li>
+                                                string url = $"/Product/HomePage/Cate/{item.Name}.html";
+                                            <li><a href="@url">@item.Name</a></li>
 
                                         }
-                                        </span>
-                                    }
+                                            </span>
+                                        }
 
                                 </ul>
                             </p>
@@ -514,22 +534,22 @@
                         <div class="nk-widget-content">
 
                             @foreach (var item in Model.popularGame)
-                                {
-                                    string url = $"/Product/HomePage/{item.Id}.html";
-                                    <div class="nk-widget-post">
-                                        <a href="@url" class="nk-post-image">
-                                            <img src="~/Images/@item.Image" alt=@item.Name>
-                                        </a>
-                                        <h3 class="nk-post-title"><a href="@url">@item.Name</a></h3>
-                                        <div class="nk-product-rating">
-                                            @for (int i = 1; i <= item.Id / 20; i++)
-                                            {
-                                                <i class="fa fa-star"></i>
-                                            }
-                                        </div>
-                                        <div class="nk-product-price">€ @item.Price</div>
+                            {
+                                string url = $"/Product/HomePage/{item.Id}.html";
+                                <div class="nk-widget-post">
+                                    <a href="@url" class="nk-post-image">
+                                        <img src="~/Images/@item.Image" alt=@item.Name>
+                                    </a>
+                                    <h3 class="nk-post-title"><a href="@url">@item.Name</a></h3>
+                                    <div class="nk-product-rating">
+                                        @for (int i = 1; i <= item.Id / 20; i++)
+                                        {
+                                            <i class="fa fa-star"></i>
+                                        }
                                     </div>
-                                }
+                                    <div class="nk-product-price">€ @item.Price</div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </aside>
@@ -551,6 +571,7 @@
 <img class="nk-page-background-top" src="~/assets/images/bg-top-4.png" alt="">
 <img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
 @section Styles{
+    <link rel="stylesheet" href="~/assets/css/price.css">
     <style>
         #more {
             display: none;

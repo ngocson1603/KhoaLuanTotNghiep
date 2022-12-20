@@ -7,12 +7,14 @@ namespace Khoaluan.Interfaces
 {
     public interface IProductRepository:IGameStoreRepository<Product>
     {
-        public List<Productdetail> getallProductwithCategory();
-        public List<Product> GetProductByName(string name);
-        public List<Product> listProductDev(int id);
-        public ActiveGame listProdevActive(int id);
-        public List<ActiveGame> listProdevNotif();
-        public List<Product> listProductItem();
-        public List<ActiveGame> listProforum();
+        List<Productdetail> getallProductwithCategory();
+        List<Product> GetProductByName(string name);
+        List<Product> listProductDev(int id);
+        ActiveGame listProdevActive(int id);
+        List<ActiveGame> listProdevNotif();
+        List<Product> listProductItem();
+        List<ActiveGame> listProforum();
+        List<Product> listProductItem(int id);
+        List<Product> listProductRelease();
     }
 }

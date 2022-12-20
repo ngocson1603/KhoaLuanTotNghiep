@@ -57,6 +57,32 @@ namespace Khoaluan.Controllers
             return View(ad);
         }
 
+        [Route("/my-Item.html", Name = "ListMyItem")]
+        public IActionResult ListMyItem(int? page)
+        {
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 10;
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID));
+            var product = _unitOfWork.ProductRepository.listProductItem(int.Parse(taikhoanID)).OrderBy(i => i.Id).ToList();
+            if (item.Count() <= 10)
+                ViewBag.maxPage = 1;
+            else
+            {
+                double dMaxPage = Convert.ToDouble(item.Count());
+                ViewBag.maxPage = Math.Ceiling(dMaxPage / 10);
+            }
+            var pl = item.AsQueryable().ToPagedList(pageNumber, pageSize);
+            var plr = pl.ToList();
+            AdminProduct ad = new AdminProduct()
+            {
+                itembyID = plr,
+                productdev = product
+            };
+            ViewBag.CurrentPage = pageNumber;
+            return View(ad);
+        }
+
         [Route("/ListItem/{id}.html", Name = ("ListItemProduct"))]
         public IActionResult ItemProduct(string id, int? page)
         {
@@ -126,14 +152,19 @@ namespace Khoaluan.Controllers
                 var taikhoanID = HttpContext.Session.GetString("CustomerId");                
                 var inventory = _unitOfWork.InventoryRepository.GetAll().Where(t => (t.UserID == int.Parse(taikhoanID)) && (t.ItemID == Id)).Single();
                 var user = _unitOfWork.UserRepository.GetById(int.Parse(taikhoanID));
+                var item = _unitOfWork.ItemRepository.GetById(Id);
                 try
                 {
                     if (sellitem.Quantity > inventory.Quantity)
                     {
                         _notyfService.Warning("quantity is not enough");
-                        return RedirectToAction(nameof(ListItem));
+                        return RedirectToAction(nameof(ListMyItem));
                     }
-
+                    if (sellitem.PricePerItem > item.MaxPrice || sellitem.PricePerItem < item.MinPrice)
+                    {
+                        _notyfService.Warning("price is incorrect");
+                        return RedirectToAction(nameof(ListMyItem));
+                    }
                     Market mk = new Market()
                     {
                         UserID = int.Parse(taikhoanID),

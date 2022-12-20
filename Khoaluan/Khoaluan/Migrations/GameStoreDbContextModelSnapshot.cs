@@ -436,6 +436,9 @@ namespace Khoaluan.Migrations
                     b.Property<string>("HoTen")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 

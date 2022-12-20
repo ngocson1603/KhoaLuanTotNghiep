@@ -1,4 +1,5 @@
 ﻿using Khoaluan.Models;
+using System.Collections.Generic;
 
 namespace Khoaluan.OtpModels
 {
@@ -20,5 +21,12 @@ namespace Khoaluan.OtpModels
         public int quantity { get; set; }
         public int totalprice { get; set; }
 
+    }
+
+    public class MarketOrder
+    {
+        public List<Market> market { get; set; }
+        public List<Order> order { get; set; }
+        public List<MarketTransaction> marketbuy { get; set; }
     }
 }

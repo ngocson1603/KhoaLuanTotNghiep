@@ -13,7 +13,10 @@
 
   <ItemGroup>
     <Content Remove="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Remove="Areas\Admin\Views\Dev\Index.cshtml" />
+    <Content Remove="Areas\Admin\Views\Search\ListDotSaleProductsSearchPartial.cshtml" />
     <Content Remove="Areas\Admin\Views\Search\ListItemSearchPartial.cshtml" />
+    <Content Remove="Areas\Admin\Views\Search\ListSaleProductsSearchPartial.cshtml" />
     <Content Remove="Areas\Admin\Views\Shared\Components\HeaderNotif\Default.cshtml" />
   </ItemGroup>
 
@@ -21,9 +24,12 @@
     <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="Areas\Admin\Views\AdminProducts\Index.cshtml" />
     <None Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Dev\Index.cshtml" />
     <None Include="Areas\Admin\Views\Dev\LoginDev.cshtml" />
     <None Include="Areas\Admin\Views\Home\Index.cshtml" />
     <None Include="Areas\Admin\Views\Search\ListItemSearchPartial.cshtml" />
+    <None Include="Areas\Admin\Views\Search\ListDotSaleProductsSearchPartial.cshtml" />
+    <None Include="Areas\Admin\Views\Search\ListSaleProductsSearchPartial.cshtml" />
     <None Include="Areas\Admin\Views\Search\ListProductsSearchPartial.cshtml" />
     <None Include="Areas\Admin\Views\Shared\Components\HeaderNotif\Default.cshtml" />
     <None Include="Areas\Admin\Views\Shared\Error.cshtml" />
@@ -842,6 +848,8 @@
   <ItemGroup>
     <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
     <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.32" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.32" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.3.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />

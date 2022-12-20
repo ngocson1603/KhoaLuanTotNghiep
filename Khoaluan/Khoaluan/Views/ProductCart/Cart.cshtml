@@ -111,7 +111,6 @@
 
                     </div>
                     <div class="nk-gap-1"></div>
-                    <a class="nk-btn nk-btn-rounded nk-btn-color-white float-right" href="#">Update Cart</a>
 
                     <div class="clearfix"></div>
                     <div class="nk-gap-2"></div>
@@ -154,7 +153,7 @@
                                             Subtotal
                                         </td>
                                         <td>
-                                            @Model.Sum(x => x.product.Price).ToString("#,##0")
+                                            @Model.Sum(x => x.product.Price)
                                         </td>
                                     </tr>
                                     <tr class="nk-store-cart-totals-shipping">

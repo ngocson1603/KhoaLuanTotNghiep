@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Khoaluan.ModelViews.SaleModelView>
+@{
+    ViewData["Title"] = "Danh sách sale";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+<div class="page-header no-gutters">
+    <div class="row align-items-md-center">
+        <div class="col-md-6">
+            <div class="media m-v-10">
+                <div class="avatar avatar-cyan avatar-icon avatar-square">
+                    <i class="anticon anticon-star"></i>
+                </div>
+                <div class="d-flex align-items-center col-md-3 m-b-10">
+                    <div class="input-affix m-r-10">
+                        <i class="prefix-icon anticon anticon-search"></i>
+                        <input id="keywordsale" name="keywordsale" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                    </div>
+                    <button class="btn btn-icon btn-default" onclick="changeHref()">
+                        <i class="anticon anticon-reload"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-11 mx-auto">
+        <!-- Card View -->
+        <div id="records_tablesale">
+            <div class="row" id="card-view">
+                @if (Model != null || Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="m-t-20 text-center">
+                                        <div class="avatar avatar-image" style="height: 100px; width: 100px;">
+                                            <img src="~/Images/@Url.Content(item.Image)" alt="">
+                                        </div>
+                                        <h4 class="m-t-30">@item.ProductName</h4>
+                                    </div>
+                                    <div class="text-center m-t-15">
+                                        <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Sale" asp-action="Edits" asp-route-id="@item.Id"><i class="anticon anticon-edit"></i></a>
+                                        <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Sale" asp-action="DeleteSeleProduct" asp-route-id="@item.Id"><i class="anticon anticon-delete"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        function changeHref() {
+            var strkeyword = $('#keywordsale').val();
+            $.ajax({
+                url: '/Admin/Search/FindProductSale/',
+                datatype: "json",
+                type: "POST",
+                data: { keyword: strkeyword },
+                async: true,
+                success: function (results) {
+                    $("#records_tablesale").html("");
+                    $("#records_tablesale").html(results);
+                },
+            });
+        }
+    </script>
+
+    <script src="~/Adminassets/js/pages/profile.js"></script>
+}

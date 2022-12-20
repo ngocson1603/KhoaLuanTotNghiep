@@ -130,48 +130,6 @@
                             </form>
                         </div>
                     </div>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
-                    {
-                        <div class="nk-widget nk-widget-highlighted">
-                            <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalItem">New Item</a>
-                            <div class="nk-modal modal fade" id="modalItem" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-sm" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span class="ion-android-close"></span>
-                                            </button>
-
-                                            <h4 class="mb-0"><span class="text-main-1">My</span> Item</h4>
-
-                                            <div class="nk-gap-1"></div>
-                                            @if (Model.itembyID != null && Model.itembyID.Count() > 0)
-                                            {
-                                                foreach (var lst in Model.itembyID)
-                                                {
-                                                    int Id = lst.Id;
-                                                    <div class="col-md-6">
-                                                        <!-- START: Post -->
-                                                        <div class="nk-blog-post">
-                                                            <a href="blog-article.html" class="nk-post-img">
-                                                                <img src="~/Images/@Url.Content(lst.Image)" alt="">
-                                                            </a>
-                                                            <h2 class="nk-post-title h4"><a href="blog-article.html">@lst.NameItem</a></h2>
-                                                            <a href="#" class="sell-item nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalNumber" data-mahh="@Id">SELL</a>
-                                                            @await Html.PartialAsync("~/Views/Item/ListItemUserPartialView.cshtml", itemsell)
-                                                        </div>
-
-                                                        <!-- END: Post -->
-                                                    </div>
-
-                                                }
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
                     <div class="nk-widget nk-widget-highlighted">
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Latest</span> Video</span></h4>
                         <div class="nk-widget-content">

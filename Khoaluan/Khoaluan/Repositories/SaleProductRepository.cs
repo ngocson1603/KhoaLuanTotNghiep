@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Khoaluan.InterfacesRepository;
 using Khoaluan.Models;
+using Khoaluan.ModelViews;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace Khoaluan.Repositories
             var query = @"select top 1.Discount
                         from Sale s,SaleProduct sp
                         where s.Id=sp.SaleID and ProductID=@id and GETDATE() between CAST(StartDate as date) 
-                        and  CAST(EndDate as date)";
+                        and  CAST(EndDate as date)
+                        order by sp.Id desc";
             var parameter = new DynamicParameters();
             parameter.Add("id", productid);          
             try
@@ -40,6 +42,38 @@ namespace Khoaluan.Repositories
                         CAST(StartDate as date) and  CAST(EndDate as date)";
             var data = Context.Database.GetDbConnection().Query<int>(query);
             return data.ToList();
+        }
+
+        public List<SaleModelView> ProductIsSale(int id)
+        {
+            var query = @"select Sale.Id as SaleId,Product.Name as ProductName,Product.Id as ProductId,Product.Image as Image,MAX(SaleProduct.Id) as Id,Discount from Sale,SaleProduct,Product where 
+            Sale.Id=SaleProduct.SaleID and Product.Id=SaleProduct.ProductID and SaleId = @id
+            group by Sale.Id,Product.Name,Product.Image,Product.Id,Discount";
+            var parameter = new DynamicParameters();
+            parameter.Add("id", id);
+            var result = Context.Database.GetDbConnection().Query<SaleModelView>(query, parameter);
+            return result.ToList();
+        }
+
+        public List<SaleModelView> ProductIsSaleInDate()
+        {
+            var query = @"select s.Name as SaleName,Product.Name as ProductName,Product.Image as Image,MAX(sp.Id) as Id
+                        from Sale s,SaleProduct sp, Product
+                        where s.Id=sp.SaleID and sp.ProductID = Product.Id and GETDATE() between 
+                        CAST(StartDate as date) and  CAST(EndDate as date)
+						group by s.Name,Product.Name,Product.Image";
+            var result = Context.Database.GetDbConnection().Query<SaleModelView>(query);
+            return result.ToList();
+        }
+
+        public List<SaleModelView> ProductNotSale()
+        {
+            var query = @"select Product.Id as ProductId,Product.Name as ProductName, Discount, Status,Image,Price from Product
+                        left join SaleProduct on Product.Id = SaleProduct.ProductID
+                        FULL OUTER JOIN Sale
+                        ON SaleProduct.SaleID = Sale.Id";
+            var result = Context.Database.GetDbConnection().Query<SaleModelView>(query);
+            return result.ToList();
         }
     }
 }

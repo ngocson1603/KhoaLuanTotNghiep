@@ -305,5 +305,67 @@ namespace Khoaluan.Helpper
                 }
             }
         }
+
+        public static void sendemailcontact(Contact contact)
+        {
+            SmtpClient client = new SmtpClient()
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential()
+                {
+                    UserName = "congty.gamests@gmail.com",
+                    Password = "beshjrsdtncjimiv"
+                }
+            };
+            MailAddress fromemail = new MailAddress("congty.gamests@gmail.com", "Xin chao");
+            MailAddress toemail = new MailAddress("sondovipro123@gmail.com", "someone");
+            MailMessage mess = new MailMessage()
+            {
+                From = fromemail,
+                Subject = "tài khoản của bạn",
+                IsBodyHtml = true,
+            };
+
+            mess.Body += "<h1>thông tin yêu cầu</h1>";
+            mess.Body += "<h1>Name:" + contact.Name + "</h1>";
+            mess.Body += "<h1>Email:" + contact.Email + "</h1>";
+            mess.Body += "<h1>Message:" + contact.Message + "</h1>";
+
+            mess.To.Add(toemail);
+            client.Send(mess);
+        }
+        public static void sendemailuser(Contact contact)
+        {
+            SmtpClient client = new SmtpClient()
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential()
+                {
+                    UserName = "congty.gamests@gmail.com",
+                    Password = "beshjrsdtncjimiv"
+                }
+            };
+            MailAddress fromemail = new MailAddress("congty.gamests@gmail.com", "Thank you");
+            MailAddress toemail = new MailAddress(contact.Email, "someone");
+            MailMessage mess = new MailMessage()
+            {
+                From = fromemail,
+                Subject = "Thank you",
+                IsBodyHtml = true,
+            };
+
+            mess.Body += "<h1>Thank you for your feedback, we will get back to you soon</h1>";
+
+            mess.To.Add(toemail);
+            client.Send(mess);
+        }
     }
 }

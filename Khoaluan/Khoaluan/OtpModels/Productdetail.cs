@@ -12,7 +12,7 @@ namespace Khoaluan.OtpModels
         public int Id { get; set; } 
         public string Name { get; set; }
         public string Overview { get; set; }    
-        public string Price { get; set; }
+        public decimal Price { get; set; }
         public string Image { get; set; }   
         public string Description { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
@@ -20,13 +20,14 @@ namespace Khoaluan.OtpModels
         public List<string> Categories { get; set; }
         public string DevName { get; set; }
         public string CatID { get; set; }
+        public int Discount { get; set; }
     }
     public class ProductDetailModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Overview { get; set; }
-        public string Price { get; set; }
+        public decimal Price { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]

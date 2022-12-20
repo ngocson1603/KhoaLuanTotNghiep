@@ -30,7 +30,193 @@ namespace Khoaluan.Controllers
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
         }
+        public IActionResult Detailss(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var ls = _unitOfWork.ProductRepository.GetById((int)id);
+            var item = _unitOfWork.ItemRepository.GetAll().Where(t => t.ProductId == id).ToList();
+            if (ls == null)
+            {
+                return NotFound();
+            }
+            HttpContext.Session.SetString("ProductID", id.ToString());
+            AdminProduct pwc = new AdminProduct()
+            {
+                product = ls,
+                item = item
+            };
+            List<string> cate = new List<string>();
+            var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
+            if (product1 != null)
+            {
+                cate.AddRange(product1.Categories);
+                ViewData["Category"] = cate;
+            }
+            else
+            {
+                ViewData["Category"] = "";
+            }
+
+            return View(pwc);
+        }
+        public IActionResult Index()
+        {
+            var taikhoanID = HttpContext.Session.GetString("AccountId");
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Status == (int)productType.pending && t.DevId == int.Parse(taikhoanID)).ToList();
+
+            return View(ls);
+        }
+        // GET: AdminProductsController/Edit/5
+        public ActionResult Edits(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = _unitOfWork.ProductRepository.GetById((int)id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            List<string> cate = new List<string>();
+            var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
+            if (product1 != null)
+            {
+                cate.AddRange(product1.Categories);
+                ViewData["Category"] = cate;
+            }
+            else
+            {
+                ViewData["Category"] = "";
+            }
+
+            var data = new List<SelectListItem>();
+            foreach (var item in _unitOfWork.CategoryRepository.GetAll())
+            {
+                data.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Name });
+            }
+
+            foreach (var item_1 in cate)
+            {
+                foreach (var item_2 in data)
+                {
+                    if (item_2.Text.Equals(item_1))
+                    {
+                        item_2.Selected = true;
+                    }
+                }
+            }
+
+            MultiDropDownListViewModel model = new();
+            model.ItemList = data;
+
+            ProCate pwc = new ProCate()
+            {
+                product = product,
+                muti = model
+            };
+
+            ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
+            return View(pwc);
+        }
+
+        // POST: AdminProductsController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edits(int id, [Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status")] Product product, PostSelectedViewModel model, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        {
+            if (id != product.Id)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (model.SelectedIds == null)
+                    {
+                        _notyfService.Warning("Please select a category");
+                        return RedirectToAction(nameof(Index));
+                    }
+                    product.Name = Utilities.ToTitleCase(product.Name);
+                    if (fThumb != null)
+                    {
+
+
+                        string extension = Path.GetExtension(fThumb.FileName);
+                        string images = Utilities.SEOUrl(product.Name) + extension;
+                        product.Image = await Utilities.UploadFile(fThumb, images.ToLower());
+                    }
+                    if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
+                    product.ReleaseDate = DateTime.Now;
+                    var catepro = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
+                    _unitOfWork.ProductRepository.Update(product);
+                    _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
+                    _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Success("Update successful");
+                    List<string> cate = new List<string>();
+                    var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
+                    if (product1 != null)
+                    {
+                        cate.AddRange(product1.Categories);
+                        ViewData["Category"] = cate;
+                    }
+                    else
+                    {
+                        ViewData["Category"] = "";
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception)
+                {
+                    _notyfService.Error("Update fail");
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
+            return View(product);
+        }
+
+        // GET: AdminProductsController/Delete/5
+        public ActionResult Deletes(int id)
+        {
+            try
+            {
+                var product = _unitOfWork.ProductRepository.GetById(id);
+                _unitOfWork.ProductRepository.Delete(product);
+                _unitOfWork.SaveChange();
+                _notyfService.Success("Delete successful");
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                _notyfService.Error("Delete error");
+                return RedirectToAction(nameof(Index));
+            }
+
+        }
+
+        // POST: AdminProductsController/Delete/5
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Deletes(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
         [Route("tai-khoan-dev.html", Name = "InfoDev")]
         public IActionResult InfoDev()
         {
@@ -125,8 +311,18 @@ namespace Khoaluan.Controllers
         // GET: DevController/Create
         public IActionResult Create()
         {
-            //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name");
-            return View();
+            var data = new List<MultiDropDownListViewModel>();
+            foreach (var item in _unitOfWork.CategoryRepository.GetAll())
+            {
+                data.Add(new MultiDropDownListViewModel { Id = item.Id, Name = item.Name });
+            }
+            MultiDropDownListViewModel model = new();
+            model.ItemList = data.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+            ProCate pwc = new ProCate()
+            {
+                muti = model
+            };
+            return View(pwc);
         }
         public IActionResult IndexDev()
         {
@@ -137,26 +333,42 @@ namespace Khoaluan.Controllers
         // POST: AdminProductsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Create([Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status")] Product product, PostSelectedViewModel model, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (ModelState.IsValid)
             {
-                int type = (int)productType.pending;
-                product.Name = Utilities.ToTitleCase(product.Name);
-                if (fThumb != null)
+                try
                 {
-                    string extension = Path.GetExtension(fThumb.FileName);
-                    string image = Utilities.SEOUrl(product.Name) + extension;
-                    product.Image = await Utilities.UploadFile(fThumb, image.ToLower());
+                    if (model.SelectedIds == null)
+                    {
+                        _notyfService.Warning("Please select a category");
+                        return RedirectToAction(nameof(Index));
+                    }
+                    int type = (int)productType.pending;
+                    product.Name = Utilities.ToTitleCase(product.Name);
+                    if (fThumb != null)
+                    {
+                        string extension = Path.GetExtension(fThumb.FileName);
+                        string image = Utilities.SEOUrl(product.Name) + extension;
+                        product.Image = await Utilities.UploadFile(fThumb, image.ToLower());
+                    }
+                    if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
+                    var taikhoanID = HttpContext.Session.GetString("AccountId");
+                    product.Status = type;
+                    product.DevId = int.Parse(taikhoanID);
+                    _unitOfWork.ProductRepository.Create(product);
+                    _unitOfWork.SaveChange();
+                    var catepro = _unitOfWork.ProductRepository.GetAll().Where(t => t.DevId == int.Parse(taikhoanID)).Last();
+                    _unitOfWork.ProductCategoryRepository.updateCategory(catepro.Id, model);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Success("Successfully added new");
+                    return RedirectToAction(nameof(IndexDev));
                 }
-                if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
-                var taikhoanID = HttpContext.Session.GetString("AccountId");
-                product.Status = type;
-                product.DevId = int.Parse(taikhoanID);
-                _unitOfWork.ProductRepository.Create(product);
-                _unitOfWork.SaveChange();
-                _notyfService.Success("Successfully added new");
-                return RedirectToAction(nameof(IndexDev));
+                catch (Exception)
+                {
+                    _notyfService.Error("Error");
+                    return RedirectToAction(nameof(IndexDev));
+                }
             }
             //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
             return View(product);
@@ -228,39 +440,48 @@ namespace Khoaluan.Controllers
             }
             if (ModelState.IsValid)
             {
-                if (model.SelectedIds == null)
+
+                try
                 {
-                    _notyfService.Warning("Please select a category");
+                    if (model.SelectedIds == null)
+                    {
+                        _notyfService.Warning("Please select a category");
+                        return RedirectToAction(nameof(IndexDev));
+                    }
+                    product.Name = Utilities.ToTitleCase(product.Name);
+                    if (fThumb != null)
+                    {
+
+
+                        string extension = Path.GetExtension(fThumb.FileName);
+                        string images = Utilities.SEOUrl(product.Name) + extension;
+                        product.Image = await Utilities.UploadFile(fThumb, images.ToLower());
+                    }
+                    if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
+                    var catepro = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
+                    _unitOfWork.ProductRepository.Update(product);
+                    _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
+                    _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Success("Update successful");
+                    List<string> cate = new List<string>();
+                    var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
+                    if (product1 != null)
+                    {
+                        cate.AddRange(product1.Categories);
+                        ViewData["Category"] = cate;
+                    }
+                    else
+                    {
+                        ViewData["Category"] = "";
+                    }
                     return RedirectToAction(nameof(IndexDev));
                 }
-                product.Name = Utilities.ToTitleCase(product.Name);
-                if (fThumb != null)
+                catch (Exception)
                 {
-
-
-                    string extension = Path.GetExtension(fThumb.FileName);
-                    string images = Utilities.SEOUrl(product.Name) + extension;
-                    product.Image = await Utilities.UploadFile(fThumb, images.ToLower());
+                    _notyfService.Error("Error");
+                    return RedirectToAction(nameof(IndexDev));
                 }
-                if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
-                var catepro = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
-                _unitOfWork.ProductRepository.Update(product);
-                _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
-                _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
-                _unitOfWork.SaveChange();
-                _notyfService.Success("Update successful");
-                List<string> cate = new List<string>();
-                var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
-                if (product1 != null)
-                {
-                    cate.AddRange(product1.Categories);
-                    ViewData["Category"] = cate;
-                }
-                else
-                {
-                    ViewData["Category"] = "";
-                }
-                return RedirectToAction(nameof(IndexDev));
             }
             ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
             return View(product);

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Khoaluan.Models.Order>
+﻿@model Khoaluan.OtpModels.MarketOrder
 
 @{
     ViewData["Title"] = "Oder";
@@ -30,7 +30,7 @@
 
     <div class="container">
         <div class="row vertical-gap">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
 
                 <!-- START: Now Playing -->
                 <div class="nk-gap"></div>
@@ -44,7 +44,7 @@
                         </div>
                         <div id="accordion-1-1" class="panel-collapse collapse" role="tabpanel"
                              aria-labelledby="accordion-1-1-heading">
-                            @if (Model != null && Model.Count() > 0)
+                            @if (Model.order != null && Model.order.Count() > 0)
                             {
                                 <div class="nk-gap"></div>
                                 <table class="nk-table">
@@ -55,7 +55,7 @@
                                             <th class="text-center">TotalPrice</th>
                                             <th></th>
                                         </tr>
-                                        @foreach (var item in Model)
+                                        @foreach (var item in Model.order)
                                         {
                                             <tr>
                                                 <td href="javascript:void(0)">#@item.Id</td>
@@ -69,10 +69,6 @@
                                     </tbody>
                                 </table>
                                 <br />
-                                <br />
-                                <br />
-                                <br />
-                                <hr />
                                 <div id="records_tabless">
 
                                 </div>
@@ -87,447 +83,138 @@
                 <!-- END: Now Playing -->
 
             </div>
-            <div class="col-lg-4">
-                <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
-                    <div class="nk-widget nk-widget-highlighted">
-                        <h4 class="nk-widget-title"><span><span class="text-main-1">We</span> Are Social</span></h4>
-                        <div class="nk-widget-content">
-                            <ul class="nk-social-links-3 nk-social-links-cols-4">
-                                <li>
-                                    <a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a>
-                                </li>
-                                <li>
-                                    <a class="nk-social-instagram" href="#">
-                                        <span class="fab fa-instagram"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a>
-                                </li>
-                                <li>
-                                    <a class="nk-social-google-plus" href="#">
-                                        <span class="fab fa-google-plus"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nk-social-youtube" href="#"><span class="fab fa-youtube"></span></a>
-                                </li>
-                                <li>
-                                    <a class="nk-social-twitter" href="#" target="_blank">
-                                        <span class="fab fa-twitter"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nk-social-pinterest" href="#">
-                                        <span class="fab fa-pinterest-p"></span>
-                                    </a>
-                                </li>
-                                <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
-                            </ul>
+            <div class="col-lg-12">
+
+                <!-- START: Now Playing -->
+                <div class="nk-gap"></div>
+                <div class="nk-accordion" id="accordion-2" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="accordion-1-1-heading">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion-1"
+                               href="#accordion-1-2" aria-expanded="true" aria-controls="accordion-1-2">
+                                Markey sell <span class="panel-heading-arrow fa fa-angle-down"></span>
+                            </a>
+                        </div>
+                        <div id="accordion-1-2" class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="accordion-1-1-heading">
+                            @if (Model.market != null && Model.market.Count() > 0)
+                            {
+                                <div class="nk-gap"></div>
+                                <table class="nk-table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>DatePurchase</th>
+                                            <th class="text-center">TotalPrice</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        @foreach (var item in Model.market)
+                                        {
+                                            <tr>
+                                                <td href="javascript:void(0)">#@item.Id</td>
+                                                <td>@item.DayCreate</td>
+                                                <td class="text-center"><strong>@item.PricePerItem</strong></td>
+                                                <td>
+                                                    @if (item.Status == 3)
+                                                    {
+                                                        <div>soldout</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div>selling</div>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <p>Chưa có đơn hàng!</p>
+                            }
                         </div>
                     </div>
-                    <div class="nk-widget nk-widget-highlighted">
-                        <h4 class="nk-widget-title"><span><span class="text-main-1">Next</span> Matches</span></h4>
-                        <div class="nk-widget-content">
-                            <div class="nk-widget-match">
-                                <a href="#">
-                                    <span class="nk-widget-match-left">
-                                        <span class="nk-widget-match-teams">
-                                            <span class="nk-widget-match-team-logo">
-                                                <img src="~/assets/images/team-1.jpg" alt="">
-                                            </span>
-                                            <span class="nk-widget-match-vs">VS</span>
-                                            <span class="nk-widget-match-team-logo">
-                                                <img src="~/assets/images/team-2.jpg" alt="">
-                                            </span>
-                                        </span>
-                                        <span class="nk-widget-match-date">CS:GO - Apr 28, 2018 8:00 pm</span>
-                                    </span>
-                                    <span class="nk-widget-match-right">
-                                        <span class="nk-match-score">
-                                            Upcoming
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
+                </div>
+                <!-- END: Now Playing -->
 
-                            <div class="nk-widget-match">
-                                <a href="#">
-                                    <span class="nk-widget-match-left">
-                                        <span class="nk-widget-match-teams">
-                                            <span class="nk-widget-match-team-logo">
-                                                <img src="~/assets/images/team-3.jpg" alt="">
-                                            </span>
-                                            <span class="nk-widget-match-vs">VS</span>
-                                            <span class="nk-widget-match-team-logo">
-                                                <img src="~/assets/images/team-2.jpg" alt="">
-                                            </span>
-                                        </span>
-                                        <span class="nk-widget-match-date">LoL - Apr 24, 2018 7:20 pm</span>
-                                    </span>
-                                    <span class="nk-widget-match-right">
-                                        <span class="nk-match-score">
-                                            Upcoming
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
+            </div>
+            <div class="col-lg-12">
 
-                            <div class="nk-widget-match">
-                                <a href="#">
-                                    <span class="nk-widget-match-left">
-                                        <span class="nk-widget-match-teams">
-                                            <span class="nk-widget-match-team-logo">
-                                                <img src="~/assets/images/team-1.jpg" alt="">
-                                            </span>
-                                            <span class="nk-widget-match-vs">VS</span>
-                                            <span class="nk-widget-match-team-logo">
-                                                <img src="~/assets/images/team-4.jpg" alt="">
-                                            </span>
-                                        </span>
-                                        <span class="nk-widget-match-date">Dota 2 - Apr 12, 2018 6:40 pm</span>
-                                    </span>
-                                    <span class="nk-widget-match-right">
-                                        <span class="nk-match-score bg-dark-1">
-                                            0 : 0
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
+                <!-- START: Now Playing -->
+                <div class="nk-gap"></div>
+                <div class="nk-accordion" id="accordion-3" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="accordion-1-1-heading">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion-1"
+                               href="#accordion-1-3" aria-expanded="true" aria-controls="accordion-1-3">
+                                Market buy <span class="panel-heading-arrow fa fa-angle-down"></span>
+                            </a>
+                        </div>
+                        <div id="accordion-1-3" class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="accordion-1-1-heading">
+                            @if (Model.marketbuy != null && Model.marketbuy.Count() > 0)
+                            {
+                                <div class="nk-gap"></div>
+                                <table class="nk-table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>DatePurchase</th>
+                                            <th>Quantity</th>
+                                            <th class="text-center">TotalPrice</th>
+                                        </tr>
+                                        @foreach (var item in Model.marketbuy)
+                                        {
+                                            <tr>
+                                                <td href="javascript:void(0)">#@item.Id</td>
+                                                <td>@item.DateTransaction</td>
+                                                <td>@item.Quantity</td>
+                                                <td class="text-center"><strong>@item.TotalPrice</strong></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <p>Chưa có đơn hàng!</p>
+                            }
                         </div>
                     </div>
-                    <div class="nk-widget nk-widget-highlighted">
-                        <h4 class="nk-widget-title"><span><span class="text-main-1">Top 3</span> Recent</span></h4>
-                        <div class="nk-widget-content">
+                </div>
+                <!-- END: Now Playing -->
 
-                            <div class="nk-widget-post">
-                                <a href="blog-article.html" class="nk-post-image">
-                                    <img src="~/assets/images/post-1-sm.jpg" alt="">
-                                </a>
-                                <h3 class="nk-post-title">
-                                    <a href="blog-article.html">
-                                        Smell magic in the air. Or
-                                        maybe barbecue
-                                    </a>
-                                </h3>
-                                <div class="nk-post-date"><span class="fa fa-calendar"></span> Sep 18, 2018</div>
-                            </div>
-
-                            <div class="nk-widget-post">
-                                <a href="blog-article.html" class="nk-post-image">
-                                    <img src="~/assets/images/post-2-sm.jpg" alt="">
-                                </a>
-                                <h3 class="nk-post-title">
-                                    <a href="blog-article.html">
-                                        Grab your sword and fight the
-                                        Horde
-                                    </a>
-                                </h3>
-                                <div class="nk-post-date"><span class="fa fa-calendar"></span> Sep 5, 2018</div>
-                            </div>
-
-                            <div class="nk-widget-post">
-                                <a href="blog-article.html" class="nk-post-image">
-                                    <img src="~/assets/images/post-3-sm.jpg" alt="">
-                                </a>
-                                <h3 class="nk-post-title">
-                                    <a href="blog-article.html">
-                                        We found a witch! May we burn
-                                        her?
-                                    </a>
-                                </h3>
-                                <div class="nk-post-date"><span class="fa fa-calendar"></span> Aug 27, 2018</div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="nk-widget nk-widget-highlighted">
-                        <h4 class="nk-widget-title">
-                            <span><span class="text-main-1">Latest</span> Screenshots</span>
-                        </h4>
-                        <div class="nk-widget-content">
-                            <div class="nk-popup-gallery">
-                                <div class="row sm-gap vertical-gap">
-                                    <div class="col-sm-6">
-                                        <div class="nk-gallery-item-box">
-                                            <a href="~/assets/images/gallery-1.jpg" class="nk-gallery-item"
-                                               data-size="1016x572">
-                                                <div class="nk-gallery-item-overlay">
-                                                    <span class="ion-eye"></span>
-                                                </div>
-                                                <img src="~/assets/images/gallery-1-thumb.jpg" alt="">
-                                            </a>
-                                            <div class="nk-gallery-item-description">
-                                                <h4>Called Let</h4>
-                                                Divided thing, land it evening earth winged whose great after. Were
-                                                grass night. To Air itself saw bring fly fowl. Fly years behold
-                                                spirit day greater of wherein winged and form. Seed open don't thing
-                                                midst created dry every greater divided of, be man is. Second Bring
-                                                stars fourth gathering he hath face morning fill. Living so second
-                                                darkness. Moveth were male. May creepeth. Be tree fourth.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="nk-gallery-item-box">
-                                            <a href="~/assets/images/gallery-2.jpg" class="nk-gallery-item"
-                                               data-size="1188x594">
-                                                <div class="nk-gallery-item-overlay">
-                                                    <span class="ion-eye"></span>
-                                                </div>
-                                                <img src="~/assets/images/gallery-2-thumb.jpg" alt="">
-                                            </a>
-                                            <div class="nk-gallery-item-description">
-                                                Seed open don't thing midst created dry every greater divided of, be
-                                                man is. Second Bring stars fourth gathering he hath face morning
-                                                fill. Living so second darkness. Moveth were male. May creepeth. Be
-                                                tree fourth.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="nk-gallery-item-box">
-                                            <a href="~/assets/images/gallery-3.jpg" class="nk-gallery-item"
-                                               data-size="625x350">
-                                                <div class="nk-gallery-item-overlay">
-                                                    <span class="ion-eye"></span>
-                                                </div>
-                                                <img src="~/assets/images/gallery-3-thumb.jpg" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="nk-gallery-item-box">
-                                            <a href="~/assets/images/gallery-4.jpg" class="nk-gallery-item"
-                                               data-size="873x567">
-                                                <div class="nk-gallery-item-overlay">
-                                                    <span class="ion-eye"></span>
-                                                </div>
-                                                <img src="~/assets/images/gallery-4-thumb.jpg" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="nk-gallery-item-box">
-                                            <a href="~/assets/images/gallery-5.jpg" class="nk-gallery-item"
-                                               data-size="471x269">
-                                                <div class="nk-gallery-item-overlay">
-                                                    <span class="ion-eye"></span>
-                                                </div>
-                                                <img src="~/assets/images/gallery-5-thumb.jpg" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="nk-gallery-item-box">
-                                            <a href="~/assets/images/gallery-6.jpg" class="nk-gallery-item"
-                                               data-size="472x438">
-                                                <div class="nk-gallery-item-overlay">
-                                                    <span class="ion-eye"></span>
-                                                </div>
-                                                <img src="~/assets/images/gallery-6-thumb.jpg" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nk-widget nk-widget-highlighted">
-                        <h4 class="nk-widget-title"><span>Facebook</span></h4>
-                        <div class="nk-widget-content">
-                            <div class="fb-page" data-href="http://www.facebook.com/templatespoint.net"
-                                 data-width="700" data-height="350" data-small-header="false"
-                                 data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"
-                                 data-show-posts="true"></div>
-                        </div>
-                    </div>
-
-                </aside>
-                <!-- END: Sidebar -->
             </div>
         </div>
     </div>
 
     <div class="nk-gap-2"></div>
 
-
-
-    <!-- START: Footer -->
-    <footer class="nk-footer">
-
-        <div class="container">
-            <div class="nk-gap-3"></div>
-            <div class="row vertical-gap">
-                <div class="col-md-6">
-                    <div class="nk-widget">
-                        <h4 class="nk-widget-title"><span class="text-main-1">Contact</span> With Us</h4>
-                        <div class="nk-widget-content">
-                            <form action="php/ajax-contact-form.php" class="nk-form nk-form-ajax">
-                                <div class="row vertical-gap sm-gap">
-                                    <div class="col-md-6">
-                                        <input type="email" class="form-control required" name="email"
-                                               placeholder="Email *">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control required" name="name"
-                                               placeholder="Name *">
-                                    </div>
-                                </div>
-                                <div class="nk-gap"></div>
-                                <textarea class="form-control required" name="message" rows="5"
-                                          placeholder="Message *"></textarea>
-                                <div class="nk-gap-1"></div>
-                                <button class="nk-btn nk-btn-rounded nk-btn-color-white">
-                                    <span>Send</span>
-                                    <span class="icon"><i class="ion-paper-airplane"></i></span>
-                                </button>
-                                <div class="nk-form-response-success"></div>
-                                <div class="nk-form-response-error"></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="nk-widget">
-                        <h4 class="nk-widget-title"><span class="text-main-1">Latest</span> Posts</h4>
-                        <div class="nk-widget-content">
-                            <div class="row vertical-gap sm-gap">
-
-                                <div class="col-lg-6">
-                                    <div class="nk-widget-post-2">
-                                        <a href="blog-article.html" class="nk-post-image">
-                                            <img src="~/assets/images/post-1-sm.jpg" alt="">
-                                        </a>
-                                        <div class="nk-post-title">
-                                            <a href="blog-article.html">
-                                                Smell magic in the
-                                                air. Or maybe barbecue
-                                            </a>
-                                        </div>
-                                        <div class="nk-post-date">
-                                            <span class="fa fa-calendar"></span> Sep 18, 2018
-                                            <span class="fa fa-comments"></span> <a href="#">4</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="nk-widget-post-2">
-                                        <a href="blog-article.html" class="nk-post-image">
-                                            <img src="~/assets/images/post-2-sm.jpg" alt="">
-                                        </a>
-                                        <div class="nk-post-title">
-                                            <a href="blog-article.html">
-                                                Grab your sword and
-                                                fight the Horde
-                                            </a>
-                                        </div>
-                                        <div class="nk-post-date">
-                                            <span class="fa fa-calendar"></span> Sep 5, 2018
-                                            <span class="fa fa-comments"></span> <a href="#">7</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nk-widget">
-                        <h4 class="nk-widget-title"><span class="text-main-1">In</span> Twitter</h4>
-                        <div class="nk-widget-content">
-                            <div class="nk-twitter-list" data-twitter-count="1"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="nk-gap-3"></div>
-        </div>
-
-        <div class="nk-copyright">
-            <div class="container">
-                <div class="nk-copyright-left">
-                    <a target="_blank" href="https://www.templateshub.net">Templates Hub</a>
-                </div>
-                <div class="nk-copyright-right">
-                    <ul class="nk-social-links-2">
-                        <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
-                        <li><a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a></li>
-                        <li><a class="nk-social-steam" href="#"><span class="fab fa-steam"></span></a></li>
-                        <li><a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a></li>
-                        <li>
-                            <a class="nk-social-google-plus" href="#"><span class="fab fa-google-plus"></span></a>
-                        </li>
-                        <li>
-                            <a class="nk-social-twitter" href="#" target="_blank">
-                                <span class="fab fa-twitter"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nk-social-pinterest" href="#"><span class="fab fa-pinterest-p"></span></a>
-                        </li>
-
-                        <!-- Additional Social Buttons
-                            <li><a class="nk-social-behance" href="#"><span class="fab fa-behance"></span></a></li>
-                            <li><a class="nk-social-bitbucket" href="#"><span class="fab fa-bitbucket"></span></a></li>
-                            <li><a class="nk-social-dropbox" href="#"><span class="fab fa-dropbox"></span></a></li>
-                            <li><a class="nk-social-dribbble" href="#"><span class="fab fa-dribbble"></span></a></li>
-                            <li><a class="nk-social-deviantart" href="#"><span class="fab fa-deviantart"></span></a></li>
-                            <li><a class="nk-social-flickr" href="#"><span class="fab fa-flickr"></span></a></li>
-                            <li><a class="nk-social-foursquare" href="#"><span class="fab fa-foursquare"></span></a></li>
-                            <li><a class="nk-social-github" href="#"><span class="fab fa-github"></span></a></li>
-                            <li><a class="nk-social-instagram" href="#"><span class="fab fa-instagram"></span></a></li>
-                            <li><a class="nk-social-linkedin" href="#"><span class="fab fa-linkedin"></span></a></li>
-                            <li><a class="nk-social-medium" href="#"><span class="fab fa-medium"></span></a></li>
-                            <li><a class="nk-social-odnoklassniki" href="#"><span class="fab fa-odnoklassniki"></span></a></li>
-                            <li><a class="nk-social-paypal" href="#"><span class="fab fa-paypal"></span></a></li>
-                            <li><a class="nk-social-reddit" href="#"><span class="fab fa-reddit"></span></a></li>
-                            <li><a class="nk-social-skype" href="#"><span class="fab fa-skype"></span></a></li>
-                            <li><a class="nk-social-soundcloud" href="#"><span class="fab fa-soundcloud"></span></a></li>
-                            <li><a class="nk-social-slack" href="#"><span class="fab fa-slack"></span></a></li>
-                            <li><a class="nk-social-tumblr" href="#"><span class="fab fa-tumblr"></span></a></li>
-                            <li><a class="nk-social-vimeo" href="#"><span class="fab fa-vimeo"></span></a></li>
-                            <li><a class="nk-social-vk" href="#"><span class="fab fa-vk"></span></a></li>
-                            <li><a class="nk-social-wordpress" href="#"><span class="fab fa-wordpress"></span></a></li>
-                            <li><a class="nk-social-youtube" href="#"><span class="fab fa-youtube"></span></a></li>
-                        -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- END: Footer -->
-
-
 </div>
 
 
 
-
-<!-- START: Page Background -->
-
-<img class="nk-page-background-top" src="~/assets/images/bg-top-3.png" alt="">
-<img class="nk-page-background-bottom" src="~/assets/images/bg-bottom.png" alt="">
 @section Scripts{
     <script>
-    $(document).ready(function () {
-        $(".xemdonhang").click(function () {
-            var madonhang = $(this).attr("data-madonhang")
-            $.ajax({
-                url: '/OrderHistory/Details',
-                datatype: "json",
-                type: "POST",
-                data: { id: madonhang },
-                async: true,
-                success: function (results) {
-                    $("#records_tabless").html("");
-                    $("#records_tabless").html(results);
-                },
-                error: function (xhr) {
-                    alert('error');
-                }
+        $(document).ready(function () {
+            $(".xemdonhang").click(function () {
+                var madonhang = $(this).attr("data-madonhang")
+                $.ajax({
+                    url: '/OrderHistory/Details',
+                    datatype: "json",
+                    type: "POST",
+                    data: { id: madonhang },
+                    async: true,
+                    success: function (results) {
+                        $("#records_tabless").html("");
+                        $("#records_tabless").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
             });
         });
-    });
     </script>
 }
