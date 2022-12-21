@@ -37,13 +37,15 @@ namespace Khoaluan.Controllers
             var bestSeller = _unitOfWork.SaleProductRepository.ProductNotSale().Take(10).ToList();
             var FreeGame = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price == 0).ToList();
             var PopularGame = _unitOfWork.SaleProductRepository.ProductNotSale().OrderByDescending(t=>t.Price).Take(6).ToList();
+            var saleProduct = _unitOfWork.SaleProductRepository.ProductSaleHomePage().ToList();
             var RencentlyReleased = _unitOfWork.ProductRepository.getallProductwithCategory().OrderByDescending(t => t.ReleaseDate).ToList();
             HomePageViewModel homepage = new HomePageViewModel()
             {
                 bestSeller = bestSeller,
                 FreeGames = FreeGame,
                 PopularGame = PopularGame,
-                RecentlyRealeased = RencentlyReleased
+                RecentlyRealeased = RencentlyReleased,
+                saleProduct = saleProduct
             };
             TempData.Keep("idpro");
             return View(homepage);
