@@ -46,6 +46,7 @@ namespace Khoaluan.OtpModels
     public class HomePageViewModel
     {
         public List<SaleModelView> bestSeller { get; set; }
+        public List<SaleModelView> saleProduct { get; set; }
         public List<Product> FreeGames { get; set; } 
         public List<SaleModelView> PopularGame { get; set; }
         public List<Productdetail> RecentlyRealeased { get; set; }
