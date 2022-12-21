@@ -15,6 +15,6 @@ namespace Khoaluan.ModelViews
         public int Id { get; set; }
         public int Discount { get; set; }
         public int Status { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
     }
 }
