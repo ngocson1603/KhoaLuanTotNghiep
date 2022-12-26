@@ -90,7 +90,7 @@ namespace Khoaluan.Repositories
 
         public List<SellitemModelView> ProductSellInMonth()
         {
-            var query = @"SELECT Product.Id,Name as NameGame,Image,[Order].DatePurchase as DayCreate,OrderDetail.Price
+            var query = @"SELECT Product.Id,Name as NameGame,Image,[Order].DatePurchase as DayCreate,OrderDetail.Price as PricePerItem
                 FROM Product
                 INNER JOIN OrderDetail ON OrderDetail.ProductID = Product.Id 
                 FULL OUTER JOIN [Order] ON [Order].Id = OrderDetail.Id 

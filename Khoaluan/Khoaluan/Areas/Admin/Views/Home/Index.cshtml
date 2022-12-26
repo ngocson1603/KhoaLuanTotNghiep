@@ -395,8 +395,8 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>8 May 2019</td>
-                                        <td>$137.00</td>
+                                        <td>@item.DayCreate.ToShortDateString()</td>
+                                        <td>$ @item.PricePerItem</td>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <span class="badge badge-success badge-dot m-r-10"></span>
@@ -409,6 +409,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div>Tổng tiền: @Model.product.Sum(t=>t.PricePerItem)</div>
                         </div>
                     </div>
             </div>
