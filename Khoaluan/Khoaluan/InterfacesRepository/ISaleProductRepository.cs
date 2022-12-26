@@ -12,5 +12,6 @@ namespace Khoaluan.InterfacesRepository
         List<SaleModelView> ProductIsSaleInDate();
         List<SaleModelView> ProductNotSale();
         List<SaleModelView> ProductSaleHomePage();
+        List<SellitemModelView> ProductSellInMonth();
     }
 }

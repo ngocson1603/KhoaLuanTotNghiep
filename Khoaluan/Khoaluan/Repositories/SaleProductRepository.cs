@@ -87,5 +87,16 @@ namespace Khoaluan.Repositories
             var result = Context.Database.GetDbConnection().Query<SaleModelView>(query);
             return result.ToList();
         }
+
+        public List<SellitemModelView> ProductSellInMonth()
+        {
+            var query = @"SELECT Product.Id,Name as NameGame,Image,[Order].DatePurchase as DayCreate,OrderDetail.Price
+                FROM Product
+                INNER JOIN OrderDetail ON OrderDetail.ProductID = Product.Id 
+                FULL OUTER JOIN [Order] ON [Order].Id = OrderDetail.Id 
+                group by Product.Id,Name,Image,[Order].DatePurchase,OrderDetail.Price";
+            var result = Context.Database.GetDbConnection().Query<SellitemModelView>(query);
+            return result.ToList();
+        }
     }
 }

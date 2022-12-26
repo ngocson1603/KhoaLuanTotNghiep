@@ -82,4 +82,8 @@ namespace Khoaluan.OtpModels
         public MultiDropDownListViewModel muti { get; set; }
         public Product product { get; set; }
     }
+    public class HomeProduct
+    {
+        public List<SellitemModelView> product { get; set; }
+    }
 }
