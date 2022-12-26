@@ -26,17 +26,6 @@ namespace DuAnGame.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var pro = _unitOfWork.SaleProductRepository.ProductSellInMonth().ToList();
-            var distinctCount = pro.Distinct().ToList();
-            List<SellitemModelView> lst = new List<SellitemModelView>();
-
-            foreach (var item in pro)
-            {
-                if (pro.Count(x => x == item) > 1)
-                {
-                    break;
-                }
-            }
-
             HomeProduct pwc = new HomeProduct()
             {
                 product = pro,
