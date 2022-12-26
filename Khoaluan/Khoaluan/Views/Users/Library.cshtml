@@ -23,19 +23,19 @@
                         {
 
                             string url = $"/Product/HomePage/{item.Id}.html";
-                            <div class="col-md-6 col-lg-4">
-                                <div class="nk-gallery-item-box">
-                                    <a href="@url" class="nk-gallery-item">
-                                        <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
-                                        <img src="~/Images/@item.Image" alt=@item.Name>
-                                    </a>
-                                    <div class="nk-gallery-item-label">
-                                        <h4 class="mb-0">@item.Name</h4>
-                                    </div>
-                                </div>
-                                <button class="removecart nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" type="submit" data-mahh="@item.Id">Refund</button>
-
+                    <div class="col-md-6 col-lg-4">
+                        <div class="nk-gallery-item-box">
+                            <a href="@url" class="nk-gallery-item">
+                                <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
+                                <img src="~/Images/@item.Image" alt=@item.Name>
+                            </a>
+                            <div class="nk-gallery-item-label">
+                                <h4 class="mb-0">@item.Name</h4>
                             </div>
+                        </div>
+                        <a href="~/Images/@item.Image" class="btn btn-secondary btn-primary-hover" download> Install
+                        </a>
+                    </div>
                         }
 
                     }
