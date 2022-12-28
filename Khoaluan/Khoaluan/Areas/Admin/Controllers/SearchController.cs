@@ -122,6 +122,24 @@ namespace Khoaluan.Areas.Admin.Controllers
                 return PartialView("ListDotSaleProductsSearchPartial", ls);
             }
         }
+        [HttpPost]
+        public IActionResult FindDev(string keyword)
+        {
+            var ls1 = _unitOfWork.DeveloperRepository.GetAll();
+            if (string.IsNullOrEmpty(keyword) || keyword.Length < 1)
+            {
+                return PartialView("ListDevPartial", ls1);
+            }
+            var ls = _unitOfWork.DeveloperRepository.GetAll().Where(t => t.Name.ToLower().Contains(keyword.Trim().ToLower())).ToList(); ;
 
+            if (ls == null || ls.Count == 0)
+            {
+                return PartialView("ListDevPartial", null);
+            }
+            else
+            {
+                return PartialView("ListDevPartial", ls);
+            }
+        }
     }
 }

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Khoaluan.Models.Developer>
+
+<div class="row" id="card-view">
+    @if (Model != null || Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="m-t-20 text-center">
+                            <div class="avatar avatar-image" style="height: 100px; width: 100px;">
+                                <img src="~/Adminassets/images/avatars/thumb-1.jpg" alt="">
+                            </div>
+                            <h4 class="m-t-30">@item.Name</h4>
+                            <p>@item.UserName</p>
+                        </div>
+                        <div class="text-center m-t-15">
+                            <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Admin" asp-action="Details" asp-route-id="@item.Id"><i class="anticon anticon-zoom-in"></i></a>
+                            <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Admin" asp-action="Edit" asp-route-id="@item.Id"><i class="anticon anticon-edit"></i></a>
+                            <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Admin" asp-action="Delete" asp-route-id="@item.Id"><i class="anticon anticon-delete"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+
+</div>
+<div class="row d-none" id="list-view">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Social</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null || Model.Count() > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="media align-items-center">
+                                                <div class="avatar avatar-image">
+                                                    <img src="assets/images/avatars/thumb-1.jpg"
+                                                         alt="">
+                                                </div>
+                                                <div class="media-body m-l-15">
+                                                    <h6 class="mb-0">@item.Name</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@item.UserName</td>
+                                        <td>
+                                            <button class="m-r-5 btn btn-icon btn-hover btn-rounded">
+                                                <i class="anticon anticon-facebook"></i>
+                                            </button>
+                                            <button class="m-r-5 btn btn-icon btn-hover btn-rounded">
+                                                <i class="anticon anticon-twitter"></i>
+                                            </button>
+                                            <button class="m-r-5 btn btn-icon btn-hover btn-rounded">
+                                                <i class="anticon anticon-instagram"></i>
+                                            </button>
+                                        </td>
+                                        <td class="text-right">
+                                            <a asp-area="Admin" asp-controller="Admin" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-tone">
+                                                <i class="anticon anticon-mail"></i>
+                                                <span class="m-l-5">Contact</span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
