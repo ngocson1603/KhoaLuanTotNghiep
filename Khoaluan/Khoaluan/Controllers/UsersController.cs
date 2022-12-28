@@ -3,6 +3,7 @@ using Khoaluan.Extension;
 using Khoaluan.Helpper;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
+using Khoaluan.OtpModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -383,6 +384,16 @@ namespace Khoaluan.Controllers
                 return View(proLib);
             }
             return RedirectToAction("Login");
+        }
+
+        public IActionResult AddFriend()
+        {
+            var findfriend = _unitOfWork.UserRepository.GetAll();
+            ListFriend friend = new ListFriend()
+            {
+                findfriend = findfriend
+            };
+            return View(friend);
         }
     }
 }

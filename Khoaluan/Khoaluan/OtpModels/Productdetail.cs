@@ -86,4 +86,8 @@ namespace Khoaluan.OtpModels
     {
         public List<SellitemModelView> product { get; set; }
     }
+    public class ListFriend
+    {
+        public List<Users> findfriend { get; set; }
+    }
 }
