@@ -32,7 +32,7 @@
                                     <form asp-action="AdminLogin" method="post">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         <div class="form-group">
-                                            <label class="font-weight-semibold" for="userName">Tài khoản:</label>
+                                            <label class="font-weight-semibold" for="userName">Gmail:</label>
                                             <div class="input-affix">
                                                 <i class="prefix-icon anticon anticon-user"></i>
                                                 <input type="text" class="form-control" asp-for="Gmail" placeholder="Tài khoản">
@@ -40,7 +40,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="font-weight-semibold" for="password">Mật khẩu:</label>
+                                            <label class="font-weight-semibold" for="password">Password:</label>
                                             <div class="input-affix m-b-10">
                                                 <i class="prefix-icon anticon anticon-lock"></i>
                                                 <input type="password" class="form-control" asp-for="Password" placeholder="Mật khẩu">
@@ -49,7 +49,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <button class="btn btn-primary">Đăng nhập</button>
+                                                <button class="btn btn-primary">Login</button>
                                                 <p class="mg-b-0"> @ViewBag.Eror</p>
                                             </div>
                                         </div>
