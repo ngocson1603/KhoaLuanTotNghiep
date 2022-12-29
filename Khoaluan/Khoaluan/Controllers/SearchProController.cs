@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Khoaluan.Models;
+using Khoaluan.ModelViews;
 using Khoaluan.OtpModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -79,14 +80,14 @@ namespace Khoaluan.Controllers
             HttpContext.Session.SetString("NamePro", name);
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 6;
-            List<Product> products = new List<Product>();
+            List<SaleModelView> products = new List<SaleModelView>();
             if (name == "all")
             {
-                products = _unitOfWork.ProductRepository.GetAll();
+                products = _unitOfWork.SaleProductRepository.ProductNotSale();
             }
             else
             {
-                products = _unitOfWork.ProductRepository.GetProductByName(name.ToLower().Trim());
+                products = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t=>t.ProductName.ToLower().Trim() == name.ToLower().Trim()).ToList();
             }
             if (products.Count() <= 6)
                 ViewBag.maxPage = 1;
