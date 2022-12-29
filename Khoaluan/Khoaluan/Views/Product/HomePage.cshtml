@@ -163,16 +163,16 @@
                                                     }
                                                     else
                                                     {
-                                                        <p>
-                                                            @{
-                                                                decimal discount = @item.Price - (@item.Price * @item.Discount / 100);
-                                                            }
-                                                            @icon @discount
-                                                            @if (item.Discount > 0)
-                                                            {
-                                                                <h6>@icon @item.Price<span class="badge bg-danger">-@item.Discount%</span></h6>
-                                                            }
-                                                        </p>
+                                                    <p>
+                                                        @{
+                                                            decimal discount = @item.Price - (@item.Price * @item.Discount / 100);
+                                                        }
+                                                        @icon @discount <span class="badge bg-danger">-@item.Discount%</span>
+                                                        @if (item.Discount > 0)
+                                                        {
+                                                            <h6 style="text-decoration:line-through">@icon @item.Price</h6>
+                                                        }
+                                                    </p>
                                                     }
                                                 </div>
                                             </div>
@@ -220,16 +220,16 @@
                                                     }
                                                     else
                                                     {
-                                                        <p>
-                                                            @{
-                                                                decimal discount = @item.Price - (@item.Price * @item.Discount / 100);
-                                                            }
-                                                            @icon @discount
-                                                            @if (item.Discount > 0)
-                                                            {
-                                                                <h6>@icon @item.Price<span class="badge bg-danger">-@item.Discount%</span></h6>
-                                                            }
-                                                        </p>
+                                                    <p>
+                                                        @{
+                                                            decimal discount = @item.Price - (@item.Price * @item.Discount / 100);
+                                                        }
+                                                        @icon @discount <span class="badge bg-danger">-@item.Discount%</span>
+                                                        @if (item.Discount > 0)
+                                                        {
+                                                            <h6 style="text-decoration:line-through">@icon @item.Price</h6>
+                                                        }
+                                                    </p>
                                                     }
                                                 </div>
                                             </div>
@@ -324,16 +324,16 @@
                                         }
                                         else
                                         {
-                                            <p>
-                                                @{
-                                                    decimal discount = @item.Price - (@item.Price * @item.Discount / 100);
-                                                }
-                                                @icon @discount
-                                                @if (item.Discount > 0)
-                                                {
-                                                    <h6>@icon @item.Price<span class="badge bg-danger">-@item.Discount%</span></h6>
-                                                }
-                                            </p>
+                                        <p>
+                                            @{
+                                                decimal discount = @item.Price - (@item.Price * @item.Discount / 100);
+                                            }
+                                            @icon @discount <span class="badge bg-danger">-@item.Discount%</span>
+                                            @if (item.Discount > 0)
+                                            {
+                                                <h6 style="text-decoration:line-through">@icon @item.Price</h6>
+                                            }
+                                        </p>
                                         }
                                     </div>
                                 </div>
