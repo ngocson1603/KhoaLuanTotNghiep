@@ -8,7 +8,7 @@ namespace Khoaluan.OtpModels
         public int OrderID { get; set; }
         public int UserID { get; set; }
         public int ProductID { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
         public DateTime DatePurchase { get; set; }
     }
     public class RefundUser
