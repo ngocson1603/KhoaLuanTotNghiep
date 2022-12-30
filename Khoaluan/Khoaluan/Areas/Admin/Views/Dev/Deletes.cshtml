@@ -8,7 +8,7 @@
         <nav class="breadcrumb breadcrumb-dash">
             <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
             <a asp-area="Admin" asp-controller="Dev" asp-action="Index" class="breadcrumb-item">Danh sách sản phẩm</a>
-            <span class="breadcrumb-item active">Thông tin sản phẩm : @Model.Name</span>
+            <span class="breadcrumb-item active">Info Product : @Model.Name</span>
         </nav>
     </div>
 </div>
@@ -23,15 +23,15 @@
                     <td class="text-dark font-weight-semibold">@Model.Id</td>
                 </tr>
                 <tr>
-                    <td>Tên sản phẩm:</td>
+                    <td>Name:</td>
                     <td>@Model.Name</td>
                 </tr>
                 <tr>
-                    <td>Mô tả ngắn:</td>
+                    <td>Description:</td>
                     <td>@Model.Description</td>
                 </tr>
                 <tr>
-                    <td>Giá:</td>
+                    <td>Price:</td>
                     <td>@Model.Price</td>
                 </tr>
                 @*<tr>
@@ -56,22 +56,22 @@
                 <td>@Model.ProductCategories.</td>
             </tr>*@
             <tr>
-                <td>Ngày tạo:</td>
+                <td>CreateDay:</td>
                 <td>@Model.ReleaseDate</td>
             </tr>
             <tr>
-                <td>Tiêu đề:</td>
+                <td>Overview:</td>
                 <td>@Model.Overview</td>
             </tr>
 
             <tr>
-                <td>Ảnh đại diện:</td>
+                <td>Image:</td>
                 <td>
                     <img width="200" height="200" src="~/Images/@Url.Content(Model.Image)" alt="@Model.Name" />
                 </td>
             </tr>
             <tr>
-                <td>Mô tả sản phẩm:</td>
+                <td>Description:</td>
                 <td>@Model.Description</td>
             </tr>
             <tr>

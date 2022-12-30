@@ -45,9 +45,10 @@ namespace Khoaluan.OtpModels
     }
     public class HomePageViewModel
     {
-        public List<Product> bestSeller { get; set; }
+        public List<SaleModelView> bestSeller { get; set; }
+        public List<SaleModelView> saleProduct { get; set; }
         public List<Product> FreeGames { get; set; } 
-        public List<Productdetail> PopularGame { get; set; }
+        public List<SaleModelView> PopularGame { get; set; }
         public List<Productdetail> RecentlyRealeased { get; set; }
         public List<Category> cate { get; set; }
         public List<Category> catesecond { get; set; }
@@ -80,5 +81,13 @@ namespace Khoaluan.OtpModels
     {
         public MultiDropDownListViewModel muti { get; set; }
         public Product product { get; set; }
+    }
+    public class HomeProduct
+    {
+        public List<SellitemModelView> product { get; set; }
+    }
+    public class ListFriend
+    {
+        public List<Users> findfriend { get; set; }
     }
 }

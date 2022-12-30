@@ -16,17 +16,17 @@
         <ul class="nk-breadcrumbs">
 
 
-            <li><a href="index.html">Home</a></li>
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
 
 
             <li><span class="fa fa-angle-right"></span></li>
 
-            <li><a href="#">Blog</a></li>
+            <li><a href="/tai-khoan-cua-toi.html">My-Item</a></li>
 
 
             <li><span class="fa fa-angle-right"></span></li>
 
-            <li><span>Blog Grid</span></li>
+            <li><span>Item</span></li>
 
         </ul>
     </div>
@@ -169,7 +169,7 @@
                                 </ul>
                             </p>
                             <div style="margin-top: 1.5rem"></div>
-                            <button onclick="myFunction()" id="myBtn">Read more</button>
+                            <button onclick="myFunction()" id="myBtnM">Read more</button>
                         </div>
                     </div>
                     <div class="nk-widget nk-widget-highlighted">
@@ -264,7 +264,7 @@
         function myFunction() {
             var dots = document.getElementById("dots");
             var moreText = document.getElementById("more");
-            var btnText = document.getElementById("myBtn");
+            var btnText = document.getElementById("myBtnM");
 
             if (dots.style.display === "none") {
                 dots.style.display = "inline";

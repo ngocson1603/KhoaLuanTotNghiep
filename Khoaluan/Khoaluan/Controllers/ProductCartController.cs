@@ -152,7 +152,7 @@ namespace DuAnGame.Controllers
                 int type = (int)marketType.buy;
                 if (maKH.Balance < totalprice)
                 {
-                    _notyfService.Success("Số tiền không đủ");
+                    _notyfService.Warning("Số tiền không đủ");
                     return RedirectToRoute("Cart");
                 }
                 try
@@ -162,9 +162,10 @@ namespace DuAnGame.Controllers
                     _unitOfWork.LibraryRepository.updateLibrary(int.Parse(taikhoanID.ToString()), cart);
                     _unitOfWork.UserRepository.updateBalance(int.Parse(taikhoanID.ToString()), totalprice, type);
                     _unitOfWork.SaveChange();
-                    //int madh = _unitOfWork.OrderRepository.orderID(int.Parse(taikhoanID));
-                    //sendemail(maKH.Gmail, cart, madh);
+                    int madh = _unitOfWork.OrderRepository.orderID(int.Parse(taikhoanID));
+                    sendemail(maKH.Gmail, cart, madh);
                     HttpContext.Session.Remove("_GioHang");
+                    _notyfService.Success("Success");
                     return RedirectToAction("HomePage", "Product");
                 }
                 catch (Exception ex)

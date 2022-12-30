@@ -8,7 +8,6 @@
     List<LibraryDetail> DanhSachDonHang = ViewBag.DonHang;
     string gia = "free";
     string icon = "$";
-    decimal discount = Model.productDetail.Price - (Model.productDetail.Price * Model.productDetail.Discount / 100);
 }
 <div class="nk-main">
     <!-- START: Breadcrumbs -->
@@ -17,17 +16,12 @@
         <ul class="nk-breadcrumbs">
 
 
-            <li><a href="index.html">Home</a></li>
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
 
 
             <li><span class="fa fa-angle-right"></span></li>
 
-            <li><a href="store.html">Store</a></li>
-
-
-            <li><span class="fa fa-angle-right"></span></li>
-
-            <li><a href="store-catalog.html">Action Games</a></li>
+            <li><a asp-controller="Product" asp-action="HomePage">Store</a></li>
 
 
             <li><span class="fa fa-angle-right"></span></li>
@@ -86,10 +80,13 @@
                                         else
                                         {
                                         <p>
+                                            @{ 
+                                                decimal discount = Model.productDetail.Price - (Model.productDetail.Price * Model.productDetail.Discount / 100);
+                                            }
                                             @icon @discount
                                             @if (Model.productDetail.Discount > 0)
                                             {
-                                            <h6>@Model.productDetail.Price<span class="badge bg-danger">-@Model.productDetail.Discount%</span></h6>
+                                                <h6>@Model.productDetail.Price<span class="badge bg-danger">-@Model.productDetail.Discount%</span></h6>
                                             }
                                         </p>
                                         }
@@ -486,7 +483,7 @@
                                 </ul>
                             </p>
                             <div style="margin-top: 1.5rem"></div>
-                            <button onclick="myFunction()" id="myBtn">Read more</button>
+                            <button onclick="myFunction()" id="myBtnR">Read more</button>
                         </div>
                     </div>
                     <div class="nk-widget nk-widget-highlighted">
@@ -627,7 +624,7 @@
         function myFunction() {
             var dots = document.getElementById("dots");
             var moreText = document.getElementById("more");
-            var btnText = document.getElementById("myBtn");
+            var btnText = document.getElementById("myBtnR");
 
             if (dots.style.display === "none") {
                 dots.style.display = "inline";

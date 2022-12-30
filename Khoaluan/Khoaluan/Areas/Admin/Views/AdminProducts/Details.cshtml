@@ -24,19 +24,19 @@
                         <td class="text-dark font-weight-semibold">@Model.product.Id</td>
                     </tr>
                     <tr>
-                        <td>Tên sản phẩm:</td>
+                        <td>Name:</td>
                         <td>@Model.product.Name</td>
                     </tr>
                     <tr>
-                        <td>Mô tả ngắn:</td>
+                        <td>Description:</td>
                         <td>@Html.Raw(Model.product.Description)</td>
                     </tr>
                     <tr>
-                        <td>Giá:</td>
+                        <td>Price:</td>
                         <td>@Model.product.Price</td>
                     </tr>
                     <tr>
-                        <td>Trạng thái:</td>
+                        <td>Status:</td>
                         <td>
                             @if (Model.product.Status == 0)
                             {
@@ -69,21 +69,21 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Ngày tạo:</td>
+                        <td>CreateDate:</td>
                         <td>@Model.product.ReleaseDate</td>
                     </tr>
                     <tr>
-                        <td>Tiêu đề:</td>
+                        <td>Overview:</td>
                         <td>@Model.product.Overview</td>
                     </tr>
                     <tr>
-                        <td>Ảnh đại diện:</td>
+                        <td>Image:</td>
                         <td>
                             <img width="200" height="200" src="~/Images/@Url.Content(Model.product.Image)" alt="@Model.product.Name" />
                         </td>
                     </tr>
                     <tr>
-                        <td>Thể loại:</td>
+                        <td>Categories:</td>
                         <td>
                             <div class="form-group col-6">
                                 @foreach (var itemca in ViewBag.Category)

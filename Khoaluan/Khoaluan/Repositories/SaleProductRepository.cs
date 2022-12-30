@@ -68,11 +68,34 @@ namespace Khoaluan.Repositories
 
         public List<SaleModelView> ProductNotSale()
         {
-            var query = @"select Product.Id as ProductId,Product.Name as ProductName, Discount, Status,Image,Price from Product
+            var query = @"select Product.Id as ProductId,Product.Name as ProductName, Discount, Status,Image,Price,Sale.Name as NameSale,StartDate,EndDate,Description from Product
                         left join SaleProduct on Product.Id = SaleProduct.ProductID
                         FULL OUTER JOIN Sale
                         ON SaleProduct.SaleID = Sale.Id";
             var result = Context.Database.GetDbConnection().Query<SaleModelView>(query);
+            return result.ToList();
+        }
+
+        public List<SaleModelView> ProductSaleHomePage()
+        {
+            var query = @"select Product.Id as ProductId,Product.Name as ProductName, Discount, Status,Image,Price,Sale.Name as NameSale,StartDate,EndDate from Product
+                        left join SaleProduct on Product.Id = SaleProduct.ProductID
+                        FULL OUTER JOIN Sale
+                        ON SaleProduct.SaleID = Sale.Id 
+						where Sale.Name is not null and GETDATE() between 
+                        CAST(StartDate as date) and  CAST(EndDate as date)";
+            var result = Context.Database.GetDbConnection().Query<SaleModelView>(query);
+            return result.ToList();
+        }
+
+        public List<SellitemModelView> ProductSellInMonth()
+        {
+            var query = @"SELECT Product.Id,Name as NameGame,Image,[Order].DatePurchase as DayCreate,OrderDetail.Price as PricePerItem
+                FROM Product
+                INNER JOIN OrderDetail ON OrderDetail.ProductID = Product.Id 
+                FULL OUTER JOIN [Order] ON [Order].Id = OrderDetail.Id 
+                group by Product.Id,Name,Image,[Order].DatePurchase,OrderDetail.Price";
+            var result = Context.Database.GetDbConnection().Query<SellitemModelView>(query);
             return result.ToList();
         }
     }
