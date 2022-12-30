@@ -12,5 +12,6 @@ namespace Khoaluan.Models
         public string HoTen { get; set; }
         public DateTime? LastLogin { get; set; }
         public DateTime? CreateDate { get; set; }
+        public List<Blog> Blogs { get; set; }
     }
 }
