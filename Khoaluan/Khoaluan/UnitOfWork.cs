@@ -26,6 +26,7 @@ namespace Khoaluan
         public IMarketTransactionRepository MarketTransactionRepository { get; set; }
         public ISaleRepository SaleRepository { get; set; }
         public ISaleProductRepository SaleProductRepository { get; set; }
+        public IBlogRepository BlogRepository { get; set; }
         public UnitOfWork(GameStoreDbContext context,
             IProductCategoryRepository productCategoryRepository,
             IProductRepository productRepository,
@@ -45,7 +46,8 @@ namespace Khoaluan
             IItemRepository itemRepository,
             IMarketTransactionRepository marketTransactionRepository,
             ISaleRepository saleRepository,
-            ISaleProductRepository saleProductRepository
+            ISaleProductRepository saleProductRepository,
+            IBlogRepository blogRepository
             )
         {
             MongoContext = mongoContext;
@@ -68,6 +70,7 @@ namespace Khoaluan
             MarketTransactionRepository = marketTransactionRepository;
             SaleRepository = saleRepository;
             SaleProductRepository = saleProductRepository;
+            BlogRepository = blogRepository;
         }
         public void Dispose()
         {

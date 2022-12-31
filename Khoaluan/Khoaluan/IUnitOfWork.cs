@@ -27,5 +27,6 @@ namespace Khoaluan
         IMarketTransactionRepository MarketTransactionRepository { get; }
         ISaleRepository SaleRepository { get; }
         ISaleProductRepository SaleProductRepository { get; }
+        IBlogRepository BlogRepository { get; }
     }
 }

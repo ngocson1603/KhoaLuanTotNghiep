@@ -41,26 +41,6 @@ namespace Khoaluan.Migrations
                     b.ToTable("Admin");
                 });
 
-            modelBuilder.Entity("Khoaluan.Models.Blog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Ad_Username")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Ad_Username");
-
-                    b.ToTable("Blog");
-                });
-
             modelBuilder.Entity("Khoaluan.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -474,16 +454,6 @@ namespace Khoaluan.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Khoaluan.Models.Blog", b =>
-                {
-                    b.HasOne("Khoaluan.Models.Admin", "Admin")
-                        .WithMany("Blogs")
-                        .HasForeignKey("Ad_Username")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Admin");
-                });
-
             modelBuilder.Entity("Khoaluan.Models.Inventory", b =>
                 {
                     b.HasOne("Khoaluan.Models.Item", "Item")
@@ -691,11 +661,6 @@ namespace Khoaluan.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Sale");
-                });
-
-            modelBuilder.Entity("Khoaluan.Models.Admin", b =>
-                {
-                    b.Navigation("Blogs");
                 });
 
             modelBuilder.Entity("Khoaluan.Models.Category", b =>
