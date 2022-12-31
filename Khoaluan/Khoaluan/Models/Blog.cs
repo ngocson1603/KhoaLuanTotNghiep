@@ -6,6 +6,7 @@ namespace Khoaluan.Models
     {
         public string Title { get; set; }
         public string Ad_Username { get; set; }
+        public string Name { get; set; }
         public string Image { get; set; }
         public bool Published { get; set; }
         public string Alias { get; set; }

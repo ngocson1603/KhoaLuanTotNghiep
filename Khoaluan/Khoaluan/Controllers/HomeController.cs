@@ -1,4 +1,5 @@
 ﻿using Khoaluan.Models;
+using Khoaluan.OtpModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,20 +13,23 @@ namespace Khoaluan.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
-
         public IActionResult Index()
         {
-            return View();
+            var blog = _unitOfWork.BlogRepository.GetAll().ToList();
+            ListBlog blogls = new ListBlog()
+            {
+                listBlogs = blog
+            };
+            return View(blogls);
         }
-        public ActionResult BlogArticle()
-        {
-            return View();
-        }
+        
         public ActionResult BlogFull()
         {
             return View();

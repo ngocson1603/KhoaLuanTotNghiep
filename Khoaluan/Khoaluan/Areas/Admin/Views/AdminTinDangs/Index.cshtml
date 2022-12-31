@@ -1,6 +1,6 @@
 @model IEnumerable<Khoaluan.Models.Blog>
-@{ int CurrentPage = ViewBag.CurrentPage;
-    ViewData["Title"] = "Danh sách tin tức" + CurrentPage;
+@{ 
+    ViewData["Title"] = "Danh sách tin tức";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 
 }
@@ -10,7 +10,7 @@
     <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
             <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
-            <span class="breadcrumb-item active">Danh sách tin tức : trang @CurrentPage</span>
+            <span class="breadcrumb-item active">Danh sách tin tức : </span>
         </nav>
     </div>
 </div>

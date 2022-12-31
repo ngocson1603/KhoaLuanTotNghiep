@@ -47,7 +47,7 @@
     <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Views\About\AboutUs.cshtml" />
     <None Include="Views\Checkout\Check.cshtml" />
-    <None Include="Views\Home\BlogArticle.cshtml" />
+    <None Include="Views\Blog\BlogArticle.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\News.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
@@ -881,6 +881,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Forum\" />
+    <Folder Include="wwwroot\Images\news\" />
     <Folder Include="wwwroot\php\instagram\cache\" />
   </ItemGroup>
 
