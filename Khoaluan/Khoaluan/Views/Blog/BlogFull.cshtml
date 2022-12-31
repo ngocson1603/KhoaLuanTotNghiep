@@ -1,10 +1,4 @@
-﻿@*@using PagedList.Core.Mvc
-@model PagedList.Core.IPagedList<DuAnGame.Models.TinDang>
-@{
-    ViewData["Title"] = "BlogFull";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<div class="nk-main">
+﻿<div class="nk-main">
 
     <!-- START: Breadcrumbs -->
     <div class="nk-gap-1"></div>
@@ -22,7 +16,7 @@
 
             <li><span class="fa fa-angle-right"></span></li>
 
-            <li><span>Blog FullWidth</span></li>
+            <li><span>Blog List</span></li>
 
         </ul>
     </div>
@@ -33,52 +27,196 @@
 
 
     <div class="container">
-        <!-- START: Posts FullWidth -->
-        <div class="nk-blog-fullwidth">
-            @if (Model != null && Model.Count() > 0)
-                        {
-                            foreach (var item in Model)
-                            {
-                                string url ="";
+        <div class="row vertical-gap">
+            <div class="col-lg-8">
+
+                <!-- START: Posts List -->
+                <div class="nk-blog-list">
+
+
                     <!-- START: Post -->
-                                        <div class="nk-blog-post">
-                                            <a href="@url" class="nk-post-img">
-                                                <img src="~/assets/images/@item.Thumb" alt="Smell magic in the air. Or maybe barbecue">
-                                                <span class="nk-post-comments-count">4</span>
-                                            </a>
-                                            <div class="nk-gap-2"></div>
-                                            <div class="row vertical-gap">
-                                                <div class="col-md-8 col-lg-9">
-                                                    <h2 class="nk-post-title h4"><a href="blog-article.html">@item.Title</a></h2>
-                                                    <div class="nk-gap"></div>
-                                                    <div class="nk-post-text">
-                                                        <p>@item.Contents</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-lg-3">
-                                                    <div class="nk-post-by">
-                                                        <img src="~/assets/images/avatar-1.jpg" alt="Hitman" class="rounded-circle" width="60">
-                                                        by <a href="#">Hitman</a>
+                    <div class="nk-blog-post">
+                        <div class="row vertical-gap">
+                            <div class="col-md-5 col-lg-6">
+                                <a href="blog-article.html" class="nk-post-img">
+                                    <img src="~/assets/images/post-1-mid.jpg"
+                                         alt="Smell magic in the air. Or maybe barbecue">
+                                    <span class="nk-post-comments-count">4</span>
+                                </a>
+                            </div>
+                            <div class="col-md-7 col-lg-6">
+                                <h2 class="nk-post-title h4">
+                                    <a href="blog-article.html">
+                                        Smell magic in the air. Or
+                                        maybe barbecue
+                                    </a>
+                                </h2>
 
-                                                        <br> in Sep 18, 2018
-                                                        <br> 4 comments
-                                                    </div>
-                                                    <div class="nk-gap-3"></div>
-                                                    <div class="text-right">
-                                                        <a href="blog-article.html" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Xem them</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> <!-- END: Post -->
-                                                        }
-            }
+                                <div class="nk-post-text">
+                                    <p>
+                                        With what mingled joy and sorrow do I take up the pen to write to my dearest
+                                        friend! Oh, what a change between to-day and yesterday! Now I am friendless
+                                        and alone...
+                                    </p>
+                                </div>
 
-            <!-- START: Post -->
-            <!-- END: Pagination -->
+                                <div class="nk-post-by">
+                                    <img src="~/assets/images/avatar-1.jpg" alt="Hitman" class="rounded-circle"
+                                         width="35"> by <a href="#">Hitman</a> in Sep 18, 2018
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END: Post -->
+                    <!-- START: Pagination -->
+                    <div class="nk-pagination nk-pagination-center">
+                        <a href="#" class="nk-pagination-prev">
+                            <span class="ion-ios-arrow-back"></span>
+                        </a>
+                        <nav>
+                            <a class="nk-pagination-current" href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <span>...</span>
+                            <a href="#">14</a>
+                        </nav>
+                        <a href="#" class="nk-pagination-next">
+                            <span class="ion-ios-arrow-forward"></span>
+                        </a>
+                    </div>
+                    <!-- END: Pagination -->
+                </div>
+                <!-- END: Posts List -->
+
+            </div>
+            <div class="col-lg-4">
+                <!--
+                    START: Sidebar
+
+                    Additional Classes:
+                        .nk-sidebar-left
+                        .nk-sidebar-right
+                        .nk-sidebar-sticky
+                -->
+                <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
+                    <div class="nk-widget">
+                        <div class="nk-widget-content">
+                            <form action="#" class="nk-form nk-form-style-1" novalidate="novalidate">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Type something...">
+                                    <button class="nk-btn nk-btn-color-main-1">
+                                        <span class="ion-search"></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">We</span> Are Social</span></h4>
+                        <div class="nk-widget-content">
+                            <!--
+                                Social Links 3
+
+                                Additional Classes:
+                                    .nk-social-links-cols-5
+                                    .nk-social-links-cols-4
+                                    .nk-social-links-cols-3
+                                    .nk-social-links-cols-2
+                            -->
+                            <ul class="nk-social-links-3 nk-social-links-cols-4">
+                                <li>
+                                    <a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-instagram" href="#">
+                                        <span class="fab fa-instagram"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-google-plus" href="#">
+                                        <span class="fab fa-google-plus"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-youtube" href="#"><span class="fab fa-youtube"></span></a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-twitter" href="#" target="_blank">
+                                        <span class="fab fa-twitter"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-pinterest" href="#">
+                                        <span class="fab fa-pinterest-p"></span>
+                                    </a>
+                                </li>
+                                <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">Latest</span> Video</span></h4>
+                        <div class="nk-widget-content">
+                            <div class="nk-plain-video" data-video="https://www.youtube.com/watch?v=vXy8UBazlO8">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">Top 3</span> Recent</span></h4>
+                        <div class="nk-widget-content">
+
+                            <div class="nk-widget-post">
+                                <a href="blog-article.html" class="nk-post-image">
+                                    <img src="~/assets/images/post-1-sm.jpg" alt="">
+                                </a>
+                                <h3 class="nk-post-title">
+                                    <a href="blog-article.html">
+                                        Smell magic in the air. Or
+                                        maybe barbecue
+                                    </a>
+                                </h3>
+                                <div class="nk-post-date"><span class="fa fa-calendar"></span> Sep 18, 2018</div>
+                            </div>
+
+                            <div class="nk-widget-post">
+                                <a href="blog-article.html" class="nk-post-image">
+                                    <img src="~/assets/images/post-2-sm.jpg" alt="">
+                                </a>
+                                <h3 class="nk-post-title">
+                                    <a href="blog-article.html">
+                                        Grab your sword and fight the
+                                        Horde
+                                    </a>
+                                </h3>
+                                <div class="nk-post-date"><span class="fa fa-calendar"></span> Sep 5, 2018</div>
+                            </div>
+
+                            <div class="nk-widget-post">
+                                <a href="blog-article.html" class="nk-post-image">
+                                    <img src="~/assets/images/post-3-sm.jpg" alt="">
+                                </a>
+                                <h3 class="nk-post-title">
+                                    <a href="blog-article.html">
+                                        We found a witch! May we burn
+                                        her?
+                                    </a>
+                                </h3>
+                                <div class="nk-post-date"><span class="fa fa-calendar"></span> Aug 27, 2018</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </aside>
+                <!-- END: Sidebar -->
+            </div>
         </div>
-        <!-- END: Posts FullWidth -->
     </div>
 
+    <div class="nk-gap-2"></div>
 
 </div>
-*@

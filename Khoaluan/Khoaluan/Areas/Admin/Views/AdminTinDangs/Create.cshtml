@@ -47,9 +47,10 @@
 
 
                     <div class="form-group">
-                        <label class="font-weight-semibold" for="productBrand">Ảnh đại diện</label>
-                        <input name="fThumb" type="file" class="form-control-file" asp-for="Image" />
-                        <span asp-validation-for="Image" class="text-danger"></span>
+                        <label class="font-weight-semibold" for="productBrand">Image</label>
+                        <input id="txtFiles" name="fThumb" type="file" class="form-control-file" asp-for="@Model.Image" />
+                        <span asp-validation-for="@Model.Image" class="text-danger"></span>
+                        <img id="imgViews"/>
                     </div>
                     <div class="row">
                         <div class="form-group d-flex align-items-center">
@@ -90,6 +91,10 @@
                 focus: true
             });
         });
+        $("#txtFiles").change(function (event) {
+            var files = event.target.files;
+            $("#imgViews").attr("src", window.URL.createObjectURL(files[0]));
+        })
     </script>
 }
 

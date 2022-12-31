@@ -179,9 +179,9 @@ namespace Khoaluan.Helpper
             try
             {
                 if (newname == null) newname = file.FileName;
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", sDirectory);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", sDirectory);
                 CreateIfMissing(path);
-                string pathFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", sDirectory, newname);
+                string pathFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", sDirectory, newname);
                 var supportedTypes = new[] { "jpg", "jpeg", "png", "gif" };
                 var fileExt = System.IO.Path.GetExtension(file.FileName).Substring(1);
                 if (!supportedTypes.Contains(fileExt.ToLower())) /// Khác các file định nghĩa

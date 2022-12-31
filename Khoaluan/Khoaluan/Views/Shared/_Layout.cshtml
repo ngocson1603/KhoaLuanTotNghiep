@@ -44,7 +44,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           crossorigin="anonymous">
     <style>
-        #myBtn {
+        #myBtnTop {
             display: none;
             position: fixed;
             bottom: 10px;
@@ -60,7 +60,7 @@
             border-radius: 20px;
         }
 
-            #myBtn:hover {
+            #myBtnTop:hover {
                 background-color: #555;
             }
     </style>
@@ -74,7 +74,7 @@
     Khoaluan.ModelViews.RegisterViewModel registerViewModel = new Khoaluan.ModelViews.RegisterViewModel();
 }
 <body>
-    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
+    <button onclick="topFunction()" id="myBtnTop" title="Go to top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
     <!-- Begin Main Header Area -->
     @await Html.PartialAsync("_headerPartial.cshtml")
     <!-- Main Header Area End Here -->

@@ -11,17 +11,21 @@ namespace Khoaluan.Controllers
 {
     public class BlogController : Controller
     {
-        //private readonly dbMarketsContext _context;
-        //public BlogController(dbMarketsContext context)
-        //{
-        //    _context = context;
-        //}
+        private readonly IUnitOfWork _unitOfWork;
 
-        public IActionResult Index()
+        public BlogController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+        public IActionResult BlogFull()
         {
             return View();
         }
-
+        public ActionResult BlogArticle()
+        {
+            return View();
+        }
         //public IActionResult BlogFull(int? page)
         //{
         //    var pageNumber = page == null || page <= 0 ? 1 : page.Value;

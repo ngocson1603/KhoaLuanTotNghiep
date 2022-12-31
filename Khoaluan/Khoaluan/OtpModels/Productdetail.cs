@@ -90,4 +90,8 @@ namespace Khoaluan.OtpModels
     {
         public List<Users> findfriend { get; set; }
     }
+    public class ListBlog
+    {
+        public List<Blog> listBlogs { get; set; }
+    }
 }

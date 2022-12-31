@@ -12,6 +12,7 @@ using PagedList.Core;
 using Khoaluan.Helpper;
 using Khoaluan.Models;
 using Khoaluan;
+using Microsoft.AspNetCore.Http;
 
 namespace WebShop.Areas.Admin.Controllers
 {
@@ -62,23 +63,26 @@ namespace WebShop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PostId,Title,Scontents,Contents,Image,Published,Alias,CreatedDate,Author,AccountId,Tags,CatId,IsHot,IsNewfeed,MetaKey,MetaDesc,Views")] Blog blog, Microsoft.AspNetCore.Http.IFormFile fImage)
+        public async Task<IActionResult> Create([Bind("Id,Title,Ad_Username,Name,Image,Published,Alias,Contents,CreatedDate")] Blog blog, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (ModelState.IsValid)
             {
                 //Xu ly Image
                 try
                 {
-                    if (fImage != null)
+                    if (fThumb != null)
                     {
-                        string extension = Path.GetExtension(fImage.FileName);
+                        string extension = Path.GetExtension(fThumb.FileName);
                         string imageName = Utilities.SEOUrl(blog.Title) + extension;
-                        blog.Image = await Utilities.UploadFileBlog(fImage, @"news", imageName.ToLower());
+                        blog.Image = await Utilities.UploadFileBlog(fThumb, @"news", imageName.ToLower());
                     }
                     if (string.IsNullOrEmpty(blog.Image)) blog.Image = "default.jpg";
+                    var taikhoanID = HttpContext.Session.GetString("AccountId");
+                    var name = _unitOfWork.AdminRepository.GetAll().Where(t=>t.TaiKhoan == taikhoanID).FirstOrDefault();
                     blog.Alias = Utilities.SEOUrl(blog.Title);
                     blog.CreatedDate = DateTime.Now;
-
+                    blog.Ad_Username = taikhoanID;
+                    blog.Name = name.HoTen;
 
                     _unitOfWork.BlogRepository.Create(blog);
                     _unitOfWork.SaveChange();
@@ -115,7 +119,7 @@ namespace WebShop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PostId,Title,Scontents,Contents,Image,Published,Alias,CreatedDate,Author,AccountId,Tags,CatId,IsHot,IsNewfeed,MetaKey,MetaDesc,Views")] Blog Blog, Microsoft.AspNetCore.Http.IFormFile fImage)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Ad_Username,Name,Image,Published,Alias,Contents,CreatedDate")] Blog Blog, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (id != Blog.Id)
             {
@@ -127,11 +131,11 @@ namespace WebShop.Areas.Admin.Controllers
                 try
                 {
                     //Xu ly Image
-                    if (fImage != null)
+                    if (fThumb != null)
                     {
-                        string extension = Path.GetExtension(fImage.FileName);
+                        string extension = Path.GetExtension(fThumb.FileName);
                         string imageName = Utilities.SEOUrl(Blog.Title) + extension;
-                        Blog.Image = await Utilities.UploadFileBlog(fImage, @"news", imageName.ToLower());
+                        Blog.Image = await Utilities.UploadFileBlog(fThumb, @"news", imageName.ToLower());
                     }
                     if (string.IsNullOrEmpty(Blog.Image)) Blog.Image = "default.jpg";
                     Blog.Alias = Utilities.SEOUrl(Blog.Title);
