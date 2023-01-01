@@ -77,12 +77,18 @@ namespace WebShop.Areas.Admin.Controllers
                         blog.Image = await Utilities.UploadFileBlog(fThumb, @"news", imageName.ToLower());
                     }
                     if (string.IsNullOrEmpty(blog.Image)) blog.Image = "default.jpg";
+                    string comm = blog.Contents;
+                    if (comm.Contains("img") && comm.Contains("style"))
+                    {
+                        comm = Utilities.SetSizeImage(comm);
+                    }
                     var taikhoanID = HttpContext.Session.GetString("AccountId");
                     var name = _unitOfWork.AdminRepository.GetAll().Where(t=>t.TaiKhoan == taikhoanID).FirstOrDefault();
                     blog.Alias = Utilities.SEOUrl(blog.Title);
                     blog.CreatedDate = DateTime.Now;
                     blog.Ad_Username = taikhoanID;
                     blog.Name = name.HoTen;
+                    blog.Contents = comm;
 
                     _unitOfWork.BlogRepository.Create(blog);
                     _unitOfWork.SaveChange();
@@ -119,9 +125,9 @@ namespace WebShop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Ad_Username,Name,Image,Published,Alias,Contents,CreatedDate")] Blog Blog, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Ad_Username,Name,Image,Published,Alias,Contents,CreatedDate")] Blog blog, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
-            if (id != Blog.Id)
+            if (id != blog.Id)
             {
                 return NotFound();
             }
@@ -134,19 +140,25 @@ namespace WebShop.Areas.Admin.Controllers
                     if (fThumb != null)
                     {
                         string extension = Path.GetExtension(fThumb.FileName);
-                        string imageName = Utilities.SEOUrl(Blog.Title) + extension;
-                        Blog.Image = await Utilities.UploadFileBlog(fThumb, @"news", imageName.ToLower());
+                        string imageName = Utilities.SEOUrl(blog.Title) + extension;
+                        blog.Image = await Utilities.UploadFileBlog(fThumb, @"news", imageName.ToLower());
                     }
-                    if (string.IsNullOrEmpty(Blog.Image)) Blog.Image = "default.jpg";
-                    Blog.Alias = Utilities.SEOUrl(Blog.Title);
+                    if (string.IsNullOrEmpty(blog.Image)) blog.Image = "default.jpg";
+                    blog.Alias = Utilities.SEOUrl(blog.Title);
+                    string comm = blog.Contents;
+                    if (comm.Contains("img") && comm.Contains("style"))
+                    {
+                        comm = Utilities.SetSizeImage(comm);
+                    }
+                    blog.Contents = comm;
 
-                    _unitOfWork.BlogRepository.Update(Blog);
+                    _unitOfWork.BlogRepository.Update(blog);
                     _unitOfWork.SaveChange();
                     _notyfService.Success("Update Success");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TinDangExists(Blog.Id))
+                    if (!TinDangExists(blog.Id))
                     {
                         return NotFound();
                     }
@@ -157,7 +169,7 @@ namespace WebShop.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(Blog);
+            return View(blog);
         }
 
         // GET: Admin/AdminTinDangs/Delete/5
