@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="~/assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           crossorigin="anonymous">
-    <style>
+    @*<style>
         #myBtnTop {
             display: none;
             position: fixed;
@@ -63,7 +63,7 @@
             #myBtnTop:hover {
                 background-color: #555;
             }
-    </style>
+    </style>*@
     <!-- END: Styles -->
     <!-- jQuery -->
     <script src="~/assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -74,7 +74,7 @@
     Khoaluan.ModelViews.RegisterViewModel registerViewModel = new Khoaluan.ModelViews.RegisterViewModel();
 }
 <body>
-    <button onclick="topFunction()" id="myBtnTop" title="Go to top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
+    @*<button onclick="topFunction()" id="myBtnTop" title="Go to top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>*@
     <!-- Begin Main Header Area -->
     @await Html.PartialAsync("_headerPartial.cshtml")
     <!-- Main Header Area End Here -->
@@ -205,7 +205,7 @@
     <script src="~/assets/js/goodgames-init.js"></script>
     <script src="~/assets/js/main.js"></script>
     @*scroll*@
-    <script>
+    @*<script>
         // Get the button
         let mybutton = document.getElementById("myBtn");
 
@@ -224,7 +224,7 @@
         function topFunction() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    </script>
+    </script>*@
     @await Component.InvokeAsync("Notyf")
     @await RenderSectionAsync("Scripts", required: false)
     <!-- END: Scripts -->
