@@ -196,25 +196,6 @@ namespace Khoaluan.Controllers
         //    return RedirectToAction("DetailForum", new { id = postId });
         //}
 
-        public string SetSizeImage(string source)
-        {
-            string final = source;
-            IEnumerable<int> indexes = source.AllIndexesOf("width: ");
-            foreach (var index in indexes)
-            {
-                int start, end;
-                start = index + 6;
-                end = source.IndexOf("px", start);
-                int imgWidth = int.Parse(source.Substring(start, end - start));
-
-                if (imgWidth > 840)
-                    final = Regex.Replace(final, $"style=\"width: {imgWidth}px;\"", "style=\"width: 840px;\"");
-            }
-
-            return final;
-        }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Comment(CommentViewModel comment)
@@ -225,7 +206,7 @@ namespace Khoaluan.Controllers
 
             if (comm.Contains("img") && comm.Contains("style"))
             {
-                comm = SetSizeImage(comm);
+                comm = Helpper.Utilities.SetSizeImage(comm);
             }
 
             try
