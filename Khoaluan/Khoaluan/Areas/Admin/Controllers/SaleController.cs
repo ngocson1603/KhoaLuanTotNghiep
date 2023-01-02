@@ -129,7 +129,7 @@ namespace Khoaluan.Areas.Admin.Controllers
         // GET: SaleController/Edit/5
         public ActionResult Edit(int id)
         {
-            var ls = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t=>t.Price > 0 && t.Discount == 0 && t.EndDate < DateTime.Now).ToList();
+            var ls = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t=>t.Price > 0 && t.Discount == 0 || t.EndDate < DateTime.Now).ToList();
             ViewBag.SaleId = id.ToString();
             return View(ls);
         }
