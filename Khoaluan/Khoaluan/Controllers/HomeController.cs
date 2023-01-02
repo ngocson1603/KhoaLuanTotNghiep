@@ -23,9 +23,11 @@ namespace Khoaluan.Controllers
         public IActionResult Index()
         {
             var blog = _unitOfWork.BlogRepository.GetAll().ToList();
+            var product = _unitOfWork.SaleProductRepository.ProductNotSale().OrderByDescending(t => t.Price).Take(4).ToList();
             ListBlog blogls = new ListBlog()
             {
-                listBlogs = blog
+                listBlogs = blog,
+                listProducts = product
             };
             return View(blogls);
         }

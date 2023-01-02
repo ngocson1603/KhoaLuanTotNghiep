@@ -93,5 +93,6 @@ namespace Khoaluan.OtpModels
     public class ListBlog
     {
         public List<Blog> listBlogs { get; set; }
+        public List<SaleModelView> listProducts { get; set; }
     }
 }

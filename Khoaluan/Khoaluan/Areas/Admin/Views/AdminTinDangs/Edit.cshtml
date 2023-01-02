@@ -21,6 +21,7 @@
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="Image" />
     <input type="hidden" asp-for="CreatedDate" />
+    <input type="hidden" asp-for="Name" />
     <div class="page-header no-gutters has-tab">
         <div class="d-md-flex m-b-15 align-items-center justify-content-between">
             <div class="m-b-15">
@@ -50,9 +51,10 @@
 
 
                     <div class="form-group">
-                        <label class="font-weight-semibold" for="productBrand">Ảnh đại diện</label>
-                        <input name="fThumb" type="file" class="form-control-file" asp-for="Image" />
-                        <span asp-validation-for="Image" class="text-danger"></span>
+                        <label class="font-weight-semibold" for="productBrand">Image</label>
+                        <input id="txtFiles" name="fThumb" type="file" class="form-control-file" asp-for="@Model.Image" />
+                        <span asp-validation-for="@Model.Image" class="text-danger"></span>
+                        <img id="imgViews" />
                     </div>
                     <div class="row">
                         <div class="form-group d-flex align-items-center">
@@ -93,5 +95,22 @@
                 focus: true
             });
         });
+    </script>
+    <script>
+
+        jQuery(document).ready(function () {
+            $('.summernote').summernote({
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+                styleTags: ['p', 'h1', 'h2', 'h3', 'h4', 'h5'],
+                height: 200,
+                minHeight: null,
+                maxHeight: null,
+                focus: true
+            });
+        });
+        $("#txtFiles").change(function (event) {
+            var files = event.target.files;
+            $("#imgViews").attr("src", window.URL.createObjectURL(files[0]));
+        })
     </script>
 }

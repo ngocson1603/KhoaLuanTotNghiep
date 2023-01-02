@@ -58,10 +58,10 @@ namespace Khoaluan.Controllers
         public IActionResult FindProducts(int firstprice, int secondprice)
         {
             var name = HttpContext.Session.GetString("NamePro");
-            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price >= firstprice && t.Price <= secondprice).ToList();
+            var ls = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Price >= firstprice && t.Price <= secondprice).ToList();
             if (name != "all")
             {
-            ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price >= firstprice && t.Price <= secondprice && t.Name.ToLower().Contains(name.Trim().ToLower())).ToList();
+            ls = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Price >= firstprice && t.Price <= secondprice && t.ProductName.ToLower().Contains(name.Trim().ToLower())).ToList();
             }    
             if (ls == null)
             {
@@ -168,15 +168,15 @@ namespace Khoaluan.Controllers
         public IActionResult FindProductsCate(string DevId,string CatId)
         {
             var name = HttpContext.Session.GetString("NamePro");
-            List<Productdetail> ls = new List<Productdetail>();
+            List<SaleModelView> ls = new List<SaleModelView>();
             if (DevId!= null)
             {
-                ls = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName == DevId).ToList();
+                ls = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.DevName == DevId).ToList();
             }
-            else if(CatId != null)
-            {
-                ls = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Categories.Contains(CatId)).ToList();
-            }
+            //else if(CatId != null)
+            //{
+            //    ls = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Categories.Contains(CatId)).ToList();
+            //}
             if (ls == null)
             {
                 return PartialView("ListProductsSearchCatDevPartials", null);

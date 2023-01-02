@@ -1,6 +1,8 @@
 ﻿@model Khoaluan.OtpModels.ListBlog
 @{
     ViewData["Title"] = "Home Page";
+    string gia = "free";
+    string icon = "$";
 }
 
 <div class="nk-image-slider" data-autoplay="150000">
@@ -146,258 +148,48 @@
 <!-- START: Latest News -->
 <div class="nk-gap-2"></div>
 <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Latest</span> News</span></h3>
-<div class="nk-gap"></div>
-
-<div class="nk-news-box">
-    <div class="nk-news-box-list">
-        <div class="nano">
-            <div class="nano-content">
-
-                @foreach (var item in Model.listBlogs.Take(1))
-                {
-                    string url = $"/tin-tuc/{item.Alias}-{item.Id}.html";
-                    <div class="nk-news-box-item nk-news-box-item-active">
-                        <div class="nk-news-box-item-img">
-                            <img src="~/Images/news/@item.Image"
-                                 alt="@item.Alias">
-                        </div>
-                        <img src="~/Images/news/@item.Image" alt="@item.Alias"
-                             class="nk-news-box-item-full-img">
-                        <h3 class="line-clamp-onerow nk-news-box-item-title">
-                            @Html.Raw(item.Contents)
-                        </h3>
-
-                        <span class="nk-news-box-item-categories">
-                            <span class="bg-main-4">MMO</span>
-                        </span>
-
-                        <div class="nk-news-box-item-text">
-                            <p>
-                                <div class="line-clamp">
-                                    @Html.Raw(item.Contents)
-                                </div>
-                            </p>
-                        </div>
-                        <a href="@url" class="nk-news-box-item-url">Read More</a>
-                        <div class="nk-news-box-item-date">
-                            <span class="fa fa-calendar"></span> @item.CreatedDate
-                        </div>
-                    </div>
-                }
-
-
-                @foreach (var item in Model.listBlogs.Skip(1))
-                {
-                    <div class="nk-news-box-item">
-                        <div class="nk-news-box-item-img">
-                            <img src="~/Images/news/@item.Image"
-                                 alt="@item.Alias">
-                        </div>
-                        <img src="~/Images/news/@item.Image" alt="@item.Alias"
-                             class="nk-news-box-item-full-img">
-                        <h3 class="line-clamp-onerow nk-news-box-item-title">
-                            @Html.Raw(item.Contents)
-                        </h3>
-                        <div class="nk-news-box-item-text">
-                            <p>
-                                <div class="line-clamp">
-                                    @Html.Raw(item.Contents)
-                                </div>
-                            </p>
-                        </div>
-                        <a href="blog-article.html" class="nk-news-box-item-url">Read More</a>
-                        <div class="nk-news-box-item-date">
-                            <span class="fa fa-calendar"></span> @item.CreatedDate
-                        </div>
-                    </div>
-                }
-
-
-            </div>
-        </div>
-    </div>
-    <div class="nk-news-box-each-info">
-        <div class="nano">
-            <div class="nano-content">
-                <!-- There will be inserted info about selected news-->
-                <div class="nk-news-box-item-image">
-                    <img src="~/assets/images/post-1.jpg" alt="">
-                </div>
-                <h3 class="nk-news-box-item-title">Smell magic in the air. Or maybe barbecue</h3>
-                <div class="nk-news-box-item-text">
-                    <p>
-                        With what mingled joy and sorrow do I take up the pen to write to my dearest friend!
-                        Oh, what a change between to-day and yesterday! Now I am friendless and alone...
-                    </p>
-                </div>
-                <a href="blog-article.html" class="nk-news-box-item-more">Read More</a>
-                <div class="nk-news-box-item-date">
-                    <span class="fa fa-calendar"></span> Sep 18, 2018
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="nk-gap-2"></div>
 <div class="nk-blog-grid">
     <div class="row">
+        @if (Model.listBlogs != null || Model.listBlogs.Count() > 0)
+        {
+            foreach (var item in Model.listBlogs.Take(4))
+            {
+                string url = $"/tin-tuc/{item.Alias}-{item.Id}.html";
+                <div class="col-md-6 col-lg-3">
+                    <!-- START: Post -->
+                    <div class="nk-blog-post">
+                        <a href="@url" class="nk-post-img">
+                            <img src="~/Images/news/@item.Image" alt="@item.Title">
+                            <span class="nk-post-comments-count">13</span>
 
+                            <span class="nk-post-categories">
+                                <span class="bg-main-5">Indie</span>
+                            </span>
 
-        <div class="col-md-6 col-lg-3">
-            <!-- START: Post -->
-            <div class="nk-blog-post">
-                <a href="blog-article.html" class="nk-post-img">
-                    <img src="~/assets/images/post-5-mid.jpg" alt="He made his passenger captain of one">
-                    <span class="nk-post-comments-count">13</span>
-
-                    <span class="nk-post-categories">
-                        <span class="bg-main-5">Indie</span>
-                    </span>
-
-                </a>
-                <div class="nk-gap"></div>
-                <h2 class="nk-post-title h4">
-                    <a href="blog-article.html">
-                        He made his passenger captain of
-                        one
-                    </a>
-                </h2>
-                <div class="nk-post-text">
-                    <p>
-                        Just then her head struck against the roof of the hall: in fact she was now more than
-                        nine feet high, and she at once took up the little golden key and hurried off to the
-                        garden door...
-                    </p>
+                        </a>
+                        <div class="nk-gap"></div>
+                        <h2 class="nk-post-title h4">
+                            <a href="@url">
+                                @item.Title
+                            </a>
+                        </h2>
+                        <div class="nk-gap"></div>
+                        <a href="@url"
+                           class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
+                            Read
+                            More
+                        </a>
+                        <div class="nk-post-date float-right">
+                            <span class="fa fa-calendar"></span> @item.CreatedDate
+                        </div>
+                    </div>
+                    <!-- END: Post -->
                 </div>
-                <div class="nk-gap"></div>
-                <a href="blog-article.html"
-                   class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
-                    Read
-                    More
-                </a>
-                <div class="nk-post-date float-right">
-                    <span class="fa fa-calendar"></span> Jul 23, 2018
-                </div>
-            </div>
-            <!-- END: Post -->
-        </div>
+            }
+        }
 
-
-        <div class="col-md-6 col-lg-3">
-            <!-- START: Post -->
-            <div class="nk-blog-post">
-                <a href="blog-article.html" class="nk-post-img">
-                    <img src="~/assets/images/post-6-mid.jpg"
-                         alt="At first, for some time, I was not able to answer">
-                    <span class="nk-post-comments-count">0</span>
-
-                    <span class="nk-post-categories">
-                        <span class="bg-main-5">Racing</span>
-                    </span>
-
-                </a>
-                <div class="nk-gap"></div>
-                <h2 class="nk-post-title h4">
-                    <a href="blog-article.html">
-                        At first, for some time, I was not
-                        able to answer
-                    </a>
-                </h2>
-                <div class="nk-post-text">
-                    <p>
-                        This little wandering journey, without settled place of abode, had been so unpleasant
-                        to me, that my own house, as I called it to myself, was a perfect settlement to me
-                        compared to that...
-                    </p>
-                </div>
-                <div class="nk-gap"></div>
-                <a href="blog-article.html"
-                   class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
-                    Read
-                    More
-                </a>
-                <div class="nk-post-date float-right"><span class="fa fa-calendar"></span> Jul 3, 2018</div>
-            </div>
-            <!-- END: Post -->
-        </div>
-
-
-        <div class="col-md-6 col-lg-3">
-            <!-- START: Post -->
-            <div class="nk-blog-post">
-                <a href="blog-article.html" class="nk-post-img">
-                    <img src="~/assets/images/post-7-mid.jpg"
-                         alt="At length one of them called out in a clear">
-                    <span class="nk-post-comments-count">0</span>
-
-                    <span class="nk-post-categories">
-                        <span class="bg-main-6">MOBA</span>
-                    </span>
-
-                </a>
-                <div class="nk-gap"></div>
-                <h2 class="nk-post-title h4">
-                    <a href="blog-article.html">
-                        At length one of them called out in
-                        a clear
-                    </a>
-                </h2>
-                <div class="nk-post-text">
-                    <p>
-                        TJust then her head struck against the roof of the hall: in fact she was now more
-                        than nine feet high, and she at once took up the little golden key and hurried off
-                        to the garden door...
-                    </p>
-                </div>
-                <div class="nk-gap"></div>
-                <a href="blog-article.html"
-                   class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
-                    Read
-                    More
-                </a>
-                <div class="nk-post-date float-right"><span class="fa fa-calendar"></span> Jul 3, 2018</div>
-            </div>
-            <!-- END: Post -->
-        </div>
-
-
-        <div class="col-md-6 col-lg-3">
-            <!-- START: Post -->
-            <div class="nk-blog-post">
-                <a href="blog-article.html" class="nk-post-img">
-                    <img src="~/assets/images/post-8-mid.jpg" alt="For good, too though, in consequence">
-                    <span class="nk-post-comments-count">0</span>
-
-                    <span class="nk-post-categories">
-                        <span class="bg-main-2">Adventure</span>
-                    </span>
-
-                </a>
-                <div class="nk-gap"></div>
-                <h2 class="nk-post-title h4">
-                    <a href="blog-article.html">
-                        For good, too though, in
-                        consequence
-                    </a>
-                </h2>
-                <div class="nk-post-text">
-                    <p>
-                        This little wandering journey, without settled place of abode, had been so unpleasant
-                        to me, that my own house, as I called it to myself, was a perfect settlement to me
-                        compared to that...
-                    </p>
-                </div>
-                <div class="nk-gap"></div>
-                <a href="blog-article.html"
-                   class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
-                    Read
-                    More
-                </a>
-                <div class="nk-post-date float-right"><span class="fa fa-calendar"></span> Jul 3, 2018</div>
-            </div>
-            <!-- END: Post -->
-        </div>
 
     </div>
 </div>
@@ -412,42 +204,40 @@
         <div class="nk-gap"></div>
         <div class="nk-blog-grid">
             <div class="row">
-                <div class="col-md-6">
-                    <!-- START: Post -->
-                    <div class="nk-blog-post">
-                        <a href="blog-article.html" class="nk-post-img">
-                            <img src="~/assets/images/post-5-mid.jpg"
-                                 alt="He made his passenger captain of one">
-                            <span class="nk-post-comments-count">13</span>
-                        </a>
-                        <div class="nk-gap"></div>
-                        <h2 class="nk-post-title h4">
-                            <a href="blog-article.html">
-                                He made his passenger
-                                captain of one
-                            </a>
-                        </h2>
-                        <div class="nk-post-by">
-                            <img src="~/assets/images/avatar-3.jpg" alt="Wolfenstein" class="rounded-circle"
-                                 width="35"> by <a href="#">Wolfenstein</a> in Jul 23, 2018
-                        </div>
-                        <div class="nk-gap"></div>
-                        <div class="nk-post-text">
-                            <p>
-                                Just then her head struck against the roof of the hall: in fact she was now
-                                more than nine feet high, and she at once took up the little golden key and
-                                hurried off to the garden door...
-                            </p>
-                        </div>
-                        <div class="nk-gap"></div>
-                        <a href="blog-article.html"
-                           class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
-                            Read
-                            More
-                        </a>
-                    </div>
-                    <!-- END: Post -->
-                </div>
+                @if (Model.listBlogs != null || Model.listBlogs.Count() > 0)
+                {
+                    foreach (var item in Model.listBlogs.OrderByDescending(t => t.CreatedDate).Take(2))
+                    {
+                        string url = $"/tin-tuc/{item.Alias}-{item.Id}.html";
+                        <div class="col-md-6">
+                            <!-- START: Post -->
+                            <div class="nk-blog-post">
+                                <a href="@url" class="nk-post-img">
+                                    <img src="~/Images/news/@item.Image"
+                                         alt="@item.Title">
+                                    <span class="nk-post-comments-count">13</span>
+                                </a>
+                                <div class="nk-gap"></div>
+                                <h2 class="nk-post-title h4">
+                                    <a href="@url">
+                                        @item.Title
+                                    </a>
+                                </h2>
+                                <div class="nk-post-by">
+                                    <img src="~/assets/images/avatar-3.jpg" alt="Wolfenstein" class="rounded-circle"
+                                         width="35"> by <a href="#">@item.Name</a> @item.CreatedDate
+                                    </div>
+                                    <div class="nk-gap"></div>
+                                    <a href="@url"
+                                       class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
+                                        Read
+                                        More
+                                    </a>
+                                </div>
+                                <!-- END: Post -->
+                            </div>
+                        }
+                    }
             </div>
         </div>
         <!-- END: Latest Posts -->
@@ -457,115 +247,51 @@
         <div class="nk-gap"></div>
         <div class="row vertical-gap">
 
-
-            <div class="col-md-6">
-                <div class="nk-product-cat">
-                    <a class="nk-product-image" href="store-product.html">
-                        <img src="~/assets/images/product-11-xs.jpg" alt="She gave my mother">
-                    </a>
-                    <div class="nk-product-cont">
-                        <h3 class="nk-product-title h5">
-                            <a href="store-product.html">She gave my mother</a>
-                        </h3>
-                        <div class="nk-gap-1"></div>
-                        <div class="nk-product-rating" data-rating="3">
-                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i>
-                        </div>
-                        <div class="nk-gap-1"></div>
-                        <div class="nk-product-price">€ 14.00</div>
-                        <div class="nk-gap-1"></div>
-                        <a href="#"
-                           class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
-                            Add
-                            to Cart
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-md-6">
-                <div class="nk-product-cat">
-                    <a class="nk-product-image" href="store-product.html">
-                        <img src="~/assets/images/product-12-xs.jpg" alt="A hundred thousand">
-                    </a>
-                    <div class="nk-product-cont">
-                        <h3 class="nk-product-title h5">
-                            <a href="store-product.html">A hundred thousand</a>
-                        </h3>
-                        <div class="nk-gap-1"></div>
-                        <div class="nk-product-rating" data-rating="4.5">
-                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i>
-                        </div>
-                        <div class="nk-gap-1"></div>
-                        <div class="nk-product-price">€ 20.00</div>
-                        <div class="nk-gap-1"></div>
-                        <a href="#"
-                           class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
-                            Add
-                            to Cart
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-md-6">
-                <div class="nk-product-cat">
-                    <a class="nk-product-image" href="store-product.html">
-                        <img src="~/assets/images/product-13-xs.jpg" alt="So saying he unbuckled">
-                    </a>
-                    <div class="nk-product-cont">
-                        <h3 class="nk-product-title h5">
-                            <a href="store-product.html">
-                                So saying he
-                                unbuckled
+            @if (Model.listProducts != null || Model.listProducts.Count() > 0)
+            {
+                foreach (var item in Model.listProducts)
+                {
+                    string url = $"/Product/HomePage/{item.ProductId}.html";
+                    <div class="col-md-6">
+                        <div class="nk-product-cat">
+                            <a class="nk-product-image" href="@url">
+                                <img src="~/Images/@item.Image" alt="@item.ProductName">
                             </a>
-                        </h3>
-                        <div class="nk-gap-1"></div>
-                        <div class="nk-product-rating" data-rating="5">
-                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                            <div class="nk-product-cont">
+                                <h3 class="nk-product-title h5">
+                                    <a href="@url">@item.ProductName</a>
+                                </h3>
+                                <div class="nk-gap-1"></div>
+                                <div class="nk-product-price">
+                                    <div class="Price-Buy">
+                                        @if (item.Price == 0)
+                                        {
+                                            @gia;
+                                        }
+                                        else if (DateTime.Now < item.StartDate || DateTime.Now > item.EndDate)
+                                        {
+                                            @icon @item.Price
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                                @{
+                                                    decimal discount = @item.Price - (@item.Price * @item.Discount / 100);
+                                                }
+                                                @icon @discount <span class="badge bg-danger">-@item.Discount%</span>
+                                                @if (item.Discount > 0)
+                                                {
+                                                    <h6 style="text-decoration:line-through">@icon @item.Price</h6>
+                                                }
+                                            </p>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="nk-gap-1"></div>
-                        <div class="nk-product-price">€ 23.00</div>
-                        <div class="nk-gap-1"></div>
-                        <a href="#"
-                           class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
-                            Add
-                            to Cart
-                        </a>
                     </div>
-                </div>
-            </div>
-
-
-            <div class="col-md-6">
-                <div class="nk-product-cat">
-                    <a class="nk-product-image" href="store-product.html">
-                        <img src="~/assets/images/product-14-xs.jpg" alt="However, I have reason">
-                    </a>
-                    <div class="nk-product-cont">
-                        <h3 class="nk-product-title h5">
-                            <a href="store-product.html">
-                                However, I have
-                                reason
-                            </a>
-                        </h3>
-                        <div class="nk-gap-1"></div>
-                        <div class="nk-product-rating" data-rating="1.5">
-                            <i class="fa fa-star"></i> <i class="fas fa-star-half"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i>
-                        </div>
-                        <div class="nk-gap-1"></div>
-                        <div class="nk-product-price">€ 32.00</div>
-                        <div class="nk-gap-1"></div>
-                        <a href="#"
-                           class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
-                            Add
-                            to Cart
-                        </a>
-                    </div>
-                </div>
-            </div>
+                }
+            }
 
         </div>
         <!-- END: Best Selling -->

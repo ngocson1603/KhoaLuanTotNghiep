@@ -77,18 +77,12 @@ namespace WebShop.Areas.Admin.Controllers
                         blog.Image = await Utilities.UploadFileBlog(fThumb, @"news", imageName.ToLower());
                     }
                     if (string.IsNullOrEmpty(blog.Image)) blog.Image = "default.jpg";
-                    string comm = blog.Contents;
-                    if (comm.Contains("img") && comm.Contains("style"))
-                    {
-                        comm = Utilities.SetSizeImage(comm);
-                    }
                     var taikhoanID = HttpContext.Session.GetString("AccountId");
                     var name = _unitOfWork.AdminRepository.GetAll().Where(t=>t.TaiKhoan == taikhoanID).FirstOrDefault();
                     blog.Alias = Utilities.SEOUrl(blog.Title);
                     blog.CreatedDate = DateTime.Now;
                     blog.Ad_Username = taikhoanID;
                     blog.Name = name.HoTen;
-                    blog.Contents = comm;
 
                     _unitOfWork.BlogRepository.Create(blog);
                     _unitOfWork.SaveChange();
@@ -145,13 +139,7 @@ namespace WebShop.Areas.Admin.Controllers
                     }
                     if (string.IsNullOrEmpty(blog.Image)) blog.Image = "default.jpg";
                     blog.Alias = Utilities.SEOUrl(blog.Title);
-                    string comm = blog.Contents;
-                    if (comm.Contains("img") && comm.Contains("style"))
-                    {
-                        comm = Utilities.SetSizeImage(comm);
-                    }
-                    blog.Contents = comm;
-
+                    
                     _unitOfWork.BlogRepository.Update(blog);
                     _unitOfWork.SaveChange();
                     _notyfService.Success("Update Success");
