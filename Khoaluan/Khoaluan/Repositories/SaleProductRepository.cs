@@ -68,10 +68,12 @@ namespace Khoaluan.Repositories
 
         public List<SaleModelView> ProductNotSale()
         {
-            var query = @"select Product.Id as ProductId,Product.Name as ProductName, Discount, Status,Image,Price,Sale.Name as NameSale,StartDate,EndDate,Description from Product
+            var query = @"select Product.Id as ProductId,Product.Name as ProductName, Discount, Status,Image,Price,Sale.Name as NameSale,StartDate,EndDate,Developer.Name as DevName,Description from Product
                         left join SaleProduct on Product.Id = SaleProduct.ProductID
                         FULL OUTER JOIN Sale
-                        ON SaleProduct.SaleID = Sale.Id";
+                        ON SaleProduct.SaleID = Sale.Id
+						FULL OUTER JOIN Developer
+                        ON Developer.Id = Product.DevId";
             var result = Context.Database.GetDbConnection().Query<SaleModelView>(query);
             return result.ToList();
         }

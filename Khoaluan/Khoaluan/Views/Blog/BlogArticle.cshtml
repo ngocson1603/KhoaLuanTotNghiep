@@ -3,14 +3,14 @@
 @{
     ViewData["Title"] = "BlogArticle";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    List<Blog> Baivietlienquan = ViewBag.Baivietlienquan; }
 
 @{
 }
-<div class="nk-main">
+<div style="background-color:beige" class="nk-main">
     <div class="nk-gap-1"></div>
     <div class="container">
-        <ul class="nk-breadcrumbs">
+        <ul style="color:black" class="nk-breadcrumbs">
 
 
             <li><a href="index.html">Home</a></li>
@@ -39,7 +39,7 @@
                             <img src="~/Images/news/@Url.Content(Model.Image)" alt="@Model.Title">
                         </div>
                         <div class="nk-gap-1"></div>
-                        <h1 class="nk-post-title h4">@Model.Title</h1>
+                        <h1 style="color:black" class="nk-post-title h4">@Model.Title</h1>
                         <div class="nk-post-by">
                             <img src="~/assets/images/avatar-2.jpg" alt="Witch Murder" class="rounded-circle" width="35"> by <a href="#">@Model.Name</a> @Model.CreatedDate
 
@@ -73,59 +73,30 @@
                     <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Similar</span> Articles</span></h3>
                     <div class="nk-gap"></div>
                     <div class="row">
+                        @if (Baivietlienquan != null && Baivietlienquan.Count() > 0)
+                        {
+                            foreach (var item in Baivietlienquan)
+                            {
+                                string _url = $"/tin-tuc/{item.Alias}-{item.Id}.html";
+                                <div class="col-md-4">
+                                    <!-- START: Post -->
+                                    <div class="nk-blog-post">
+                                        <a href="@_url" class="nk-post-img">
+                                            <img src="~/Images/news/@Url.Content(Model.Image)" alt="@item.Title">
+                                            <span class="nk-post-comments-count">7</span>
 
-                        <div class="col-md-4">
-                            <!-- START: Post -->
-                            <div class="nk-blog-post">
-                                <a href="blog-article.html" class="nk-post-img">
-                                    <img src="~/assets/images/post-3-mid.jpg" alt="We found a witch! May we burn her?">
-                                    <span class="nk-post-comments-count">7</span>
+                                            <span class="nk-post-categories">
+                                                <span class="bg-main-2">Adventure</span>
+                                            </span>
 
-                                    <span class="nk-post-categories">
-                                        <span class="bg-main-2">Adventure</span>
-                                    </span>
-
-                                </a>
-                                <div class="nk-gap"></div>
-                                <h2 class="nk-post-title h4"><a href="blog-article.html">We found a witch! May we burn her?</a></h2>
-                            </div>
-                            <!-- END: Post -->
-                        </div>
-
-                        <div class="col-md-4">
-                            <!-- START: Post -->
-                            <div class="nk-blog-post">
-                                <a href="blog-article.html" class="nk-post-img">
-                                    <img src="~/assets/images/post-4-mid.jpg" alt="For good, too though, in consequence">
-                                    <span class="nk-post-comments-count">23</span>
-
-                                    <span class="nk-post-categories">
-                                        <span class="bg-main-3">Strategy</span>
-                                    </span>
-
-                                </a>
-                                <div class="nk-gap"></div>
-                                <h2 class="nk-post-title h4"><a href="blog-article.html">For good, too though, in consequence</a></h2>
-                            </div>
-                            <!-- END: Post -->
-                        </div>
-                        <div class="col-md-4">
-                            <!-- START: Post -->
-                            <div class="nk-blog-post">
-                                <a href="blog-article.html" class="nk-post-img">
-                                    <img src="~/assets/images/post-4-mid.jpg" alt="For good, too though, in consequence">
-                                    <span class="nk-post-comments-count">23</span>
-
-                                    <span class="nk-post-categories">
-                                        <span class="bg-main-3">Strategy</span>
-                                    </span>
-
-                                </a>
-                                <div class="nk-gap"></div>
-                                <h2 class="nk-post-title h4"><a href="blog-article.html">For good, too though, in consequence</a></h2>
-                            </div>
-                            <!-- END: Post -->
-                        </div>
+                                        </a>
+                                        <div class="nk-gap"></div>
+                                        <h2 class="nk-post-title h4"><a href="@_url">@item.Title</a></h2>
+                                    </div>
+                                    <!-- END: Post -->
+                                </div>
+                            }
+                        }
                     </div>
                     <!-- END: Similar Articles -->
                 </div>

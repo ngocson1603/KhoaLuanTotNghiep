@@ -43,27 +43,47 @@
     <link rel="stylesheet" href="~/assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           crossorigin="anonymous">
-    @*<style>
-        #myBtnTop {
-            display: none;
+    <style>
+        #button {
+            display: inline-block;
+            background-color: #FF9800;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            border-radius: 4px;
             position: fixed;
-            bottom: 10px;
-            right: 15px;
-            z-index: 99;
-            font-size: 18px;
-            border: none;
-            outline: none;
-            background-color: red;
-            color: white;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 20px;
+            bottom: 30px;
+            right: 30px;
+            transition: background-color .3s, opacity .5s, visibility .5s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
         }
 
-            #myBtnTop:hover {
+            #button::after {
+                content: "\f077";
+                font-family: FontAwesome;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 2em;
+                line-height: 50px;
+                color: #fff;
+            }
+
+            #button:hover {
+                cursor: pointer;
+                background-color: #333;
+            }
+
+            #button:active {
                 background-color: #555;
             }
-    </style>*@
+
+            #button.show {
+                opacity: 1;
+                visibility: visible;
+            }
+    </style>
     <!-- END: Styles -->
     <!-- jQuery -->
     <script src="~/assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -74,7 +94,7 @@
     Khoaluan.ModelViews.RegisterViewModel registerViewModel = new Khoaluan.ModelViews.RegisterViewModel();
 }
 <body>
-    @*<button onclick="topFunction()" id="myBtnTop" title="Go to top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>*@
+    <a id="button"></a>
     <!-- Begin Main Header Area -->
     @await Html.PartialAsync("_headerPartial.cshtml")
     <!-- Main Header Area End Here -->
@@ -205,26 +225,22 @@
     <script src="~/assets/js/goodgames-init.js"></script>
     <script src="~/assets/js/main.js"></script>
     @*scroll*@
-    @*<script>
-        // Get the button
-        let mybutton = document.getElementById("myBtn");
+    <script>
+        var btn = $('#button');
 
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function () { scrollFunction() };
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                mybutton.style.display = "block";
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
+                btn.addClass('show');
             } else {
-                mybutton.style.display = "none";
+                btn.removeClass('show');
             }
-        }
+        });
 
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>*@
+        btn.on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, '300');
+        });
+        </script>
     @await Component.InvokeAsync("Notyf")
     @await RenderSectionAsync("Scripts", required: false)
     <!-- END: Scripts -->
