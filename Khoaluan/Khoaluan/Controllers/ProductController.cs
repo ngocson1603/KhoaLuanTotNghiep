@@ -141,7 +141,7 @@ namespace Khoaluan.Controllers
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
                 var pageSize = 6;
                 var popular = _unitOfWork.SaleProductRepository.ProductNotSale().Take(6).ToList();
-                var pro = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals(id)).ToList();
+                var pro = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.DevName.Equals(id)).ToList();
                 if (pro.Count() <= 6)
                     ViewBag.maxPage = 1;
                 else
@@ -154,7 +154,7 @@ namespace Khoaluan.Controllers
                 var plr = pl.ToList();
                 DetailCate pwc = new DetailCate()
                 {
-                    productwithCate = plr,
+                    productwithCateDev = plr,
                     PopularGame1=popular
                 };
                 TempData.Keep("idpro");
