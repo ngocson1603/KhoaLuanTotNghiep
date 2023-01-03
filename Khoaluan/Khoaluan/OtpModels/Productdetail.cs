@@ -65,6 +65,7 @@ namespace Khoaluan.OtpModels
     public class DetailCate
     {
         public List<Productdetail> productwithCate { get; set; }
+        public List<SaleModelView> productwithCateDev { get; set; }
         public List<SaleModelView> PopularGame1 { get; set; }
     }
     public class AdminProduct

@@ -21,5 +21,6 @@ namespace Khoaluan.ModelViews
         public DateTime EndDate { get; set; }
         public string DevName { get; set; }
         public string Description { get; set; }
+        public string Overview { get; set; }
     }
 }
