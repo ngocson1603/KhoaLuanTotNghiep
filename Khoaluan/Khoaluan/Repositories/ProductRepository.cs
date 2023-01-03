@@ -19,7 +19,7 @@ namespace Khoaluan.Repositories
         }
         public List<Productdetail>getallProductwithCategory()
         {
-            var query = @"select Product.Id,Product.Name as Name,Overview,price,image as Image,Description,ReleaseDate,Category.Name Category,Developer.Name as DevName
+            var query = @"select Product.Id,Product.Name as Name,Overview,price,image as Image,Description,ReleaseDate,Category.Name Category,Developer.Name as DevName,Status
                         from Product,ProductCategory,Category,Developer
                         where Product.DevId=Developer.Id and Product.Id=ProductCategory.ProductId
                         and ProductCategory.CategoryId=Category.Id";
