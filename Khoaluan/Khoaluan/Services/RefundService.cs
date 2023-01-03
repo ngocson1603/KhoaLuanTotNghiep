@@ -47,7 +47,7 @@ namespace Khoaluan.Services
             var userRefunds=_refundRepository.GetRefundUsers();
             foreach(var user in userRefunds)
             {
-                var userRefund = _userService.updateBalance(user.UserID, user.Price, (int)marketType.buy);
+                var userRefund = _userService.updateBalance(user.UserID, user.Price, (int)marketType.sell);
                 var rf = _refundRepository.GetById(user.Id);
                 rf.Status = (int)RefundType.accept;
                 _usersRepository.Update(userRefund);

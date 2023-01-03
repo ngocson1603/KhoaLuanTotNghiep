@@ -419,7 +419,7 @@
                 <div class="row vertical-gap">
                     @foreach (var item in Model.relateGame)
                     {
-                        string url = $"/Product/HomePage/{item.Id}.html";
+                        string url = $"/Product/HomePage/{item.ProductId}.html";
                         <div class="col-md-6">
                             <div class="nk-product-cat">
                                 <a class="nk-product-image" href="@url">
@@ -556,7 +556,7 @@
 
                             @foreach (var item in Model.popularGame)
                             {
-                                string url = $"/Product/HomePage/{item.Id}.html";
+                                string url = $"/Product/HomePage/{item.ProductId}.html";
                                 <div class="nk-widget-post">
                                     <a href="@url" class="nk-post-image">
                                         <img src="~/Images/@item.Image" alt=@item.ProductName>
