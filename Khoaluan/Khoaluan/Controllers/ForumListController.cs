@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Khoaluan.Extension;
 using System.Text.RegularExpressions;
 using PagedList.Core;
+using Khoaluan.Enums;
 
 namespace Khoaluan.Controllers
 {
@@ -224,9 +225,10 @@ namespace Khoaluan.Controllers
         [Route("Forum.html", Name = ("Forum"))]
         public IActionResult ForumInD(int? page)
         {
+            int release = (int)productType.release;
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 10;
-            var ls1 = _unitOfWork.ProductRepository.listProforum().ToList();
+            var ls1 = _unitOfWork.ProductRepository.listProforum().Where(t=>t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             if (ls1.Count() <= 10)
                 ViewBag.maxPage = 1;
             else

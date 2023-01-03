@@ -21,6 +21,7 @@ namespace Khoaluan.OtpModels
         public string DevName { get; set; }
         public string CatID { get; set; }
         public int Discount { get; set; }
+        public int Status { get; set; }
     }
     public class ProductDetailModel
     {
@@ -35,6 +36,7 @@ namespace Khoaluan.OtpModels
         public string Category { get; set; }
         public string DevName { get; set; }
         public string CatID { get; set; }
+        public int Status { get; set; }
     }
     public class LibraryDetail
     {
@@ -49,7 +51,7 @@ namespace Khoaluan.OtpModels
         public List<SaleModelView> saleProduct { get; set; }
         public List<Product> FreeGames { get; set; } 
         public List<SaleModelView> PopularGame { get; set; }
-        public List<Productdetail> RecentlyRealeased { get; set; }
+        public List<SaleModelView> RecentlyRealeased { get; set; }
         public List<Category> cate { get; set; }
         public List<Category> catesecond { get; set; }
         public Productdetail detail { get; set; }

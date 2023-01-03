@@ -1,4 +1,5 @@
-﻿using Khoaluan.Models;
+﻿using Khoaluan.Enums;
+using Khoaluan.Models;
 using Khoaluan.OtpModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -22,8 +23,9 @@ namespace Khoaluan.Controllers
         }
         public IActionResult Index()
         {
-            var blog = _unitOfWork.BlogRepository.GetAll().ToList();
-            var product = _unitOfWork.SaleProductRepository.ProductNotSale().OrderByDescending(t => t.Price).Take(4).ToList();
+            int release = (int)productType.release;
+            var blog = _unitOfWork.BlogRepository.GetAll().Where(t=>t.Published == true).ToList();
+            var product = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).OrderByDescending(t => t.Price).Take(4).ToList();
             ListBlog blogls = new ListBlog()
             {
                 listBlogs = blog,
