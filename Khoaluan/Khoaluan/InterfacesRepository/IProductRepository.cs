@@ -8,6 +8,7 @@ namespace Khoaluan.Interfaces
     public interface IProductRepository:IGameStoreRepository<Product>
     {
         List<Productdetail> getallProductwithCategory();
+        List<Productdetail1> getallProductwithCategory1();
         List<Product> GetProductByName(string name);
         List<Product> listProductDev(int id);
         ActiveGame listProdevActive(int id);

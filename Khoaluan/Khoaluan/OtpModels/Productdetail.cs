@@ -38,6 +38,47 @@ namespace Khoaluan.OtpModels
         public string CatID { get; set; }
         public int Status { get; set; }
     }
+
+    public class Productdetail1
+    {
+        public int SaleId { get; set; }
+        public string ProductName { get; set; }
+        public int ProductId { get; set; }
+        public string Image { get; set; }
+        public string SaleName { get; set; }
+        public int Id { get; set; }
+        public int Discount { get; set; }
+        public int Status { get; set; }
+        public decimal Price { get; set; }
+        public string NameSale { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string DevName { get; set; }
+        public string Description { get; set; }
+        public string Overview { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public List<string> Categories { get; set; }
+    }
+    public class ProductDetailModel1
+    {
+        public int SaleId { get; set; }
+        public string ProductName { get; set; }
+        public int ProductId { get; set; }
+        public string Image { get; set; }
+        public string SaleName { get; set; }
+        public int Id { get; set; }
+        public int Discount { get; set; }
+        public int Status { get; set; }
+        public decimal Price { get; set; }
+        public string NameSale { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string DevName { get; set; }
+        public string Description { get; set; }
+        public string Overview { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public string Category { get; set; }
+    }
     public class LibraryDetail
     {
         public int UserID { get; set; }
@@ -66,7 +107,7 @@ namespace Khoaluan.OtpModels
     }
     public class DetailCate
     {
-        public List<Productdetail> productwithCate { get; set; }
+        public List<Productdetail1> productwithCate { get; set; }
         public List<SaleModelView> productwithCateDev { get; set; }
         public List<SaleModelView> PopularGame1 { get; set; }
     }

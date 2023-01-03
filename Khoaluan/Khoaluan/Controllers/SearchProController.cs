@@ -170,15 +170,15 @@ namespace Khoaluan.Controllers
         public IActionResult FindProductsCate(string DevId,string CatId)
         {
             var name = HttpContext.Session.GetString("NamePro");
-            List<SaleModelView> ls = new List<SaleModelView>();
+            List<Productdetail1> ls = new List<Productdetail1>();
             if (DevId!= null)
             {
-                ls = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.DevName == DevId && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
+                ls = _unitOfWork.ProductRepository.getallProductwithCategory1().Where(t => t.DevName == DevId && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             }
-            //else if(CatId != null)
-            //{
-            //    ls = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Categories.Contains(CatId)).ToList();
-            //}
+            else if (CatId != null)
+            {
+                ls = _unitOfWork.ProductRepository.getallProductwithCategory1().Where(t => t.Categories.Contains(CatId) && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
+            }
             if (ls == null)
             {
                 return PartialView("ListProductsSearchCatDevPartials", null);
