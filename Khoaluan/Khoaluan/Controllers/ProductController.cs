@@ -40,7 +40,7 @@ namespace Khoaluan.Controllers
             var FreeGame = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price == 0 && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             var PopularGame = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).OrderByDescending(t=>t.Price).Take(6).ToList();
             var saleProduct = _unitOfWork.SaleProductRepository.ProductSaleHomePage().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
-            var RencentlyReleased = _unitOfWork.SaleProductRepository.ProductSaleHomePage().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).OrderByDescending(t => t.ReleaseDate).ToList();
+            var RencentlyReleased = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).OrderByDescending(t => t.ReleaseDate).ToList();
             HomePageViewModel homepage = new HomePageViewModel()
             {
                 bestSeller = bestSeller,

@@ -89,7 +89,7 @@ namespace Khoaluan.Controllers
             }
             else
             {
-                products = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t=>t.ProductName.ToLower().Trim() == name.ToLower().Trim() && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
+                products = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t=>t.ProductName.Contains(name,StringComparison.OrdinalIgnoreCase) && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             }
             if (products.Count() <= 6)
                 ViewBag.maxPage = 1;

@@ -55,7 +55,7 @@ namespace Khoaluan.Repositories
 
         public List<Productdetail1> getallProductwithCategory1()
         {
-            var query = @"select Product.Id,Product.Name as Name,Overview,price,image as Image,Description,ReleaseDate,Category.Name Category,Developer.Name as DevName,Discount,Status,Sale.Name as NameSale,StartDate,EndDate from Product
+            var query = @"select Product.Id as ProductId,Product.Name as ProductName,Overview,price,image as Image,Description,ReleaseDate,Category.Name Category,Developer.Name as DevName,Discount,Status,Sale.Name as NameSale,StartDate,EndDate from Product
                         left join SaleProduct on Product.Id = SaleProduct.ProductID
                         FULL OUTER JOIN Sale
                         ON SaleProduct.SaleID = Sale.Id

@@ -75,7 +75,7 @@
             {
                 foreach (var item in Model.RecentlyRealeased.Take(1))
                 {
-                    string url = $"/Product/HomePage/{item.Id}.html";
+                    string url = $"/Product/HomePage/{item.ProductId}.html";
                     <div class="col-md-6 col-lg-4">
                         <div class="nk-gallery-item-box">
                             <a href="@url" class="nk-gallery-item">
@@ -93,7 +93,7 @@
             {
                 foreach (var item in Model.RecentlyRealeased.Skip(5).Take(1))
                 {
-                    string url = $"/Product/HomePage/{item.Id}.html";
+                    string url = $"/Product/HomePage/{item.ProductId}.html";
                     <div class="col-md-6 col-lg-4 order-lg-3">
                         <div class="nk-gallery-item-box">
                             <a href="@url" class="nk-gallery-item">
@@ -113,7 +113,7 @@
                     {
                         foreach (var item in Model.RecentlyRealeased.Skip(1).Take(4))
                         {
-                            string url = $"/Product/HomePage/{item.Id}.html";
+                            string url = $"/Product/HomePage/{item.ProductId}.html";
                             <div class="col-md-6">
                                 <div class="nk-gallery-item-box1">
                                     <a href="@url" class="nk-gallery-item">

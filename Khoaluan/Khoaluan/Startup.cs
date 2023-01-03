@@ -101,7 +101,7 @@ namespace Khoaluan
             app.UseHangfireDashboard();
             app.UseAuthentication();
             app.UseAuthorization();
-            RecurringJob.AddOrUpdate<IRefundService>("refund-user", i => i.refundtoallUser(), Cron.Daily);
+            RecurringJob.AddOrUpdate<IRefundService>("refund-user", i => i.refundtoallUser(), Cron.Daily); //*/ 10 * ****
             RecurringJob.AddOrUpdate<IProductService>("release-product", i => i.ReleaseProduct(), "* */1 * * *");
             app.UseEndpoints(endpoints =>
             {
