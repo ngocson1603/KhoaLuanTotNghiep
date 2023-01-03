@@ -8135,6 +8135,7 @@ div.nk-error {
 .nk-post-title > a {
     color: inherit;
     text-decoration: none;
+    text-transform:none;
     -webkit-transition: .15s color;
     -o-transition: .15s color;
     transition: .15s color;

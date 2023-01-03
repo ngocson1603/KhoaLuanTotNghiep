@@ -79,16 +79,16 @@
                                         }
                                         else
                                         {
-                                        <p>
-                                            @{ 
-                                                decimal discount = Model.productDetail.Price - (Model.productDetail.Price * Model.productDetail.Discount / 100);
-                                            }
-                                            @icon @discount
-                                            @if (Model.productDetail.Discount > 0)
-                                            {
-                                                <h6>@Model.productDetail.Price<span class="badge bg-danger">-@Model.productDetail.Discount%</span></h6>
-                                            }
-                                        </p>
+                                            <p>
+                                                @{
+                                                    decimal discount = Model.productDetail.Price - (Model.productDetail.Price * Model.productDetail.Discount / 100);
+                                                }
+                                                @icon @discount
+                                                @if (Model.productDetail.Discount > 0)
+                                                {
+                                                    <h6>@Model.productDetail.Price<span class="badge bg-danger">-@Model.productDetail.Discount%</span></h6>
+                                                }
+                                            </p>
                                         }
                                     </div>
                                 </div>
@@ -417,26 +417,50 @@
                 <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Related</span> Products</span></h3>
                 <div class="nk-gap"></div>
                 <div class="row vertical-gap">
-                    @foreach (var p in Model.relateGame)
+                    @foreach (var item in Model.relateGame)
                     {
-                        string url = $"/Product/HomePage/{p.Id}.html";
+                        string url = $"/Product/HomePage/{item.Id}.html";
                         <div class="col-md-6">
                             <div class="nk-product-cat">
                                 <a class="nk-product-image" href="@url">
-                                    <img src="~/Images/@p.Image" alt=@p.Name>
+                                    <img src="~/Images/@item.Image" alt=@item.ProductName>
                                 </a>
                                 <div class="nk-product-cont">
-                                    <h3 class="nk-product-title h5"><a href="@url">@p.Name</a></h3>
+                                    <h3 class="nk-product-title h5"><a href="@url">@item.ProductName</a></h3>
                                     <div class="nk-gap-1"></div>
                                     <div class="nk-product-rating">
-                                        @for (int i = 1; i <= p.Id / 10; i++)
+                                        @for (int i = 1; i <= item.Id / 10; i++)
                                         {
                                             <i class="fa fa-star"></i>
                                         }
 
                                     </div>
                                     <div class="nk-gap-1"></div>
-                                    <div class="nk-product-price">€ @p.Price</div>
+                                    <div class="nk-product-price">
+                                        <div class="Price-Buy">
+                                            @if (item.Price == 0)
+                                            {
+                                                @gia;
+                                            }
+                                            else if (DateTime.Now < item.StartDate || DateTime.Now > item.EndDate)
+                                            {
+                                                @icon @item.Price
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    @{
+                                                        decimal discount = @item.Price - (@item.Price * @item.Discount / 100);
+                                                    }
+                                                    @icon @discount <span class="badge bg-danger">-@item.Discount%</span>
+                                                    @if (item.Discount > 0)
+                                                    {
+                                                        <h6 style="text-decoration:line-through">@icon @item.Price</h6>
+                                                    }
+                                                </p>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -535,16 +559,40 @@
                                 string url = $"/Product/HomePage/{item.Id}.html";
                                 <div class="nk-widget-post">
                                     <a href="@url" class="nk-post-image">
-                                        <img src="~/Images/@item.Image" alt=@item.Name>
+                                        <img src="~/Images/@item.Image" alt=@item.ProductName>
                                     </a>
-                                    <h3 class="nk-post-title"><a href="@url">@item.Name</a></h3>
+                                    <h3 class="nk-post-title"><a href="@url">@item.ProductName</a></h3>
                                     <div class="nk-product-rating">
                                         @for (int i = 1; i <= item.Id / 20; i++)
                                         {
                                             <i class="fa fa-star"></i>
                                         }
                                     </div>
-                                    <div class="nk-product-price">€ @item.Price</div>
+                                    <div class="nk-product-price">
+                                        <div class="Price-Buy">
+                                            @if (item.Price == 0)
+                                            {
+                                                @gia;
+                                            }
+                                            else if (DateTime.Now < item.StartDate || DateTime.Now > item.EndDate)
+                                            {
+                                                @icon @item.Price
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    @{
+                                                        decimal discount = @item.Price - (@item.Price * @item.Discount / 100);
+                                                    }
+                                                    @icon @discount <span class="badge bg-danger">-@item.Discount%</span>
+                                                    @if (item.Discount > 0)
+                                                    {
+                                                        <h6 style="text-decoration:line-through">@icon @item.Price</h6>
+                                                    }
+                                                </p>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             }
                         </div>

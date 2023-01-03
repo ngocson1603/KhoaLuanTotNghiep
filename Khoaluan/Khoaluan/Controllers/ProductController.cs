@@ -64,8 +64,8 @@ namespace Khoaluan.Controllers
             {
                 
             }
-            var relateGame = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
-            var popularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals("Rockstar Games")).ToList();
+            var relateGame = _unitOfWork.SaleProductRepository.ProductNotSale().Take(6).ToList();
+            var popularGame = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.DevName.Equals("Rockstar Games")).ToList();
             var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).ToList();
             var cart = HttpContext.Session.Get<List<Cart>>("_GioHang");
             GetLibrary();
@@ -104,7 +104,7 @@ namespace Khoaluan.Controllers
                 ViewBag.id1 = id.Trim();
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
                 var pageSize = 6;
-                var popular = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
+                var popular =_unitOfWork.SaleProductRepository.ProductNotSale().Take(6).ToList();
                 var pro = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Categories.Contains(id)).ToList();
                 ViewBag.Category = id;
                 if (pro.Count() <= 6)
@@ -140,7 +140,7 @@ namespace Khoaluan.Controllers
                 ViewBag.id1 = id.Trim();
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
                 var pageSize = 6;
-                var popular = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
+                var popular = _unitOfWork.SaleProductRepository.ProductNotSale().Take(6).ToList();
                 var pro = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals(id)).ToList();
                 if (pro.Count() <= 6)
                     ViewBag.maxPage = 1;

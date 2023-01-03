@@ -33,7 +33,7 @@
                         <th>Tiêu đề</th>
                         <th>Ngày tạo</th>
                         <th>Trạng thái</th>
-                        <th>#</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,9 +62,9 @@
                                     }
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTinDangs" asp-action="Details" asp-route-id="@item.Id">Chi tiết</a>
-                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTinDangs" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
-                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTinDangs" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTinDangs" asp-action="Details" asp-route-id="@item.Id"><i class="anticon anticon-zoom-in"></i></a>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTinDangs" asp-action="Edit" asp-route-id="@item.Id"><i class="anticon anticon-edit"></i></a>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTinDangs" asp-action="Delete" asp-route-id="@item.Id"><i class="anticon anticon-delete"></i></a>
                                 </td>
                             </tr>
                         }

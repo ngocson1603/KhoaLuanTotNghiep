@@ -57,15 +57,15 @@ namespace Khoaluan.OtpModels
     public class DetailPage
     {
         public Productdetail productDetail { get; set; }   
-        public List<Productdetail> relateGame { get; set; }
-        public List<Productdetail> popularGame { get; set; }
+        public List<SaleModelView> relateGame { get; set; }
+        public List<SaleModelView> popularGame { get; set; }
         public List<Category> cate { get; set; }
         public AddToCart add { get; set; }
     }
     public class DetailCate
     {
         public List<Productdetail> productwithCate { get; set; }
-        public List<Productdetail> PopularGame1 { get; set; }
+        public List<SaleModelView> PopularGame1 { get; set; }
     }
     public class AdminProduct
     {
