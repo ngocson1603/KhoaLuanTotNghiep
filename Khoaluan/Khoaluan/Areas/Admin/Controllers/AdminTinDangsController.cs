@@ -63,7 +63,7 @@ namespace WebShop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Ad_Username,Name,Image,Published,Alias,Contents,CreatedDate")] Blog blog, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Create([Bind("Id,Title,TContent,Ad_Username,Name,Image,Published,Alias,Contents,CreatedDate")] Blog blog, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +119,7 @@ namespace WebShop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Ad_Username,Name,Image,Published,Alias,Contents,CreatedDate")] Blog blog, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,TContent,Ad_Username,Name,Image,Published,Alias,Contents,CreatedDate")] Blog blog, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (id != blog.Id)
             {
