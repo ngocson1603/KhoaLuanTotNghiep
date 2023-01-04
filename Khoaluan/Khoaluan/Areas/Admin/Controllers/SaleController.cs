@@ -129,7 +129,7 @@ namespace Khoaluan.Areas.Admin.Controllers
         // GET: SaleController/Edit/5
         public ActionResult Edit(int id)
         {
-            var ls = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t=>t.Price > 0 && t.Discount == 0 || t.EndDate < DateTime.Now).ToList();
+            var ls = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t=>t.Price > 0 && t.Discount == 0 || t.Price > 0 && t.EndDate < DateTime.Now).ToList();
             ViewBag.SaleId = id.ToString();
             return View(ls);
         }
@@ -209,20 +209,27 @@ namespace Khoaluan.Areas.Admin.Controllers
                 return View();
             }
         }
-
+        private void deletesale(int id)
+        {
+            var sale = _unitOfWork.SaleRepository.GetById(id);
+            _unitOfWork.SaleRepository.Delete(sale);
+            _unitOfWork.SaveChange();
+        }
         // POST: SaleController/Delete/5
         public ActionResult Delete(int id)
         {
             try
             {
-                var sale = _unitOfWork.SaleRepository.GetById(id);
                 var product = _unitOfWork.SaleProductRepository.GetAll().Where(t=>t.SaleID == id).ToList();
-                
-                _unitOfWork.SaleProductRepository.BulkDelete(product);
-                _unitOfWork.SaveChange();
-                _unitOfWork.SaleRepository.Delete(sale);
-                _unitOfWork.SaveChange();
+                foreach (var item in product)
+                {
+                    _unitOfWork.SaleProductRepository.Delete(item);
+                    _unitOfWork.SaveChange();
+                }
+
+                deletesale(id);
                 _notyfService.Success("Delete successful");
+                
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
