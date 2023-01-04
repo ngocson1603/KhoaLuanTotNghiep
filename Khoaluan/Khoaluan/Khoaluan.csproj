@@ -60,7 +60,6 @@
     <None Include="Views\Shared\_headerPartial.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-    <None Include="Views\StoreProduct\Galery.cshtml" />
     <None Include="Views\StoreProduct\ProductStore.cshtml" />
     <None Include="Views\StoreProduct\StoreCatalog.cshtml" />
     <None Include="Views\Product\StoreCatalogAlt.cshtml" />

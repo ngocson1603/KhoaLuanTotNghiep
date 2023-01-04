@@ -121,7 +121,7 @@ namespace Khoaluan.Controllers
             }
             else
             {
-                item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID)).Where(t=>t.NameItem.ToLower().Trim().Equals(name.ToLower().Trim())).ToList();
+                item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID)).Where(t => t.NameItem.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
             }
             if (item.Count() <= 10)
                 ViewBag.maxPage = 1;
