@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Khoaluan.Controllers
 {
-    [Authorize]
+
     public class ItemController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -34,9 +34,7 @@ namespace Khoaluan.Controllers
         {
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 10;
-            var taikhoanID = HttpContext.Session.GetString("CustomerId");
             var ls = _unitOfWork.ItemRepository.getItemSell();
-            var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID));
             var product = _unitOfWork.ProductRepository.listProductItem().OrderBy(i => i.Id).ToList();
             if (ls.Count() <= 10)
                 ViewBag.maxPage = 1;
@@ -50,13 +48,12 @@ namespace Khoaluan.Controllers
             AdminProduct ad = new AdminProduct()
             {
                 itembySell = plr,
-                itembyID = item,
                 productdev = product
             };
             ViewBag.CurrentPage = pageNumber;
             return View(ad);
         }
-
+        [Authorize]
         [Route("/my-Item.html", Name = "ListMyItem")]
         public IActionResult ListMyItem(int? page)
         {
@@ -83,7 +80,7 @@ namespace Khoaluan.Controllers
             return View(ad);
         }
 
-        [Route("/ListItem/{id}.html", Name = ("ListItemProduct"))]
+        [Route("/ListItem/name={id}.html", Name = ("ListItemProduct"))]
         public IActionResult ItemProduct(string id, int? page)
         {
             try
@@ -91,10 +88,15 @@ namespace Khoaluan.Controllers
                 ViewBag.idproitem = id.Trim();
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
                 var pageSize = 10;
-                var taikhoanID = HttpContext.Session.GetString("CustomerId");
-                var ls = _unitOfWork.ItemRepository.getItemSell().Where(t=>t.NameGame.Equals(id)).ToList();
-                var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID));
+                var ls = _unitOfWork.ItemRepository.getItemSell();
                 var product = _unitOfWork.ProductRepository.listProductItem().OrderBy(i => i.Id).ToList();
+                if (id == "all")
+                {
+                }
+                else
+                {
+                    ls = _unitOfWork.ItemRepository.getItemSell().Where(t => t.NameItem.Contains(id, StringComparison.OrdinalIgnoreCase)).ToList();
+                }
                 if (ls.Count() <= 10)
                     ViewBag.maxPage = 1;
                 else
@@ -108,7 +110,6 @@ namespace Khoaluan.Controllers
                 AdminProduct ad = new AdminProduct()
                 {
                     itembySell = plr,
-                    itembyID = item,
                     productdev = product
                 };
                 ViewBag.CurrentPage = pageNumber;

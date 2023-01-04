@@ -39,6 +39,8 @@ namespace Khoaluan.Controllers
         public IActionResult BlogArticle(int id)
         {
             var tindang = _unitOfWork.BlogRepository.GetById(id);
+            string cont = tindang.Contents;
+            tindang.Contents = cont.Replace("rgb(34, 34, 34)", "rgb(255, 255, 255)");
             if (tindang == null)
             {
                 return RedirectToAction("Index");

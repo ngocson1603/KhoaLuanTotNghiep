@@ -124,8 +124,8 @@
                         <div class="nk-widget-content">
                             <form action="#" class="nk-form nk-form-style-1" novalidate="novalidate">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Type something...">
-                                    <button class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span></button>
+                                    <input type="text" class="form-control" id="txtSearchTMK" onkeypress="return searchKeyPressTMK(event);" placeholder="Type something...">
+                                    <a class="nk-btn nk-btn-color-main-1" id="btnSearchItemMK" onclick="changeHrefTMK()"><span class="ion-search"></span></a>
                                 </div>
                             </form>
                         </div>
@@ -269,6 +269,31 @@
                 btnText.innerHTML = "Read less";
                 moreText.style.display = "inline";
             }
+        }
+    </script>
+
+    <script>
+        function changeHrefTMK() {
+            var value = $('#txtSearchTMK').val();
+            var url1;
+            var all = "all";
+            if (value === "") {
+                url1 = '/ListItem/name=' + all + '.html';
+            }
+            else {
+                url1 = '/ListItem/name=' + value + '.html';
+            }
+
+            location.href = url1;
+        }
+        function searchKeyPressTMK(e) {
+            // look for window.event in case event isn't passed in
+            e = e || window.event;
+            if (e.keyCode == 13) {
+                document.getElementById('btnSearchItemMK').click();
+                return false;
+            }
+            return true;
         }
     </script>
 }
