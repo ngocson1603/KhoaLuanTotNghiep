@@ -8592,7 +8592,7 @@ div.nk-error {
 
 .nk-news-box .nk-news-box-each-info .nk-news-box-item-image img {
     width: 100%;
-    height: auto;
+    height: 250px;
 }
 
 .nk-news-box .nk-news-box-each-info .nk-news-box-item-image[style*="background"] {
