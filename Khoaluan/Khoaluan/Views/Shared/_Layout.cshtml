@@ -240,7 +240,17 @@
             e.preventDefault();
             $('html, body').animate({ scrollTop: 0 }, '300');
         });
-        </script>
+    </script>
+    <script>
+        document.addEventListener("keydown", function (event) {
+            if (event.keyCode === 123) {
+                event.preventDefault();
+            }
+        });
+        window.oncontextmenu = function () {
+            return false;
+        }
+    </script>
     @await Component.InvokeAsync("Notyf")
     @await RenderSectionAsync("Scripts", required: false)
     <!-- END: Scripts -->
