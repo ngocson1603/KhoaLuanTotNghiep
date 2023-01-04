@@ -5,6 +5,7 @@ namespace Khoaluan.Models
     public class Blog:BaseEntity
     {
         public string Title { get; set; }
+        public string TContent { get; set; }
         public string Ad_Username { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
