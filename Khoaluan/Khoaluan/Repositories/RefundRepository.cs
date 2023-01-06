@@ -34,7 +34,7 @@ namespace Khoaluan.Repositories
                         Product p,Library l,
 						(select ProductID,UserID,MAX(DatePurchase) as latestDate from 
                         [Order] o,OrderDetail od
-                        where o.Id=od.Id and UserID=1
+                        where o.Id=od.Id and UserID=@userid
                         group by ProductID,UserID)
 
 						as tmp
