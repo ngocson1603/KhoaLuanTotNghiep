@@ -7,6 +7,32 @@
     var wallet = Model.Account.Balance + Model.Fund.Price;
 }
 
+<style>
+    .c-paypal-icon {
+        background: url('~/wwwroot/assets/images/paypal-icon-1.png') no-repeat 50% 50%;
+        background-size: 28px 28px;
+        display: inline-block;
+        height: 28px;
+        width: 50px;
+    }
+
+    .c-vnpay-icon {
+        background: url('~/wwwroot/assets/images/vnpay-icon-1.png') no-repeat 50% 50%;
+        background-size: 28px 28px;
+        display: inline-block;
+        height: 28px;
+        width: 50px;
+    }
+
+    .c-momo-icon {
+        background: url('~/wwwroot/assets/images/momo-icon-1.png') no-repeat 50% 50%;
+        background-size: 28px 28px;
+        display: inline-block;
+        height: 28px;
+        width: 50px;
+    }
+</style>
+
 <img class="nk-page-background-top" src="~/assets/images/bg-top-2.png" alt="">
 
 <h3 class="nk-decorated-h-3">
@@ -86,8 +112,18 @@
 </div>
 <div class="nk-gap-2"></div>
 <a href="#" onclick="CallPaypal();" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-success">
-    <span class="fa fa-paypal"></span>
+    @*<span class="c-paypal-icon"></span>*@
     Paypal
+</a>
+&nbsp;&nbsp;
+<a href="#" onclick="CallVNPay();" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-success">
+    @*<span class="c-vnpay-icon"></span>*@
+    VNPay
+</a>
+&nbsp;&nbsp;
+<a href="#" onclick="CallMomo();" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-success">
+    @*<span class="c-momo-icon"></span>*@
+    Momo
 </a>
 &nbsp;&nbsp;
 <a asp-controller="Fund" asp-action="AddFunds" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-danger">
@@ -98,6 +134,14 @@
 <script>
     function CallPaypal() {
         window.location.href = '@Url.Action("Paypalvtwo", "Fund", new { id = Model.Fund.Id })';
+    }
+
+    function CallVNPay() {
+        window.location.href = '@Url.Action("VNPayvtwo", "Fund", new { id = Model.Fund.Id })';
+    }
+
+    function CallMomo() {
+        window.location.href = '@Url.Action("Momovtwo", "Fund", new { id = Model.Fund.Id })';
     }
 </script>
 

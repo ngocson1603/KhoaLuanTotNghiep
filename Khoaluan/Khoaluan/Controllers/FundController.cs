@@ -2,6 +2,7 @@
 using Khoaluan.Enums;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
+using Khoaluan.VNPayOthers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -23,13 +24,21 @@ namespace Khoaluan.Controllers
         private string _secretKey;
         private string _paypalEnvironment = "sandbox";
 
+        // VNPay Settings
+        private string _tmnCode;
+        private string _hashSecret;
+
         public FundController(INotyfService notyfService, IUnitOfWork unitOfWork, IService service, IConfiguration config)
         {
             _notyfService = notyfService;
             _unitOfWork = unitOfWork;
             _service = service;
+
             _clientID = config["PaypalSettings:ClientID"];
             _secretKey = config["PaypalSettings:SecretKey"];
+
+            _tmnCode = config["VNPaySettings:TmnCode"];
+            _hashSecret = config["VNPaySettings:HashSecret"];
         }
 
         [HttpGet]
@@ -259,6 +268,31 @@ namespace Khoaluan.Controllers
             }
 
             return RedirectToAction("AddFunds");
+        }
+
+        public ActionResult VNPayvtwo(string id = null)
+        {
+            string url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+            string redirectUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + "/Fund/PaymentConfirm";
+
+            PayLib pay = new PayLib();
+            pay.AddRequestData("vnp_Version", "2.1.0");
+            pay.AddRequestData("vnp_Command", "pay");
+            pay.AddRequestData("vnp_TmnCode", _tmnCode);
+            pay.AddRequestData("vnp_Amount", "1000000"); // Số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
+            pay.AddRequestData("vnp_BankCode", "");
+            pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            pay.AddRequestData("vnp_CurrCode", "VND");
+            // pay.AddRequestData("vnp_IpAddr", Util.GetIpAddress()); // Địa chỉ IP của khách hàng thực hiện giao dịch
+            pay.AddRequestData("vnp_Locale", "vn"); // Ngôn ngữ giao diện hiển thị - Tiếng Việt (vn), Tiếng Anh (en)
+            pay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang"); // Thông tin mô tả nội dung thanh toán
+            pay.AddRequestData("vnp_OrderType", "other");
+            pay.AddRequestData("vnp_ReturnUrl", redirectUrl); // URL thông báo kết quả giao dịch khi Khách hàng kết thúc thanh toán
+            pay.AddRequestData("vnp_TxnRef", DateTime.Now.Ticks.ToString()); // Mã hóa đơn
+
+            string paymentUrl = pay.CreateRequestUrl(url, _hashSecret);
+
+            return Redirect(paymentUrl);
         }
     }
 }
