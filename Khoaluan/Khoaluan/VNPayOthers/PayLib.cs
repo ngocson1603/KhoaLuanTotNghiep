@@ -97,10 +97,9 @@ namespace Khoaluan.VNPayOthers
             return data.ToString();
         }
 
-        public bool ValidateSignature(string inputHash, string secretKey)
+        public bool ValidateSignature(string inputHash, string secretKey, string hashString)
         {
-            string rspRaw = GetResponseData();
-            string myChecksum = Util.HmacSHA512(secretKey, rspRaw);
+            string myChecksum = Util.HmacSHA512(secretKey, hashString);
             return myChecksum.Equals(inputHash, StringComparison.InvariantCultureIgnoreCase);
         }
         

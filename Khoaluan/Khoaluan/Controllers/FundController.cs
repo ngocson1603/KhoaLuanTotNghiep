@@ -108,7 +108,7 @@ namespace Khoaluan.Controllers
             string id = null
         )
         {
-            #region local_variables
+            #region Local variables
 
             // Setup paypal environment
             MyPaypalPayment.MyPaypalSetup payPalSetup = new MyPaypalPayment.MyPaypalSetup()
@@ -144,7 +144,7 @@ namespace Khoaluan.Controllers
 
             #endregion
 
-            #region check_payment_cancellation
+            #region Check payment cancellation
 
             // Kiểm tra nếu payer hủy giao dịch
             if (!string.IsNullOrEmpty(Cancel) && Cancel.Trim().ToLower() == "true")
@@ -172,7 +172,7 @@ namespace Khoaluan.Controllers
                     return RedirectToAction("AddFunds");
                 }
 
-                #region order_creation
+                #region Order creation
 
                 // Lưu session Paypal, gói nạp: SS_Paypal, SS_FundId
                 HttpContext.Session.SetString("SS_Paypal", "order_creation");
@@ -212,7 +212,7 @@ namespace Khoaluan.Controllers
             }
             else
             {
-                #region order_execution
+                #region Order execution
 
                 // Lưu session Paypal: SS_Paypal
                 HttpContext.Session.SetString("SS_Paypal", "order_execution");
@@ -263,12 +263,23 @@ namespace Khoaluan.Controllers
 
         public ActionResult VNPayvtwo(string id = null)
         {
+            var fund = _unitOfWork.FundRepository.GetById(Convert.ToInt32(id));
+
+            if (fund == null)
+            {
+                _notyfService.Error("Không thể lấy thông tin gói nạp!");
+                return RedirectToAction("AddFunds");
+            }
+
+            decimal tax = Math.Round((decimal)(fund.Price * fund.Tax), 2);
+            int total = Convert.ToInt32((tax + fund.Price) * 24000 * 100);
+
             string url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-            string redirectUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + "/Fund/PaymentConfirm";
+            string redirectUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + $"/Fund/PaymentConfirm?id={id}";
 
             // Lấy địa chỉ IP của người dùng hiện hành
             IPAddress remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
-            string result = "";
+            string ipAddress = "";
 
             if (remoteIpAddress != null)
             {
@@ -277,18 +288,18 @@ namespace Khoaluan.Controllers
                     remoteIpAddress = System.Net.Dns.GetHostEntry(remoteIpAddress).AddressList.First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
                 }
 
-                result = remoteIpAddress.ToString();
+                ipAddress = remoteIpAddress.ToString();
             }
 
             PayLib pay = new PayLib();
             pay.AddRequestData("vnp_Version", "2.1.0");
             pay.AddRequestData("vnp_Command", "pay");
             pay.AddRequestData("vnp_TmnCode", _tmnCode);
-            pay.AddRequestData("vnp_Amount", "1000000"); // Số tiền cần thanh toán, công thức: số tiền (vnđ) * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
+            pay.AddRequestData("vnp_Amount", total.ToString()); 
             pay.AddRequestData("vnp_BankCode", "");
             pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
             pay.AddRequestData("vnp_CurrCode", "VND");
-            pay.AddRequestData("vnp_IpAddr", result);
+            pay.AddRequestData("vnp_IpAddr", ipAddress);
             pay.AddRequestData("vnp_Locale", "vn"); // Ngôn ngữ giao diện hiển thị - Tiếng Việt (vn), Tiếng Anh (en)
             pay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang"); // Thông tin mô tả nội dung thanh toán
             pay.AddRequestData("vnp_OrderType", "other");
@@ -300,24 +311,47 @@ namespace Khoaluan.Controllers
             return Redirect(paymentUrl);
         }
 
-        public ActionResult PaymentConfirm([FromQuery(Name = "vnp_TxnRef")] string vnp_TxnRef,
-            [FromQuery(Name = "vnp_TransactionNo")] string vnp_TransactionNo,
+        public ActionResult PaymentConfirm(
+            [FromQuery(Name = "vnp_Amount")] string vnp_Amount,
+            [FromQuery(Name = "vnp_BankCode")] string vnp_BankCode,
+            [FromQuery(Name = "vnp_BankTranNo")] string vnp_BankTranNo,
+            [FromQuery(Name = "vnp_CardType")] string vnp_CardType,
+            [FromQuery(Name = "vnp_OrderInfo")] string vnp_OrderInfo,
+            [FromQuery(Name = "vnp_PayDate")] string vnp_PayDate,
             [FromQuery(Name = "vnp_ResponseCode")] string vnp_ResponseCode,
-            [FromQuery(Name = "vnp_SecureHash")] string vnp_SecureHash
+            [FromQuery(Name = "vnp_TmnCode")] string vnp_TmnCode,
+            [FromQuery(Name = "vnp_TransactionNo")] string vnp_TransactionNo,
+            [FromQuery(Name = "vnp_TransactionStatus")] string vnp_TransactionStatus,
+            [FromQuery(Name = "vnp_TxnRef")] string vnp_TxnRef,
+            [FromQuery(Name = "vnp_SecureHash")] string vnp_SecureHash,
+            string id = null
             )
         {
             PayLib pay = new PayLib();
+            string hashString = $"vnp_Amount={vnp_Amount}&vnp_BankCode={vnp_BankCode}&vnp_BankTranNo={vnp_BankTranNo}&vnp_CardType={vnp_CardType}&vnp_OrderInfo=Thanh+toan+don+hang&vnp_PayDate={vnp_PayDate}&vnp_ResponseCode={vnp_ResponseCode}&vnp_TmnCode={vnp_TmnCode}&vnp_TransactionNo={vnp_TransactionNo}&vnp_TransactionStatus={vnp_TransactionStatus}&vnp_TxnRef={vnp_TxnRef}";
 
             long orderId = Convert.ToInt64(vnp_TxnRef); // Mã hóa đơn
             long vnpayTranId = Convert.ToInt64(vnp_TransactionNo); // Mã giao dịch tại hệ thống VNPAY
 
-            bool checkSignature = pay.ValidateSignature(vnp_SecureHash, _hashSecret); //check chữ ký đúng hay không?
+            bool checkSignature = pay.ValidateSignature(vnp_SecureHash, _hashSecret, hashString); // check chữ ký đúng hay không?
+
+            var accountId = HttpContext.Session.GetString("CustomerId");
+            var fund = _unitOfWork.FundRepository.GetById(Convert.ToInt32(id));
+
+            if (fund == null)
+            {
+                _notyfService.Error("Không thể lấy thông tin gói nạp!");
+                return RedirectToAction("AddFunds");
+            }
 
             if (checkSignature)
             {
                 if (vnp_ResponseCode == "00")
                 {
-                    _notyfService.Information("Thanh toán thành công hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId);
+                    _unitOfWork.UserRepository.updateBalance(Convert.ToInt32(accountId), fund.Price, (int)marketType.paypal);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Information("Payment successful Order ID " + orderId + " Transaction ID " + vnpayTranId);
+                    _notyfService.Success("Update balance successful");
                 }
                 else
                 {
