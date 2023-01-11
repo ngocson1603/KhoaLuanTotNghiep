@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Khoaluan.Controllers
@@ -108,6 +109,7 @@ namespace Khoaluan.Controllers
         )
         {
             #region local_variables
+
             // Setup paypal environment
             MyPaypalPayment.MyPaypalSetup payPalSetup = new MyPaypalPayment.MyPaypalSetup()
             {
@@ -139,9 +141,11 @@ namespace Khoaluan.Controllers
                 _notyfService.Error("Không thể lấy thông tin gói nạp!");
                 return RedirectToAction("AddFunds");
             }
+
             #endregion
 
             #region check_payment_cancellation
+
             // Kiểm tra nếu payer hủy giao dịch
             if (!string.IsNullOrEmpty(Cancel) && Cancel.Trim().ToLower() == "true")
             {
@@ -151,6 +155,7 @@ namespace Khoaluan.Controllers
                 HttpContext.Session.Remove("SS_Paypal");
                 return RedirectToAction("AddFunds");
             }
+
             #endregion
 
             payPalSetup.PayerApprovedOrderId = token;
@@ -168,6 +173,7 @@ namespace Khoaluan.Controllers
                 }
 
                 #region order_creation
+
                 // Lưu session Paypal, gói nạp: SS_Paypal, SS_FundId
                 HttpContext.Session.SetString("SS_Paypal", "order_creation");
                 HttpContext.Session.SetString("SS_FundId", id);
@@ -201,11 +207,13 @@ namespace Khoaluan.Controllers
                     paymentResultList.Add("There was an error in processing your payment");
                     paymentResultList.Add("Details: " + ex.Message);
                 }
+
                 #endregion
             }
             else
             {
                 #region order_execution
+
                 // Lưu session Paypal: SS_Paypal
                 HttpContext.Session.SetString("SS_Paypal", "order_execution");
 
@@ -225,24 +233,6 @@ namespace Khoaluan.Controllers
                         _notyfService.Success("Thanh toán thành công!");
                         _notyfService.Information("Cập nhật số dư ví thành công!");
                         paymentResultList.Add("Payment Successful. Thank you.");
-
-                        //switch (kq)
-                        //{
-                        //    case -1:
-                        //        _notyfService.Information("Không tìm thấy tài khoản!");
-                        //        break;
-                        //    case 0:
-                        //        _notyfService.Error("Có lỗi trong quá trình cập nhật số dư ví!");
-                        //        break;
-                        //    case 1:
-                        //        _unitOfWork.SaveChange();
-                        //        _notyfService.Information("Cập nhật số dư ví thành công!");
-                        //        break;
-
-                        //    default:
-                        //        _notyfService.Error("Lỗi không xác định");
-                        //        break;
-                        //}
 
                         HttpContext.Session.Remove("SS_Token");
                         HttpContext.Session.Remove("SS_Paypal");
@@ -264,6 +254,7 @@ namespace Khoaluan.Controllers
                     paymentResultList.Add("There was an error in processing your payment");
                     paymentResultList.Add("Details: " + ex.Message);
                 }
+
                 #endregion
             }
 
@@ -275,15 +266,29 @@ namespace Khoaluan.Controllers
             string url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
             string redirectUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + "/Fund/PaymentConfirm";
 
+            // Lấy địa chỉ IP của người dùng hiện hành
+            IPAddress remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
+            string result = "";
+
+            if (remoteIpAddress != null)
+            {
+                if (remoteIpAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                {
+                    remoteIpAddress = System.Net.Dns.GetHostEntry(remoteIpAddress).AddressList.First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                }
+
+                result = remoteIpAddress.ToString();
+            }
+
             PayLib pay = new PayLib();
             pay.AddRequestData("vnp_Version", "2.1.0");
             pay.AddRequestData("vnp_Command", "pay");
             pay.AddRequestData("vnp_TmnCode", _tmnCode);
-            pay.AddRequestData("vnp_Amount", "1000000"); // Số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
+            pay.AddRequestData("vnp_Amount", "1000000"); // Số tiền cần thanh toán, công thức: số tiền (vnđ) * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
             pay.AddRequestData("vnp_BankCode", "");
             pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
             pay.AddRequestData("vnp_CurrCode", "VND");
-            // pay.AddRequestData("vnp_IpAddr", Util.GetIpAddress()); // Địa chỉ IP của khách hàng thực hiện giao dịch
+            pay.AddRequestData("vnp_IpAddr", result);
             pay.AddRequestData("vnp_Locale", "vn"); // Ngôn ngữ giao diện hiển thị - Tiếng Việt (vn), Tiếng Anh (en)
             pay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang"); // Thông tin mô tả nội dung thanh toán
             pay.AddRequestData("vnp_OrderType", "other");
@@ -293,6 +298,38 @@ namespace Khoaluan.Controllers
             string paymentUrl = pay.CreateRequestUrl(url, _hashSecret);
 
             return Redirect(paymentUrl);
+        }
+
+        public ActionResult PaymentConfirm([FromQuery(Name = "vnp_TxnRef")] string vnp_TxnRef,
+            [FromQuery(Name = "vnp_TransactionNo")] string vnp_TransactionNo,
+            [FromQuery(Name = "vnp_ResponseCode")] string vnp_ResponseCode,
+            [FromQuery(Name = "vnp_SecureHash")] string vnp_SecureHash
+            )
+        {
+            PayLib pay = new PayLib();
+
+            long orderId = Convert.ToInt64(vnp_TxnRef); // Mã hóa đơn
+            long vnpayTranId = Convert.ToInt64(vnp_TransactionNo); // Mã giao dịch tại hệ thống VNPAY
+
+            bool checkSignature = pay.ValidateSignature(vnp_SecureHash, _hashSecret); //check chữ ký đúng hay không?
+
+            if (checkSignature)
+            {
+                if (vnp_ResponseCode == "00")
+                {
+                    _notyfService.Information("Thanh toán thành công hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId);
+                }
+                else
+                {
+                    _notyfService.Error("Có lỗi xảy ra trong quá trình xử lý hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId + " | Mã lỗi: " + vnp_ResponseCode);
+                }
+            }
+            else
+            {
+                _notyfService.Error("Có lỗi xảy ra trong quá trình xử lý");
+            }
+
+            return RedirectToAction("AddFunds");
         }
     }
 }
