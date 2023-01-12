@@ -13,6 +13,7 @@ namespace Khoaluan.Models
         public string Image { get; set; }
         public int DevId { get; set; }
         public int Status { get; set; }
+        public int AppId { get; set; }
         public Developer Developer { get; set; }
 
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
