@@ -170,7 +170,9 @@ namespace Khoaluan.Controllers
                 try
                 {
                     Models.Refund refundrequest = _service.RefundService.refund(userid, productID);
+                    var lib = _unitOfWork.LibraryRepository.GetAll().Where(t => t.UserId == int.Parse(taikhoanID) && t.ProductId == productID).FirstOrDefault();
                     _unitOfWork.RefundRepository.Create(refundrequest);
+                    _unitOfWork.LibraryRepository.Delete(lib);
                     _unitOfWork.SaveChange();
                     _notyfService.Success("Successfully");
                     return RedirectToAction(nameof(Library));

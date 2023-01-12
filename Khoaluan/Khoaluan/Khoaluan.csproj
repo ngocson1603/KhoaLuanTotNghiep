@@ -24,6 +24,11 @@
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="Areas\Admin\Views\AdminProducts\Index.cshtml" />
+    <None Include="Areas\Admin\Views\AdminTinDangs\Create.cshtml" />
+    <None Include="Areas\Admin\Views\AdminTinDangs\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\AdminTinDangs\Details.cshtml" />
+    <None Include="Areas\Admin\Views\AdminTinDangs\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\AdminTinDangs\Index.cshtml" />
     <None Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <None Include="Areas\Admin\Views\Dev\Index.cshtml" />
     <None Include="Areas\Admin\Views\Dev\LoginDev.cshtml" />
@@ -42,7 +47,7 @@
     <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Views\About\AboutUs.cshtml" />
     <None Include="Views\Checkout\Check.cshtml" />
-    <None Include="Views\Home\BlogArticle.cshtml" />
+    <None Include="Views\Blog\BlogArticle.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\News.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
@@ -55,7 +60,6 @@
     <None Include="Views\Shared\_headerPartial.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-    <None Include="Views\StoreProduct\Galery.cshtml" />
     <None Include="Views\StoreProduct\ProductStore.cshtml" />
     <None Include="Views\StoreProduct\StoreCatalog.cshtml" />
     <None Include="Views\Product\StoreCatalogAlt.cshtml" />
@@ -865,7 +869,7 @@
     <PackageReference Include="MongoDB.Driver.Core" Version="2.18.0" />
     <PackageReference Include="PagedList.Core.Mvc" Version="3.0.0" />
     <PackageReference Include="PayPalCheckoutSdk" Version="1.0.4" />
-    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="5.17.1" />
+    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="5.17.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -876,6 +880,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Forum\" />
+    <Folder Include="wwwroot\Images\news\" />
     <Folder Include="wwwroot\php\instagram\cache\" />
   </ItemGroup>
 

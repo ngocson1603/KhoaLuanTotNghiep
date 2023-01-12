@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Khoaluan.Extension;
 using System.Text.RegularExpressions;
 using PagedList.Core;
+using Khoaluan.Enums;
 
 namespace Khoaluan.Controllers
 {
@@ -196,25 +197,6 @@ namespace Khoaluan.Controllers
         //    return RedirectToAction("DetailForum", new { id = postId });
         //}
 
-        public string SetSizeImage(string source)
-        {
-            string final = source;
-            IEnumerable<int> indexes = source.AllIndexesOf("width: ");
-            foreach (var index in indexes)
-            {
-                int start, end;
-                start = index + 6;
-                end = source.IndexOf("px", start);
-                int imgWidth = int.Parse(source.Substring(start, end - start));
-
-                if (imgWidth > 840)
-                    final = Regex.Replace(final, $"style=\"width: {imgWidth}px;\"", "style=\"width: 840px;\"");
-            }
-
-            return final;
-        }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Comment(CommentViewModel comment)
@@ -225,7 +207,7 @@ namespace Khoaluan.Controllers
 
             if (comm.Contains("img") && comm.Contains("style"))
             {
-                comm = SetSizeImage(comm);
+                comm = Helpper.Utilities.SetSizeImage(comm);
             }
 
             try
@@ -243,9 +225,10 @@ namespace Khoaluan.Controllers
         [Route("Forum.html", Name = ("Forum"))]
         public IActionResult ForumInD(int? page)
         {
+            int release = (int)productType.release;
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 10;
-            var ls1 = _unitOfWork.ProductRepository.listProforum().ToList();
+            var ls1 = _unitOfWork.ProductRepository.listProforum().Where(t=>t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             if (ls1.Count() <= 10)
                 ViewBag.maxPage = 1;
             else

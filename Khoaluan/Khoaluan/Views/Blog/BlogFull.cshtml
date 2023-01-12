@@ -1,9 +1,12 @@
-﻿@*@using PagedList.Core.Mvc
-@model PagedList.Core.IPagedList<DuAnGame.Models.TinDang>
+﻿@model IEnumerable<Khoaluan.Models.Blog>
+
 @{
     ViewData["Title"] = "BlogFull";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int PageCurrent = ViewBag.CurrentPage;
+    int PageNext = PageCurrent + 1;
 }
+
 <div class="nk-main">
 
     <!-- START: Breadcrumbs -->
@@ -12,7 +15,7 @@
         <ul class="nk-breadcrumbs">
 
 
-            <li><a href="index.html">Home</a></li>
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
 
 
             <li><span class="fa fa-angle-right"></span></li>
@@ -22,7 +25,7 @@
 
             <li><span class="fa fa-angle-right"></span></li>
 
-            <li><span>Blog FullWidth</span></li>
+            <li><span>Blog List</span></li>
 
         </ul>
     </div>
@@ -33,52 +36,213 @@
 
 
     <div class="container">
-        <!-- START: Posts FullWidth -->
-        <div class="nk-blog-fullwidth">
-            @if (Model != null && Model.Count() > 0)
-                        {
-                            foreach (var item in Model)
-                            {
-                                string url ="";
+        <div class="row vertical-gap">
+            <div class="col-lg-8">
+
+                <!-- START: Posts List -->
+                <div class="nk-blog-list">
+
+
                     <!-- START: Post -->
-                                        <div class="nk-blog-post">
-                                            <a href="@url" class="nk-post-img">
-                                                <img src="~/assets/images/@item.Thumb" alt="Smell magic in the air. Or maybe barbecue">
-                                                <span class="nk-post-comments-count">4</span>
+                    @if (Model != null || Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            string url = $"/tin-tuc/{item.Alias}-{item.Id}.html";
+                            <div class="nk-blog-post">
+                                <div class="row vertical-gap">
+                                    <div class="col-md-5 col-lg-6">
+                                        <a href="@url" class="nk-post-img">
+                                            <img src="~/Images/news/@Url.Content(item.Image)"
+                                                 alt="@item.Title">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-7 col-lg-6">
+                                        <h2 class="nk-post-title h4">
+                                            <a href="@url">
+                                                @item.Title
                                             </a>
-                                            <div class="nk-gap-2"></div>
-                                            <div class="row vertical-gap">
-                                                <div class="col-md-8 col-lg-9">
-                                                    <h2 class="nk-post-title h4"><a href="blog-article.html">@item.Title</a></h2>
-                                                    <div class="nk-gap"></div>
-                                                    <div class="nk-post-text">
-                                                        <p>@item.Contents</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-lg-3">
-                                                    <div class="nk-post-by">
-                                                        <img src="~/assets/images/avatar-1.jpg" alt="Hitman" class="rounded-circle" width="60">
-                                                        by <a href="#">Hitman</a>
+                                        </h2>
 
-                                                        <br> in Sep 18, 2018
-                                                        <br> 4 comments
-                                                    </div>
-                                                    <div class="nk-gap-3"></div>
-                                                    <div class="text-right">
-                                                        <a href="blog-article.html" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Xem them</a>
-                                                    </div>
-                                                </div>
+                                        <div class="nk-post-text">
+                                            <p class="line-clamp">
+                                                @item.TContent
+                                            </p>
+                                        </div>
+
+                                        <div class="nk-post-by">
+                                            <img src="~/assets/images/avatar-1.jpg" alt="Hitman" class="rounded-circle"
+                                                 width="35"> by <a href="#">@item.Name</a> @item.CreatedDate
                                             </div>
-                                        </div> <!-- END: Post -->
-                                                        }
-            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
 
-            <!-- START: Post -->
-            <!-- END: Pagination -->
+                    <!-- END: Post -->
+                    <!-- START: Pagination -->
+                <div class="nk-pagination nk-pagination-center">
+
+                    @if (PageCurrent > 1)
+                    {
+                        string url = $"/blogs.html";
+                        <a href="@url?page=@(PageCurrent - 1)" class="nk-pagination-prev">
+                            <span class="ion-ios-arrow-back"></span>
+                        </a>
+                    }
+                    else
+                    {
+                        string url1 = $"/blogs.html";
+                        <a href="@url1" class="nk-pagination-prev">
+                            <span class="ion-ios-arrow-back"></span>
+                        </a>
+                    }
+
+                    @{
+                        string url2 = $"/blogs.html";
+                        @if (@PageCurrent < ViewBag.maxPage)
+                        {
+
+                            <nav>
+                                <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                                <a href="@url2?page=@PageNext">@PageNext</a>
+                            </nav>
+                            <a class="nk-pagination-next" href="@url2?page=@PageNext">
+                                <span class="ion-ios-arrow-forward"></span>
+                            </a>
+                        }
+                        else
+                        {
+                            <nav>
+                                <a class="nk-pagination-current" href="@url2?page=@PageCurrent">@PageCurrent</a>
+                                <a hidden href="@url2?page=@PageNext">@PageNext</a>
+                            </nav>
+                            <a class="nk-pagination-next">
+                                <span disabled class="ion-ios-arrow-forward"></span>
+                            </a>
+                        }
+                    }
+                </div>
+                    <!-- END: Pagination -->
+                </div>
+                <!-- END: Posts List -->
+
+            </div>
+            <div class="col-lg-4">
+                <!--
+                    START: Sidebar
+
+                    Additional Classes:
+                        .nk-sidebar-left
+                        .nk-sidebar-right
+                        .nk-sidebar-sticky
+                -->
+                <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
+                    <div class="nk-widget">
+                        <div class="nk-widget-content">
+                            <form action="#" class="nk-form nk-form-style-1" novalidate="novalidate">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Type something...">
+                                    <button class="nk-btn nk-btn-color-main-1">
+                                        <span class="ion-search"></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">We</span> Are Social</span></h4>
+                        <div class="nk-widget-content">
+                            <ul class="nk-social-links-3 nk-social-links-cols-4">
+                                <li>
+                                    <a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-instagram" href="#">
+                                        <span class="fab fa-instagram"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-google-plus" href="#">
+                                        <span class="fab fa-google-plus"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-youtube" href="#"><span class="fab fa-youtube"></span></a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-twitter" href="#" target="_blank">
+                                        <span class="fab fa-twitter"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nk-social-pinterest" href="#">
+                                        <span class="fab fa-pinterest-p"></span>
+                                    </a>
+                                </li>
+                                <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">Latest</span> Video</span></h4>
+                        <div class="nk-widget-content">
+                            <div class="nk-plain-video" data-video="https://www.youtube.com/watch?v=vXy8UBazlO8">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">Top 3</span> Recent</span></h4>
+                        <div class="nk-widget-content">
+                            @if (Model != null || Model.Count() > 0)
+                            {
+                                foreach (var item in Model.TakeLast(3))
+                                {
+                                    string url = $"/tin-tuc/{item.Alias}-{item.Id}.html";
+                                    <div class="nk-widget-post">
+                                        <a href="blog-article.html" class="nk-post-image1">
+                                            <img src="~/Images/news/@Url.Content(item.Image)" alt="">
+                                        </a>
+                                        <h3 class="nk-post-title">
+                                            <a href="@url" class="line-clamp2">
+                                                @item.Title
+                                            </a>
+                                        </h3>
+                                        <div class="nk-post-date">
+                                            <span class="fa fa-calendar"></span> @item.CreatedDate
+
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                </aside>
+                <!-- END: Sidebar -->
+            </div>
         </div>
-        <!-- END: Posts FullWidth -->
     </div>
 
+    <div class="nk-gap-2"></div>
 
 </div>
-*@
+
+@section Styles{
+    <style>
+        .line-clamp {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .line-clamp2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+}

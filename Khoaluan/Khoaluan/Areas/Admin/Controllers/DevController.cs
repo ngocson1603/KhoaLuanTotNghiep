@@ -146,8 +146,6 @@ namespace Khoaluan.Controllers
                     product.Name = Utilities.ToTitleCase(product.Name);
                     if (fThumb != null)
                     {
-
-
                         string extension = Path.GetExtension(fThumb.FileName);
                         string images = Utilities.SEOUrl(product.Name) + extension;
                         product.Image = await Utilities.UploadFile(fThumb, images.ToLower());

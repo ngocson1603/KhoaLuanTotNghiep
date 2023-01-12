@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Khoaluan.Enums;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
 using Khoaluan.OtpModels;
@@ -16,13 +17,14 @@ namespace Khoaluan.Controllers
     public class SearchProController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        
         public INotyfService _notyfService { get; }
         public SearchProController(IUnitOfWork unitOfWork, INotyfService notyfService)
         {
             _unitOfWork = unitOfWork;
             _notyfService = notyfService;
         }
-
+        int release = (int)productType.release;
         public string NamePro
         {
             get
@@ -58,10 +60,10 @@ namespace Khoaluan.Controllers
         public IActionResult FindProducts(int firstprice, int secondprice)
         {
             var name = HttpContext.Session.GetString("NamePro");
-            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price >= firstprice && t.Price <= secondprice).ToList();
+            var ls = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Price >= firstprice && t.Price <= secondprice && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             if (name != "all")
             {
-            ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price >= firstprice && t.Price <= secondprice && t.Name.ToLower().Contains(name.Trim().ToLower())).ToList();
+            ls = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Price >= firstprice && t.Price <= secondprice && t.ProductName.ToLower().Contains(name.Trim().ToLower()) && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             }    
             if (ls == null)
             {
@@ -83,11 +85,11 @@ namespace Khoaluan.Controllers
             List<SaleModelView> products = new List<SaleModelView>();
             if (name == "all")
             {
-                products = _unitOfWork.SaleProductRepository.ProductNotSale();
+                products = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t=>t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             }
             else
             {
-                products = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t=>t.ProductName.ToLower().Trim() == name.ToLower().Trim()).ToList();
+                products = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t=>t.ProductName.Contains(name,StringComparison.OrdinalIgnoreCase) && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             }
             if (products.Count() <= 6)
                 ViewBag.maxPage = 1;
@@ -119,7 +121,7 @@ namespace Khoaluan.Controllers
             }
             else
             {
-                item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID)).Where(t=>t.NameItem.ToLower().Trim().Equals(name.ToLower().Trim())).ToList();
+                item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID)).Where(t => t.NameItem.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
             }
             if (item.Count() <= 10)
                 ViewBag.maxPage = 1;
@@ -168,14 +170,14 @@ namespace Khoaluan.Controllers
         public IActionResult FindProductsCate(string DevId,string CatId)
         {
             var name = HttpContext.Session.GetString("NamePro");
-            List<Productdetail> ls = new List<Productdetail>();
+            List<Productdetail1> ls = new List<Productdetail1>();
             if (DevId!= null)
             {
-                ls = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName == DevId).ToList();
+                ls = _unitOfWork.ProductRepository.getallProductwithCategory1().Where(t => t.DevName == DevId && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             }
-            else if(CatId != null)
+            else if (CatId != null)
             {
-                ls = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Categories.Contains(CatId)).ToList();
+                ls = _unitOfWork.ProductRepository.getallProductwithCategory1().Where(t => t.Categories.Contains(CatId) && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             }
             if (ls == null)
             {

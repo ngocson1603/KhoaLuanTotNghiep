@@ -19,7 +19,7 @@ namespace Khoaluan.Repositories
         }
         public List<Productdetail>getallProductwithCategory()
         {
-            var query = @"select Product.Id,Product.Name as Name,Overview,price,image as Image,Description,ReleaseDate,Category.Name Category,Developer.Name as DevName
+            var query = @"select Product.Id,Product.Name as Name,Overview,price,image as Image,Description,ReleaseDate,Category.Name Category,Developer.Name as DevName,Status
                         from Product,ProductCategory,Category,Developer
                         where Product.DevId=Developer.Id and Product.Id=ProductCategory.ProductId
                         and ProductCategory.CategoryId=Category.Id";
@@ -48,6 +48,63 @@ namespace Khoaluan.Repositories
                              ReleaseDate = productdetail.Key.ReleaseDate,
                              DevName = productdetail.Key.DevName,
                              Discount=0,
+                             Categories = productdetail.ToList()
+                         };
+            return result.ToList();
+        }
+
+        public List<Productdetail1> getallProductwithCategory1()
+        {
+            var query = @"select Product.Id as ProductId,Product.Name as ProductName,Overview,price,image as Image,Description,ReleaseDate,Category.Name Category,Developer.Name as DevName,Discount,Status,Sale.Name as NameSale,StartDate,EndDate from Product
+                        left join SaleProduct on Product.Id = SaleProduct.ProductID
+                        FULL OUTER JOIN Sale
+                        ON SaleProduct.SaleID = Sale.Id
+						FULL OUTER JOIN Developer
+                        ON Developer.Id = Product.DevId
+						FULL OUTER JOIN ProductCategory
+                        ON ProductCategory.ProductId = Product.Id
+						FULL OUTER JOIN Category
+                        ON ProductCategory.CategoryId = Category.Id";
+
+            var data = Context.Database.GetDbConnection().Query<ProductDetailModel1>(query);
+            var result = from p in data.AsEnumerable()
+                         group p.Category by new
+                         {
+                             p.SaleId,
+                             p.ProductName,
+                             p.ProductId,
+                             p.Image,
+                             p.SaleName,
+                             p.Id,
+                             p.Discount,
+                             p.Status,
+                             p.Price,
+                             p.NameSale,
+                             p.StartDate,
+                             p.EndDate,
+                             p.DevName,
+                             p.Description,
+                             p.Overview,
+                             p.ReleaseDate
+                         } into productdetail
+                         select new Productdetail1
+                         {
+                             SaleId = productdetail.Key.SaleId,
+                             ProductName = productdetail.Key.ProductName,
+                             ProductId = productdetail.Key.ProductId,
+                             Image = productdetail.Key.Image,
+                             SaleName = productdetail.Key.SaleName,
+                             Id = productdetail.Key.Id,
+                             Discount = productdetail.Key.Discount,
+                             Status = productdetail.Key.Status,
+                             Price = productdetail.Key.Price,
+                             NameSale = productdetail.Key.NameSale,
+                             StartDate = productdetail.Key.StartDate,
+                             EndDate = productdetail.Key.EndDate,
+                             DevName = productdetail.Key.DevName,
+                             Description = productdetail.Key.Description,
+                             Overview = productdetail.Key.Overview,
+                             ReleaseDate = productdetail.Key.ReleaseDate,
                              Categories = productdetail.ToList()
                          };
             return result.ToList();

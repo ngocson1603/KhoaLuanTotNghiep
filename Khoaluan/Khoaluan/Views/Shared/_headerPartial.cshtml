@@ -68,7 +68,7 @@
         <div class="container">
             <div class="nk-nav-table">
 
-                <a href="index.html" class="nk-nav-logo">
+                <a asp-controller="Home" asp-action="Index" class="nk-nav-logo">
                     <img src="~/assets/images/logo.png" alt="GoodGames" width="199">
                 </a>
 
@@ -129,62 +129,38 @@
                             Market
                         </a>
                         <ul class="dropdown">
-
-                            <li>
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="News">News</a>
-                            </li>
                             <li class=" nk-drop-item">
                                 <a href="#">
                                     Blog With Sidebar
 
                                 </a>
                                 <ul class="dropdown">
-
-                                    <li>
-                                        <a href="#">
-                                            Blog Grid
-
-                                        </a>
-                                    </li>
                                     <li>
                                         <a href="/ListItem.html">
                                             Market Item
                                         </a>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
-                            <li>
-                                <a class="nav-link" asp-area="" asp-controller="Blog" asp-action="BlogFull">BlogFull</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="BlogArticle">BlogArticle</a>
-                            </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a class="nav-link" asp-area="" asp-controller="StoreProduct" asp-action="Galery">Galery</a>
                     </li>
                     <li class=" nk-drop-item">
                         <a class="nav-link" asp-area="" asp-controller="Product" asp-action="HomePage">Store</a>
                         <ul class="dropdown">
 
                             <li>
-                                <a class="nav-link"asp-area="" asp-controller="Product" asp-action="HomePage">Store</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" asp-area="" asp-controller="StoreProduct" asp-action="ProductStore">Product</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" asp-area="" asp-controller="StoreProduct" asp-action="StoreCatalog">Catalog</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" asp-area="" asp-controller="StoreProduct" asp-action="StoreCatalogAlt">CatalogAlt</a>
+                                <a class="nav-link" asp-area="" asp-controller="Product" asp-action="HomePage">Store</a>
                             </li>
                             <li>
                                 <a class="nav-link" asp-area="" asp-controller="ProductCart" asp-action="Cart">Cart</a>
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="/blogs.html">
+                            Blog
+                        </a>
                     </li>
                     <li>
                         <a class="nav-link" asp-area="" asp-controller="About" asp-action="AboutUs">About Us</a>
@@ -194,7 +170,7 @@
                             Contact
                         </a>
                     </li>
-                   
+
                 </ul>
 
                 <ul class="nk-nav nk-nav-right nk-nav-icons">

@@ -15,7 +15,7 @@
         <ul class="nk-breadcrumbs">
 
 
-            <li><a href="index.html">Home</a></li>
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
 
 
             <li><span class="fa fa-angle-right"></span></li>
@@ -75,15 +75,15 @@
             {
                 foreach (var item in Model.RecentlyRealeased.Take(1))
                 {
-                    string url = $"/Product/HomePage/{item.Id}.html";
+                    string url = $"/Product/HomePage/{item.ProductId}.html";
                     <div class="col-md-6 col-lg-4">
                         <div class="nk-gallery-item-box">
                             <a href="@url" class="nk-gallery-item">
                                 <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
-                                <img src="~/Images/@item.Image" alt=@item.Name height="315px" width="350px">
+                                <img src="~/Images/@item.Image" alt=@item.ProductName height="315px" width="350px">
                             </a>
                             <div class="nk-gallery-item-label">
-                                <h4 class="mb-0">@item.Name</h4>
+                                <h4 class="mb-0">@item.ProductName</h4>
                             </div>
                         </div>
                     </div>
@@ -93,15 +93,15 @@
             {
                 foreach (var item in Model.RecentlyRealeased.Skip(5).Take(1))
                 {
-                    string url = $"/Product/HomePage/{item.Id}.html";
+                    string url = $"/Product/HomePage/{item.ProductId}.html";
                     <div class="col-md-6 col-lg-4 order-lg-3">
                         <div class="nk-gallery-item-box">
                             <a href="@url" class="nk-gallery-item">
                                 <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
-                                <img src="~/Images/@item.Image" alt=@item.Name height="315px" width="350px">
+                                <img src="~/Images/@item.Image" alt=@item.ProductName height="315px" width="350px">
                             </a>
                             <div class="nk-gallery-item-label">
-                                <h4 class="mb-0">@item.Name</h4>
+                                <h4 class="mb-0">@item.ProductName</h4>
                             </div>
                         </div>
                     </div>
@@ -113,12 +113,12 @@
                     {
                         foreach (var item in Model.RecentlyRealeased.Skip(1).Take(4))
                         {
-                            string url = $"/Product/HomePage/{item.Id}.html";
+                            string url = $"/Product/HomePage/{item.ProductId}.html";
                             <div class="col-md-6">
                                 <div class="nk-gallery-item-box1">
                                     <a href="@url" class="nk-gallery-item">
                                         <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
-                                        <img src="~/Images/@item.Image" alt=@item.Name>
+                                        <img src="~/Images/@item.Image" alt=@item.ProductName>
                                     </a>
                                 </div>
                             </div>
@@ -264,7 +264,7 @@
                                 <div class="nk-product-rating" data-rating="3.5"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fas fa-star-half"></i> <i class="far fa-star"></i></div>
                                 <div class="nk-gap-1"></div>
                                 <div class="line-clamp">
-                                    @item.Description
+                                    @Html.Raw(item.Description)
                                 </div>
                                 <div class="nk-gap-2"></div>
                                 <div class="nk-product-price">

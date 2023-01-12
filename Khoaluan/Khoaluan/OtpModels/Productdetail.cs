@@ -21,6 +21,7 @@ namespace Khoaluan.OtpModels
         public string DevName { get; set; }
         public string CatID { get; set; }
         public int Discount { get; set; }
+        public int Status { get; set; }
     }
     public class ProductDetailModel
     {
@@ -35,6 +36,48 @@ namespace Khoaluan.OtpModels
         public string Category { get; set; }
         public string DevName { get; set; }
         public string CatID { get; set; }
+        public int Status { get; set; }
+    }
+
+    public class Productdetail1
+    {
+        public int SaleId { get; set; }
+        public string ProductName { get; set; }
+        public int ProductId { get; set; }
+        public string Image { get; set; }
+        public string SaleName { get; set; }
+        public int Id { get; set; }
+        public int Discount { get; set; }
+        public int Status { get; set; }
+        public decimal Price { get; set; }
+        public string NameSale { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string DevName { get; set; }
+        public string Description { get; set; }
+        public string Overview { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public List<string> Categories { get; set; }
+    }
+    public class ProductDetailModel1
+    {
+        public int SaleId { get; set; }
+        public string ProductName { get; set; }
+        public int ProductId { get; set; }
+        public string Image { get; set; }
+        public string SaleName { get; set; }
+        public int Id { get; set; }
+        public int Discount { get; set; }
+        public int Status { get; set; }
+        public decimal Price { get; set; }
+        public string NameSale { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string DevName { get; set; }
+        public string Description { get; set; }
+        public string Overview { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public string Category { get; set; }
     }
     public class LibraryDetail
     {
@@ -49,7 +92,7 @@ namespace Khoaluan.OtpModels
         public List<SaleModelView> saleProduct { get; set; }
         public List<Product> FreeGames { get; set; } 
         public List<SaleModelView> PopularGame { get; set; }
-        public List<Productdetail> RecentlyRealeased { get; set; }
+        public List<SaleModelView> RecentlyRealeased { get; set; }
         public List<Category> cate { get; set; }
         public List<Category> catesecond { get; set; }
         public Productdetail detail { get; set; }
@@ -57,15 +100,16 @@ namespace Khoaluan.OtpModels
     public class DetailPage
     {
         public Productdetail productDetail { get; set; }   
-        public List<Productdetail> relateGame { get; set; }
-        public List<Productdetail> popularGame { get; set; }
+        public List<SaleModelView> relateGame { get; set; }
+        public List<SaleModelView> popularGame { get; set; }
         public List<Category> cate { get; set; }
         public AddToCart add { get; set; }
     }
     public class DetailCate
     {
-        public List<Productdetail> productwithCate { get; set; }
-        public List<Productdetail> PopularGame1 { get; set; }
+        public List<Productdetail1> productwithCate { get; set; }
+        public List<SaleModelView> productwithCateDev { get; set; }
+        public List<SaleModelView> PopularGame1 { get; set; }
     }
     public class AdminProduct
     {
@@ -89,5 +133,10 @@ namespace Khoaluan.OtpModels
     public class ListFriend
     {
         public List<Users> findfriend { get; set; }
+    }
+    public class ListBlog
+    {
+        public List<Blog> listBlogs { get; set; }
+        public List<SaleModelView> listProducts { get; set; }
     }
 }

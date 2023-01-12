@@ -13,6 +13,7 @@ using System.Drawing.Printing;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using Khoaluan.Extension;
+using Khoaluan.Enums;
 
 namespace Khoaluan.Controllers
 {
@@ -34,11 +35,12 @@ namespace Khoaluan.Controllers
 
         public IActionResult Homepage()
         {
-            var bestSeller = _unitOfWork.SaleProductRepository.ProductNotSale().Take(10).ToList();
-            var FreeGame = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price == 0).ToList();
-            var PopularGame = _unitOfWork.SaleProductRepository.ProductNotSale().OrderByDescending(t=>t.Price).Take(6).ToList();
-            var saleProduct = _unitOfWork.SaleProductRepository.ProductSaleHomePage().ToList();
-            var RencentlyReleased = _unitOfWork.ProductRepository.getallProductwithCategory().OrderByDescending(t => t.ReleaseDate).ToList();
+            int release = (int)productType.release;
+            var bestSeller = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t=>t.Status == release && t.ReleaseDate <= DateTime.Now).Take(10).ToList();
+            var FreeGame = _unitOfWork.ProductRepository.GetAll().Where(t => t.Price == 0 && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
+            var PopularGame = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).OrderByDescending(t=>t.Price).Take(6).ToList();
+            var saleProduct = _unitOfWork.SaleProductRepository.ProductSaleHomePage().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
+            var RencentlyReleased = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).OrderByDescending(t => t.ReleaseDate).ToList();
             HomePageViewModel homepage = new HomePageViewModel()
             {
                 bestSeller = bestSeller,
@@ -54,6 +56,7 @@ namespace Khoaluan.Controllers
         [Route("/Product/HomePage/{id}.html", Name = ("ProductDetails"))]
         public IActionResult Detail(int id)
         {
+            int release = (int)productType.release;
             var discount=_unitOfWork.SaleProductRepository.getdiscount(id);
             var x = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
             if(discount!=-1)
@@ -64,8 +67,8 @@ namespace Khoaluan.Controllers
             {
                 
             }
-            var relateGame = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
-            var popularGame = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals("Rockstar Games")).ToList();
+            var relateGame = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).Take(6).ToList();
+            var popularGame = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.DevName.Equals("Rockstar Games") && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             var cate = _unitOfWork.CategoryRepository.GetAll().OrderBy(i => i.Id).ToList();
             var cart = HttpContext.Session.Get<List<Cart>>("_GioHang");
             GetLibrary();
@@ -101,11 +104,12 @@ namespace Khoaluan.Controllers
         {
             try
             {
+                int release = (int)productType.release;
                 ViewBag.id1 = id.Trim();
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
                 var pageSize = 6;
-                var popular = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
-                var pro = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Categories.Contains(id)).ToList();
+                var popular =_unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).Take(6).ToList();
+                var pro = _unitOfWork.ProductRepository.getallProductwithCategory1().Where(t => t.Categories.Contains(id)).ToList();
                 ViewBag.Category = id;
                 if (pro.Count() <= 6)
                     ViewBag.maxPage = 1;
@@ -137,11 +141,12 @@ namespace Khoaluan.Controllers
         {
             try
             {
+                int release = (int)productType.release;
                 ViewBag.id1 = id.Trim();
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
                 var pageSize = 6;
-                var popular = _unitOfWork.ProductRepository.getallProductwithCategory().Take(6).ToList();
-                var pro = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.DevName.Equals(id)).ToList();
+                var popular = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).Take(6).ToList();
+                var pro = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.DevName.Equals(id) && t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
                 if (pro.Count() <= 6)
                     ViewBag.maxPage = 1;
                 else
@@ -154,7 +159,7 @@ namespace Khoaluan.Controllers
                 var plr = pl.ToList();
                 DetailCate pwc = new DetailCate()
                 {
-                    productwithCate = plr,
+                    productwithCateDev = plr,
                     PopularGame1=popular
                 };
                 TempData.Keep("idpro");

@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     int PageCurrent = ViewBag.CurrentPage;
     int PageNext = PageCurrent + 1;
+    string gia = "free";
+    string icon = "$";
 }
 
 <div class="nk-main">
@@ -130,14 +132,14 @@
             {
                 foreach (var item in Model.productwithCate)
                 {
-                    string url = $"/Product/HomePage/{item.Id}.html";
+                    string url = $"/Product/HomePage/{item.ProductId}.html";
                     <div class="col-lg-6">
                         <div class="nk-product-cat-2">
                             <a class="nk-product-image" href="@url">
                                 <img src="~/Images/@Url.Content(item.Image)" alt="So saying he unbuckled">
                             </a>
                             <div class="nk-product-cont">
-                                <h3 class="nk-product-title h5"><a href="@url">@item.Name</a></h3>
+                                <h3 class="nk-product-title h5"><a href="@url">@item.ProductName</a></h3>
                                 <div class="nk-gap-1"></div>
                                 <div class="nk-product-rating" data-rating="4"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i></div>
                                 <div class="nk-gap-1"></div>
@@ -145,7 +147,31 @@
                                     @item.Overview
                                 </div>
                                 <div class="nk-gap-2"></div>
-                                <div class="nk-product-price">€ @item.Price</div>
+                                <div class="nk-product-price">
+                                    <div class="Price-Buy">
+                                        @if (item.Price == 0)
+                                        {
+                                            @gia;
+                                        }
+                                        else if (DateTime.Now < item.StartDate || DateTime.Now > item.EndDate)
+                                        {
+                                            @icon @item.Price
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                                @{
+                                                    decimal discount = @item.Price - (@item.Price * @item.Discount / 100);
+                                                }
+                                                @icon @discount <span class="badge bg-danger">-@item.Discount%</span>
+                                                @if (item.Discount > 0)
+                                                {
+                                                    <h6 style="text-decoration:line-through">@icon @item.Price</h6>
+                                                }
+                                            </p>
+                                        }
+                                    </div>
+                                </div>
                                 <div class="nk-gap-1"></div>
                             </div>
                         </div>
@@ -271,7 +297,7 @@
                                 <img src="~/Images/@Url.Content(item.Image)" alt="She gave my mother">
                             </a>
                             <div class="nk-product-cont">
-                                <h3 class="nk-product-title h5"><a href="@url">@item.Name</a></h3>
+                                <h3 class="nk-product-title h5"><a href="@url">@item.ProductName</a></h3>
                                 <div class="nk-gap-1"></div>
                                 <div class="nk-product-rating" data-rating="3">
                                     @for (int i = 1; i <= item.Id / 20; i++)
@@ -281,7 +307,31 @@
 
                                 </div>
                                 <div class="nk-gap-1"></div>
-                                <div class="nk-product-price">€ @item.Price</div>
+                                <div class="nk-product-price">
+                                    <div class="Price-Buy">
+                                        @if (item.Price == 0)
+                                        {
+                                            @gia;
+                                        }
+                                        else if (DateTime.Now < item.StartDate || DateTime.Now > item.EndDate)
+                                        {
+                                            @icon @item.Price
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                                @{
+                                                    decimal discount = @item.Price - (@item.Price * @item.Discount / 100);
+                                                }
+                                                @icon @discount <span class="badge bg-danger">-@item.Discount%</span>
+                                                @if (item.Discount > 0)
+                                                {
+                                                    <h6 style="text-decoration:line-through">@icon @item.Price</h6>
+                                                }
+                                            </p>
+                                        }
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,6 @@
-﻿using Khoaluan.Models;
+﻿using Khoaluan.Enums;
+using Khoaluan.Models;
+using Khoaluan.OtpModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,20 +14,26 @@ namespace Khoaluan.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
-
         public IActionResult Index()
         {
-            return View();
+            int release = (int)productType.release;
+            var blog = _unitOfWork.BlogRepository.GetAll().Where(t=>t.Published == true).ToList();
+            var product = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).OrderByDescending(t => t.Price).Take(4).ToList();
+            ListBlog blogls = new ListBlog()
+            {
+                listBlogs = blog,
+                listProducts = product
+            };
+            return View(blogls);
         }
-        public ActionResult BlogArticle()
-        {
-            return View();
-        }
+        
         public ActionResult BlogFull()
         {
             return View();

@@ -1,0 +1,59 @@
+@model Khoaluan.Models.Blog
+
+@{ ViewData["Title"] = "Chi tiết tin tức :" + Model.Title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml"; }
+
+<div class="main-content">
+    <div class="page-header">
+        <h2 class="header-title">Blog Post</h2>
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+                <a class="breadcrumb-item" href="#">Pages</a>
+                <span class="breadcrumb-item active">Blog Post</span>
+            </nav>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="container">
+                <h2 class="font-weight-normal m-b-10">@Model.Title</h2>
+                <div class="d-flex m-b-30">
+                    <div class="avatar avatar-cyan avatar-img">
+                        <img src="~/Images/news/@Url.Content(Model.Image)" alt="">
+                    </div>
+                    <div class="m-l-15">
+                        <a href="javascript:void(0);" class="text-dark m-b-0 font-weight-semibold">@Model.Name</a>
+                        <p class="m-b-0 text-muted font-size-13">@Model.CreatedDate</p>
+                    </div>
+                </div>
+                <img alt="" class="img-fluid w-100" src="~/Images/news/@Url.Content(Model.Image)">
+                <div class="m-t-30">
+                    <p class="h3" style="color:black">@Model.TContent</p>
+                    @Html.Raw(Model.Contents)
+                </div>
+                <div class="d-flex m-t-40 align-items-center">
+                    <span class="m-r-15">Share this post: </span>
+                    <ul class="list-inline m-b-0">
+                        <li class="list-inline-item">
+                            <button class="font-size-16 btn btn-hover btn-icon btn-rounded">
+                                <i class="anticon anticon-facebook"></i>
+                            </button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button class="font-size-16 btn btn-hover btn-icon btn-rounded">
+                                <i class="anticon anticon-twitter"></i>
+                            </button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button class="font-size-16 btn btn-hover btn-icon btn-rounded">
+                                <i class="anticon anticon-instagram"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>

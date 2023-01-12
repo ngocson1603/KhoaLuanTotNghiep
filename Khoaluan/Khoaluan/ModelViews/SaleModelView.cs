@@ -19,6 +19,9 @@ namespace Khoaluan.ModelViews
         public string NameSale { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public string DevName { get; set; }
         public string Description { get; set; }
+        public string Overview { get; set; }
+        public DateTime ReleaseDate { get; set; }
     }
 }
