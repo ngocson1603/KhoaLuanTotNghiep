@@ -327,6 +327,12 @@ namespace Khoaluan.Controllers
             string id = null
             )
         {
+            if (vnp_ResponseCode == "24")
+            {
+                _notyfService.Information("Đã hủy giao dịch!");
+                return RedirectToAction("AddFunds");
+            }
+
             PayLib pay = new PayLib();
             string hashString = $"vnp_Amount={vnp_Amount}&vnp_BankCode={vnp_BankCode}&vnp_BankTranNo={vnp_BankTranNo}&vnp_CardType={vnp_CardType}&vnp_OrderInfo=Thanh+toan+don+hang&vnp_PayDate={vnp_PayDate}&vnp_ResponseCode={vnp_ResponseCode}&vnp_TmnCode={vnp_TmnCode}&vnp_TransactionNo={vnp_TransactionNo}&vnp_TransactionStatus={vnp_TransactionStatus}&vnp_TxnRef={vnp_TxnRef}";
 
