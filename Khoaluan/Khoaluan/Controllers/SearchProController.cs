@@ -140,6 +140,34 @@ namespace Khoaluan.Controllers
             ViewBag.CurrentPage = pageNumber;
             return View(ad);
         }
+
+        [Route("/my-Item/Product/{name}.html", Name = ("ItemsByNameProduct"))]
+        public IActionResult ItemsByNameProduct(string name, int? page)
+        {
+            ViewBag.nameSearchItem = name.Trim();
+            HttpContext.Session.SetString("NameItem", name);
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 10;
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            var product = _unitOfWork.ProductRepository.listProductItem(int.Parse(taikhoanID)).OrderBy(i => i.Id).ToList();
+            var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID)).Where(t => t.NameItem.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+            if (item.Count() <= 10)
+                ViewBag.maxPage = 1;
+            else
+            {
+                double dMaxPage = Convert.ToDouble(item.Count());
+                ViewBag.maxPage = Math.Ceiling(dMaxPage / 10);
+            }
+            var pl = item.AsQueryable().ToPagedList(pageNumber, pageSize);
+            var plr = pl.ToList();
+            AdminProduct ad = new AdminProduct()
+            {
+                itembyID = plr,
+                productdev = product
+            };
+            ViewBag.CurrentPage = pageNumber;
+            return View(ad);
+        }
         //[HttpPost]
         //public IActionResult SearchDanhMuc(string devId, string catId, int? page)
         //{

@@ -1,7 +1,7 @@
 ﻿@using PagedList.Core.Mvc
 @model Khoaluan.OtpModels.AdminProduct
 @{
-    ViewData["Title"] = "ListItem";
+    ViewData["Title"] = "ListItemByName";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int PageCurrent = ViewBag.CurrentPage;
     int PageNext = PageCurrent + 1;
@@ -74,21 +74,21 @@
 
                         @if (PageCurrent > 1)
                         {
-                            string url = $"/ListItem.html";
+                            string url = $"/ListItem/name={@ViewBag.idproitem}.html";
                             <a href="@url?page=@(PageCurrent - 1)" class="nk-pagination-prev">
                                 <span class="ion-ios-arrow-back"></span>
                             </a>
                         }
                         else
                         {
-                            string url1 = $"/ListItem.html";
+                            string url1 = $"/ListItem/name={@ViewBag.idproitem}.html";
                             <a href="@url1" class="nk-pagination-prev">
                                 <span class="ion-ios-arrow-back"></span>
                             </a>
                         }
 
                         @{
-                            string url2 = $"/ListItem.html";
+                            string url2 = $"/ListItem/name={@ViewBag.idproitem}.html";
                             @if (@PageCurrent < ViewBag.maxPage)
                             {
 

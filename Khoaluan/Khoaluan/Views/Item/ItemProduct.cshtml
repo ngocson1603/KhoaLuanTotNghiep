@@ -145,7 +145,7 @@
                                     {
                                         foreach (var item in Model.productdev.Take(5))
                                         {
-                                            string url = $"/ListItem/{item.Name}.html";
+                                            string url = $"/ListItem/Product/{item.Name}.html";
                                             <li><a href="@url">@item.Name</a></li>
                                         }
                                         <span id="dots"></span>
@@ -153,7 +153,7 @@
                                         <span id="more">
                                             @foreach (var item in Model.productdev.Skip(5))
                                             {
-                                                string url = $"/ListItem/{item.Name}.html";
+                                                string url = $"/ListItem/Product/{item.Name}.html";
                                             <li><a href="@url">@item.Name</a></li>
 
                                         }
