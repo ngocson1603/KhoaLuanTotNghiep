@@ -165,7 +165,7 @@ from Developer,Product where Product.DevId = Developer.Id";
         public List<Product> listProductItem(int id)
         {
             var query = @"select Product.* from Product, Item,Inventory,Library where Product.Id = Item.ProductId and Inventory.ItemID = Item.Id and Library.ProductId = Product.Id and Inventory.UserID =@id
-group by Product.Id,Product.Name,Product.Overview,Product.Description,Product.ReleaseDate,Product.Price,Product.Image,Product.DevId,Product.Status";
+group by Product.AppId,Product.Id,Product.Name,Product.Overview,Product.Description,Product.ReleaseDate,Product.Price,Product.Image,Product.DevId,Product.Status";
             var parameter = new DynamicParameters();
             parameter.Add("id", id);
             var result = Context.Database.GetDbConnection().Query<Product>(query, parameter);
