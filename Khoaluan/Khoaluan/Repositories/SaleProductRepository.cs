@@ -92,11 +92,13 @@ namespace Khoaluan.Repositories
 
         public List<SellitemModelView> ProductSellInMonth()
         {
-            var query = @"SELECT Product.Id,Name as NameGame,Image,[Order].DatePurchase as DayCreate,OrderDetail.Price as PricePerItem
+            var query = @"SELECT Product.Id,Developer.Name as HoTen,Product.Name as NameGame,Image,[Order].DatePurchase as DayCreate,OrderDetail.Price as PricePerItem
                 FROM Product
                 INNER JOIN OrderDetail ON OrderDetail.ProductID = Product.Id 
                 FULL OUTER JOIN [Order] ON [Order].Id = OrderDetail.Id 
-                group by Product.Id,Name,Image,[Order].DatePurchase,OrderDetail.Price";
+				INNER JOIN Developer ON Developer.Id = Product.DevId 
+                group by Product.Id,Product.Name,Image,[Order].DatePurchase,OrderDetail.Price,Developer.Name
+                order by [Order].DatePurchase desc";
             var result = Context.Database.GetDbConnection().Query<SellitemModelView>(query);
             return result.ToList();
         }

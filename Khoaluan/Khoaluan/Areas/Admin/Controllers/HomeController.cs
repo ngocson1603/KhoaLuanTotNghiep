@@ -26,6 +26,13 @@ namespace DuAnGame.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var pro = _unitOfWork.SaleProductRepository.ProductSellInMonth().ToList();
+            var topproduct = _unitOfWork.ProductRepository.TopProduct().ToList();
+            var orders = _unitOfWork.OrderRepository.GetAll().Where(t=>t.DatePurchase.Month == DateTime.Now.Month).ToList();
+            if (topproduct!= null)
+            {
+                ViewBag.Topproduct = topproduct;
+            }
+            ViewBag.orders = orders;
             HomeProduct pwc = new HomeProduct()
             {
                 product = pro,

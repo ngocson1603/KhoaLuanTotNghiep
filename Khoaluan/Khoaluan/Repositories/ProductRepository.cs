@@ -177,5 +177,15 @@ group by Product.AppId,Product.Id,Product.Name,Product.Overview,Product.Descript
             var data = Context.Database.GetDbConnection().Query<Product>(query);
             return data.ToList();
         }
+
+        public List<ActiveGame> TopProduct()
+        {
+            var query = @"select Product.Name as NamePro,Product.Image as Image,Developer.Name as NameDev,SUM(OrderDetail.Price) as Price from Product,Developer,[Order],OrderDetail where 
+Product.Id = OrderDetail.ProductID and OrderDetail.Id=[Order].Id and Product.DevId = Developer.Id
+group by Product.Name,Product.Image,Developer.Name
+order by Price desc ";
+            var result = Context.Database.GetDbConnection().Query<ActiveGame>(query);
+            return result.ToList();
+        }
     }
 }
