@@ -27,11 +27,13 @@ namespace DuAnGame.Areas.Admin.Controllers
         {
             var pro = _unitOfWork.SaleProductRepository.ProductSellInMonth().ToList();
             var topproduct = _unitOfWork.ProductRepository.TopProduct().ToList();
-            var orders = _unitOfWork.OrderRepository.GetAll().Where(t=>t.DatePurchase.Month == DateTime.Now.Month).ToList();
-            if (topproduct!= null)
+            var orders = _unitOfWork.OrderRepository.GetAll().Where(t => t.DatePurchase.Month == DateTime.Now.Month).ToList();
+            var sale = _unitOfWork.SaleProductRepository.CountProductsell().Where(t => t.EndDate >= DateTime.Now).ToList();
+            if (topproduct != null)
             {
                 ViewBag.Topproduct = topproduct;
             }
+            ViewBag.Sale = sale;
             ViewBag.orders = orders;
             HomeProduct pwc = new HomeProduct()
             {

@@ -102,5 +102,11 @@ namespace Khoaluan.Repositories
             var result = Context.Database.GetDbConnection().Query<SellitemModelView>(query);
             return result.ToList();
         }
+        public List<Sale> CountProductsell()
+        {
+            var query = @"select SaleProduct.Id as Id, StartDate,EndDate from SaleProduct,Sale,Product where SaleProduct.ProductID=Product.Id and Sale.Id = SaleProduct.SaleID";
+            var result = Context.Database.GetDbConnection().Query<Sale>(query);
+            return result.ToList();
+        }
     }
 }

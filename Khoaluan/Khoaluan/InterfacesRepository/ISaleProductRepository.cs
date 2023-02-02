@@ -13,5 +13,6 @@ namespace Khoaluan.InterfacesRepository
         List<SaleModelView> ProductNotSale();
         List<SaleModelView> ProductSaleHomePage();
         List<SellitemModelView> ProductSellInMonth();
+        List<Sale> CountProductsell();
     }
 }
