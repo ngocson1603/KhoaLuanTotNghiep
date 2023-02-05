@@ -6,10 +6,12 @@ using Khoaluan.VNPayOthers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace Khoaluan.Controllers
@@ -267,7 +269,7 @@ namespace Khoaluan.Controllers
 
             if (fund == null)
             {
-                _notyfService.Error("Không thể lấy thông tin gói nạp!");
+                _notyfService.Error("Unable to get loaded package information!");
                 return RedirectToAction("AddFunds");
             }
 
@@ -295,7 +297,7 @@ namespace Khoaluan.Controllers
             pay.AddRequestData("vnp_Version", "2.1.0");
             pay.AddRequestData("vnp_Command", "pay");
             pay.AddRequestData("vnp_TmnCode", _tmnCode);
-            pay.AddRequestData("vnp_Amount", total.ToString()); 
+            pay.AddRequestData("vnp_Amount", total.ToString());
             pay.AddRequestData("vnp_BankCode", "");
             pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
             pay.AddRequestData("vnp_CurrCode", "VND");
@@ -310,7 +312,99 @@ namespace Khoaluan.Controllers
 
             return Redirect(paymentUrl);
         }
+        public ActionResult Momovtwo(string id = null)
+        {
+            var fund = _unitOfWork.FundRepository.GetById(Convert.ToInt32(id));
 
+            if (fund == null)
+            {
+                _notyfService.Error("Unable to get loaded package information!");
+                return RedirectToAction("AddFunds");
+            }
+
+            decimal tax = Math.Round((decimal)(fund.Price * fund.Tax), 2);
+            string total = Convert.ToInt32((tax + fund.Price) * 24000).ToString();
+
+            //request params need to request to MoMo system
+            string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+            string partnerCode = "MOMOOJOI20210710";
+            string accessKey = "iPXneGmrJH0G8FOP";
+            string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
+            string orderInfo = "Checkout";
+            string returnUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + $"/Fund/MomoConfirm?id={id}";
+            string notifyurl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + $"/Fund/MomoConfirm?id={id}"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+
+            string amount = total;
+            string orderid = DateTime.Now.Ticks.ToString(); //mã đơn hàng
+            string requestId = DateTime.Now.Ticks.ToString();
+            string extraData = "";
+
+            //Before sign HMAC SHA256 signature
+            string rawHash = "partnerCode=" +
+                partnerCode + "&accessKey=" +
+                accessKey + "&requestId=" +
+                requestId + "&amount=" +
+                amount + "&orderId=" +
+                orderid + "&orderInfo=" +
+                orderInfo + "&returnUrl=" +
+                returnUrl + "&notifyUrl=" +
+                notifyurl + "&extraData=" +
+                extraData;
+
+            MoMoSecurity crypto = new MoMoSecurity();
+            //sign signature SHA256
+            string signature = crypto.signSHA256(rawHash, serectkey);
+
+            //build body json request
+            JObject message = new JObject
+            {
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "notifyUrl", notifyurl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+
+            };
+
+            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+
+            JObject jmessage = JObject.Parse(responseFromMomo);
+
+            return Redirect(jmessage.GetValue("payUrl").ToString());
+        }
+
+        public ActionResult MomoConfirm(
+            [FromQuery(Name = "orderId")] string orderId,
+            string id = null)
+        {
+            var accountId = HttpContext.Session.GetString("CustomerId");
+            var fund = _unitOfWork.FundRepository.GetById(Convert.ToInt32(id));
+            if (fund == null)
+            {
+                _notyfService.Error("Unable to get loaded package information!");
+                return RedirectToAction("AddFunds");
+            }
+            int errorCode = int.Parse(HttpContext.Request.Query["errorCode"]);
+            if (!errorCode.Equals(0))
+            {
+                _notyfService.Error("Transaction error!");
+                return RedirectToAction("AddFunds");
+            }
+            else
+            {
+                _unitOfWork.UserRepository.updateBalance(Convert.ToInt32(accountId), fund.Price, (int)marketType.paypal);
+                _unitOfWork.SaveChange();
+                _notyfService.Information("Payment successful Order ID " + orderId);
+                _notyfService.Success("Update balance successful");
+            }
+            return RedirectToAction("AddFunds");
+        }
         public ActionResult PaymentConfirm(
             [FromQuery(Name = "vnp_Amount")] string vnp_Amount,
             [FromQuery(Name = "vnp_BankCode")] string vnp_BankCode,
@@ -346,7 +440,7 @@ namespace Khoaluan.Controllers
 
             if (fund == null)
             {
-                _notyfService.Error("Không thể lấy thông tin gói nạp!");
+                _notyfService.Error("Unable to get loaded package information!");
                 return RedirectToAction("AddFunds");
             }
 
