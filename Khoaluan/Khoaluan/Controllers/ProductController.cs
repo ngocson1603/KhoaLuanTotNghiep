@@ -41,6 +41,7 @@ namespace Khoaluan.Controllers
             var PopularGame = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).OrderByDescending(t=>t.Price).Take(6).ToList();
             var saleProduct = _unitOfWork.SaleProductRepository.ProductSaleHomePage().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).ToList();
             var RencentlyReleased = _unitOfWork.SaleProductRepository.ProductNotSale().Where(t => t.Status == release && t.ReleaseDate <= DateTime.Now).OrderByDescending(t => t.ReleaseDate).ToList();
+            var gamesale = _unitOfWork.SaleRepository.GetAll().Where(t => t.EndDate > DateTime.Now).ToList();
             HomePageViewModel homepage = new HomePageViewModel()
             {
                 bestSeller = bestSeller,
@@ -49,6 +50,7 @@ namespace Khoaluan.Controllers
                 RecentlyRealeased = RencentlyReleased,
                 saleProduct = saleProduct
             };
+            ViewBag.GameSale = gamesale;
             TempData.Keep("idpro");
             return View(homepage);
         }
