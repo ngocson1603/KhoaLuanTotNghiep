@@ -31,6 +31,7 @@ namespace Khoaluan
             modelBuilder.ApplyConfiguration(new SaleConfiguration());
             modelBuilder.ApplyConfiguration(new SaleProductConfiguration());
             modelBuilder.ApplyConfiguration(new BlogConfigurationcs());
+            modelBuilder.ApplyConfiguration(new AddFundTransactionConfiguration());
             modelBuilder.Entity<MarketTransaction>().Property(e => e.TotalPrice).HasPrecision(18, 2);
             modelBuilder.Entity<Market>().Property(e => e.PricePerItem).HasPrecision(18, 2);
             modelBuilder.Entity<Item>().Property(e=>e.MaxPrice).HasPrecision(18, 2);

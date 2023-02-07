@@ -10,5 +10,6 @@ namespace Khoaluan.Models
         public string Name { get; set; }
         public int Price { get; set; }
         public float Tax { get; set; }
+        public List<AddFundTransaction> AddFundTransactions { get; set; }
     }
 }
