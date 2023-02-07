@@ -22,5 +22,6 @@ namespace Khoaluan.Models
         public List<Refund> Refunds { get; set; }
         public List<MarketTransaction> Buys { get; set; }
         public List<MarketTransaction> Sells { get; set; }
+        public List<AddFundTransaction> AddFundTransactions { get; set; }
     }
 }
