@@ -165,7 +165,7 @@ from Developer,Product where Product.DevId = Developer.Id";
         public List<Product> listProductItem(int id)
         {
             var query = @"select Product.* from Product, Item,Inventory,Library where Product.Id = Item.ProductId and Inventory.ItemID = Item.Id and Library.ProductId = Product.Id and Inventory.UserID =@id
-group by Product.Id,Product.Name,Product.Overview,Product.Description,Product.ReleaseDate,Product.Price,Product.Image,Product.DevId,Product.Status";
+group by Product.AppId,Product.Id,Product.Name,Product.Overview,Product.Description,Product.ReleaseDate,Product.Price,Product.Image,Product.DevId,Product.Status";
             var parameter = new DynamicParameters();
             parameter.Add("id", id);
             var result = Context.Database.GetDbConnection().Query<Product>(query, parameter);
@@ -176,6 +176,16 @@ group by Product.Id,Product.Name,Product.Overview,Product.Description,Product.Re
             var query = @"select * from Product where CAST(releasedate as date)=CAST(getdate() as date) and Status=1";
             var data = Context.Database.GetDbConnection().Query<Product>(query);
             return data.ToList();
+        }
+
+        public List<ActiveGame> TopProduct()
+        {
+            var query = @"select Product.Name as NamePro,Product.Image as Image,Developer.Name as NameDev,SUM(OrderDetail.Price) as Price from Product,Developer,[Order],OrderDetail where 
+Product.Id = OrderDetail.ProductID and OrderDetail.Id=[Order].Id and Product.DevId = Developer.Id
+group by Product.Name,Product.Image,Developer.Name
+order by Price desc ";
+            var result = Context.Database.GetDbConnection().Query<ActiveGame>(query);
+            return result.ToList();
         }
     }
 }

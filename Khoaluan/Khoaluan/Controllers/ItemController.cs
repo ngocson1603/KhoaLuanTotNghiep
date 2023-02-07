@@ -120,7 +120,39 @@ namespace Khoaluan.Controllers
                 return RedirectToRoute("ListItem");
             }
         }
+        [Route("/ListItem/Product/{id}.html", Name = ("ItemProductByNamePro"))]
+        public IActionResult ItemProductByNamePro(string id, int? page)
+        {
+            try
+            {
+                ViewBag.idproitem = id.Trim();
+                var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+                var pageSize = 10;
+                var product = _unitOfWork.ProductRepository.listProductItem().OrderBy(i => i.Id).ToList();
+                var ls = _unitOfWork.ItemRepository.getItemSell().Where(t => t.NameGame.Contains(id, StringComparison.OrdinalIgnoreCase)).ToList();
+                if (ls.Count() <= 10)
+                    ViewBag.maxPage = 1;
+                else
+                {
+                    double dMaxPage = Convert.ToDouble(ls.Count());
+                    ViewBag.maxPage = Math.Ceiling(dMaxPage / 10);
+                }
 
+                var pl = ls.AsQueryable().ToPagedList(pageNumber, pageSize);
+                var plr = pl.ToList();
+                AdminProduct ad = new AdminProduct()
+                {
+                    itembySell = plr,
+                    productdev = product
+                };
+                ViewBag.CurrentPage = pageNumber;
+                return View(ad);
+            }
+            catch
+            {
+                return RedirectToRoute("ListItem");
+            }
+        }
         public ActionResult DetailsItemSell(int? id)
         {
             if (id == null)

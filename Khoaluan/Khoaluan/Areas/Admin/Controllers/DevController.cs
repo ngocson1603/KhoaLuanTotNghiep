@@ -430,7 +430,7 @@ namespace Khoaluan.Controllers
         // POST: AdminProductsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status")] Product product, PostSelectedViewModel model, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Overview,Description,Price,Image,DevId,ReleaseDate,Status,AppId")] Product product, PostSelectedViewModel model, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (id != product.Id)
             {
@@ -444,6 +444,12 @@ namespace Khoaluan.Controllers
                     if (model.SelectedIds == null)
                     {
                         _notyfService.Warning("Please select a category");
+                        return RedirectToAction(nameof(IndexDev));
+                    }
+                    var x = _unitOfWork.ProductRepository.GetAll().Where(t => t.AppId == product.AppId).ToList();
+                    if (x.Count() > 0)
+                    {
+                        _notyfService.Warning("AppId already exists");
                         return RedirectToAction(nameof(IndexDev));
                     }
                     product.Name = Utilities.ToTitleCase(product.Name);

@@ -2,12 +2,16 @@
 using Khoaluan.Enums;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
+using Khoaluan.VNPayOthers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace Khoaluan.Controllers
@@ -23,13 +27,21 @@ namespace Khoaluan.Controllers
         private string _secretKey;
         private string _paypalEnvironment = "sandbox";
 
+        // VNPay Settings
+        private string _tmnCode;
+        private string _hashSecret;
+
         public FundController(INotyfService notyfService, IUnitOfWork unitOfWork, IService service, IConfiguration config)
         {
             _notyfService = notyfService;
             _unitOfWork = unitOfWork;
             _service = service;
+
             _clientID = config["PaypalSettings:ClientID"];
             _secretKey = config["PaypalSettings:SecretKey"];
+
+            _tmnCode = config["VNPaySettings:TmnCode"];
+            _hashSecret = config["VNPaySettings:HashSecret"];
         }
 
         [HttpGet]
@@ -98,7 +110,8 @@ namespace Khoaluan.Controllers
             string id = null
         )
         {
-            #region local_variables
+            #region Local variables
+
             // Setup paypal environment
             MyPaypalPayment.MyPaypalSetup payPalSetup = new MyPaypalPayment.MyPaypalSetup()
             {
@@ -130,9 +143,11 @@ namespace Khoaluan.Controllers
                 _notyfService.Error("Không thể lấy thông tin gói nạp!");
                 return RedirectToAction("AddFunds");
             }
+
             #endregion
 
-            #region check_payment_cancellation
+            #region Check payment cancellation
+
             // Kiểm tra nếu payer hủy giao dịch
             if (!string.IsNullOrEmpty(Cancel) && Cancel.Trim().ToLower() == "true")
             {
@@ -142,6 +157,7 @@ namespace Khoaluan.Controllers
                 HttpContext.Session.Remove("SS_Paypal");
                 return RedirectToAction("AddFunds");
             }
+
             #endregion
 
             payPalSetup.PayerApprovedOrderId = token;
@@ -158,7 +174,8 @@ namespace Khoaluan.Controllers
                     return RedirectToAction("AddFunds");
                 }
 
-                #region order_creation
+                #region Order creation
+
                 // Lưu session Paypal, gói nạp: SS_Paypal, SS_FundId
                 HttpContext.Session.SetString("SS_Paypal", "order_creation");
                 HttpContext.Session.SetString("SS_FundId", id);
@@ -192,11 +209,13 @@ namespace Khoaluan.Controllers
                     paymentResultList.Add("There was an error in processing your payment");
                     paymentResultList.Add("Details: " + ex.Message);
                 }
+
                 #endregion
             }
             else
             {
-                #region order_execution
+                #region Order execution
+
                 // Lưu session Paypal: SS_Paypal
                 HttpContext.Session.SetString("SS_Paypal", "order_execution");
 
@@ -216,24 +235,6 @@ namespace Khoaluan.Controllers
                         _notyfService.Success("Thanh toán thành công!");
                         _notyfService.Information("Cập nhật số dư ví thành công!");
                         paymentResultList.Add("Payment Successful. Thank you.");
-
-                        //switch (kq)
-                        //{
-                        //    case -1:
-                        //        _notyfService.Information("Không tìm thấy tài khoản!");
-                        //        break;
-                        //    case 0:
-                        //        _notyfService.Error("Có lỗi trong quá trình cập nhật số dư ví!");
-                        //        break;
-                        //    case 1:
-                        //        _unitOfWork.SaveChange();
-                        //        _notyfService.Information("Cập nhật số dư ví thành công!");
-                        //        break;
-
-                        //    default:
-                        //        _notyfService.Error("Lỗi không xác định");
-                        //        break;
-                        //}
 
                         HttpContext.Session.Remove("SS_Token");
                         HttpContext.Session.Remove("SS_Paypal");
@@ -255,7 +256,211 @@ namespace Khoaluan.Controllers
                     paymentResultList.Add("There was an error in processing your payment");
                     paymentResultList.Add("Details: " + ex.Message);
                 }
+
                 #endregion
+            }
+
+            return RedirectToAction("AddFunds");
+        }
+
+        public ActionResult VNPayvtwo(string id = null)
+        {
+            var fund = _unitOfWork.FundRepository.GetById(Convert.ToInt32(id));
+
+            if (fund == null)
+            {
+                _notyfService.Error("Unable to get loaded package information!");
+                return RedirectToAction("AddFunds");
+            }
+
+            decimal tax = Math.Round((decimal)(fund.Price * fund.Tax), 2);
+            int total = Convert.ToInt32((tax + fund.Price) * 24000 * 100);
+
+            string url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+            string redirectUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + $"/Fund/PaymentConfirm?id={id}";
+
+            // Lấy địa chỉ IP của người dùng hiện hành
+            IPAddress remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
+            string ipAddress = "";
+
+            if (remoteIpAddress != null)
+            {
+                if (remoteIpAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                {
+                    remoteIpAddress = System.Net.Dns.GetHostEntry(remoteIpAddress).AddressList.First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                }
+
+                ipAddress = remoteIpAddress.ToString();
+            }
+
+            PayLib pay = new PayLib();
+            pay.AddRequestData("vnp_Version", "2.1.0");
+            pay.AddRequestData("vnp_Command", "pay");
+            pay.AddRequestData("vnp_TmnCode", _tmnCode);
+            pay.AddRequestData("vnp_Amount", total.ToString());
+            pay.AddRequestData("vnp_BankCode", "");
+            pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            pay.AddRequestData("vnp_CurrCode", "VND");
+            pay.AddRequestData("vnp_IpAddr", ipAddress);
+            pay.AddRequestData("vnp_Locale", "vn"); // Ngôn ngữ giao diện hiển thị - Tiếng Việt (vn), Tiếng Anh (en)
+            pay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang"); // Thông tin mô tả nội dung thanh toán
+            pay.AddRequestData("vnp_OrderType", "other");
+            pay.AddRequestData("vnp_ReturnUrl", redirectUrl); // URL thông báo kết quả giao dịch khi Khách hàng kết thúc thanh toán
+            pay.AddRequestData("vnp_TxnRef", DateTime.Now.Ticks.ToString()); // Mã hóa đơn
+
+            string paymentUrl = pay.CreateRequestUrl(url, _hashSecret);
+
+            return Redirect(paymentUrl);
+        }
+        public ActionResult Momovtwo(string id = null)
+        {
+            var fund = _unitOfWork.FundRepository.GetById(Convert.ToInt32(id));
+
+            if (fund == null)
+            {
+                _notyfService.Error("Unable to get loaded package information!");
+                return RedirectToAction("AddFunds");
+            }
+
+            decimal tax = Math.Round((decimal)(fund.Price * fund.Tax), 2);
+            string total = Convert.ToInt32((tax + fund.Price) * 24000).ToString();
+
+            //request params need to request to MoMo system
+            string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+            string partnerCode = "MOMOOJOI20210710";
+            string accessKey = "iPXneGmrJH0G8FOP";
+            string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
+            string orderInfo = "Checkout";
+            string returnUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + $"/Fund/MomoConfirm?id={id}";
+            string notifyurl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + $"/Fund/MomoConfirm?id={id}"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+
+            string amount = total;
+            string orderid = DateTime.Now.Ticks.ToString(); //mã đơn hàng
+            string requestId = DateTime.Now.Ticks.ToString();
+            string extraData = "";
+
+            //Before sign HMAC SHA256 signature
+            string rawHash = "partnerCode=" +
+                partnerCode + "&accessKey=" +
+                accessKey + "&requestId=" +
+                requestId + "&amount=" +
+                amount + "&orderId=" +
+                orderid + "&orderInfo=" +
+                orderInfo + "&returnUrl=" +
+                returnUrl + "&notifyUrl=" +
+                notifyurl + "&extraData=" +
+                extraData;
+
+            MoMoSecurity crypto = new MoMoSecurity();
+            //sign signature SHA256
+            string signature = crypto.signSHA256(rawHash, serectkey);
+
+            //build body json request
+            JObject message = new JObject
+            {
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "notifyUrl", notifyurl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+
+            };
+
+            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+
+            JObject jmessage = JObject.Parse(responseFromMomo);
+
+            return Redirect(jmessage.GetValue("payUrl").ToString());
+        }
+
+        public ActionResult MomoConfirm(
+            [FromQuery(Name = "orderId")] string orderId,
+            string id = null)
+        {
+            var accountId = HttpContext.Session.GetString("CustomerId");
+            var fund = _unitOfWork.FundRepository.GetById(Convert.ToInt32(id));
+            if (fund == null)
+            {
+                _notyfService.Error("Unable to get loaded package information!");
+                return RedirectToAction("AddFunds");
+            }
+            int errorCode = int.Parse(HttpContext.Request.Query["errorCode"]);
+            if (!errorCode.Equals(0))
+            {
+                _notyfService.Error("Transaction error!");
+                return RedirectToAction("AddFunds");
+            }
+            else
+            {
+                _unitOfWork.UserRepository.updateBalance(Convert.ToInt32(accountId), fund.Price, (int)marketType.paypal);
+                _unitOfWork.SaveChange();
+                _notyfService.Information("Payment successful Order ID " + orderId);
+                _notyfService.Success("Update balance successful");
+            }
+            return RedirectToAction("AddFunds");
+        }
+        public ActionResult PaymentConfirm(
+            [FromQuery(Name = "vnp_Amount")] string vnp_Amount,
+            [FromQuery(Name = "vnp_BankCode")] string vnp_BankCode,
+            [FromQuery(Name = "vnp_BankTranNo")] string vnp_BankTranNo,
+            [FromQuery(Name = "vnp_CardType")] string vnp_CardType,
+            [FromQuery(Name = "vnp_OrderInfo")] string vnp_OrderInfo,
+            [FromQuery(Name = "vnp_PayDate")] string vnp_PayDate,
+            [FromQuery(Name = "vnp_ResponseCode")] string vnp_ResponseCode,
+            [FromQuery(Name = "vnp_TmnCode")] string vnp_TmnCode,
+            [FromQuery(Name = "vnp_TransactionNo")] string vnp_TransactionNo,
+            [FromQuery(Name = "vnp_TransactionStatus")] string vnp_TransactionStatus,
+            [FromQuery(Name = "vnp_TxnRef")] string vnp_TxnRef,
+            [FromQuery(Name = "vnp_SecureHash")] string vnp_SecureHash,
+            string id = null
+            )
+        {
+            if (vnp_ResponseCode == "24")
+            {
+                _notyfService.Information("Đã hủy giao dịch!");
+                return RedirectToAction("AddFunds");
+            }
+
+            PayLib pay = new PayLib();
+            string hashString = $"vnp_Amount={vnp_Amount}&vnp_BankCode={vnp_BankCode}&vnp_BankTranNo={vnp_BankTranNo}&vnp_CardType={vnp_CardType}&vnp_OrderInfo=Thanh+toan+don+hang&vnp_PayDate={vnp_PayDate}&vnp_ResponseCode={vnp_ResponseCode}&vnp_TmnCode={vnp_TmnCode}&vnp_TransactionNo={vnp_TransactionNo}&vnp_TransactionStatus={vnp_TransactionStatus}&vnp_TxnRef={vnp_TxnRef}";
+
+            long orderId = Convert.ToInt64(vnp_TxnRef); // Mã hóa đơn
+            long vnpayTranId = Convert.ToInt64(vnp_TransactionNo); // Mã giao dịch tại hệ thống VNPAY
+
+            bool checkSignature = pay.ValidateSignature(vnp_SecureHash, _hashSecret, hashString); // check chữ ký đúng hay không?
+
+            var accountId = HttpContext.Session.GetString("CustomerId");
+            var fund = _unitOfWork.FundRepository.GetById(Convert.ToInt32(id));
+
+            if (fund == null)
+            {
+                _notyfService.Error("Unable to get loaded package information!");
+                return RedirectToAction("AddFunds");
+            }
+
+            if (checkSignature)
+            {
+                if (vnp_ResponseCode == "00")
+                {
+                    _unitOfWork.UserRepository.updateBalance(Convert.ToInt32(accountId), fund.Price, (int)marketType.paypal);
+                    _unitOfWork.SaveChange();
+                    _notyfService.Information("Payment successful Order ID " + orderId + " Transaction ID " + vnpayTranId);
+                    _notyfService.Success("Update balance successful");
+                }
+                else
+                {
+                    _notyfService.Error("Có lỗi xảy ra trong quá trình xử lý hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId + " | Mã lỗi: " + vnp_ResponseCode);
+                }
+            }
+            else
+            {
+                _notyfService.Error("Có lỗi xảy ra trong quá trình xử lý");
             }
 
             return RedirectToAction("AddFunds");
