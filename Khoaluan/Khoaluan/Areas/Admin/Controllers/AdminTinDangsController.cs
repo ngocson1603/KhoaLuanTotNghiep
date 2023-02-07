@@ -95,7 +95,11 @@ namespace WebShop.Areas.Admin.Controllers
                     throw;
                 }
             }
-            return View(blog);
+            else
+            {
+                _notyfService.Error("Error");
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // GET: Admin/AdminTinDangs/Edit/5
@@ -139,7 +143,7 @@ namespace WebShop.Areas.Admin.Controllers
                     }
                     if (string.IsNullOrEmpty(blog.Image)) blog.Image = "default.jpg";
                     blog.Alias = Utilities.SEOUrl(blog.Title);
-                    
+
                     _unitOfWork.BlogRepository.Update(blog);
                     _unitOfWork.SaveChange();
                     _notyfService.Success("Update Success");
@@ -157,7 +161,11 @@ namespace WebShop.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(blog);
+            else
+            {
+                _notyfService.Error("Error");
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // GET: Admin/AdminTinDangs/Delete/5

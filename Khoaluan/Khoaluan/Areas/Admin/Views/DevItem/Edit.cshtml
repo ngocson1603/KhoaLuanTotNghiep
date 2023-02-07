@@ -31,31 +31,31 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
-                        <label class="font-weight-semibold" for="productName">Tên sản phẩm</label>
+                        <label class="font-weight-semibold" for="productName">Item Name</label>
                         <input type="text" class="form-control" asp-for="Name">
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="font-weight-semibold" for="productPrice">Giá bán Max</label>
-                            <input type="text" class="form-control" asp-for="MaxPrice">
+                            <label class="font-weight-semibold" for="productPrice">MaxPrice</label>
+                            <input type="number" class="form-control" asp-for="MaxPrice">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="font-weight-semibold" for="productPrice">Giá bán Min</label>
-                            <input type="text" class="form-control" asp-for="MinPrice">
+                            <label class="font-weight-semibold" for="productPrice">MinPrice</label>
+                            <input type="number" class="form-control" asp-for="MinPrice">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-6">
-                            <label class="font-weight-semibold" for="productCategory">Danh mục sản phẩm</label>
+                            <label class="font-weight-semibold" for="productCategory">Category Product</label>
                             <select class="custom-select" asp-for="ProductId" style="min-width: 200px;" asp-items="ViewBag.Item">
-                                <option value="" disabled selected>Chọn danh mục</option>
+                                <option value="" disabled selected>Choose</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="font-weight-semibold" for="productBrand">Ảnh đại diện</label>
+                        <label class="font-weight-semibold" for="productBrand">Image</label>
                         <input id="txtFile" name="fThumb" type="file" class="form-control-file" asp-for="Image" />
                         <span asp-validation-for="Image" class="text-danger"></span>
                         <img id="imgView" width="400" height="559" src="~/Images/@Url.Content(Model.Image)" alt="@Model.Name" />

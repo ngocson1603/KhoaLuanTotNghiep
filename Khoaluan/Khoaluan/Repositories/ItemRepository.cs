@@ -37,7 +37,7 @@ namespace Khoaluan.Repositories
 
         public List<SellitemModelView> getItemByUser(int id)
         {
-            var query = @"select Item.Id as Id,Item.Name as NameItem,Item.Image as Image,MinPrice,MaxPrice,Quantity,MinPrice,MaxPrice from Item,Inventory where Item.Id = Inventory.ItemID and Inventory.UserID = @id";
+            var query = @"select Item.Id as Id,Item.Name as NameItem,Item.Image as Image,MinPrice,MaxPrice,Quantity,MinPrice,MaxPrice,Product.Name as NameGame from Item,Inventory,Product where Item.Id = Inventory.ItemID and Product.Id = Item.ProductId and Inventory.UserID = @id";
             var parameter = new DynamicParameters();
             parameter.Add("id", id);
             var data = Context.Database.GetDbConnection().Query<SellitemModelView>(query, parameter);

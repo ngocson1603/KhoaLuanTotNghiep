@@ -15,6 +15,7 @@
     <input type="hidden" asp-for="@Model.product.Image" />
     <input type="hidden" asp-for="@Model.product.ReleaseDate" />
     <input type="hidden" asp-for="@Model.product.DevId" />
+    <input type="hidden" asp-for="@Model.product.Status" />
     <div class="page-header no-gutters has-tab">
         <div class="d-md-flex m-b-15 align-items-center justify-content-between">
             <div class="m-b-15">
@@ -23,6 +24,15 @@
                     <span>Save</span>
                 </button>
             </div>
+            @if (Model.product.Status == 2)
+            {
+                <div class="m-b-15">
+                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Dev" asp-action="Approved" asp-route-id="@Model.product.Id">
+                        <i class="anticon anticon-save"></i>
+                        <span>approved the game</span>
+                    </a>
+                </div>
+            }
         </div>
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -47,7 +57,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="font-weight-semibold" for="productPrice">Price</label>
-                            <input type="text" class="form-control" asp-for="@Model.product.Price">
+                            <input type="number" class="form-control" asp-for="@Model.product.Price">
                         </div>
                     </div>
 
@@ -65,16 +75,6 @@
                             {
                                 <label class="font-weight-semibold" for="productPrice">@itemca,</label>
                             }
-                        </div>
-                        <div class="form-group col-6">
-                            <label class="font-weight-semibold" for="productCategory">Status</label>
-                            <select class="custom-select" asp-for="@Model.product.Status" style="min-width: 200px;">
-                                <option disabled selected>Choose option</option>
-                                <option value="0">pending</option>
-                                <option value="1">accept</option>
-                                <option value="2">decline</option>
-                                <option value="3">release</option>
-                            </select>
                         </div>
                     </div>
                     <div class="form-group">

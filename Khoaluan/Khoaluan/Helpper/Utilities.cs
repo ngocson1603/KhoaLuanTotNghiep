@@ -205,9 +205,9 @@ namespace Khoaluan.Helpper
         }
         public static void sendemaildev(string emailaddress, Developer dev)
         {
-            if (emailaddress.Length == 0)
+            if (emailaddress.Length == 0 || emailaddress == null)
             {
-
+                return;
             }
             else
             {

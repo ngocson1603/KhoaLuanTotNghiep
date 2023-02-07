@@ -148,6 +148,11 @@ namespace Khoaluan.Controllers
                         _notyfService.Warning("Please select a category");
                         return RedirectToAction(nameof(Index));
                     }
+                    if (product.Price <= 0)
+                    {
+                        _notyfService.Warning("Price is Correct");
+                        return RedirectToAction(nameof(Index));
+                    }
                     product.Name = Utilities.ToTitleCase(product.Name);
                     if (fThumb != null)
                     {
@@ -184,6 +189,17 @@ namespace Khoaluan.Controllers
             }
             ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
             return View(product);
+        }
+
+        public ActionResult Approved(int id)
+        {
+            var product = _unitOfWork.ProductRepository.GetById(id);
+            product.Status = (int)Enums.productType.pending;
+            product.ReleaseDate = DateTime.Now;
+            _unitOfWork.ProductRepository.Update(product);
+            _unitOfWork.SaveChange();
+            _notyfService.Success("Success");
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AdminProductsController/Delete/5
@@ -373,8 +389,13 @@ namespace Khoaluan.Controllers
                     return RedirectToAction(nameof(IndexDev));
                 }
             }
+            else
+            {
+                _notyfService.Error("Error");
+                return RedirectToAction(nameof(IndexDev));
+            }
             //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
-            return View(product);
+            
         }
 
         // GET: DevController/Edit/5
@@ -449,6 +470,11 @@ namespace Khoaluan.Controllers
                     if (model.SelectedIds == null)
                     {
                         _notyfService.Warning("Please select a category");
+                        return RedirectToAction(nameof(IndexDev));
+                    }
+                    if (product.Price <= 0)
+                    {
+                        _notyfService.Warning("Price is Correct");
                         return RedirectToAction(nameof(IndexDev));
                     }
                     var x = _unitOfWork.ProductRepository.GetAll().Where(t => t.AppId == product.AppId).ToList();

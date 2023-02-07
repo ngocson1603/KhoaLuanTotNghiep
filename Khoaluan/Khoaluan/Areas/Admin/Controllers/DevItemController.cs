@@ -32,7 +32,7 @@ namespace Khoaluan.Areas.Admin.Controllers
             ViewData["GameItem"] = new SelectList(_unitOfWork.ProductRepository.GetAll(), "Id", "Name");
             return View(ls);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateItem([Bind("Id,Name,Image,ProductId,MinPrice,MaxPrice")] Item item, Microsoft.AspNetCore.Http.IFormFile fThumb)
@@ -41,6 +41,11 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (item.MaxPrice < item.MinPrice || item.MaxPrice <= 0 || item.MinPrice <= 0)
+                    {
+                        _notyfService.Error("Price is Correct");
+                        return RedirectToAction(nameof(Index));
+                    }
                     item.Name = Utilities.ToTitleCase(item.Name);
                     if (fThumb != null)
                     {
@@ -135,6 +140,11 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (item.MaxPrice < item.MinPrice || item.MaxPrice <= 0 || item.MinPrice <= 0)
+                    {
+                        _notyfService.Error("Price is correct");
+                        return RedirectToAction(nameof(Index));
+                    }
                     item.Name = Utilities.ToTitleCase(item.Name);
                     if (fThumb != null)
                     {
