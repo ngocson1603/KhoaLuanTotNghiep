@@ -231,6 +231,16 @@ namespace Khoaluan.Controllers
                     if (result.Status.Trim().ToUpper() == "COMPLETED")
                     {
                         _unitOfWork.UserRepository.updateBalance(Convert.ToInt32(accountId), fund.Price, (int)marketType.paypal);
+                        AddFundTransaction add = new AddFundTransaction()
+                        {
+                            //TransactionId = vnpayTranId.ToString(),
+                            //OrderId = orderId.ToString(),
+                            FundId = int.Parse(id),
+                            UserId = int.Parse(accountId),
+                            PaymentMethod = "PayPal",
+                            CreateOn = DateTime.Now,
+                        };
+                        _unitOfWork.AddFundTransactionRepository.Create(add);
                         _unitOfWork.SaveChange();
                         _notyfService.Success("Thanh toán thành công!");
                         _notyfService.Information("Cập nhật số dư ví thành công!");
@@ -381,6 +391,8 @@ namespace Khoaluan.Controllers
 
         public ActionResult MomoConfirm(
             [FromQuery(Name = "orderId")] string orderId,
+            [FromQuery(Name = "transId")] string momoTranId,
+            [FromQuery(Name = "responseTime")] DateTime dateTime,
             string id = null)
         {
             var accountId = HttpContext.Session.GetString("CustomerId");
@@ -399,8 +411,18 @@ namespace Khoaluan.Controllers
             else
             {
                 _unitOfWork.UserRepository.updateBalance(Convert.ToInt32(accountId), fund.Price, (int)marketType.paypal);
+                AddFundTransaction add = new AddFundTransaction()
+                {
+                    TransactionId = momoTranId,
+                    OrderId = orderId,
+                    FundId = int.Parse(id),
+                    UserId = int.Parse(accountId),
+                    PaymentMethod = "Momo",
+                    CreateOn = dateTime,
+                };
+                _unitOfWork.AddFundTransactionRepository.Create(add);
                 _unitOfWork.SaveChange();
-                _notyfService.Information("Payment successful Order ID " + orderId);
+                _notyfService.Information("Payment successful Order ID " + orderId + " Transaction ID " + momoTranId);
                 _notyfService.Success("Update balance successful");
             }
             return RedirectToAction("AddFunds");
@@ -449,6 +471,16 @@ namespace Khoaluan.Controllers
                 if (vnp_ResponseCode == "00")
                 {
                     _unitOfWork.UserRepository.updateBalance(Convert.ToInt32(accountId), fund.Price, (int)marketType.paypal);
+                    AddFundTransaction add = new AddFundTransaction()
+                    {
+                        TransactionId = vnpayTranId.ToString(),
+                        OrderId = orderId.ToString(),
+                        FundId = int.Parse(id),
+                        UserId = int.Parse(accountId),
+                        PaymentMethod = "VNPay",
+                        CreateOn = DateTime.Now,
+                    };
+                    _unitOfWork.AddFundTransactionRepository.Create(add);
                     _unitOfWork.SaveChange();
                     _notyfService.Information("Payment successful Order ID " + orderId + " Transaction ID " + vnpayTranId);
                     _notyfService.Success("Update balance successful");
