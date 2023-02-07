@@ -231,16 +231,18 @@ namespace Khoaluan.Controllers
                     if (result.Status.Trim().ToUpper() == "COMPLETED")
                     {
                         _unitOfWork.UserRepository.updateBalance(Convert.ToInt32(accountId), fund.Price, (int)marketType.paypal);
+
                         AddFundTransaction add = new AddFundTransaction()
                         {
-                            //TransactionId = vnpayTranId.ToString(),
-                            //OrderId = orderId.ToString(),
-                            FundId = int.Parse(id),
+                            TransactionId = result.PurchaseUnits[0].Payments.Captures[0].Id,
+                            OrderId = result.Id,
+                            FundId = int.Parse(HttpContext.Session.GetString("SS_FundId")),
                             UserId = int.Parse(accountId),
                             PaymentMethod = "PayPal",
                             CreateOn = DateTime.Now,
                         };
                         _unitOfWork.AddFundTransactionRepository.Create(add);
+
                         _unitOfWork.SaveChange();
                         _notyfService.Success("Thanh toán thành công!");
                         _notyfService.Information("Cập nhật số dư ví thành công!");
@@ -427,6 +429,7 @@ namespace Khoaluan.Controllers
             }
             return RedirectToAction("AddFunds");
         }
+
         public ActionResult PaymentConfirm(
             [FromQuery(Name = "vnp_Amount")] string vnp_Amount,
             [FromQuery(Name = "vnp_BankCode")] string vnp_BankCode,
@@ -482,7 +485,7 @@ namespace Khoaluan.Controllers
                     };
                     _unitOfWork.AddFundTransactionRepository.Create(add);
                     _unitOfWork.SaveChange();
-                    _notyfService.Information("Payment successful Order ID " + orderId + " Transaction ID " + vnpayTranId);
+                    _notyfService.Information("Payment successful\nOrder ID " + orderId + "Transaction ID " + vnpayTranId);
                     _notyfService.Success("Update balance successful");
                 }
                 else

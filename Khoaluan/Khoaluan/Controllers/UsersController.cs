@@ -88,6 +88,7 @@ namespace Khoaluan.Controllers
                     //ViewBag.DonHang = lsDonHang;
                     ViewBag.NumberOfGames = _unitOfWork.LibraryRepository.getLibrary(khachhang.Id).Count();
                     ViewBag.NumberOfGamesRf = _unitOfWork.RefundRepository.listgameRefund(int.Parse(taikhoanID)).Count();
+                    ViewBag.NumberOfItems = "50";
                     return View(khachhang);
                 }
             }

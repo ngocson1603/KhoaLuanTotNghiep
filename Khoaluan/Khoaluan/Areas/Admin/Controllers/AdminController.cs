@@ -127,11 +127,19 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 try
                 {
-                    _unitOfWork.DeveloperRepository.Create(developer);
-                    _unitOfWork.SaveChange();
-                    Utilities.sendemaildev(developer.UserName, developer);
-                    _notyfService.Success("Successfully added new");
-                    return RedirectToAction(nameof(Index));
+                    if (developer.UserName != null)
+                    {
+                        _unitOfWork.DeveloperRepository.Create(developer);
+                        _unitOfWork.SaveChange();
+                        Utilities.sendemaildev(developer.UserName, developer);
+                        _notyfService.Success("Successfully added new");
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        _notyfService.Error("Error");
+                        return RedirectToAction(nameof(Index));
+                    }
                 }
                 catch (Exception)
                 {

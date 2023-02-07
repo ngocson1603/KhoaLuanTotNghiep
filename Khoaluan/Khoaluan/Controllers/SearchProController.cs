@@ -150,7 +150,7 @@ namespace Khoaluan.Controllers
             var pageSize = 10;
             var taikhoanID = HttpContext.Session.GetString("CustomerId");
             var product = _unitOfWork.ProductRepository.listProductItem(int.Parse(taikhoanID)).OrderBy(i => i.Id).ToList();
-            var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID)).Where(t => t.NameItem.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+            var item = _unitOfWork.ItemRepository.getItemByUser(int.Parse(taikhoanID)).Where(t => t.NameGame.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
             if (item.Count() <= 10)
                 ViewBag.maxPage = 1;
             else
