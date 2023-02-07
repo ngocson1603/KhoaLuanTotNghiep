@@ -66,7 +66,12 @@ namespace Khoaluan.Controllers
         public IActionResult Index()
         {
             var taikhoanID = HttpContext.Session.GetString("AccountId");
-            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Status == (int)productType.pending && t.DevId == int.Parse(taikhoanID)).ToList();
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => 
+            (
+                (t.Status == (int)productType.pending) || 
+                (t.Status == (int)productType.decline)
+            )
+            && t.DevId == int.Parse(taikhoanID)).ToList();
 
             return View(ls);
         }
