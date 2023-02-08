@@ -30,46 +30,6 @@ namespace Khoaluan.Controllers
             _service = service;
         }
 
-        /* ValidatePhone
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult ValidatePhone(string Phone)
-        {
-            try
-            {
-                var khachhang = _context.Customers.AsNoTracking().SingleOrDefault(x => x.Phone.ToLower() == Phone.ToLower());
-                if (khachhang != null)
-                    return Json(data: "Số điện thoại : " + Phone + "đã được sử dụng");
-
-                return Json(data: true);
-
-            }
-            catch
-            {
-                return Json(data: true);
-            }
-        }
-        */
-
-        /* ValidateEmail
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult ValidateEmail(string Email)
-        {
-            try
-            {
-                var khachhang = _context.Customers.AsNoTracking().SingleOrDefault(x => x.Email.ToLower() == Email.ToLower());
-                if (khachhang != null)
-                    return Json(data: "Email : " + Email + " đã được sử dụng");
-                return Json(data: true);
-            }
-            catch
-            {
-                return Json(data: true);
-            }
-        }
-        */
-
         [Route("tai-khoan-cua-toi.html", Name = "Dashboard")]
         public IActionResult Dashboard()
         {
