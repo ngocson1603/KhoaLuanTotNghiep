@@ -143,7 +143,12 @@ namespace Khoaluan.Controllers
             {
                 try
                 {
-                    if (model.SelectedIds == null)
+                    if (product.Name == null || product.Overview == null || product.AppId.ToString() == null || product.Description == null)
+                    {
+                        _notyfService.Error("Error");
+                        return RedirectToAction(nameof(Index));
+                    }
+                        if (model.SelectedIds == null)
                     {
                         _notyfService.Warning("Please select a category");
                         return RedirectToAction(nameof(Index));
@@ -467,6 +472,11 @@ namespace Khoaluan.Controllers
 
                 try
                 {
+                    if (product.Name.Length == 0 || product.Overview.Length == 0 || product.AppId.ToString().Length == 0 || product.Description.Length == 0)
+                    {
+                        _notyfService.Error("Error");
+                        return RedirectToAction(nameof(IndexDev));
+                    }
                     if (model.SelectedIds == null)
                     {
                         _notyfService.Warning("Please select a category");

@@ -41,6 +41,11 @@ namespace Khoaluan.Areas.Admin.Controllers
             {
                 try
                 {
+                    if(item.Name == null)
+                    {
+                        _notyfService.Error("Error");
+                        return RedirectToAction(nameof(Index));
+                    }
                     if (item.MaxPrice < item.MinPrice || item.MaxPrice <= 0 || item.MinPrice <= 0)
                     {
                         _notyfService.Error("Price is Correct");
