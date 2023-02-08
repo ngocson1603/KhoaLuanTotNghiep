@@ -156,7 +156,7 @@ namespace Khoaluan.Controllers
             }
             catch
             {
-                _notyfService.Success("Đã có lỗi xảy ra");
+                _notyfService.Success("An error has occurred");
                 return Redirect(url);
             }
         }
@@ -213,12 +213,12 @@ namespace Khoaluan.Controllers
             try
             {
                 _discussionService.comment(idpost, name, comm);
-                _notyfService.Success("Tạo mới thành công");
+                _notyfService.Success("Successful new creation");
                 return Redirect(url);
             }
             catch
             {
-                _notyfService.Success("Tạo mới không thành công");
+                _notyfService.Success("New creation failed");
                 return Redirect(url);
             }
         }

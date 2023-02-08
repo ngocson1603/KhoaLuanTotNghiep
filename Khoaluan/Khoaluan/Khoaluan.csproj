@@ -49,7 +49,6 @@
     <None Include="Views\Checkout\Check.cshtml" />
     <None Include="Views\Blog\BlogArticle.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
-    <None Include="Views\Home\News.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
     <None Include="Views\Home\Support.cshtml" />
     <None Include="Views\ProductCart\Cart.cshtml" />

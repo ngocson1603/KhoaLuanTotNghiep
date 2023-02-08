@@ -75,7 +75,7 @@ namespace DuAnGame.Controllers
                 //Luu lai Session
                 HttpContext.Session.Set<List<Cart>>("_GioHang", cart);
                 ViewBag.GioHang = cart;
-                _notyfService.Success("Thêm sản phẩm thành công");
+                _notyfService.Success("More successful products");
                 return Json(new { success = true });
             }
             catch
@@ -107,20 +107,20 @@ namespace DuAnGame.Controllers
                             Password = "caofqthenhkakkgl"
                         }
                     };
-                    MailAddress fromemail = new MailAddress("sondovipro123@gmail.com", "Xin chao");
+                    MailAddress fromemail = new MailAddress("sondovipro123@gmail.com", "admin");
                     MailAddress toemail = new MailAddress(emailaddress, "someone");
                     MailMessage mess = new MailMessage()
                     {
                         From = fromemail,
-                        Subject = "chúc mừng bạn đặt hàng thành công",
+                        Subject = "Congratulations on your successful order",
                         IsBodyHtml = true,
                     };
-                    mess.Body += "<h1>Xin chào:" + User.Identity.Name + "</h1>";
-                    mess.Body += "<h3>Đơn hàng của bạn đã đặt thành công<h3>";
-                    mess.Body += "<h3>Mã đơn hàng của bạn:" + id_dh.ToString() + "</h3>";
-                    mess.Body += "<h3>Danh sách các mặt hàng đã đặt</h3>";
+                    mess.Body += "<h1>Hello:" + User.Identity.Name + "</h1>";
+                    mess.Body += "<h3>Your order has been placed successfully<h3>";
+                    mess.Body += "<h3>Your order number:" + id_dh.ToString() + "</h3>";
+                    mess.Body += "<h3>List of ordered items</h3>";
                     mess.Body += "<table><thead>";
-                    mess.Body += "<tr><th>Mã sản phẩm</th><th>Tên sản phẩm</th><th>Số lượng</th><th>Đơn giá</th></thead>";
+                    mess.Body += "<tr><th>Product code</th><th>Product name</th><th>Quantity</th><th>Price</th></thead>";
                     mess.Body += "<tbody>";
                     decimal countprice = 0;
                     foreach (var item in cart)
@@ -129,7 +129,7 @@ namespace DuAnGame.Controllers
                         countprice += item.product.Price;
                     }
                     mess.Body += "</tbody></table>";
-                    mess.Body += "<h4>Tổng tiền:" + countprice.ToString() + "Đ</h4>";
+                    mess.Body += "<h4>Total price:" + countprice.ToString() + "$</h4>";
                     mess.To.Add(toemail);
                     client.Send(mess);
                 }
@@ -152,7 +152,7 @@ namespace DuAnGame.Controllers
                 int type = (int)marketType.buy;
                 if (maKH.Balance < totalprice)
                 {
-                    _notyfService.Warning("Số tiền không đủ");
+                    _notyfService.Warning("The amount is not enough");
                     return RedirectToRoute("Cart");
                 }
                 try
