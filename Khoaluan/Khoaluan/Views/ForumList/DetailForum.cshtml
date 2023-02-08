@@ -54,16 +54,12 @@
         <ul class="nk-forum nk-forum-topic">
             <li>
                 <div class="nk-forum-topic-author">
-                    <a href="#">
-                        <img src="assets/images/avatar-1.jpg" alt="Hitman">
-                    </a>
-                    <div class="nk-forum-topic-author-name" title="Hitman">
+
+                    <div class="nk-forum-topic-author-name" title="@Model.Name">
                         <a href="#">@Model.Name</a>
                     </div>
                     <div class="nk-forum-topic-author-role">Keymaster</div>
-                    <div class="nk-forum-topic-author-since">
-                        Member since January 13, 2018
-                    </div>
+
                 </div>
                 <div class="nk-forum-topic-content">
                     <p>
@@ -72,7 +68,7 @@
 
                 </div>
                 <div class="nk-forum-topic-footer">
-                    <span class="nk-forum-topic-date">June 18, 2018</span>
+                    <span class="nk-forum-topic-date">@Model.CreateDate</span>
 
                     <span class="nk-forum-action-btn">
                         <a href="#forum-reply" class="nk-anchor"><span class="fa fa-reply"></span> Reply</a>
@@ -93,16 +89,12 @@
                 {
                     <li>
                         <div class="nk-forum-topic-author">
-                            <a href="#">
-                                <img src="assets/images/avatar-2.jpg" alt="Witch Murder">
-                            </a>
-                            <div class="nk-forum-topic-author-name" title="Witch Murder">
+                            
+                            <div class="nk-forum-topic-author-name" title="@item.UserName">
                                 <a href="#">@item.UserName</a>
                             </div>
                             <div class="nk-forum-topic-author-role">Participant</div>
-                            <div class="nk-forum-topic-author-since">
-                                Member since March 27, 2018
-                            </div>
+                            
                         </div>
                         <div class="nk-forum-topic-content">
                             <p>
@@ -110,7 +102,6 @@
                             </p>
                         </div>
                         <div class="nk-forum-topic-footer">
-                            <span class="nk-forum-topic-date">June 19, 2018</span>
 
                             <span class="nk-forum-action-btn">
                                 <a href="#forum-reply" class="nk-anchor"><span class="fa fa-reply"></span> Reply</a>
