@@ -226,17 +226,17 @@ namespace Khoaluan.Helpper
                             Password = "caofqthenhkakkgl"
                         }
                     };
-                    MailAddress fromemail = new MailAddress("sondovipro123@gmail.com", "Xin chao");
+                    MailAddress fromemail = new MailAddress("sondovipro123@gmail.com", "admin");
                     MailAddress toemail = new MailAddress(emailaddress, "someone");
                     MailMessage mess = new MailMessage()
                     {
                         From = fromemail,
-                        Subject = "tài khoản của bạn",
+                        Subject = "your account",
                         IsBodyHtml = true,
                     };
-                    mess.Body += "<h1>Xin chào:" + dev.Name + "</h1>";
-                    mess.Body += "<h3>Tài khoản của bạn đã đăng kí thành công thành công<h3>";
-                    mess.Body += "<h3>thông tin tài khoản</h3>";
+                    mess.Body += "<h1>Hello:" + dev.Name + "</h1>";
+                    mess.Body += "<h3>Your account has been successfully registered<h3>";
+                    mess.Body += "<h3>account information</h3>";
                     mess.Body += "<table><thead>";
                     mess.Body += "<tr><th>Username</th><th>password</th></thead>";
                     mess.Body += "<tbody>";
@@ -304,7 +304,7 @@ namespace Khoaluan.Helpper
                     MailMessage mess = new MailMessage()
                     {
                         From = fromemail,
-                        Subject = "tài khoản của bạn",
+                        Subject = "your account",
                         IsBodyHtml = true,
                     };
                     string status;
@@ -316,9 +316,9 @@ namespace Khoaluan.Helpper
                     {
                         status = "The game is not approved";
                     }
-                    mess.Body += "<h1>Xin chào:" + pro.NameDev + "</h1>";
-                    mess.Body += "<h3>Thông tin duyệt game<h3>";
-                    mess.Body += "<h3>thông tin game</h3>";
+                    mess.Body += "<h1>Hello:" + pro.NameDev + "</h1>";
+                    mess.Body += "<h3>Game browsing information<h3>";
+                    mess.Body += "<h3>game infomation</h3>";
                     mess.Body += "<table><thead>";
                     mess.Body += "<tr><th>Name</th><th>Price</th><th>Status</th></thead>";
                     mess.Body += "<tbody>";
@@ -354,7 +354,7 @@ namespace Khoaluan.Helpper
             MailMessage mess = new MailMessage()
             {
                 From = fromemail,
-                Subject = "tài khoản của bạn",
+                Subject = "your account",
                 IsBodyHtml = true,
             };
 

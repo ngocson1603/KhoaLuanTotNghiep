@@ -307,17 +307,17 @@ namespace Khoaluan.Controllers
                         taikhoan.Password = passnew;
                         _unitOfWork.UserRepository.Update(taikhoan);
                         _unitOfWork.SaveChange();
-                        _notyfService.Success("Đổi mật khẩu thành công");
+                        _notyfService.Success("Change password successfully");
                         return RedirectToAction("Dashboard", "Users");
                     }
                 }
             }
             catch
             {
-                _notyfService.Success("Thay đổi mật khẩu không thành công");
+                _notyfService.Success("Password change failed");
                 return RedirectToAction("Dashboard", "Users");
             }
-            _notyfService.Success("Thay đổi mật khẩu không thành công");
+            _notyfService.Success("Password change failed");
             return RedirectToAction("Dashboard", "Users");
         }
 

@@ -74,7 +74,7 @@ namespace Khoaluan.Controllers
             if (paypalTransaction == null) { }
             else
             {
-                _notyfService.Warning("Đang có giao dịch được thực hiện!");
+                _notyfService.Warning("Transactions in progress!");
                 return RedirectToAction("AddFunds");
             }
 
@@ -99,7 +99,7 @@ namespace Khoaluan.Controllers
         {
             HttpContext.Session.Remove("SS_Token");
             HttpContext.Session.Remove("SS_Paypal");
-            _notyfService.Information("Bạn đã có thể tạo giao dịch mới!");
+            _notyfService.Information("You can now create a new transaction!");
         }
 
         public async Task<ActionResult> Paypalvtwo(
@@ -132,7 +132,7 @@ namespace Khoaluan.Controllers
 
             if (fundId == null || accountId == null)
             {
-                _notyfService.Error("Không thể lấy id gói nạp hoặc id tài khoản!");
+                _notyfService.Error("Can't get recharge pack id or account id!");
                 return RedirectToAction("AddFunds");
             }
 
@@ -140,7 +140,7 @@ namespace Khoaluan.Controllers
 
             if (fund == null)
             {
-                _notyfService.Error("Không thể lấy thông tin gói nạp!");
+                _notyfService.Error("Unable to get loaded package information!");
                 return RedirectToAction("AddFunds");
             }
 
@@ -152,7 +152,7 @@ namespace Khoaluan.Controllers
             if (!string.IsNullOrEmpty(Cancel) && Cancel.Trim().ToLower() == "true")
             {
                 paymentResultList.Add("You cancelled the transaction.");
-                _notyfService.Information("Đã hủy giao dịch!");
+                _notyfService.Information("Canceled transaction!");
                 HttpContext.Session.Remove("SS_Token");
                 HttpContext.Session.Remove("SS_Paypal");
                 return RedirectToAction("AddFunds");
@@ -170,7 +170,7 @@ namespace Khoaluan.Controllers
                 if (paypalTransaction == null) { }
                 else
                 {
-                    _notyfService.Warning("Đang có giao dịch được thực hiện!");
+                    _notyfService.Warning("Transactions in progress!");
                     return RedirectToAction("AddFunds");
                 }
 
@@ -244,8 +244,8 @@ namespace Khoaluan.Controllers
                         _unitOfWork.AddFundTransactionRepository.Create(add);
 
                         _unitOfWork.SaveChange();
-                        _notyfService.Success("Thanh toán thành công!");
-                        _notyfService.Information("Cập nhật số dư ví thành công!");
+                        _notyfService.Success("Payment success!");
+                        _notyfService.Information("Successful wallet balance update!");
                         paymentResultList.Add("Payment Successful. Thank you.");
 
                         HttpContext.Session.Remove("SS_Token");
@@ -264,7 +264,7 @@ namespace Khoaluan.Controllers
                 }
                 catch (Exception ex)
                 {
-                    _notyfService.Error("Thanh toán thất bại");
+                    _notyfService.Error("Payment failed");
                     paymentResultList.Add("There was an error in processing your payment");
                     paymentResultList.Add("Details: " + ex.Message);
                 }
@@ -448,7 +448,7 @@ namespace Khoaluan.Controllers
         {
             if (vnp_ResponseCode == "24")
             {
-                _notyfService.Information("Đã hủy giao dịch!");
+                _notyfService.Information("Canceled transaction!");
                 return RedirectToAction("AddFunds");
             }
 
@@ -490,12 +490,12 @@ namespace Khoaluan.Controllers
                 }
                 else
                 {
-                    _notyfService.Error("Có lỗi xảy ra trong quá trình xử lý hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId + " | Mã lỗi: " + vnp_ResponseCode);
+                    _notyfService.Error("An error occurred during invoice processing " + orderId + " | Mã giao dịch: " + vnpayTranId + " | Mã lỗi: " + vnp_ResponseCode);
                 }
             }
             else
             {
-                _notyfService.Error("Có lỗi xảy ra trong quá trình xử lý");
+                _notyfService.Error("An error occurred during processing");
             }
 
             return RedirectToAction("AddFunds");
