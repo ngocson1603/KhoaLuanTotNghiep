@@ -34,14 +34,6 @@ namespace Khoaluan.Controllers
             return View(blogls);
         }
         
-        public ActionResult BlogFull()
-        {
-            return View();
-        }
-        public ActionResult News()
-        {
-            return View();
-        }
         public ActionResult Support()
         {
             return View();
