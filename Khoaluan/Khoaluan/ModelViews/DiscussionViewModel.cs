@@ -10,10 +10,10 @@ namespace Khoaluan.ModelViews
     public class DiscussionViewModel
     {
         [Required(ErrorMessage = ("Vui lòng nhập Title"))]
-        [Display(Name = "Địa chỉ Title")]
+        [Display(Name = "Tittle")]
         public string Title { get; set; }
         [Required(ErrorMessage = ("Vui lòng nhập Content"))]
-        [Display(Name = "Địa chỉ Content")]
+        [Display(Name = "Content")]
         public string Content { get; set; }
         public int ProductID { get; set; }
         public DateTime CreateDate { get; set; }

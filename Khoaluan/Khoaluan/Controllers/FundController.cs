@@ -299,10 +299,18 @@ namespace Khoaluan.Controllers
             {
                 if (remoteIpAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
                 {
-                    remoteIpAddress = System.Net.Dns.GetHostEntry(remoteIpAddress).AddressList.First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                    try
+                    {
+                        remoteIpAddress = System.Net.Dns.GetHostEntry(remoteIpAddress).AddressList.First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                        ipAddress = remoteIpAddress.ToString();
+                    }
+                    catch
+                    {
+                        ipAddress = "192.168.1.251";
+                    }
                 }
 
-                ipAddress = remoteIpAddress.ToString();
+                
             }
 
             PayLib pay = new PayLib();
