@@ -24,5 +24,18 @@ namespace Khoaluan.Services
             result.ForEach(t => t.Status = (int)productType.release);
             Context.BulkUpdate(result);
         }
+
+        public bool IsGameCanBuy(int UserId, int ProductId)
+        {
+            var result=_productRepository.IsRefundGame(UserId, ProductId);
+            if(result==null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
