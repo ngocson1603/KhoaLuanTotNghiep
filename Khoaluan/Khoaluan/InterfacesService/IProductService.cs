@@ -7,5 +7,6 @@ namespace Khoaluan.InterfacesService
     public interface IProductService
     {
         void ReleaseProduct();
+        bool IsGameCanBuy(int UserId,int ProductId);
     }
 }

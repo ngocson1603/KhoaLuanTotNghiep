@@ -20,10 +20,11 @@ namespace Khoaluan.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IService _service;
+        public ProductController(IUnitOfWork unitOfWork,IService service)
         {
             _unitOfWork = unitOfWork;
+            _service = service;
         }
 
         public IActionResult Index()
@@ -60,7 +61,7 @@ namespace Khoaluan.Controllers
         {
             int release = (int)productType.release;
             var discount=_unitOfWork.SaleProductRepository.getdiscount(id);
-            var x = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
+            var x = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();          
             if(discount!=-1)
             {
                 x.Discount = discount;

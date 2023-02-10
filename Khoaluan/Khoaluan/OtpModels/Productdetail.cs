@@ -22,6 +22,7 @@ namespace Khoaluan.OtpModels
         public string CatID { get; set; }
         public int Discount { get; set; }
         public int Status { get; set; }
+        public bool CanBuy { get; set; }
     }
     public class ProductDetailModel
     {

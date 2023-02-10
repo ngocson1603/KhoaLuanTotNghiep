@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Khoaluan.Enums;
 using Khoaluan.Interfaces;
 using Khoaluan.Models;
 using Khoaluan.ModelViews;
@@ -186,6 +187,27 @@ group by Product.Name,Product.Image,Developer.Name
 order by Price desc ";
             var result = Context.Database.GetDbConnection().Query<ActiveGame>(query);
             return result.ToList();
+        }
+
+        public Refund IsRefundGame(int UserId, int ProductId)
+        {
+            int Status = (int)RefundType.pending;
+            var query = @"select top 1.* from Refund
+                        where UserID=@userid and ProductID=@productid and Status=@status
+                        order by DatePurchase desc";
+            var parameters=new DynamicParameters();
+            parameters.Add("userid", UserId);
+            parameters.Add("productid", ProductId);
+            parameters.Add("status", Status);
+            var result=Context.Database.GetDbConnection().Query<Refund>(query,parameters).SingleOrDefault();
+            if(result==null)
+            {
+                return null;
+            }
+            else
+            {
+                return result;
+            }        
         }
     }
 }

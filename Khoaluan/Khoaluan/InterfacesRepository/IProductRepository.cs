@@ -18,5 +18,6 @@ namespace Khoaluan.Interfaces
         List<Product> listProductItem(int id);
         List<Product> listProductRelease();
         List<ActiveGame> TopProduct();
+        Refund IsRefundGame(int UserId, int ProductId);
     }
 }
