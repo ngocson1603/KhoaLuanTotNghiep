@@ -97,38 +97,8 @@
                                     <input type="number" id="txtsoLuong" name="txtsoLuong" class="form-control" value="1" min="1" max="21">
                                     @{
                                         int productID = Model.productDetail.Id;
-                                        @*ViewBag.name = TempData["idpro"];
-
-                                            if (ViewBag.name != null)
-                                            {
-                                                int proid = int.Parse(ViewBag.name);
-                                                //foreach (var item in ViewBag.name)
-                                                //{
-                                                if (proid == productID)
-                                                {
-                                                    <div>
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</button>
-                                                    </div>
-                                                }
-                                                else
-                                                {*@
                                         @if (User.Identity.IsAuthenticated)
                                         {
-                                            if (ViewBag.GameDangHoanTien == true)
-                                            {
-                                                <div class="add-to-cart">
-                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                    <input hidden asp-for="@productID" />
-                                                </div>
-                                            }
-                                            else if (ViewBag.GameDangHoanTien == false)
-                                            {
-                                                <div>
-                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Can't Purcharse</button>
-                                                    <input hidden asp-for="@productID" />
-                                                </div>
-                                            }
-
                                             if (DanhSachDonHang != null)
                                             {
                                                 if (DanhSachDonHang.Any(t => t.UserID == int.Parse(ViewBag.GetId) && t.Id == productID))
@@ -155,6 +125,20 @@
                                                             <input hidden asp-for="@productID" />
                                                         </div>
                                                     }
+                                                }
+                                                else if (ViewBag.GameDangHoanTien == true)
+                                                {
+                                                    <div class="add-to-cart">
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                        <input hidden asp-for="@productID" />
+                                                    </div>
+                                                }
+                                                else if (ViewBag.GameDangHoanTien == false)
+                                                {
+                                                    <div>
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Can't Purcharse</button>
+                                                        <input hidden asp-for="@productID" />
+                                                    </div>
                                                 }
                                                 else
                                                 {
@@ -218,20 +202,6 @@
                                                 </div>
                                             }
                                         }
-
-
-
-
-                                        @*}
-                                                //}
-                                            }
-                                            else
-                                            {
-                                                <div class="add-to-cart">
-                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                    <input hidden asp-for="@productID" />
-                                                </div>
-                                            }*@
                                     }
                                 </div>
                             </form>
