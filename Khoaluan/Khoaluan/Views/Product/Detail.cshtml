@@ -45,7 +45,7 @@
                             <!-- START: Product Photos -->
                             <div class="nk-popup-gallery">
                                 <div class="nk-gallery-item-box">
-                                    <a href="~/assets/images/product-6.jpg" class="nk-gallery-item" data-size="1200x554">
+                                    <a href="~/Images/@Url.Content(Model.productDetail.Image)" class="nk-gallery-item" data-size="1200x554">
                                         <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
                                         <img src="~/Images/@Url.Content(Model.productDetail.Image)" alt="">
                                     </a>
@@ -118,6 +118,19 @@
                                                             <input hidden asp-for="@productID" />
                                                         </div>
                                                     }
+                                                    else if (ViewBag.GameDangHoanTien == true)
+                                                    {
+                                                        <div class="add-to-cart">
+                                                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                            <input hidden asp-for="@productID" />
+                                                        </div>
+                                                    }
+                                                    else if (ViewBag.GameDangHoanTien == false)
+                                                    {
+                                                        <div>
+                                                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" disabled>Can't Purcharse</button>
+                                                        </div>
+                                                    }
                                                     else
                                                     {
                                                         <div class="add-to-cart">
@@ -136,8 +149,7 @@
                                                 else if (ViewBag.GameDangHoanTien == false)
                                                 {
                                                     <div>
-                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Can't Purcharse</button>
-                                                        <input hidden asp-for="@productID" />
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" disabled>Can't Purcharse</button>
                                                     </div>
                                                 }
                                                 else
@@ -150,12 +162,24 @@
                                             }
                                             else if (ViewBag.GioHang != null)
                                             {
-
                                                 if (carts.Any(t => t.product.Id == productID))
                                                 {
                                                     <div>
                                                         <a class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="/cart.html">In Cart</a>
                                                         <input hidden asp-for="@productID" />
+                                                    </div>
+                                                }
+                                                else if (ViewBag.GameDangHoanTien == true)
+                                                {
+                                                    <div class="add-to-cart">
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                        <input hidden asp-for="@productID" />
+                                                    </div>
+                                                }
+                                                else if (ViewBag.GameDangHoanTien == false)
+                                                {
+                                                    <div>
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" disabled>Can't Purcharse</button>
                                                     </div>
                                                 }
                                                 else
@@ -166,12 +190,27 @@
                                                     </div>
                                                 }
                                             }
-                                            else
+                                            else if (DanhSachDonHang == null)
                                             {
-                                                <div class="add-to-cart">
-                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
-                                                    <input hidden asp-for="@productID" />
-                                                </div>
+                                                if (ViewBag.GameDangHoanTien == true)
+                                                {
+                                                    <div class="add-to-cart">
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                        <input hidden asp-for="@productID" />
+                                                    </div>
+                                                }
+                                                else if (ViewBag.GameDangHoanTien == false)
+                                                {
+                                                    <div>
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" disabled>Can't Purcharse</button>
+                                                    </div>
+                                                }
+                                                else
+                                                {<div class="add-to-cart">
+                                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                        <input hidden asp-for="@productID" />
+                                                    </div>
+                                                }
                                             }
                                         }
                                         else
