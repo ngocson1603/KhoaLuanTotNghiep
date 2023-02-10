@@ -116,11 +116,17 @@
                                         {
                                             if (ViewBag.GameDangHoanTien == true)
                                             {
-                                                // cho phep mua game
+                                                <div class="add-to-cart">
+                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Add to Cart</button>
+                                                    <input hidden asp-for="@productID" />
+                                                </div>
                                             }
-                                            else
+                                            else if (ViewBag.GameDangHoanTien == false)
                                             {
-                                                // khong cho phep mua game
+                                                <div>
+                                                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" href="javascript:void(0)">Can't Purcharse</button>
+                                                    <input hidden asp-for="@productID" />
+                                                </div>
                                             }
 
                                             if (DanhSachDonHang != null)
