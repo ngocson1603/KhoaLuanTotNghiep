@@ -271,6 +271,24 @@ namespace Khoaluan.Controllers
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
                 ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
+
+                List<Cart> carts = HttpContext.Session.Get<List<Cart>>("_GioHang");
+                if (carts != null)
+                {
+                    HttpContext.Session.Remove("_GioHang");
+
+                    foreach (var cart in carts.ToList())
+                    {
+                        bool checkRefunded = _service.ProductService.IsGameCanBuy(user.Id, cart.product.Id);
+                        if (!checkRefunded)
+                        {
+                            carts.Remove(cart);
+                        } 
+                    }
+
+                    HttpContext.Session.Set<List<Cart>>("_GioHang", carts);
+                }    
+
                 _notyfService.Success($"Welcome back, {user.HoTen}!");
 
                 return RedirectToAction("Dashboard");
