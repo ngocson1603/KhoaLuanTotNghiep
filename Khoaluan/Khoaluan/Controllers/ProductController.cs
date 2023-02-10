@@ -82,6 +82,10 @@ namespace Khoaluan.Controllers
                 popularGame = popularGame,
                 cate = cate,
             };
+
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+
+            ViewBag.GameDangHoanTien = _service.ProductService.IsGameCanBuy(int.Parse(taikhoanID), id);
             ViewBag.GioHang = cart;
             return View(dtp);
         }

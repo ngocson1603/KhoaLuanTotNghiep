@@ -114,6 +114,15 @@
                                                 {*@
                                         @if (User.Identity.IsAuthenticated)
                                         {
+                                            if (ViewBag.GameDangHoanTien == true)
+                                            {
+                                                // cho phep mua game
+                                            }
+                                            else
+                                            {
+                                                // khong cho phep mua game
+                                            }
+
                                             if (DanhSachDonHang != null)
                                             {
                                                 if (DanhSachDonHang.Any(t => t.UserID == int.Parse(ViewBag.GetId) && t.Id == productID))
