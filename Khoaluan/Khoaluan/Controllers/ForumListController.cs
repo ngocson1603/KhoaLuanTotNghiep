@@ -205,22 +205,31 @@ namespace Khoaluan.Controllers
             string comm = comment.Message;
             string url = "/forum-single-topic/" + idpost + ".html";
 
-            if (comm.Contains("img") && comm.Contains("style"))
+            if(comment.Message != null)
             {
-                comm = Helpper.Utilities.SetSizeImage(comm);
-            }
+                if (comm.Contains("img") && comm.Contains("style"))
+                {
+                    comm = Helpper.Utilities.SetSizeImage(comm);
+                }
 
-            try
+                try
+                {
+                    _discussionService.comment(idpost, name, comm);
+                    _notyfService.Success("Successful new creation");
+                    return Redirect(url);
+                }
+                catch
+                {
+                    _notyfService.Error("New creation failed");
+                    return Redirect(url);
+                }
+            }
+            else
             {
-                _discussionService.comment(idpost, name, comm);
-                _notyfService.Success("Successful new creation");
+                _notyfService.Error("New creation failed");
                 return Redirect(url);
             }
-            catch
-            {
-                _notyfService.Success("New creation failed");
-                return Redirect(url);
-            }
+            
         }
         [Route("Forum.html", Name = ("Forum"))]
         public IActionResult ForumInD(int? page)

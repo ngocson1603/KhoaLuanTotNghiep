@@ -14,15 +14,15 @@
 
                     <div class="form-group">
                         <label for="new-project-name">Name</label>
-                        <input type="text" class="form-control" id="new-project-name" asp-for="@Model.Name" placeholder="Please input project name">
+                        <input type="text" class="form-control" id="new-project-name" asp-for="@Model.Name" placeholder="Please input sale name" required>
                     </div>
                     <div class="form-group">
                         <label for="new-project-desc">StartDate</label>
-                        <input type="date" class="arrival_dates form-control" asp-for="@Model.StartDate">
+                        <input type="date" class="arrival_dates form-control" asp-for="@Model.StartDate" required>
                     </div>
                     <div class="form-group">
                         <label for="new-project-desc">EndDate</label>
-                        <input type="date" class="arrival_dates form-control" asp-for="@Model.EndDate">
+                        <input type="date" class="arrival_dates form-control" asp-for="@Model.EndDate" required>
                     </div>
 
                     <div class="modal-footer">

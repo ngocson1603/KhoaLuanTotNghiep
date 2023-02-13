@@ -66,9 +66,9 @@ namespace Khoaluan.Controllers
         public IActionResult Index()
         {
             var taikhoanID = HttpContext.Session.GetString("AccountId");
-            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => 
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t =>
             (
-                (t.Status == (int)productType.pending) || 
+                (t.Status == (int)productType.pending) ||
                 (t.Status == (int)productType.decline)
             )
             && t.DevId == int.Parse(taikhoanID)).ToList();
@@ -143,12 +143,7 @@ namespace Khoaluan.Controllers
             {
                 try
                 {
-                    if (product.Name == null || product.Overview == null || product.AppId.ToString() == null || product.Description == null)
-                    {
-                        _notyfService.Error("Error");
-                        return RedirectToAction(nameof(Index));
-                    }
-                        if (model.SelectedIds == null)
+                    if (model.SelectedIds == null)
                     {
                         _notyfService.Warning("Please select a category");
                         return RedirectToAction(nameof(Index));
@@ -351,7 +346,7 @@ namespace Khoaluan.Controllers
         public IActionResult IndexDev()
         {
             var taikhoanID = HttpContext.Session.GetString("AccountId");
-            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Status == (int)productType.accept && t.DevId==int.Parse(taikhoanID)).ToList();
+            var ls = _unitOfWork.ProductRepository.GetAll().Where(t => t.Status == (int)productType.accept && t.DevId == int.Parse(taikhoanID)).ToList();
             return View(ls);
         }
         // POST: AdminProductsController/Create
@@ -400,7 +395,7 @@ namespace Khoaluan.Controllers
                 return RedirectToAction(nameof(IndexDev));
             }
             //ViewData["Developer"] = new SelectList(_unitOfWork.DeveloperRepository.GetAll(), "Id", "Name", product.DevId);
-            
+
         }
 
         // GET: DevController/Edit/5
@@ -472,11 +467,6 @@ namespace Khoaluan.Controllers
 
                 try
                 {
-                    if (product.Name.Length == 0 || product.Overview.Length == 0 || product.AppId.ToString().Length == 0 || product.Description.Length == 0)
-                    {
-                        _notyfService.Error("Error");
-                        return RedirectToAction(nameof(IndexDev));
-                    }
                     if (model.SelectedIds == null)
                     {
                         _notyfService.Warning("Please select a category");

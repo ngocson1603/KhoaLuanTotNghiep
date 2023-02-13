@@ -18,13 +18,13 @@
                         <div>
                             Quantity : 
                         </div>
-                        <input type="number" asp-for="@Model.Quantity" class="form-control" value="1" min="1" max="99999999999999999">
+                        <input type="number" asp-for="@Model.Quantity" class="form-control" value="1" min="1" max="99999999999999999" required>
                         <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
                         <br />
                         <div>
                             Price : 
                         </div>
-                        <input type="number" asp-for="@Model.PricePerItem" class="form-control" value="1" min="1" max="99999999999999999">
+                        <input type="number" asp-for="@Model.PricePerItem" class="form-control" value="1" min="1" max="99999999999999999" required>
                         <span asp-validation-for="@Model.PricePerItem" class="text-danger"></span>
                         <button class="nk-btn nk-btn-rounded nk-btn-color-main-1">Sell</button>
                     </div>

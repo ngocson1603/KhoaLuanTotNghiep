@@ -70,11 +70,6 @@ namespace WebShop.Areas.Admin.Controllers
                 //Xu ly Image
                 try
                 {
-                    if(blog.Name == null || blog.Title == null || blog.Contents == null || blog.TContent == null)
-                    {
-                        _notyfService.Error("Error");
-                        return RedirectToAction(nameof(Index));
-                    }
                     if (fThumb != null)
                     {
                         string extension = Path.GetExtension(fThumb.FileName);
