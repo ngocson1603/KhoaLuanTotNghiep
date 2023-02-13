@@ -148,7 +148,7 @@ namespace Khoaluan.Controllers
                         _notyfService.Warning("Please select a category");
                         return RedirectToAction(nameof(Index));
                     }
-                    if (product.Price <= 0)
+                    if (product.Price < 0)
                     {
                         _notyfService.Warning("Price is Correct");
                         return RedirectToAction(nameof(Index));
@@ -472,7 +472,7 @@ namespace Khoaluan.Controllers
                         _notyfService.Warning("Please select a category");
                         return RedirectToAction(nameof(IndexDev));
                     }
-                    if (product.Price <= 0)
+                    if (product.Price < 0)
                     {
                         _notyfService.Warning("Price is Correct");
                         return RedirectToAction(nameof(IndexDev));
