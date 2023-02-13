@@ -52,12 +52,12 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="font-weight-semibold" for="productName">Name</label>
-                        <input type="text" class="form-control" asp-for="@Model.product.Name">
+                        <input type="text" class="form-control" asp-for="@Model.product.Name" required>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="font-weight-semibold" for="productPrice">Price</label>
-                            <input type="number" class="form-control" asp-for="@Model.product.Price">
+                            <input type="number" class="form-control" asp-for="@Model.product.Price" required>
                         </div>
                     </div>
 
@@ -92,7 +92,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="font-weight-semibold" for="productSize">Title</label>
-                        <input type="text" class="form-control" asp-for="@Model.product.Overview">
+                        <input type="text" class="form-control" asp-for="@Model.product.Overview" required>
                     </div>
                 </div>
             </div>
@@ -114,7 +114,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-body">
-                        <textarea class="summernote" asp-for="@Model.product.Description"></textarea>
+                        <textarea class="summernote" asp-for="@Model.product.Description" required></textarea>
                     </div>
                 </div>
             </div>
