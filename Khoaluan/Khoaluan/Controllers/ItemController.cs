@@ -175,7 +175,7 @@ namespace Khoaluan.Controllers
             HttpContext.Session.SetInt32("SetIdItem",id);
         }
 
-        [HttpPost]
+        [Authorize, HttpPost]
         [Route("api/item/sell")]
         public ActionResult SellItem(SellitemModelView sellitem)
         {
@@ -223,7 +223,7 @@ namespace Khoaluan.Controllers
             return RedirectToRoute("ListItem");
         }
 
-        [HttpPost]
+        [Authorize, HttpPost]
         public ActionResult BuyItem(int Id, SellitemModelView sellitem)
         {
             if (ModelState.IsValid)
