@@ -488,7 +488,7 @@ namespace Khoaluan.Controllers
                     //    _notyfService.Warning("AppId already exists");
                     //    return RedirectToAction(nameof(IndexDev));
                     //}
-                    product.Status = 3;
+                    product.Status = (int)productType.release;
                     if (fThumb != null)
                     {
                         string extension = Path.GetExtension(fThumb.FileName);
