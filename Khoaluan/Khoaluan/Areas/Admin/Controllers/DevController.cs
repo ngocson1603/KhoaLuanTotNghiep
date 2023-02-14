@@ -208,6 +208,12 @@ namespace Khoaluan.Controllers
             try
             {
                 var product = _unitOfWork.ProductRepository.GetById(id);
+                var catepro = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
+                foreach (var item in catepro)
+                {
+                    _unitOfWork.ProductCategoryRepository.Delete(item);
+                    _unitOfWork.SaveChange();
+                }
                 _unitOfWork.ProductRepository.Delete(product);
                 _unitOfWork.SaveChange();
                 _notyfService.Success("Delete successful");
@@ -464,7 +470,6 @@ namespace Khoaluan.Controllers
             }
             if (ModelState.IsValid)
             {
-
                 try
                 {
                     if (model.SelectedIds == null)
@@ -477,17 +482,15 @@ namespace Khoaluan.Controllers
                         _notyfService.Warning("Price is Correct");
                         return RedirectToAction(nameof(IndexDev));
                     }
-                    var x = _unitOfWork.ProductRepository.GetAll().Where(t => t.AppId == product.AppId).ToList();
-                    if (x.Count() > 0)
-                    {
-                        _notyfService.Warning("AppId already exists");
-                        return RedirectToAction(nameof(IndexDev));
-                    }
-                    product.Name = Utilities.ToTitleCase(product.Name);
+                    //var x = _unitOfWork.ProductRepository.GetAll().Where(t => t.AppId == product.AppId).ToList();
+                    //if (x.Count() > 0)
+                    //{
+                    //    _notyfService.Warning("AppId already exists");
+                    //    return RedirectToAction(nameof(IndexDev));
+                    //}
+                    product.Status = 3;
                     if (fThumb != null)
                     {
-
-
                         string extension = Path.GetExtension(fThumb.FileName);
                         string images = Utilities.SEOUrl(product.Name) + extension;
                         product.Image = await Utilities.UploadFile(fThumb, images.ToLower());
@@ -498,7 +501,7 @@ namespace Khoaluan.Controllers
                     _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
                     _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
                     _unitOfWork.SaveChange();
-                    _notyfService.Success("Update successful");
+                    
                     List<string> cate = new List<string>();
                     var product1 = _unitOfWork.ProductRepository.getallProductwithCategory().Where(t => t.Id == id).FirstOrDefault();
                     if (product1 != null)
@@ -510,6 +513,7 @@ namespace Khoaluan.Controllers
                     {
                         ViewData["Category"] = "";
                     }
+                    _notyfService.Success("Update successful");
                     return RedirectToAction(nameof(IndexDev));
                 }
                 catch (Exception)
