@@ -1,7 +1,7 @@
 ﻿@model Khoaluan.OtpModels.MarketOrder
 
 @{
-    ViewData["Title"] = "Oder";
+    ViewData["Title"] = "Order";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -75,7 +75,7 @@
                             }
                             else
                             {
-                                <p>Chưa có đơn hàng!</p>
+                                <p>Empty!</p>
                             }
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                             }
                             else
                             {
-                                <p>Chưa có đơn hàng!</p>
+                                <p>Empty!</p>
                             }
                         </div>
                     </div>
@@ -178,7 +178,57 @@
                             }
                             else
                             {
-                                <p>Chưa có đơn hàng!</p>
+                                <p>Empty!</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Now Playing -->
+
+            </div>
+
+            <div class="col-lg-12">
+
+                <!-- START: Now Playing -->
+                <div class="nk-gap"></div>
+                <div class="nk-accordion" id="accordion-4" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="accordion-1-1-heading">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion-4"
+                               href="#accordion-1-4" aria-expanded="true" aria-controls="accordion-1-4">
+                                Add Fund History <span class="panel-heading-arrow fa fa-angle-down"></span>
+                            </a>
+                        </div>
+                        <div id="accordion-1-4" class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="accordion-1-1-heading">
+                            @if (Model.addFundTransaction != null && Model.addFundTransaction.Count() > 0)
+                            {
+                                <div class="nk-gap"></div>
+                                <table class="nk-table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Transaction Id</th>
+                                            <th>Order Id</th>
+                                            <th>Price</th>
+                                            <th>PaymentMethod</th>
+                                            <th>CreateOn</th>
+                                        </tr>
+                                        @foreach (var item in Model.addFundTransaction)
+                                        {
+                                            <tr>
+                                                <td href="javascript:void(0)">#@item.TransactionId</td>
+                                                <td>@item.OrderId</td>
+                                                <td>@item.FundId</td>
+                                                <td>@item.PaymentMethod</td>
+                                                <td>@item.CreateOn</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <p>Empty!</p>
                             }
                         </div>
                     </div>
