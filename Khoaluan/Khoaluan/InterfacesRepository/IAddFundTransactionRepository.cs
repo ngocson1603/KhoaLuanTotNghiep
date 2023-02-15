@@ -8,5 +8,6 @@ namespace Khoaluan.Interfaces
 {
     public interface IAddFundTransactionRepository : IGameStoreRepository<AddFundTransaction>
     {
+        List<AddFundTransaction> GetFundTransactions(int id);
     }
 }

@@ -39,11 +39,14 @@ namespace Khoaluan.Controllers
                 var lsMarketbuy = _unitOfWork.MarketTransactionRepository.GetAll()
                     .Where(t => t.BuyerID == int.Parse(taikhoanID))
                     .OrderByDescending(x => x.DateTransaction).ToList();
+                var fundTransactionHistory = _unitOfWork.AddFundTransactionRepository.GetFundTransactions(int.Parse(taikhoanID))
+                    .OrderByDescending(x => x.CreateOn).ToList();
                 MarketOrder dtp = new MarketOrder()
                 {
                     market = lsMarket,
                     order = lsDonHang,
                     marketbuy = lsMarketbuy,
+                    addFundTransaction = fundTransactionHistory
                 };
                 return View(dtp);
             }

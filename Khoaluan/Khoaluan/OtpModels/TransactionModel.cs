@@ -28,5 +28,6 @@ namespace Khoaluan.OtpModels
         public List<Market> market { get; set; }
         public List<Order> order { get; set; }
         public List<MarketTransaction> marketbuy { get; set; }
+        public List<AddFundTransaction> addFundTransaction { get; set; }
     }
 }
