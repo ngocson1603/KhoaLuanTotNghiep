@@ -482,12 +482,7 @@ namespace Khoaluan.Controllers
                         _notyfService.Warning("Price is Correct");
                         return RedirectToAction(nameof(IndexDev));
                     }
-                    //var x = _unitOfWork.ProductRepository.GetAll().Where(t => t.AppId == product.AppId).ToList();
-                    //if (x.Count() > 0)
-                    //{
-                    //    _notyfService.Warning("AppId already exists");
-                    //    return RedirectToAction(nameof(IndexDev));
-                    //}
+                    int appid = product.AppId;
                     product.Status = (int)productType.release;
                     if (fThumb != null)
                     {
@@ -498,6 +493,12 @@ namespace Khoaluan.Controllers
                     if (string.IsNullOrEmpty(product.Image)) product.Image = "default.jpg";
                     var catepro = _unitOfWork.ProductCategoryRepository.GetAll().Where(t => t.ProductId == id);
                     _unitOfWork.ProductRepository.Update(product);
+                    var x = _unitOfWork.ProductRepository.GetAll().Where(t => t.AppId == appid).ToList();
+                    if (x.Count() > 1)
+                    {
+                        _notyfService.Warning("AppId already exists");
+                        return RedirectToAction(nameof(IndexDev));
+                    }
                     _unitOfWork.ProductCategoryRepository.BulkDelete(catepro.ToList());
                     _unitOfWork.ProductCategoryRepository.updateCategory(id, model);
                     _unitOfWork.SaveChange();
